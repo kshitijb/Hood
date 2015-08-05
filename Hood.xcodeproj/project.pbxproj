@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D547A47F1B6B5C4300B556B4 /* Me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D547A47E1B6B5C4300B556B4 /* Me.jpg */; };
+		D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4801B6B69DB00B556B4 /* FeedViewController.swift */; };
+		D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4821B6B717600B556B4 /* CellWithoutImage.swift */; };
+		D547A4851B6F526000B556B4 /* AC.png in Resources */ = {isa = PBXBuildFile; fileRef = D547A4841B6F526000B556B4 /* AC.png */; };
+		D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4861B70B87C00B556B4 /* CommentsViewController.swift */; };
+		D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */; };
+		D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A48A1B70D29B00B556B4 /* CellWithImage.swift */; };
 		D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */; };
 		D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */; };
 		D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4861B6A2CB000F3DF9F /* DataViewController.swift */; };
@@ -15,6 +22,17 @@
 		D5B3E48E1B6A2CB000F3DF9F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */; };
 		D5B3E4911B6A2CB000F3DF9F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E48F1B6A2CB000F3DF9F /* LaunchScreen.xib */; };
 		D5B3E49D1B6A2CB000F3DF9F /* HoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E49C1B6A2CB000F3DF9F /* HoodTests.swift */; };
+		D5B3E4B21B6A33E000F3DF9F /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4A71B6A33E000F3DF9F /* Lato-Black.ttf */; };
+		D5B3E4B31B6A33E000F3DF9F /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4A81B6A33E000F3DF9F /* Lato-BlackItalic.ttf */; };
+		D5B3E4B41B6A33E000F3DF9F /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4A91B6A33E000F3DF9F /* Lato-Bold.ttf */; };
+		D5B3E4B51B6A33E000F3DF9F /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4AA1B6A33E000F3DF9F /* Lato-BoldItalic.ttf */; };
+		D5B3E4B61B6A33E000F3DF9F /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4AB1B6A33E000F3DF9F /* Lato-Hairline.ttf */; };
+		D5B3E4B71B6A33E000F3DF9F /* Lato-HairlineItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4AC1B6A33E000F3DF9F /* Lato-HairlineItalic.ttf */; };
+		D5B3E4B81B6A33E000F3DF9F /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4AD1B6A33E000F3DF9F /* Lato-Italic.ttf */; };
+		D5B3E4B91B6A33E000F3DF9F /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4AE1B6A33E000F3DF9F /* Lato-Light.ttf */; };
+		D5B3E4BA1B6A33E000F3DF9F /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4AF1B6A33E000F3DF9F /* Lato-LightItalic.ttf */; };
+		D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */; };
+		D5B3E4BC1B6A33E000F3DF9F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B11B6A33E000F3DF9F /* OFL.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +46,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D547A47E1B6B5C4300B556B4 /* Me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Me.jpg; sourceTree = "<group>"; };
+		D547A4801B6B69DB00B556B4 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		D547A4821B6B717600B556B4 /* CellWithoutImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithoutImage.swift; sourceTree = "<group>"; };
+		D547A4841B6F526000B556B4 /* AC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AC.png; sourceTree = "<group>"; };
+		D547A4861B70B87C00B556B4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsHeaderCell.swift; sourceTree = "<group>"; };
+		D547A48A1B70D29B00B556B4 /* CellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithImage.swift; sourceTree = "<group>"; };
 		D5B3E47D1B6A2CB000F3DF9F /* Hood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B3E4811B6A2CB000F3DF9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +65,17 @@
 		D5B3E4961B6A2CB000F3DF9F /* HoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B3E49B1B6A2CB000F3DF9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5B3E49C1B6A2CB000F3DF9F /* HoodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoodTests.swift; sourceTree = "<group>"; };
+		D5B3E4A71B6A33E000F3DF9F /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		D5B3E4A81B6A33E000F3DF9F /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		D5B3E4A91B6A33E000F3DF9F /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		D5B3E4AA1B6A33E000F3DF9F /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		D5B3E4AB1B6A33E000F3DF9F /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		D5B3E4AC1B6A33E000F3DF9F /* Lato-HairlineItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-HairlineItalic.ttf"; sourceTree = "<group>"; };
+		D5B3E4AD1B6A33E000F3DF9F /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		D5B3E4AE1B6A33E000F3DF9F /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		D5B3E4AF1B6A33E000F3DF9F /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		D5B3E4B11B6A33E000F3DF9F /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +117,16 @@
 		D5B3E47F1B6A2CB000F3DF9F /* Hood */ = {
 			isa = PBXGroup;
 			children = (
+				D5B3E4BE1B6A33EC00F3DF9F /* Assets */,
 				D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */,
 				D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */,
+				D547A4861B70B87C00B556B4 /* CommentsViewController.swift */,
+				D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */,
+				D547A48A1B70D29B00B556B4 /* CellWithImage.swift */,
 				D5B3E4861B6A2CB000F3DF9F /* DataViewController.swift */,
 				D5B3E4881B6A2CB000F3DF9F /* ModelController.swift */,
+				D547A4801B6B69DB00B556B4 /* FeedViewController.swift */,
+				D547A4821B6B717600B556B4 /* CellWithoutImage.swift */,
 				D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */,
 				D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */,
 				D5B3E48F1B6A2CB000F3DF9F /* LaunchScreen.xib */,
@@ -116,6 +158,34 @@
 				D5B3E49B1B6A2CB000F3DF9F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D5B3E4A61B6A33E000F3DF9F /* Lato */ = {
+			isa = PBXGroup;
+			children = (
+				D5B3E4A71B6A33E000F3DF9F /* Lato-Black.ttf */,
+				D5B3E4A81B6A33E000F3DF9F /* Lato-BlackItalic.ttf */,
+				D5B3E4A91B6A33E000F3DF9F /* Lato-Bold.ttf */,
+				D5B3E4AA1B6A33E000F3DF9F /* Lato-BoldItalic.ttf */,
+				D5B3E4AB1B6A33E000F3DF9F /* Lato-Hairline.ttf */,
+				D5B3E4AC1B6A33E000F3DF9F /* Lato-HairlineItalic.ttf */,
+				D5B3E4AD1B6A33E000F3DF9F /* Lato-Italic.ttf */,
+				D5B3E4AE1B6A33E000F3DF9F /* Lato-Light.ttf */,
+				D5B3E4AF1B6A33E000F3DF9F /* Lato-LightItalic.ttf */,
+				D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */,
+				D5B3E4B11B6A33E000F3DF9F /* OFL.txt */,
+			);
+			path = Lato;
+			sourceTree = "<group>";
+		};
+		D5B3E4BE1B6A33EC00F3DF9F /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D547A4841B6F526000B556B4 /* AC.png */,
+				D547A47E1B6B5C4300B556B4 /* Me.jpg */,
+				D5B3E4A61B6A33E000F3DF9F /* Lato */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +237,7 @@
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = F3642YKY5X;
 					};
 					D5B3E4951B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
@@ -198,8 +269,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5B3E4BC1B6A33E000F3DF9F /* OFL.txt in Resources */,
+				D5B3E4B81B6A33E000F3DF9F /* Lato-Italic.ttf in Resources */,
+				D5B3E4B21B6A33E000F3DF9F /* Lato-Black.ttf in Resources */,
+				D5B3E4B41B6A33E000F3DF9F /* Lato-Bold.ttf in Resources */,
+				D5B3E4B91B6A33E000F3DF9F /* Lato-Light.ttf in Resources */,
+				D547A47F1B6B5C4300B556B4 /* Me.jpg in Resources */,
 				D5B3E48C1B6A2CB000F3DF9F /* Main.storyboard in Resources */,
+				D5B3E4B31B6A33E000F3DF9F /* Lato-BlackItalic.ttf in Resources */,
 				D5B3E4911B6A2CB000F3DF9F /* LaunchScreen.xib in Resources */,
+				D5B3E4BA1B6A33E000F3DF9F /* Lato-LightItalic.ttf in Resources */,
+				D5B3E4B71B6A33E000F3DF9F /* Lato-HairlineItalic.ttf in Resources */,
+				D5B3E4B51B6A33E000F3DF9F /* Lato-BoldItalic.ttf in Resources */,
+				D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */,
+				D5B3E4B61B6A33E000F3DF9F /* Lato-Hairline.ttf in Resources */,
+				D547A4851B6F526000B556B4 /* AC.png in Resources */,
 				D5B3E48E1B6A2CB000F3DF9F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,9 +302,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */,
 				D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */,
+				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
+				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
+				D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */,
 				D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */,
+				D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */,
 				D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -358,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -417,6 +508,7 @@
 				D5B3E4A21B6A2CB000F3DF9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D5B3E4A31B6A2CB000F3DF9F /* Build configuration list for PBXNativeTarget "HoodTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +517,7 @@
 				D5B3E4A51B6A2CB000F3DF9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        UINavigationBar.appearance().barTintColor = UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 1)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        let fontNames = UIFont.fontNamesForFamilyName("Lato")
+        let font = UIFont(name: "Lato-Light", size: 24)
+        if let font = font{
+            let titleDict: NSDictionary = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
+            UINavigationBar.appearance().titleTextAttributes = titleDict as [NSObject : AnyObject]
+        }
         return true
     }
 

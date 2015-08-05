@@ -17,26 +17,23 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
-        self.pageViewController = UIPageViewController(transitionStyle: .PageCurl, navigationOrientation: .Horizontal, options: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         self.pageViewController!.delegate = self
-
-        let startingViewController: DataViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
+        self.pageViewController?.view.backgroundColor = UIColor.lightGrayColor()
+        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
         let viewControllers = [startingViewController]
         self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
-
         self.pageViewController!.dataSource = self.modelController
-
+        let firstDataObject: AnyObject? = self.modelController.pageData.firstObject
+        updateTitleForString(firstDataObject!.description!)
         self.addChildViewController(self.pageViewController!)
         self.view.addSubview(self.pageViewController!.view)
-
-        // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
         var pageViewRect = self.view.bounds
         self.pageViewController!.view.frame = pageViewRect
-
         self.pageViewController!.didMoveToParentViewController(self)
-
-        // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,7 +55,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     // MARK: - UIPageViewController delegate methods
 
     func pageViewController(pageViewController: UIPageViewController, spineLocationForInterfaceOrientation orientation: UIInterfaceOrientation) -> UIPageViewControllerSpineLocation {
-        // Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewControllerSpineLocationMid' in landscape orientation sets the doubleSided property to true, so set it to false here.
         let currentViewController = self.pageViewController!.viewControllers[0] as! UIViewController
         let viewControllers = [currentViewController]
         self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: {done in })
@@ -67,6 +63,25 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         return .Min
     }
 
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+        if completed{
+            let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
+            updateTitleForString("\(dataViewController.dataObject!)")
+        }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
 
+    func updateTitleForString(title: String){
+        self.title = "#\(title)"
+    }
+    
+    func showComments(notification: NSNotification){
+        let commentsView: UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! UIViewController
+        self.navigationController?.pushViewController(commentsView, animated: true)
+    }
+    
 }
 

@@ -9,8 +9,7 @@
 import UIKit
 
 /*
- A controller object that manages a simple model -- a collection of month names.
- 
+
  The controller serves as the data source for the page view controller; it therefore implements pageViewController:viewControllerBeforeViewController: and pageViewController:viewControllerAfterViewController:.
  It also implements a custom method, viewControllerAtIndex: which is useful in the implementation of the data source methods, and in the initial configuration of the application.
  
@@ -26,23 +25,23 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     override init() {
         super.init()
         // Create the data model.
-        let dateFormatter = NSDateFormatter()
-        pageData = dateFormatter.monthSymbols
+        pageData = NSArray(array: ["Home","News","Buy/Sell","SOS","Sharing"])
     }
 
-    func viewControllerAtIndex(index: Int, storyboard: UIStoryboard) -> DataViewController? {
+    func viewControllerAtIndex(index: Int, storyboard: UIStoryboard) -> FeedViewController? {
         // Return the data view controller for the given index.
         if (self.pageData.count == 0) || (index >= self.pageData.count) {
             return nil
         }
 
         // Create a new view controller and pass suitable data.
-        let dataViewController = storyboard.instantiateViewControllerWithIdentifier("DataViewController") as! DataViewController
+        let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
+        println(dataViewController.view.frame)
         dataViewController.dataObject = self.pageData[index]
         return dataViewController
     }
 
-    func indexOfViewController(viewController: DataViewController) -> Int {
+    func indexOfViewController(viewController: FeedViewController) -> Int {
         // Return the index of the given data view controller.
         // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
         if let dataObject: AnyObject = viewController.dataObject {
@@ -55,7 +54,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     // MARK: - Page View Controller Data Source
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        var index = self.indexOfViewController(viewController as! DataViewController)
+        var index = self.indexOfViewController(viewController as! FeedViewController)
         if (index == 0) || (index == NSNotFound) {
             return nil
         }
@@ -65,7 +64,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        var index = self.indexOfViewController(viewController as! DataViewController)
+        var index = self.indexOfViewController(viewController as! FeedViewController)
         if index == NSNotFound {
             return nil
         }
