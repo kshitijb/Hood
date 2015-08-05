@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
 		D547A47F1B6B5C4300B556B4 /* Me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D547A47E1B6B5C4300B556B4 /* Me.jpg */; };
 		D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4801B6B69DB00B556B4 /* FeedViewController.swift */; };
 		D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4821B6B717600B556B4 /* CellWithoutImage.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		D547A47E1B6B5C4300B556B4 /* Me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Me.jpg; sourceTree = "<group>"; };
 		D547A4801B6B69DB00B556B4 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D547A4821B6B717600B556B4 /* CellWithoutImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithoutImage.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				D547A4801B6B69DB00B556B4 /* FeedViewController.swift */,
 				D547A4821B6B717600B556B4 /* CellWithoutImage.swift */,
 				D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */,
+				425DF22D1B720CC900837B8C /* AddPostViewController.swift */,
 				D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */,
 				D5B3E48F1B6A2CB000F3DF9F /* LaunchScreen.xib */,
 				D5B3E4801B6A2CB000F3DF9F /* Supporting Files */,
@@ -308,6 +311,7 @@
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
 				D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */,
+				425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */,
 				D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */,
 				D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */,
 				D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */,

@@ -8,63 +8,60 @@
 
 import UIKit
 
-class AddPostViewController: UIViewController {
+class AddPostViewController: UIViewController,UITextViewDelegate
+{
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var textviewBottomConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var addPhotoButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        postTextView.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        postTextView.becomeFirstResponder()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidHideNotification, object: nil)
     }
     
+    func textViewDidBeginEditing(textView: UITextView)
+    {
+        if textView.text == "What's on your mind?"
+        {
+            textView.text = nil
+            textView.textColor = UIColor(red: 107/255, green: 107/255, blue: 107/255, alpha: 1)
+            
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
 //  MARK: - animate Add photo button with Keyboard
+
     
     func keyboardWillShow(notification:NSNotification)
     {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
         {
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
-                let textViewOrigin = self.postTextView.frame.origin
-//                self.postTextView.frame = CGRectMake(textViewOrigin.x, textViewOrigin.y, self.postTextView.frame.width, self.postTextView.frame.height - keyboardSize.height)
-                self.textviewBottomConstraint.constant = keyboardSize.height + 20
-                self.postTextView.layoutIfNeeded()
-                }, completion: { (completed) -> Void in
-                
-            })
             
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
-            print(duration)
+            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
+            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                self.textviewBottomConstraint.constant = keyboardSize.height + 20
+                self.postTextView.layoutIfNeeded()
+            }, completion: { (completion) -> Void in
+                
+            })
         }
     }
     func keyboardWillHide(notification:NSNotification)
     {
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
