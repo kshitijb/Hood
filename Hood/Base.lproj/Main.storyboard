@@ -280,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AKz-2W-5qp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1880" y="476"/>
+            <point key="canvasLocation" x="2306" y="1340"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="zey-Tj-qFo">
@@ -558,10 +558,10 @@
             </objects>
             <point key="canvasLocation" x="2765" y="475"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Post View Controller-->
         <scene sceneID="jEt-ip-RrF">
             <objects>
-                <viewController id="XXA-Y3-OCx" sceneMemberID="viewController">
+                <viewController id="XXA-Y3-OCx" customClass="AddPostViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kLw-fU-Xuh"/>
                         <viewControllerLayoutGuide type="bottom" id="XGd-Qj-I2w"/>
@@ -570,28 +570,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
                                 <rect key="frame" x="16" y="19" width="568" height="561"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
+                                <rect key="frame" x="233" y="552" width="134" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="d2N-bM-05R"/>
+                                    <constraint firstAttribute="width" constant="134" id="guq-1f-zqY"/>
+                                </constraints>
+                                <state key="normal" image="Add Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" id="00N-r5-BKv"/>
+                            <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="vxe-qT-rTF" secondAttribute="bottom" constant="20" id="2zO-PI-X6P"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="E63-2m-yjL"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="Hpl-ng-pjS"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="M9b-j1-LoC"/>
                             <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="20" id="Pqm-yC-VB3"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="XmD-pf-TUa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4hd-Dw-guh" secondAttribute="trailing" id="qmf-Zl-Op4"/>
                             <constraint firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" id="xRa-EP-de9"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2zO-PI-X6P"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="addPhotoButton" destination="vxe-qT-rTF" id="rN5-ap-U8D"/>
+                        <outlet property="postTextView" destination="4hd-Dw-guh" id="QMR-CT-XPN"/>
+                        <outlet property="textviewBottomConstraint" destination="Pqm-yC-VB3" id="Ljm-S6-F2u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jLh-wi-qsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4215" y="475"/>
+            <point key="canvasLocation" x="1829" y="476"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="3GU-QQ-JyJ">
@@ -612,6 +635,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Add" id="lRs-YM-avi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="XXA-Y3-OCx" kind="show" id="7MM-bh-Zoy"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
@@ -642,6 +668,7 @@
     <resources>
         <image name="AC.png" width="749" height="389"/>
         <image name="Add" width="22" height="22"/>
+        <image name="Add Photo" width="266" height="47"/>
         <image name="Me.jpg" width="320" height="320"/>
         <image name="Profile" width="19" height="23"/>
     </resources>
