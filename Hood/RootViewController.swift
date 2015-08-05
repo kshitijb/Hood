@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
+import SwiftyJSON
 
 class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
@@ -34,6 +37,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
+        getData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +85,13 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     func showComments(notification: NSNotification){
         let commentsView: UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! UIViewController
         self.navigationController?.pushViewController(commentsView, animated: true)
+    }
+    
+    func getData(){
+        Alamofire.request(.GET, "http://192.168.1.8:8000/channel/all/", parameters: nil)
+            .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, JSON, error) -> Void in
+                println(JSON)
+        }
     }
     
 }
