@@ -21,7 +21,16 @@ class AddPostViewController: UIViewController,UITextViewDelegate
         postTextView.delegate = self
         postNowButton.layer.borderColor = UIColor(red: 243/255, green: 150/255, blue: 48/255, alpha: 1).CGColor
         postNowButton.layer.borderWidth = 2.5
-        postNowButton.layer.cornerRadius = 20
+        postNowButton.layer.cornerRadius = 25
+//        view.addConstraint(NSLayoutConstraint(item: addPhotoButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+// 
+//        view.addConstraint(NSLayoutConstraint(item: postNowButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        var viewBindingsDict: NSMutableDictionary = NSMutableDictionary()
+        viewBindingsDict.setValue(addPhotoButton, forKey: "addPhotoButton")
+        viewBindingsDict.setValue(postNowButton, forKey: "postNowButton")
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[addPhotoButton]-(>=10)-[postNowButton]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewBindingsDict as [NSObject : AnyObject]))
+
+    
     }
     
     override func viewDidAppear(animated: Bool) {
