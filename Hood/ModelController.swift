@@ -25,7 +25,8 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     override init() {
         super.init()
         // Create the data model.
-        pageData = NSArray(array: ["Home","News","Buy/Sell","SOS","Sharing"])
+//        pageData = NSArray(array: ["Home","News","Buy/Sell","SOS","Sharing"])
+//                pageData = NSArray(array: ["Home"])
     }
 
     func viewControllerAtIndex(index: Int, storyboard: UIStoryboard) -> FeedViewController? {

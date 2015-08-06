@@ -124,6 +124,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D5604CF31B722C68002AD200 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +155,7 @@
 		D5B3E47F1B6A2CB000F3DF9F /* Hood */ = {
 			isa = PBXGroup;
 			children = (
+				D5604CF31B722C68002AD200 /* Libraries */,
 				D5B3E4BE1B6A33EC00F3DF9F /* Assets */,
 				D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */,
 				D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */,
@@ -270,7 +278,6 @@
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = F3642YKY5X;
 					};
 					D5B3E4951B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
