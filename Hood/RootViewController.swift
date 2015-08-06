@@ -70,7 +70,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         if completed{
             let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
-            updateTitleForString("\(dataViewController.dataObject!)")
+            let titleString = dataViewController.dataObject["name"]
+            updateTitleForString("\(titleString)")
         }
     }
     
@@ -95,12 +96,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
                 if let _error = error{
                     println(error)
                 }else{
-                    print(data)
-//                    let responseDictionary = data as? NSDictionary
-//                    let responseArray = data?["results"] as? NSArray
                     let swiftyJSONObject = JSON(data!)
                     print(swiftyJSONObject)
                     self.modelController.pageData = swiftyJSONObject["results"]
+                    print(self.modelController.pageData)
+                    let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
+                    let viewControllers = [startingViewController]
+                    self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+                    //Update First title
+                    self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
                 }
         }
     }
