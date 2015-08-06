@@ -24,12 +24,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         self.pageViewController!.delegate = self
         self.pageViewController?.view.backgroundColor = UIColor.lightGrayColor()
-        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
-        let viewControllers = [startingViewController]
-        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+//        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
+//        let viewControllers = [startingViewController]
+//        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
         self.pageViewController!.dataSource = self.modelController
-        let firstDataObject: AnyObject? = self.modelController.pageData.firstObject
-        updateTitleForString(firstDataObject!.description!)
+//        let firstDataObject: AnyObject? = self.modelController.pageData.firstObject
+//        updateTitleForString(firstDataObject!.description!)
         self.addChildViewController(self.pageViewController!)
         self.view.addSubview(self.pageViewController!.view)
         var pageViewRect = self.view.bounds
@@ -89,8 +89,16 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     
     func getData(){
         Alamofire.request(.GET, "http://192.168.1.8:8000/channel/all/", parameters: nil)
-            .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, JSON, error) -> Void in
-                println(JSON)
+            .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
+                if let _error = error{
+                    println(error)
+                }else{
+                    let swiftyJSONObject = JSON(data!)
+                    //                println(swiftyJSONObject)
+                    for obj in swiftyJSONObject["results"]{
+                        println(obj)
+                    }
+                }
         }
     }
     
