@@ -90,7 +90,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     
     func getData(){
         SVProgressHUD.show()
-        Alamofire.request(.GET, "http://128.199.179.151:8000/channel/all/", parameters: nil)
+        Alamofire.request(.GET, APIConstants().getAllChannels(), parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
                 SVProgressHUD.dismiss()
                 if let _error = error{
