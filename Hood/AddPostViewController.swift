@@ -13,11 +13,15 @@ class AddPostViewController: UIViewController,UITextViewDelegate
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var textviewBottomConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
+        postNowButton.layer.borderColor = UIColor(red: 243/255, green: 150/255, blue: 48/255, alpha: 1).CGColor
+        postNowButton.layer.borderWidth = 2.5
+        postNowButton.layer.cornerRadius = 20
     }
     
     override func viewDidAppear(animated: Bool) {
