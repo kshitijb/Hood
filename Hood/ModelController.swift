@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftyJSON
 /*
 
  The controller serves as the data source for the page view controller; it therefore implements pageViewController:viewControllerBeforeViewController: and pageViewController:viewControllerAfterViewController:.
@@ -19,7 +19,7 @@ import UIKit
 
 class ModelController: NSObject, UIPageViewControllerDataSource {
 
-    var pageData = NSMutableArray()
+    var pageData = JSON.nullJSON
 
 
     override init() {
@@ -38,7 +38,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         // Create a new view controller and pass suitable data.
         let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
         println(dataViewController.view.frame)
-        dataViewController.dataObject = self.pageData[index]
+        dataViewController.dataObject = self.pageData[index] as? AnyObject
         return dataViewController
     }
 
@@ -46,7 +46,10 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         // Return the index of the given data view controller.
         // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
         if let dataObject: AnyObject = viewController.dataObject {
-            return self.pageData.indexOfObject(dataObject)
+            let dataArray  = pageData.array as [JSON]!
+            let dataJSON = dataObject as! JSON
+            return find(dataArray, dataJSON)!
+//            return dataArray.indexOfObject(dataJSON)
         } else {
             return NSNotFound
         }

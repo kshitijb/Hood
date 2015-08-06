@@ -95,13 +95,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
                 if let _error = error{
                     println(error)
                 }else{
-                    let responseDictionary = data as? NSDictionary
-                    let responseArray = data?["results"] as? NSArray
-//                    let swiftyJSONObject = JSON(data!)
-//                    let array = NSMutableArray()
-//                    for(index,subJSON) in swiftyJSONObject["results"]{
-////                        array.addObject(sub)
-//                    }
+                    print(data)
+//                    let responseDictionary = data as? NSDictionary
+//                    let responseArray = data?["results"] as? NSArray
+                    let swiftyJSONObject = JSON(data!)
+                    print(swiftyJSONObject)
+                    self.modelController.pageData = swiftyJSONObject["results"]
                 }
         }
     }
