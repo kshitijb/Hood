@@ -19,7 +19,7 @@ import UIKit
 
 class ModelController: NSObject, UIPageViewControllerDataSource {
 
-    var pageData = NSArray()
+    var pageData = NSMutableArray()
 
 
     override init() {
