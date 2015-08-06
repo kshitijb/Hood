@@ -579,12 +579,8 @@
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
-                                <rect key="frame" x="100" y="552" width="134" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="d2N-bM-05R"/>
-                                    <constraint firstAttribute="width" constant="134" id="guq-1f-zqY"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
+                                <rect key="frame" x="208.5" y="532" width="174" height="45"/>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="20"/>
                                 <inset key="titleEdgeInsets" minX="-18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="100" maxY="0.0"/>
@@ -594,7 +590,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2c-ec-f8k">
-                                <rect key="frame" x="242" y="535" width="156" height="45"/>
+                                <rect key="frame" x="0.0" y="532" width="109" height="48"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <state key="normal" title="Post Now">
                                     <color key="titleColor" red="0.95294117647058818" green="0.58823529411764708" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
@@ -604,22 +600,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vxe-qT-rTF" firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" constant="-133" id="00N-r5-BKv"/>
-                            <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="vxe-qT-rTF" secondAttribute="bottom" constant="20" id="2zO-PI-X6P"/>
+                            <constraint firstItem="K2c-ec-f8k" firstAttribute="height" secondItem="vxe-qT-rTF" secondAttribute="height" id="0Ec-g3-rbB"/>
+                            <constraint firstItem="K2c-ec-f8k" firstAttribute="leading" secondItem="vxe-qT-rTF" secondAttribute="trailing" constant="15" id="5JH-AO-ouT"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="E63-2m-yjL"/>
-                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="Hpl-ng-pjS"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="Li3-ug-fV1"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="M9b-j1-LoC"/>
-                            <constraint firstItem="4hd-Dw-guh" firstAttribute="bottom" secondItem="K2c-ec-f8k" secondAttribute="bottom" id="OY5-Ul-a4C"/>
                             <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="20" id="Pqm-yC-VB3"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="XmD-pf-TUa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4hd-Dw-guh" secondAttribute="trailing" id="qmf-Zl-Op4"/>
+                            <constraint firstItem="K2c-ec-f8k" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="sHG-wI-mZd"/>
                             <constraint firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" id="xRa-EP-de9"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2zO-PI-X6P"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="addPhotoButton" destination="vxe-qT-rTF" id="rN5-ap-U8D"/>
