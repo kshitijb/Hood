@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var dataArray: NSMutableArray = [1,2,3,4]
-    var dataObject: AnyObject?
+    var dataObject: JSON = JSON.nullJSON
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -38,21 +38,21 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         // Create a new view controller and pass suitable data.
         let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
         println(dataViewController.view.frame)
-        dataViewController.dataObject = self.pageData[index] as? AnyObject
+        dataViewController.dataObject = self.pageData[index]
         return dataViewController
     }
 
     func indexOfViewController(viewController: FeedViewController) -> Int {
         // Return the index of the given data view controller.
         // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-        if let dataObject: AnyObject = viewController.dataObject {
-            let dataArray  = pageData.array as [JSON]!
-            let dataJSON = dataObject as! JSON
+        let dataObject = viewController.dataObject
+            let dataArray  = pageData.array!
+            let dataJSON = dataObject
             return find(dataArray, dataJSON)!
 //            return dataArray.indexOfObject(dataJSON)
-        } else {
-            return NSNotFound
-        }
+//        } else {
+//            return NSNotFound
+//        }
     }
 
     // MARK: - Page View Controller Data Source
