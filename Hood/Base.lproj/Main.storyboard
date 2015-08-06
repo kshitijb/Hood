@@ -16,8 +16,10 @@
         <mutableArray key="Lato-Light.ttf">
             <string>Lato-Light</string>
             <string>Lato-Light</string>
+            <string>Lato-Light</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -280,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AKz-2W-5qp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1880" y="476"/>
+            <point key="canvasLocation" x="2306" y="1340"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="zey-Tj-qFo">
@@ -558,10 +560,10 @@
             </objects>
             <point key="canvasLocation" x="2765" y="475"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Post View Controller-->
         <scene sceneID="jEt-ip-RrF">
             <objects>
-                <viewController id="XXA-Y3-OCx" sceneMemberID="viewController">
+                <viewController id="XXA-Y3-OCx" customClass="AddPostViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kLw-fU-Xuh"/>
                         <viewControllerLayoutGuide type="bottom" id="XGd-Qj-I2w"/>
@@ -571,27 +573,64 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
-                                <rect key="frame" x="16" y="19" width="568" height="561"/>
+                                <rect key="frame" x="16" y="63" width="568" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
+                                <rect key="frame" x="100" y="552" width="134" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="d2N-bM-05R"/>
+                                    <constraint firstAttribute="width" constant="134" id="guq-1f-zqY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="-18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="100" maxY="0.0"/>
+                                <state key="normal" title="Add Photo" image="Camera">
+                                    <color key="titleColor" red="0.60784313725490191" green="0.65098039215686276" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2c-ec-f8k">
+                                <rect key="frame" x="242" y="535" width="156" height="45"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                <state key="normal" title="Post Now">
+                                    <color key="titleColor" red="0.95294117647058818" green="0.58823529411764708" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" constant="-133" id="00N-r5-BKv"/>
+                            <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="vxe-qT-rTF" secondAttribute="bottom" constant="20" id="2zO-PI-X6P"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="E63-2m-yjL"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="Hpl-ng-pjS"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="M9b-j1-LoC"/>
+                            <constraint firstItem="4hd-Dw-guh" firstAttribute="bottom" secondItem="K2c-ec-f8k" secondAttribute="bottom" id="OY5-Ul-a4C"/>
                             <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="20" id="Pqm-yC-VB3"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="XmD-pf-TUa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4hd-Dw-guh" secondAttribute="trailing" id="qmf-Zl-Op4"/>
                             <constraint firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" id="xRa-EP-de9"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2zO-PI-X6P"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="addPhotoButton" destination="vxe-qT-rTF" id="rN5-ap-U8D"/>
+                        <outlet property="postNowButton" destination="K2c-ec-f8k" id="i0C-rl-Pwm"/>
+                        <outlet property="postTextView" destination="4hd-Dw-guh" id="QMR-CT-XPN"/>
+                        <outlet property="textviewBottomConstraint" destination="Pqm-yC-VB3" id="Ljm-S6-F2u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jLh-wi-qsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4215" y="475"/>
+            <point key="canvasLocation" x="1829" y="476"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="3GU-QQ-JyJ">
@@ -612,6 +651,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Add" id="lRs-YM-avi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="XXA-Y3-OCx" kind="show" id="7MM-bh-Zoy"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
@@ -642,6 +684,7 @@
     <resources>
         <image name="AC.png" width="749" height="389"/>
         <image name="Add" width="22" height="22"/>
+        <image name="Camera" width="56" height="48"/>
         <image name="Me.jpg" width="320" height="320"/>
         <image name="Profile" width="19" height="23"/>
     </resources>
