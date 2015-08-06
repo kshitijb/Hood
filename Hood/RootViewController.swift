@@ -88,16 +88,20 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     }
     
     func getData(){
-        Alamofire.request(.GET, "http://192.168.1.8:8000/channel/all/", parameters: nil)
+        SVProgressHUD.show()
+        Alamofire.request(.GET, "http://128.199.179.151:8000/channel/all/", parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
+                SVProgressHUD.dismiss()
                 if let _error = error{
                     println(error)
                 }else{
-                    let swiftyJSONObject = JSON(data!)
-                    //                println(swiftyJSONObject)
-                    for obj in swiftyJSONObject["results"]{
-                        println(obj)
-                    }
+                    let responseDictionary = data as? NSDictionary
+                    let responseArray = data?["results"] as? NSArray
+//                    let swiftyJSONObject = JSON(data!)
+//                    let array = NSMutableArray()
+//                    for(index,subJSON) in swiftyJSONObject["results"]{
+////                        array.addObject(sub)
+//                    }
                 }
         }
     }
