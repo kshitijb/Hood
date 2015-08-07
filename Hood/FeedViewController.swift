@@ -21,8 +21,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 138
-        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(34, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
+        self.automaticallyAdjustsScrollViewInsets = true
         getPosts()
 //        dataArray = NSMutableArray(array: [1,2,3,4,5,6,7,8,9])
         // Do any additional setup after loading the view.
@@ -63,20 +64,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewDidAppear(animated: Bool) {
+        print("Did appear")
 //        self.tableView.reloadData()
+//                tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
     override func viewWillAppear(animated: Bool) {
+//        print("contentInset on will appear \(tableView.contentInset.top)")
 //        println("Table View Frame on appear \(self.tableView.frame)")
-//        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
 //        tableView.reloadData()
+//        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
-    override func viewDidLayoutSubviews() {
-        println("Table View Frame on layout \(self.tableView.frame)")
+    override func viewWillLayoutSubviews() {
+        print("Current inset is \(self.tableView.contentInset.top)" )
+//        println("Table View Frame on layout \(self.tableView.frame)")
         let frame:CGRect = self.tableView.frame;
         if(frame.size.width > self.view.frame.size.width) {
-            self.tableView.frame = CGRectMake(0, frame.origin.y, self.view.frame.size.width, frame.size.height);
+            self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height)
+        }
+        if(tableView.contentInset.top != 34){
+            tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         }
     }
     
