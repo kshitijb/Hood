@@ -50,8 +50,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
         cell.preservesSuperviewLayoutMargins = false
         cell.layoutMargins = UIEdgeInsetsZero
-        cell.content.text = self.dataArray[indexPath.row]["message"].stringValue
-        
+        cell.setContents(dataArray[indexPath.row])
         return cell
     }
     
@@ -77,7 +76,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillLayoutSubviews() {
-        print("Current inset is \(self.tableView.contentInset.top)" )
+//        print("Current inset is \(self.tableView.contentInset.top)" )
 //        println("Table View Frame on layout \(self.tableView.frame)")
         let frame:CGRect = self.tableView.frame;
         if(frame.size.width > self.view.frame.size.width) {
