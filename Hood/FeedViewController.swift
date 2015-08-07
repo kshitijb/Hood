@@ -49,8 +49,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
         cell.preservesSuperviewLayoutMargins = false
         cell.layoutMargins = UIEdgeInsetsZero
-        cell.content.text = self.dataArray[indexPath.row]["message"].stringValue
-        
+        cell.setContents(dataArray[indexPath.row])
         return cell
     }
     

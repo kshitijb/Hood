@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import SwiftyJSON
+import WebImage
 class CellWithoutImage: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -16,6 +17,7 @@ class CellWithoutImage: UITableViewCell {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     
+    @IBOutlet weak var timestampLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,6 +34,23 @@ class CellWithoutImage: UITableViewCell {
         content.attributedText = attrString
         content.updateConstraintsIfNeeded()
         commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func setContents(jsonObject:JSON)
+    {
+        print(jsonObject)
+        content.text = jsonObject["message"].string
+        let noOfComments = jsonObject["comments"].array?.count
+        commentsButton.setTitle("\(noOfComments!) Comments", forState: UIControlState.Normal)
+        timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
+        let lastName = jsonObject["author"]["lastname"].string
+        var firstChar = Array(lastName!)[0]
+        userName.text = jsonObject["author"]["firstname"].string! + " " + String(firstChar)
+        if let profileURL = jsonObject["author"]["profile_photo"].string
+        {
+            let otherURL = "https://pbs.twimg.com/profile_images/2499605683/bf8yn88rwt3jklyajuax.jpeg"
+            profileImage.sd_setImageWithURL(NSURL(string:otherURL), placeholderImage: UIImage(named: "Me.jpg"))
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
