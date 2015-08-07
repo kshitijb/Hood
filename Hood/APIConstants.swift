@@ -16,17 +16,18 @@ struct API {
         static let channels = "channel"
         static let posts = "post"
         static let all = "all"
+        static let filter = "filter"
     }
     private var fullUrl:String{
         return Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
     }
     
     private var allChannels:String{
-        return fullUrl + "/" + Static.channels + "/" + Static.all + "/"
+        return "/".join([fullUrl, Static.channels, Static.all])
     }
     
     private var allPosts:String{
-        return fullUrl + "/" + Static.posts + "/" + Static.all + "/"
+        return "/".join([fullUrl, Static.posts, Static.all])
     }
     
     func getFullUrl() -> String{
@@ -40,6 +41,11 @@ struct API {
     func getAllPosts() -> String{
         return allPosts
     }
+    
+    func getAllPostsForChannel(channel: String) -> String{
+        return "/".join([fullUrl,Static.posts,Static.filter,"55c34163f4eafb78e5c49d3c",channel])
+    }
+    
 //    let fullUrl = Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
 //    let allChannels = fullURLRef + "/"
     

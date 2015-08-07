@@ -626,7 +626,7 @@
         <!--Root View Controller-->
         <scene sceneID="3GU-QQ-JyJ">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="PxF-Ax-wPy" customClass="RootViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PxF-Ax-wPy" customClass="RootViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="17i-ZA-3zy"/>
                         <viewControllerLayoutGuide type="bottom" id="8Yh-h8-jIR"/>

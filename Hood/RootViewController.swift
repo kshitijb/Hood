@@ -22,6 +22,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
+        self.pageControl.hidden = true
         self.pageIndicatorContainer.backgroundColor = UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 0.9)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.automaticallyAdjustsScrollViewInsets = false
@@ -29,12 +30,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController!.delegate = self
         self.pageViewController?.view.backgroundColor = UIColor.whiteColor()
         self.pageViewController?.view.userInteractionEnabled = false
-//        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
-//        let viewControllers = [startingViewController]
-//        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
         self.pageViewController!.dataSource = self.modelController
-//        let firstDataObject: AnyObject? = self.modelController.pageData.firstObject
-//        updateTitleForString(firstDataObject!.description!)
         self.addChildViewController(self.pageViewController!)
         self.view.insertSubview(self.pageViewController!.view, belowSubview: self.pageIndicatorContainer)
         var pageViewRect = self.view.bounds
@@ -95,7 +91,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     }
     
     func getData(){
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("Loading")
         Alamofire.request(.GET, API().getAllChannels(), parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
                 SVProgressHUD.dismiss()
@@ -111,10 +107,22 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
                     let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
                     let viewControllers = [startingViewController]
                     self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+                    
                     //Update First title
                     self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
                     self.pageViewController?.view.userInteractionEnabled = true
+                    self.showPageControl()
                 }
+        }
+    }
+    
+    func showPageControl(){
+        self.pageControl.hidden = false
+        self.pageControl.transform = CGAffineTransformMakeScale(0.6, 0.6)
+        UIView.animateWithDuration(0.7, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
+            self.pageControl.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        }) { (completed) -> Void in
+            
         }
     }
     
