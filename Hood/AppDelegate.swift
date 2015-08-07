@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         UINavigationBar.appearance().barTintColor = UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 1)
+        UINavigationBar.appearance().setBackgroundImage(getImageWithColor(UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 1), size: CGSizeMake(1, 64)), forBarMetrics: .Default)
+        UINavigationBar.appearance().shadowImage = UIImage.new()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         let fontNames = UIFont.fontNamesForFamilyName("Lato")
@@ -50,6 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
 }
 

@@ -21,6 +21,7 @@
 		D5604CEF1B72238E002AD200 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE71B721FFF002AD200 /* SwiftyJSON.framework */; };
 		D5604CF11B72238E002AD200 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE71B721FFF002AD200 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D57382A11B7359150080A4FA /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57382A01B7359150080A4FA /* APIConstants.swift */; };
 		D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */; };
 		D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */; };
 		D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4861B6A2CB000F3DF9F /* DataViewController.swift */; };
@@ -80,6 +81,7 @@
 		D5604CE51B721FFF002AD200 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D5604CE71B721FFF002AD200 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D57382A01B7359150080A4FA /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D5B3E47D1B6A2CB000F3DF9F /* Hood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B3E4811B6A2CB000F3DF9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */,
 				D5B3E48F1B6A2CB000F3DF9F /* LaunchScreen.xib */,
 				D5B3E4801B6A2CB000F3DF9F /* Supporting Files */,
+				D57382A01B7359150080A4FA /* APIConstants.swift */,
 			);
 			path = Hood;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */,
+				D57382A11B7359150080A4FA /* APIConstants.swift in Sources */,
 				D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */,
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,

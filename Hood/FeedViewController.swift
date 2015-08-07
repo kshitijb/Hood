@@ -7,21 +7,25 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Alamofire
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var dataArray: NSMutableArray = [1,2,3,4]
-    var dataObject: AnyObject?
+    var dataArray: JSON = JSON.nullJSON
+    var dataObject: JSON = JSON.nullJSON
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 138
-        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(34, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
-        dataArray = NSMutableArray(array: [1,2,3,4,5,6,7,8,9])
+        self.automaticallyAdjustsScrollViewInsets = true
+        getPosts()
+//        dataArray = NSMutableArray(array: [1,2,3,4,5,6,7,8,9])
         // Do any additional setup after loading the view.
     }
 
@@ -37,15 +41,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var identifier:String
-        if(indexPath.row == 1){
-            identifier = "CellWithImage"
-        }else{
+//        if(indexPath.row == 1){
+//            identifier = "CellWithImage"
+//        }else{
             identifier = "CellWithoutImage"
-        }
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! UITableViewCell
+//        }
+        let cell:CellWithoutImage = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
         cell.preservesSuperviewLayoutMargins = false
         cell.layoutMargins = UIEdgeInsetsZero
+        cell.content.text = self.dataArray[indexPath.row]["message"].stringValue
+        
         return cell
     }
     
@@ -53,21 +59,44 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return dataArray.count
     }
     
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView.new()
+    }
+    
     override func viewDidAppear(animated: Bool) {
+        print("Did appear")
 //        self.tableView.reloadData()
+//                tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
     override func viewWillAppear(animated: Bool) {
+//        print("contentInset on will appear \(tableView.contentInset.top)")
 //        println("Table View Frame on appear \(self.tableView.frame)")
-//        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
 //        tableView.reloadData()
+//        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
-    override func viewDidLayoutSubviews() {
-        println("Table View Frame on layout \(self.tableView.frame)")
+    override func viewWillLayoutSubviews() {
+        print("Current inset is \(self.tableView.contentInset.top)" )
+//        println("Table View Frame on layout \(self.tableView.frame)")
         let frame:CGRect = self.tableView.frame;
         if(frame.size.width > self.view.frame.size.width) {
-            self.tableView.frame = CGRectMake(0, frame.origin.y, self.view.frame.size.width, frame.size.height);
+            self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height)
+        }
+        if(tableView.contentInset.top != 34){
+            tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        }
+    }
+    
+    func getPosts(){
+        Alamofire.request(.GET, API().getAllPosts(), parameters: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
+            if let e = error{
+                print(error)
+            }else{
+                let responseJSON = JSON(data!)
+                self.dataArray = responseJSON["results"]
+                self.tableView.reloadData()
+            }
         }
     }
     
