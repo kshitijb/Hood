@@ -148,6 +148,7 @@
                                             <outlet property="content" destination="coH-in-OX4" id="Ekv-cd-YUY"/>
                                             <outlet property="likesButton" destination="31R-oc-IpB" id="6Hb-aa-YPu"/>
                                             <outlet property="profileImage" destination="XJW-Qb-nN7" id="BHl-NV-9Qw"/>
+                                            <outlet property="timestampLabel" destination="4ex-4M-a9d" id="dqC-8D-YfZ"/>
                                             <outlet property="userName" destination="Pei-jR-FLY" id="sIX-IQ-IAP"/>
                                         </connections>
                                     </tableViewCell>
@@ -591,6 +592,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2c-ec-f8k">
                                 <rect key="frame" x="0.0" y="532" width="109" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="q1C-jI-0Vz"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <state key="normal" title="Post Now">
                                     <color key="titleColor" red="0.95294117647058818" green="0.58823529411764708" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>

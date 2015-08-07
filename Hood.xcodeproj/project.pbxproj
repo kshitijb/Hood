@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
+		42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EB28231B74BCE400AB0331 /* Utilities.swift */; };
+		42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; };
+		42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D547A47F1B6B5C4300B556B4 /* Me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D547A47E1B6B5C4300B556B4 /* Me.jpg */; };
 		D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4801B6B69DB00B556B4 /* FeedViewController.swift */; };
 		D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4821B6B717600B556B4 /* CellWithoutImage.swift */; };
@@ -63,6 +66,7 @@
 				D5604CEF1B72238E002AD200 /* SVProgressHUD.framework in Embed Frameworks */,
 				D5604CED1B72238E002AD200 /* Alamofire.framework in Embed Frameworks */,
 				D5604CF11B72238E002AD200 /* SwiftyJSON.framework in Embed Frameworks */,
+				42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +75,8 @@
 
 /* Begin PBXFileReference section */
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		42EB28231B74BCE400AB0331 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		42EB28251B74D79100AB0331 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		D547A47E1B6B5C4300B556B4 /* Me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Me.jpg; sourceTree = "<group>"; };
 		D547A4801B6B69DB00B556B4 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D547A4821B6B717600B556B4 /* CellWithoutImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithoutImage.swift; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 				D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */,
 				D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */,
 				D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */,
+				42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +145,7 @@
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
+				42EB28251B74D79100AB0331 /* WebImage.framework */,
 				D5604CE51B721FFF002AD200 /* Alamofire.framework */,
 				D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */,
 				D5604CE71B721FFF002AD200 /* SwiftyJSON.framework */,
@@ -169,6 +177,7 @@
 				D5B3E4861B6A2CB000F3DF9F /* DataViewController.swift */,
 				D5B3E4881B6A2CB000F3DF9F /* ModelController.swift */,
 				D547A4801B6B69DB00B556B4 /* FeedViewController.swift */,
+				42EB28231B74BCE400AB0331 /* Utilities.swift */,
 				D547A4821B6B717600B556B4 /* CellWithoutImage.swift */,
 				D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */,
 				425DF22D1B720CC900837B8C /* AddPostViewController.swift */,
@@ -370,6 +379,7 @@
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
+				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
 				D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */,
 				425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */,
 				D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */,
