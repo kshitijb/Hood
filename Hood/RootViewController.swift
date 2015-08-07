@@ -15,15 +15,20 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
     var pageViewController: UIPageViewController?
 
+    @IBOutlet weak var pageIndicatorContainer: UIView!
+    @IBOutlet weak var pageControl: UIPageControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
+        self.pageIndicatorContainer.backgroundColor = UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 0.9)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        self.automaticallyAdjustsScrollViewInsets = false
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         self.pageViewController!.delegate = self
-        self.pageViewController?.view.backgroundColor = UIColor.lightGrayColor()
+        self.pageViewController?.view.backgroundColor = UIColor.whiteColor()
+        self.pageViewController?.view.userInteractionEnabled = false
 //        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
 //        let viewControllers = [startingViewController]
 //        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
@@ -31,7 +36,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 //        let firstDataObject: AnyObject? = self.modelController.pageData.firstObject
 //        updateTitleForString(firstDataObject!.description!)
         self.addChildViewController(self.pageViewController!)
-        self.view.addSubview(self.pageViewController!.view)
+        self.view.insertSubview(self.pageViewController!.view, belowSubview: self.pageIndicatorContainer)
         var pageViewRect = self.view.bounds
         self.pageViewController!.view.frame = pageViewRect
         self.pageViewController!.didMoveToParentViewController(self)
@@ -72,6 +77,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
             let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
             let titleString = dataViewController.dataObject["name"]
             updateTitleForString("\(titleString)")
+            self.pageControl.currentPage = self.modelController.indexOfViewController(dataViewController)
         }
     }
     
@@ -90,7 +96,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     
     func getData(){
         SVProgressHUD.show()
-        Alamofire.request(.GET, "http://128.199.179.151:8000/channel/all/", parameters: nil)
+        Alamofire.request(.GET, API().getAllChannels(), parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
                 SVProgressHUD.dismiss()
                 if let _error = error{
@@ -99,12 +105,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
                     let swiftyJSONObject = JSON(data!)
                     print(swiftyJSONObject)
                     self.modelController.pageData = swiftyJSONObject["results"]
+                    self.pageControl.numberOfPages = self.modelController.pageData.count
+                    self.pageControl.currentPage = 0
                     print(self.modelController.pageData)
                     let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
                     let viewControllers = [startingViewController]
                     self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
                     //Update First title
                     self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
+                    self.pageViewController?.view.userInteractionEnabled = true
                 }
         }
     }

@@ -287,7 +287,7 @@
         <!--Comments View Controller-->
         <scene sceneID="zey-Tj-qFo">
             <objects>
-                <viewController storyboardIdentifier="Comments" id="yBB-lD-5wj" customClass="CommentsViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Comments" automaticallyAdjustsScrollViewInsets="NO" id="yBB-lD-5wj" customClass="CommentsViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Se-xv-num"/>
                         <viewControllerLayoutGuide type="bottom" id="HLM-Ze-bPT"/>
@@ -632,10 +632,37 @@
                         <viewControllerLayoutGuide type="bottom" id="8Yh-h8-jIR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cc6-cB-pgf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjg-F2-s6c">
+                                <rect key="frame" x="0.0" y="64" width="600" height="25"/>
+                                <subviews>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="rTU-PP-B0B">
+                                        <rect key="frame" x="281" y="-6" width="39" height="37"/>
+                                    </pageControl>
+                                </subviews>
+                                <color key="backgroundColor" red="0.35294117650000001" green="0.72156862749999995" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="8YH-cH-VjW"/>
+                                    <constraint firstAttribute="centerX" secondItem="rTU-PP-B0B" secondAttribute="centerX" constant="-0.5" id="M0p-Eh-O6h"/>
+                                    <constraint firstAttribute="centerY" secondItem="rTU-PP-B0B" secondAttribute="centerY" id="jlm-kv-52z"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="wjg-F2-s6c" secondAttribute="trailing" constant="-16" id="FDh-Xd-mTH"/>
+                            <constraint firstItem="wjg-F2-s6c" firstAttribute="top" secondItem="17i-ZA-3zy" secondAttribute="bottom" id="drf-05-5H5"/>
+                            <constraint firstItem="wjg-F2-s6c" firstAttribute="leading" secondItem="cc6-cB-pgf" secondAttribute="leadingMargin" constant="-16" id="lqp-MV-Tqd"/>
+                            <constraint firstItem="wjg-F2-s6c" firstAttribute="top" secondItem="17i-ZA-3zy" secondAttribute="bottom" id="o56-ra-jNJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="o56-ra-jNJ"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="7Gf-hM-8lt">
                         <barButtonItem key="leftBarButtonItem" image="Profile" id="uhQ-51-UTj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -647,6 +674,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="pageControl" destination="rTU-PP-B0B" id="4MP-Tt-8bc"/>
+                        <outlet property="pageIndicatorContainer" destination="wjg-F2-s6c" id="JbX-KK-THl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPC-vx-IW7" sceneMemberID="firstResponder"/>
             </objects>
@@ -675,7 +706,7 @@
     <resources>
         <image name="AC.png" width="749" height="389"/>
         <image name="Add" width="22" height="22"/>
-        <image name="Camera" width="56" height="48"/>
+        <image name="Camera" width="28" height="24"/>
         <image name="Me.jpg" width="320" height="320"/>
         <image name="Profile" width="19" height="23"/>
     </resources>
