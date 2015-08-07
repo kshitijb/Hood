@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftyJSON
 class CellWithoutImage: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -32,6 +32,11 @@ class CellWithoutImage: UITableViewCell {
         content.attributedText = attrString
         content.updateConstraintsIfNeeded()
         commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func setContents(jsonObject:JSON)
+    {
+        print(jsonObject)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -675,7 +675,7 @@
     <resources>
         <image name="AC.png" width="749" height="389"/>
         <image name="Add" width="22" height="22"/>
-        <image name="Camera" width="56" height="48"/>
+        <image name="Camera" width="28" height="24"/>
         <image name="Me.jpg" width="320" height="320"/>
         <image name="Profile" width="19" height="23"/>
     </resources>
