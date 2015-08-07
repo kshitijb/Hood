@@ -8,11 +8,12 @@
 
 import UIKit
 import SwiftyJSON
+import Alamofire
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var dataArray: NSMutableArray = [1,2,3,4]
+    var dataArray: JSON = JSON.nullJSON
     var dataObject: JSON = JSON.nullJSON
     
     override func viewDidLoad() {
@@ -22,7 +23,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.estimatedRowHeight = 138
         tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
-        dataArray = NSMutableArray(array: [1,2,3,4,5,6,7,8,9])
+        getPosts()
+//        dataArray = NSMutableArray(array: [1,2,3,4,5,6,7,8,9])
         // Do any additional setup after loading the view.
     }
 
@@ -38,20 +40,26 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var identifier:String
-        if(indexPath.row == 1){
-            identifier = "CellWithImage"
-        }else{
+//        if(indexPath.row == 1){
+//            identifier = "CellWithImage"
+//        }else{
             identifier = "CellWithoutImage"
-        }
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! UITableViewCell
+//        }
+        let cell:CellWithoutImage = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
         cell.preservesSuperviewLayoutMargins = false
         cell.layoutMargins = UIEdgeInsetsZero
+        cell.content.text = self.dataArray[indexPath.row]["message"].stringValue
+        
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView.new()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -69,6 +77,18 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let frame:CGRect = self.tableView.frame;
         if(frame.size.width > self.view.frame.size.width) {
             self.tableView.frame = CGRectMake(0, frame.origin.y, self.view.frame.size.width, frame.size.height);
+        }
+    }
+    
+    func getPosts(){
+        Alamofire.request(.GET, API().getAllPosts(), parameters: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
+            if let e = error{
+                print(error)
+            }else{
+                let responseJSON = JSON(data!)
+                self.dataArray = responseJSON["results"]
+                self.tableView.reloadData()
+            }
         }
     }
     

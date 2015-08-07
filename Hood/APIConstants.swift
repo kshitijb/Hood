@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct APIConstants {
+struct API {
     struct Static {
         static let apiProtocol = "http://"
         static let baseURL = "128.199.179.151"
-        static let portNumber = "8000"
+        static let portNumber = "80"
         static let channels = "channel"
+        static let posts = "post"
         static let all = "all"
     }
     private var fullUrl:String{
@@ -24,6 +25,10 @@ struct APIConstants {
         return fullUrl + "/" + Static.channels + "/" + Static.all + "/"
     }
     
+    private var allPosts:String{
+        return fullUrl + "/" + Static.posts + "/" + Static.all + "/"
+    }
+    
     func getFullUrl() -> String{
         return fullUrl
     }
@@ -31,7 +36,10 @@ struct APIConstants {
     func getAllChannels() -> String{
         return allChannels
     }
-    
+
+    func getAllPosts() -> String{
+        return allPosts
+    }
 //    let fullUrl = Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
 //    let allChannels = fullURLRef + "/"
     

@@ -23,7 +23,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         self.pageViewController!.delegate = self
-        self.pageViewController?.view.backgroundColor = UIColor.lightGrayColor()
+        self.pageViewController?.view.backgroundColor = UIColor.whiteColor()
+        self.pageViewController?.view.userInteractionEnabled = false
 //        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
 //        let viewControllers = [startingViewController]
 //        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
@@ -90,7 +91,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     
     func getData(){
         SVProgressHUD.show()
-        Alamofire.request(.GET, APIConstants().getAllChannels(), parameters: nil)
+        Alamofire.request(.GET, API().getAllChannels(), parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
                 SVProgressHUD.dismiss()
                 if let _error = error{
@@ -105,6 +106,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
                     self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
                     //Update First title
                     self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
+                    self.pageViewController?.view.userInteractionEnabled = true
                 }
         }
     }
