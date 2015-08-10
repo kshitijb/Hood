@@ -15,6 +15,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     var dataArray: JSON = JSON.nullJSON
     var dataObject: JSON = JSON.nullJSON
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,11 +63,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewDidAppear(animated: Bool) {
-        println(self.dataObject)
         getPosts()
-//        print("Did appear")
-//        self.tableView.reloadData()
-//                tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -91,16 +88,35 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getPosts(){
-        let url = API().getAllPostsForChannel(self.dataObject["id"].string!)
+        if(self.dataArray.count == 0){
+            showLoader()
+        }
+        let url = API().getAllPostsForChannel(self.dataObject["id"].stringValue)
         Alamofire.request(.GET, url, parameters: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
+            self.hideLoader()
             if let e = error{
                 print(error)
             }else{
                 let responseJSON = JSON(data!)
                 self.dataArray = responseJSON["results"]
                 self.tableView.reloadData()
+                self.tableView.setNeedsLayout()
+                self.tableView.layoutIfNeeded()
+                self.tableView.reloadData()
             }
         }
+    }
+    
+    func showLoader(){
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoader(){
+        activityIndicator.stopAnimating()
     }
     
     /*

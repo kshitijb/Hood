@@ -43,7 +43,7 @@ struct API {
     }
     
     func getAllPostsForChannel(channel: String) -> String{
-        return "/".join([fullUrl,Static.posts,Static.filter,"55c34163f4eafb78e5c49d3c",channel])
+        return "/".join([fullUrl,Static.posts,Static.filter,"1",channel])
     }
     
 //    let fullUrl = Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
