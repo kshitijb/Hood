@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         let fontNames = UIFont.fontNamesForFamilyName("Lato")
-        let font = UIFont(name: "Lato-Light", size: 24)
+        let font = UIFont(name: "Lato-Regular", size: 26)
         if let font = font{
             let titleDict: NSDictionary = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
             UINavigationBar.appearance().titleTextAttributes = titleDict as [NSObject : AnyObject]

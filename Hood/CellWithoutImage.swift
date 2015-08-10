@@ -34,14 +34,17 @@ class CellWithoutImage: UITableViewCell {
         content.attributedText = attrString
         content.updateConstraintsIfNeeded()
         commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        self.likesButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func setContents(jsonObject:JSON)
     {
         print(jsonObject)
         content.text = jsonObject["message"].string
-        let noOfComments = jsonObject["comments"].array?.count
-        commentsButton.setTitle("\(noOfComments!) Comments", forState: UIControlState.Normal)
+        if let noOfComments = jsonObject["comments_count"].number{
+            commentsButton.setTitle("\(noOfComments) Comments", forState: UIControlState.Normal)
+        }
         timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
         let lastName = jsonObject["author"]["lastname"].string
         var firstChar = Array(lastName!)[0]
@@ -68,6 +71,9 @@ class CellWithoutImage: UITableViewCell {
         NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: nil)
     }
     
+    func likePressed(){
+        self.likesButton.selected = true
+    }
     
     
 }
