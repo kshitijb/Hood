@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        UINavigationBar.appearance().barTintColor = UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 1)
-        UINavigationBar.appearance().setBackgroundImage(getImageWithColor(UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 1), CGSizeMake(1, 64)), forBarMetrics: .Default)
+        
+        UINavigationBar.appearance().barTintColor = PipalGlobalColor
+        UINavigationBar.appearance().setBackgroundImage(getImageWithColor(PipalGlobalColor, CGSizeMake(1, 64)), forBarMetrics: .Default)
         UINavigationBar.appearance().shadowImage = UIImage.new()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
@@ -27,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let titleDict: NSDictionary = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
             UINavigationBar.appearance().titleTextAttributes = titleDict as [NSObject : AnyObject]
         }
-        return true
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -46,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(application: UIApplication) {

@@ -25,13 +25,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length + 30, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = true
-//        dataArray = NSMutableArray(array: [1,2,3,4,5,6,7,8,9])
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -111,6 +108,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.center = view.center
+        activityIndicator.center.y = activityIndicator.center.y + self.topLayoutGuide.length
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }
@@ -118,15 +116,5 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func hideLoader(){
         activityIndicator.stopAnimating()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

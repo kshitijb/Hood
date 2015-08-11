@@ -19,6 +19,9 @@
 		D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4861B70B87C00B556B4 /* CommentsViewController.swift */; };
 		D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */; };
 		D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A48A1B70D29B00B556B4 /* CellWithImage.swift */; };
+		D54B9BC71B78C54D0075836C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BC41B78C54D0075836C /* FBSDKCoreKit.framework */; };
+		D54B9BC81B78C54D0075836C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BC51B78C54D0075836C /* FBSDKLoginKit.framework */; };
+		D54B9BC91B78C54D0075836C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BC61B78C54D0075836C /* FBSDKShareKit.framework */; };
 		D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE51B721FFF002AD200 /* Alamofire.framework */; };
 		D5604CED1B72238E002AD200 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE51B721FFF002AD200 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; };
@@ -86,6 +89,9 @@
 		D547A4861B70B87C00B556B4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsHeaderCell.swift; sourceTree = "<group>"; };
 		D547A48A1B70D29B00B556B4 /* CellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithImage.swift; sourceTree = "<group>"; };
+		D54B9BC41B78C54D0075836C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D54B9BC51B78C54D0075836C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		D54B9BC61B78C54D0075836C /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		D5604CE51B721FFF002AD200 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D5604CE71B721FFF002AD200 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -120,7 +126,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D54B9BC71B78C54D0075836C /* FBSDKCoreKit.framework in Frameworks */,
 				D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */,
+				D54B9BC81B78C54D0075836C /* FBSDKLoginKit.framework in Frameworks */,
+				D54B9BC91B78C54D0075836C /* FBSDKShareKit.framework in Frameworks */,
 				D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */,
 				D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */,
 				42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */,
@@ -147,6 +156,9 @@
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
+				D54B9BC41B78C54D0075836C /* FBSDKCoreKit.framework */,
+				D54B9BC51B78C54D0075836C /* FBSDKLoginKit.framework */,
+				D54B9BC61B78C54D0075836C /* FBSDKShareKit.framework */,
 				42EB28251B74D79100AB0331 /* WebImage.framework */,
 				D5604CE51B721FFF002AD200 /* Alamofire.framework */,
 				D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */,
@@ -521,6 +533,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					/Users/abheyraj/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -536,6 +549,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					/Users/abheyraj/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -41,9 +41,15 @@ class CellWithoutImage: UITableViewCell {
     func setContents(jsonObject:JSON)
     {
         print(jsonObject)
-        content.text = jsonObject["message"].string
+        var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
+        let attributedString = NSAttributedString(string: jsonObject["message"].string!, attributes: attributes)
+        content.attributedText = attributedString
+        content.updateConstraintsIfNeeded()
         if let noOfComments = jsonObject["comments_count"].number{
             commentsButton.setTitle("\(noOfComments) Comments", forState: UIControlState.Normal)
+        }
+        if let noOfLikes = jsonObject["upvotes_count"].number{
+            likesButton.setTitle("\(noOfLikes) Likes", forState: UIControlState.Normal)
         }
         timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
         let lastName = jsonObject["author"]["lastname"].string
@@ -56,15 +62,9 @@ class CellWithoutImage: UITableViewCell {
         }
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.updateConstraintsIfNeeded()
+//        self.updateConstraintsIfNeeded()
     }
     
     func commentsPressed(){
@@ -72,7 +72,10 @@ class CellWithoutImage: UITableViewCell {
     }
     
     func likePressed(){
-        self.likesButton.selected = true
+        if self.likesButton.selected {
+            self.likesButton.selected = false        }else{
+            self.likesButton.selected = true
+        }
     }
     
     

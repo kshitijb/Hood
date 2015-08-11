@@ -23,7 +23,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
         self.pageControl.hidden = true
-        self.pageIndicatorContainer.backgroundColor = UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 0.9)
+        self.pageIndicatorContainer.backgroundColor = PipalGlobalColor.colorWithAlphaComponent(0.9)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.automaticallyAdjustsScrollViewInsets = false
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
