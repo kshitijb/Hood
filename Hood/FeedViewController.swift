@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 
+
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
@@ -60,6 +61,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewDidAppear(animated: Bool) {
+        
         getPosts()
     }
     
