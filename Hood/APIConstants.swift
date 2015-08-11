@@ -46,7 +46,4 @@ struct API {
         return "/".join([fullUrl,Static.posts,Static.filter,"1",channel])
     }
     
-//    let fullUrl = Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
-//    let allChannels = fullURLRef + "/"
-    
 }

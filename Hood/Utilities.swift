@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let PipalGlobalColor:UIColor = UIColor(red: 97/255, green: 199/255, blue: 144/255, alpha: 1)
 
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
 {

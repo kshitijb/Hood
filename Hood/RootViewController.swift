@@ -10,7 +10,9 @@ import UIKit
 import Alamofire
 import SVProgressHUD
 import SwiftyJSON
-
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FBSDKShareKit
 class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
     var pageViewController: UIPageViewController?
@@ -20,10 +22,18 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (FBSDKAccessToken.currentAccessToken() == nil)
+        {
+            performSegueWithIdentifier("showLogin", sender: self)
+        }
+        else
+        {
+            getData()
+        }
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
         self.pageControl.hidden = true
-        self.pageIndicatorContainer.backgroundColor = UIColor(red: 66/255, green: 186/255, blue: 201/255, alpha: 0.9)
+        self.pageIndicatorContainer.backgroundColor = PipalGlobalColor.colorWithAlphaComponent(0.9)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.automaticallyAdjustsScrollViewInsets = false
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
@@ -38,14 +48,30 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
-        getData()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let profile: AnyObject = userDefaults.valueForKey("fbProfilePhoto")
+        {
+            print(profile)
+        }
+        if (FBSDKAccessToken.currentAccessToken() == nil)
+        {
+            performSegueWithIdentifier("showLogin", sender: self)
+        }
+        else
+        {
+            getData()
+        }
+    }
     var modelController: ModelController {
         // Return the model controller object, creating it if necessary.
         // In more complex implementations, the model controller may be passed to the view controller.
