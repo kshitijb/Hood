@@ -17,7 +17,10 @@ struct API {
         static let posts = "post"
         static let all = "all"
         static let filter = "filter"
-    }
+        static let upvote = "upvote"
+        static let add = "add"
+        static let delete = "delete"
+     }
     private var fullUrl:String{
         return Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
     }
@@ -46,4 +49,10 @@ struct API {
         return "/".join([fullUrl,Static.posts,Static.filter,"1",channel])
     }
     
+    func upvotePost()->String{
+        return "/".join([fullUrl,Static.upvote,Static.add])
+    }
+    func downvotePost()->String{
+        return "/".join([fullUrl,Static.upvote,Static.delete])
+    }
 }
