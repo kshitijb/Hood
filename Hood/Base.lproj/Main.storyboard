@@ -589,7 +589,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
                                 <rect key="frame" x="16" y="64" width="568" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -630,11 +630,13 @@
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="3Xc-1f-oP6"/>
                             <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="K2c-ec-f8k" secondAttribute="bottom" id="HdB-qZ-YG5"/>
                             <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" id="hHa-Y4-vuT"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="23" id="jvA-xL-AJM"/>
                             <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="vxe-qT-rTF" secondAttribute="bottom" constant="8" id="s2O-a7-Evd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addPhotoButton" destination="vxe-qT-rTF" id="rN5-ap-U8D"/>
+                        <outlet property="buttonBottomConstraint" destination="s2O-a7-Evd" id="38y-7e-SaZ"/>
                         <outlet property="postNowButton" destination="K2c-ec-f8k" id="i0C-rl-Pwm"/>
                         <outlet property="postTextView" destination="4hd-Dw-guh" id="QMR-CT-XPN"/>
                     </connections>
