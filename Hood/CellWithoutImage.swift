@@ -18,6 +18,7 @@ class CellWithoutImage: UITableViewCell {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     var postID :Int?
+    var upvotesCount = 0
     @IBOutlet weak var timestampLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +44,7 @@ class CellWithoutImage: UITableViewCell {
     {
         print(jsonObject)
         postID = jsonObject["id"].int
+        upvotesCount = jsonObject["upvotes_count"].int!
         var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
         let attributedString = NSAttributedString(string: jsonObject["message"].string!, attributes: attributes)
         content.attributedText = attributedString
@@ -76,20 +78,47 @@ class CellWithoutImage: UITableViewCell {
     func likePressed(){
         if self.likesButton.selected
         {
+            upvotesCount--
+            likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
+            let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
+            println(postID)
+            let params = ["post_id" : postID!, "user_id": userID!]
+            Alamofire.request(.POST, API().downvotePost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
+                print(error)
+                if (error != nil)
+                {
+                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
+                    alert.show()
+                    self.upvotesCount++
+                    self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                    self.likesButton.selected = true
+
+                }
+                print(response)
+                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
+                })
             self.likesButton.selected = false
-            
         }
         else
         {
-            let userID = NSUserDefaults.standardUserDefaults().valueForKey("fb_id") as! String
-            let userIDno = userID.toInt()
+            upvotesCount++
+            likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
+            let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
             println(postID)
-            let params = ["post_id" : postID!, "user_id": 1]
-            Alamofire.request(.POST, "http://128.199.179.151/upvote/add/", parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
+            let params = ["post_id" : postID!, "user_id": userID!]
+            Alamofire.request(.POST, API().upvotePost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
                 print(error)
+                if (error != nil)
+                {
+                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
+                    alert.show()
+                    self.upvotesCount--
+                    self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                    self.likesButton.selected = false
+                }
                 print(response)
                 print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-                print(request)
             })
             self.likesButton.selected = true
         }

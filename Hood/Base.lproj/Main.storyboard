@@ -589,15 +589,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
-                                <rect key="frame" x="16" y="63" width="568" height="517"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
+                                <rect key="frame" x="16" y="64" width="568" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
-                                <rect key="frame" x="208.5" y="532" width="174" height="45"/>
+                                <rect key="frame" x="35" y="547" width="174" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="BRR-qe-bvv"/>
+                                    <constraint firstAttribute="height" constant="45" id="XuL-TX-JkE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="20"/>
                                 <inset key="titleEdgeInsets" minX="-18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="100" maxY="0.0"/>
@@ -607,9 +611,10 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2c-ec-f8k">
-                                <rect key="frame" x="0.0" y="532" width="109" height="48"/>
+                                <rect key="frame" x="458" y="544" width="109" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="q1C-jI-0Vz"/>
+                                    <constraint firstAttribute="width" constant="109" id="0o9-Co-CJB"/>
+                                    <constraint firstAttribute="height" constant="48" id="yXz-lr-dv8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <state key="normal" title="Post Now">
@@ -620,23 +625,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="K2c-ec-f8k" firstAttribute="height" secondItem="vxe-qT-rTF" secondAttribute="height" id="0Ec-g3-rbB"/>
-                            <constraint firstItem="K2c-ec-f8k" firstAttribute="leading" secondItem="vxe-qT-rTF" secondAttribute="trailing" constant="15" id="5JH-AO-ouT"/>
-                            <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="E63-2m-yjL"/>
-                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="Li3-ug-fV1"/>
-                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="M9b-j1-LoC"/>
-                            <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="20" id="Pqm-yC-VB3"/>
-                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="XmD-pf-TUa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="4hd-Dw-guh" secondAttribute="trailing" id="qmf-Zl-Op4"/>
-                            <constraint firstItem="K2c-ec-f8k" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="sHG-wI-mZd"/>
-                            <constraint firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" id="xRa-EP-de9"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" constant="5" id="13x-ID-hIP"/>
+                            <constraint firstItem="4hd-Dw-guh" firstAttribute="trailing" secondItem="j6q-UG-sag" secondAttribute="trailingMargin" id="1ft-Gj-Apd"/>
+                            <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="3Xc-1f-oP6"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="K2c-ec-f8k" secondAttribute="bottom" id="HdB-qZ-YG5"/>
+                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" id="hHa-Y4-vuT"/>
+                            <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="vxe-qT-rTF" secondAttribute="bottom" constant="8" id="s2O-a7-Evd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addPhotoButton" destination="vxe-qT-rTF" id="rN5-ap-U8D"/>
                         <outlet property="postNowButton" destination="K2c-ec-f8k" id="i0C-rl-Pwm"/>
                         <outlet property="postTextView" destination="4hd-Dw-guh" id="QMR-CT-XPN"/>
-                        <outlet property="textviewBottomConstraint" destination="Pqm-yC-VB3" id="Ljm-S6-F2u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jLh-wi-qsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

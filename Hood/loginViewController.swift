@@ -49,7 +49,6 @@ class loginViewController: UIViewController {
                 fbRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                     print(result)
                     let userDefaults = NSUserDefaults.standardUserDefaults()
-                    userDefaults.setValue(result["id"], forKey: "fb_id")
                     userDefaults.setValue(result["name"], forKey: "fbUserName")
                     let id = result["id"]
                     userDefaults.setValue("https://graph.facebook.com/\(id!)/picture?type=normal", forKey: "fbProfilePhoto")
@@ -70,9 +69,14 @@ class loginViewController: UIViewController {
                     ]
                     
                     Alamofire.request(.POST, "http://128.199.179.151/user/register/", parameters: parameters as? [String : AnyObject], encoding: .JSON) .response { request, response, data, error in
-                        println(request)
-                        println(response)
-                        println(error)
+                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        if let responseDict = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil) as? NSDictionary
+                        {
+                            let userDefaults = NSUserDefaults.standardUserDefaults()
+                            userDefaults.setValue(responseDict["id"], forKey: "id")
+                            userDefaults.setValue(responseDict["access_token"], forKey: "accessToken")
+                            userDefaults.synchronize()
+                        }
                     }
 
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
