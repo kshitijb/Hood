@@ -621,6 +621,9 @@
                                     <color key="titleColor" red="0.95294117647058818" green="0.58823529411764708" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postNow:" destination="XXA-Y3-OCx" eventType="touchUpInside" id="X0E-aI-ypj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -692,7 +695,7 @@
                         <barButtonItem key="rightBarButtonItem" image="Add" id="lRs-YM-avi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="XXA-Y3-OCx" kind="show" id="7MM-bh-Zoy"/>
+                                <segue destination="XXA-Y3-OCx" kind="show" identifier="addPost" id="7MM-bh-Zoy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

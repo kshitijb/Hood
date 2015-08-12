@@ -141,7 +141,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
                 }
         }
     }
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addPost"
+        {
+            (segue.destinationViewController as? AddPostViewController)?.channelID = pageControl.currentPage
+        }
+    }
     func showPageControl(){
         self.pageControl.hidden = false
         self.pageControl.transform = CGAffineTransformMakeScale(0.6, 0.6)
@@ -151,6 +156,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
             
         }
     }
+    
+    
     
 }
 

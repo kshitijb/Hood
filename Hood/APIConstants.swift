@@ -55,4 +55,9 @@ struct API {
     func downvotePost()->String{
         return "/".join([fullUrl,Static.upvote,Static.delete])
     }
+    
+    func addPost() -> String
+    {
+        return "/".join([fullUrl,Static.posts,Static.add])
+    }
 }

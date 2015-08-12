@@ -61,8 +61,7 @@ class CellWithoutImage: UITableViewCell {
         userName.text = jsonObject["author"]["firstname"].string! + " " + String(firstChar)
         if let profileURL = jsonObject["author"]["profile_photo"].string
         {
-            let otherURL = "https://pbs.twimg.com/profile_images/2499605683/bf8yn88rwt3jklyajuax.jpeg"
-            profileImage.sd_setImageWithURL(NSURL(string:otherURL), placeholderImage: UIImage(named: "Me.jpg"))
+            profileImage.sd_setImageWithURL(NSURL(string:profileURL), placeholderImage: UIImage(named: "Me.jpg"))
         }
     }
 

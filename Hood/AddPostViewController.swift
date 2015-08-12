@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Alamofire
 
 class AddPostViewController: UIViewController,UITextViewDelegate
 {
     @IBOutlet weak var postTextView: UITextView!
-
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
+    var channelID: Int?
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
     override func viewDidLoad() {
@@ -22,9 +23,6 @@ class AddPostViewController: UIViewController,UITextViewDelegate
         postNowButton.layer.borderColor = UIColor(red: 243/255, green: 150/255, blue: 48/255, alpha: 1).CGColor
         postNowButton.layer.borderWidth = 2.5
         postNowButton.layer.cornerRadius = 25
-//        view.addConstraint(NSLayoutConstraint(item: addPhotoButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-// 
-//        view.addConstraint(NSLayoutConstraint(item: postNowButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
         var viewBindingsDict: NSMutableDictionary = NSMutableDictionary()
         viewBindingsDict.setValue(addPhotoButton, forKey: "addPhotoButton")
         viewBindingsDict.setValue(postNowButton, forKey: "postNowButton")
@@ -33,6 +31,19 @@ class AddPostViewController: UIViewController,UITextViewDelegate
     
     }
     
+    @IBAction func postNow(sender: AnyObject)
+    {
+        let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
+        let params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!+1, "message" : postTextView.text] as [String:AnyObject!]
+        print(params)
+        Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
+            print(error)
+            print(response)
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            self.navigationController?.popViewControllerAnimated(true)
+        })
+
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)
