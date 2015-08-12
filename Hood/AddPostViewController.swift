@@ -11,7 +11,6 @@ import UIKit
 class AddPostViewController: UIViewController,UITextViewDelegate
 {
     @IBOutlet weak var postTextView: UITextView!
-    @IBOutlet weak var textviewBottomConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
@@ -65,7 +64,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
             UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
-                self.textviewBottomConstraint.constant = keyboardSize.height + 20
+ 
                 self.postTextView.layoutIfNeeded()
             }, completion: { (completion) -> Void in
                 
