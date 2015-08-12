@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import WebImage
+import Alamofire
 class CellWithoutImage: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -16,7 +17,7 @@ class CellWithoutImage: UITableViewCell {
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
-    
+    var postID :Int?
     @IBOutlet weak var timestampLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +42,7 @@ class CellWithoutImage: UITableViewCell {
     func setContents(jsonObject:JSON)
     {
         print(jsonObject)
+        postID = jsonObject["id"].int
         var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
         let attributedString = NSAttributedString(string: jsonObject["message"].string!, attributes: attributes)
         content.attributedText = attributedString
@@ -72,8 +74,23 @@ class CellWithoutImage: UITableViewCell {
     }
     
     func likePressed(){
-        if self.likesButton.selected {
-            self.likesButton.selected = false        }else{
+        if self.likesButton.selected
+        {
+            self.likesButton.selected = false
+            
+        }
+        else
+        {
+            let userID = NSUserDefaults.standardUserDefaults().valueForKey("fb_id") as! String
+            let userIDno = userID.toInt()
+            println(postID)
+            let params = ["post_id" : postID!, "user_id": 1]
+            Alamofire.request(.POST, "http://128.199.179.151/upvote/add/", parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
+                print(error)
+                print(response)
+                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                print(request)
+            })
             self.likesButton.selected = true
         }
     }
