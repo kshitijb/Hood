@@ -49,10 +49,11 @@ class loginViewController: UIViewController {
                 fbRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                     print(result)
                     let userDefaults = NSUserDefaults.standardUserDefaults()
-                    userDefaults.setValue(result["id"], forKey: "facebookID")
+                    userDefaults.setValue(result["id"], forKey: "fb_id")
                     userDefaults.setValue(result["name"], forKey: "fbUserName")
                     let id = result["id"]
                     userDefaults.setValue("https://graph.facebook.com/\(id!)/picture?type=normal", forKey: "fbProfilePhoto")
+                    userDefaults.setValue(id, forKey: "fb_id")
                     userDefaults.synchronize()
                     var fullNameArr = split(result["name"] as! String) {$0 == " "}
                     var firstName: String = fullNameArr[0]
