@@ -112,7 +112,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     }
     
     func showComments(notification: NSNotification){
-        let commentsView: UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! UIViewController
+        let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! CommentsViewController
+        var info = notification.userInfo!
+        commentsView.postID = info["postID"] as! Int
         self.navigationController?.pushViewController(commentsView, animated: true)
     }
     

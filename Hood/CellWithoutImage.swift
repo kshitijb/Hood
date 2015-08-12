@@ -71,7 +71,8 @@ class CellWithoutImage: UITableViewCell {
     }
     
     func commentsPressed(){
-        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: nil)
+        let userInfo = ["postID" : postID!]
+        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
     
     func likePressed(){

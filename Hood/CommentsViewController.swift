@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Alamofire
+import SwiftyJSON
 class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var headerView: UIView!
@@ -17,7 +18,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var postContent: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentsTextView: UITextView!
-    var comments:NSMutableArray = NSMutableArray(array: [1,2])
+    var postID = 0
+    @IBOutlet weak var commentConstraint: NSLayoutConstraint!
+    var comments = JSON.nullJSON
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.estimatedRowHeight = 138
         tableView.rowHeight = UITableViewAutomaticDimension
         setupUI()
+        
+        
+        print(API().getCommentsForPost("\(postID)"))
+        Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,17 +52,48 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     }
     
+    @IBAction func sendComment(sender: AnyObject)
+    {
+        let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
+        let params = [ "user_id": userID! ,"post_id" : postID, "comment":commentsTextView.text] as [String:AnyObject!]
+        print(params)
+        Alamofire.request(.POST, API().addComment(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
+            print(error)
+            print(response)
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
+        })
+    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var identifier:String
-        if(indexPath.section == 0){
-            identifier = "HeaderCell"
-        }else{
-            identifier = "Comment"
+        if(indexPath.section == 0)
+        {
+            var cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as? CommentsHeaderCell
+            if(cell == nil)
+            {
+                cell = CommentsHeaderCell()
+            }
+            
+            cell!.preservesSuperviewLayoutMargins = false
+            cell!.layoutMargins = UIEdgeInsetsZero
+            return cell!
         }
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! UITableViewCell
-        cell.preservesSuperviewLayoutMargins = false
-        cell.layoutMargins = UIEdgeInsetsZero
-        return cell
+        else
+        {
+            identifier = "Comment"
+            var cell = tableView.dequeueReusableCellWithIdentifier("Comment") as? commentCell
+            cell?.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + String(Array(comments["results"][indexPath.row]["author"]["lastname"].string!)[0])
+            
+            cell?.commentLabel.text = comments["results"][indexPath.row]["comment"].string
+            cell?.timestampLabel.text = Utilities.timeStampFromDate(comments["results"][indexPath.row]["timestamp"].string!)
+            
+            cell!.preservesSuperviewLayoutMargins = false
+            cell!.layoutMargins = UIEdgeInsetsZero
+            return cell!
+        }
+
+
+       
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,17 +115,28 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             return nil
         }
     }
-    
+    func keyboardWillShow(notification:NSNotification)
+    {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        {
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
+            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                self.commentConstraint.constant += keyboardSize.height
+                }, completion: { (completion) -> Void in
+                    
+            })
+        }
+    }
+    func keyboardWillHide(notification:NSNotification)
+    {
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidHideNotification, object: nil)
+    }
     override func viewDidLayoutSubviews() {
         self.tableView.reloadData()
     }
-    
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//        let updatedHeight = self.postContent.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height
-//        let updatedFrame: CGRect = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, updatedHeight + headerView.frame.size.height)
-//        headerView.frame = updatedFrame
-//    }
-    
-    
 }
