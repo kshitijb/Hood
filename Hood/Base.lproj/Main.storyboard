@@ -323,7 +323,7 @@
                                             <constraint firstAttribute="height" constant="1" id="yeo-Tw-6Ik"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" editable="NO" text="Add a comment" translatesAutoresizingMaskIntoConstraints="NO" id="7F6-fm-gAT">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" text="Add a comment" translatesAutoresizingMaskIntoConstraints="NO" id="7F6-fm-gAT">
                                         <rect key="frame" x="16" y="8" width="530" height="38"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -338,6 +338,9 @@
                                         <state key="normal" title="Send">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendComment:" destination="yBB-lD-5wj" eventType="touchUpInside" id="LLn-of-77t"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
@@ -363,7 +366,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Comment" rowHeight="145" id="uEj-CO-MkI">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Comment" rowHeight="145" id="uEj-CO-MkI" customClass="commentCell" customModule="Hood" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uEj-CO-MkI" id="Oep-FD-vPh">
@@ -414,6 +417,11 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="authorLabel" destination="xei-FD-upk" id="VLg-gZ-3Te"/>
+                                            <outlet property="commentLabel" destination="AAh-lP-vCx" id="sKa-1m-koR"/>
+                                            <outlet property="timestampLabel" destination="bcg-ja-8HC" id="M3R-qt-AGU"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="138" id="2pV-ML-CNT" customClass="CommentsHeaderCell" customModule="Hood" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -501,6 +509,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="commentConstraint" destination="lkl-ZV-mce" id="4AR-XX-FO1"/>
                         <outlet property="commentsTextView" destination="7F6-fm-gAT" id="TO4-H2-0aN"/>
                         <outlet property="headerView" destination="bMK-pq-pYh" id="ndI-Q0-vLl"/>
                         <outlet property="postContent" destination="jma-26-JCc" id="t3B-KE-U1m"/>
@@ -590,14 +599,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
-                                <rect key="frame" x="16" y="63" width="568" height="517"/>
+                                <rect key="frame" x="16" y="64" width="568" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
-                                <rect key="frame" x="208.5" y="532" width="174" height="45"/>
+                                <rect key="frame" x="35" y="547" width="174" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="BRR-qe-bvv"/>
+                                    <constraint firstAttribute="height" constant="45" id="XuL-TX-JkE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="20"/>
                                 <inset key="titleEdgeInsets" minX="-18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="100" maxY="0.0"/>
@@ -607,36 +620,37 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2c-ec-f8k">
-                                <rect key="frame" x="0.0" y="532" width="109" height="48"/>
+                                <rect key="frame" x="458" y="544" width="109" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="q1C-jI-0Vz"/>
+                                    <constraint firstAttribute="width" constant="109" id="0o9-Co-CJB"/>
+                                    <constraint firstAttribute="height" constant="48" id="yXz-lr-dv8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <state key="normal" title="Post Now">
                                     <color key="titleColor" red="0.95294117647058818" green="0.58823529411764708" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postNow:" destination="XXA-Y3-OCx" eventType="touchUpInside" id="X0E-aI-ypj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="K2c-ec-f8k" firstAttribute="height" secondItem="vxe-qT-rTF" secondAttribute="height" id="0Ec-g3-rbB"/>
-                            <constraint firstItem="K2c-ec-f8k" firstAttribute="leading" secondItem="vxe-qT-rTF" secondAttribute="trailing" constant="15" id="5JH-AO-ouT"/>
-                            <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="E63-2m-yjL"/>
-                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="Li3-ug-fV1"/>
-                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="M9b-j1-LoC"/>
-                            <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="20" id="Pqm-yC-VB3"/>
-                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" constant="-1" id="XmD-pf-TUa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="4hd-Dw-guh" secondAttribute="trailing" id="qmf-Zl-Op4"/>
-                            <constraint firstItem="K2c-ec-f8k" firstAttribute="bottom" secondItem="4hd-Dw-guh" secondAttribute="bottom" id="sHG-wI-mZd"/>
-                            <constraint firstAttribute="centerX" secondItem="4hd-Dw-guh" secondAttribute="centerX" id="xRa-EP-de9"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" constant="5" id="13x-ID-hIP"/>
+                            <constraint firstItem="4hd-Dw-guh" firstAttribute="trailing" secondItem="j6q-UG-sag" secondAttribute="trailingMargin" id="1ft-Gj-Apd"/>
+                            <constraint firstItem="4hd-Dw-guh" firstAttribute="leading" secondItem="j6q-UG-sag" secondAttribute="leadingMargin" id="3Xc-1f-oP6"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="bottom" secondItem="K2c-ec-f8k" secondAttribute="bottom" id="HdB-qZ-YG5"/>
+                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="kLw-fU-Xuh" secondAttribute="bottom" id="hHa-Y4-vuT"/>
+                            <constraint firstItem="vxe-qT-rTF" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="23" id="jvA-xL-AJM"/>
+                            <constraint firstItem="XGd-Qj-I2w" firstAttribute="top" secondItem="vxe-qT-rTF" secondAttribute="bottom" constant="8" id="s2O-a7-Evd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addPhotoButton" destination="vxe-qT-rTF" id="rN5-ap-U8D"/>
+                        <outlet property="buttonBottomConstraint" destination="s2O-a7-Evd" id="38y-7e-SaZ"/>
                         <outlet property="postNowButton" destination="K2c-ec-f8k" id="i0C-rl-Pwm"/>
                         <outlet property="postTextView" destination="4hd-Dw-guh" id="QMR-CT-XPN"/>
-                        <outlet property="textviewBottomConstraint" destination="Pqm-yC-VB3" id="Ljm-S6-F2u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jLh-wi-qsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -690,7 +704,7 @@
                         <barButtonItem key="rightBarButtonItem" image="Add" id="lRs-YM-avi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="XXA-Y3-OCx" kind="show" id="7MM-bh-Zoy"/>
+                                <segue destination="XXA-Y3-OCx" kind="show" identifier="addPost" id="7MM-bh-Zoy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
