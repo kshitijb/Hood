@@ -18,6 +18,7 @@ class CellWithoutImage: UITableViewCell {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     var postID :Int?
+    var post = JSON.nullJSON
     var upvotesCount = 0
     @IBOutlet weak var timestampLabel: UILabel!
     override func awakeFromNib() {

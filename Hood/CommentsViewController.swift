@@ -36,6 +36,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
             self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            self.tableView.reloadData()
         })
         
     }
@@ -82,11 +83,18 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         {
             identifier = "Comment"
             var cell = tableView.dequeueReusableCellWithIdentifier("Comment") as? commentCell
-            cell?.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + String(Array(comments["results"][indexPath.row]["author"]["lastname"].string!)[0])
-            
-            cell?.commentLabel.text = comments["results"][indexPath.row]["comment"].string
-            cell?.timestampLabel.text = Utilities.timeStampFromDate(comments["results"][indexPath.row]["timestamp"].string!)
-            
+            if(cell == nil)
+            {
+                cell = commentCell()
+            }
+            if comments["results"].array?.count>0
+            {
+                print(comments["results"].array!.count)
+                cell?.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + String(Array(comments["results"][indexPath.row]["author"]["lastname"].string!)[0])
+                
+                cell?.commentLabel.text = comments["results"][indexPath.row]["comment"].string
+                cell?.timestampLabel.text = Utilities.timeStampFromDate(comments["results"][indexPath.row]["timestamp"].string!)
+            }
             cell!.preservesSuperviewLayoutMargins = false
             cell!.layoutMargins = UIEdgeInsetsZero
             return cell!
@@ -100,7 +108,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         if(section == 0){
             return 1
         }else{
-            return comments.count
+            if let x = comments["results"].array?.count
+            {
+                return x
+            }
+            else
+            {
+                return 0
+            }
         }
     }
     
