@@ -18,6 +18,7 @@ class CellWithoutImage: UITableViewCell {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     var postID :Int?
+    var post = JSON.nullJSON
     var upvotesCount = 0
     @IBOutlet weak var timestampLabel: UILabel!
     override func awakeFromNib() {
@@ -43,6 +44,7 @@ class CellWithoutImage: UITableViewCell {
     func setContents(jsonObject:JSON)
     {
         print(jsonObject)
+        post = jsonObject
         postID = jsonObject["id"].int
         upvotesCount = jsonObject["upvotes_count"].int!
         var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
@@ -66,8 +68,7 @@ class CellWithoutImage: UITableViewCell {
         userName.text = jsonObject["author"]["firstname"].string! + " " + String(firstChar)
         if let profileURL = jsonObject["author"]["profile_photo"].string
         {
-            let otherURL = "https://pbs.twimg.com/profile_images/2499605683/bf8yn88rwt3jklyajuax.jpeg"
-            profileImage.sd_setImageWithURL(NSURL(string:otherURL), placeholderImage: UIImage(named: "Me.jpg"))
+            profileImage.sd_setImageWithURL(NSURL(string:profileURL), placeholderImage: UIImage(named: "Me.jpg"))
         }
     }
 
@@ -77,7 +78,9 @@ class CellWithoutImage: UITableViewCell {
     }
     
     func commentsPressed(){
-        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: nil)
+        print(post)
+        let userInfo:Dictionary = ["post" : post.object , "postID" : postID!]
+        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
     
     func likePressed(){
