@@ -73,7 +73,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
                 print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                 self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-                self.tableView.reloadData()
+                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Right)
             })
         })
     }
