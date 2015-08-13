@@ -55,6 +55,11 @@ class CellWithoutImage: UITableViewCell {
         if let noOfLikes = jsonObject["upvotes_count"].number{
             likesButton.setTitle("\(noOfLikes) Likes", forState: UIControlState.Normal)
         }
+        if let isLiked = jsonObject["is_upvoted"].bool{
+            if isLiked{
+                likesButton.selected = true
+            }
+        }
         timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
         let lastName = jsonObject["author"]["lastname"].string
         var firstChar = Array(lastName!)[0]
