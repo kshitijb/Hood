@@ -72,7 +72,7 @@ class CellWithoutImage: UITableViewCell {
     }
     
     func commentsPressed(){
-        let userInfo = ["postID" : postID!]
+        let userInfo:Dictionary<String,JSON> = ["postID" : postID!, "postObject": post]
         NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
     
