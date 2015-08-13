@@ -39,7 +39,6 @@
 		D5B3E48C1B6A2CB000F3DF9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */; };
 		D5B3E48E1B6A2CB000F3DF9F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */; };
 		D5B3E4911B6A2CB000F3DF9F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E48F1B6A2CB000F3DF9F /* LaunchScreen.xib */; };
-		D5B3E49D1B6A2CB000F3DF9F /* HoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E49C1B6A2CB000F3DF9F /* HoodTests.swift */; };
 		D5B3E4B21B6A33E000F3DF9F /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4A71B6A33E000F3DF9F /* Lato-Black.ttf */; };
 		D5B3E4B31B6A33E000F3DF9F /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4A81B6A33E000F3DF9F /* Lato-BlackItalic.ttf */; };
 		D5B3E4B41B6A33E000F3DF9F /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4A91B6A33E000F3DF9F /* Lato-Bold.ttf */; };
@@ -52,16 +51,6 @@
 		D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */; };
 		D5B3E4BC1B6A33E000F3DF9F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B11B6A33E000F3DF9F /* OFL.txt */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D5B3E4971B6A2CB000F3DF9F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D5B3E4751B6A2CB000F3DF9F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D5B3E47C1B6A2CB000F3DF9F;
-			remoteInfo = Hood;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D5604CF21B72238E002AD200 /* Embed Frameworks */ = {
@@ -111,7 +100,6 @@
 		D5B3E48B1B6A2CB000F3DF9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D5B3E4901B6A2CB000F3DF9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D5B3E4961B6A2CB000F3DF9F /* HoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B3E49B1B6A2CB000F3DF9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5B3E49C1B6A2CB000F3DF9F /* HoodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoodTests.swift; sourceTree = "<group>"; };
 		D5B3E4A71B6A33E000F3DF9F /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
@@ -139,13 +127,6 @@
 				D54B9BCD1B7B3BFA0075836C /* FBSDKCoreKit.framework in Frameworks */,
 				D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */,
 				42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D5B3E4931B6A2CB000F3DF9F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				D5B3E47D1B6A2CB000F3DF9F /* Hood.app */,
-				D5B3E4961B6A2CB000F3DF9F /* HoodTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,24 +268,6 @@
 			productReference = D5B3E47D1B6A2CB000F3DF9F /* Hood.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D5B3E4951B6A2CB000F3DF9F /* HoodTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D5B3E4A31B6A2CB000F3DF9F /* Build configuration list for PBXNativeTarget "HoodTests" */;
-			buildPhases = (
-				D5B3E4921B6A2CB000F3DF9F /* Sources */,
-				D5B3E4931B6A2CB000F3DF9F /* Frameworks */,
-				D5B3E4941B6A2CB000F3DF9F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D5B3E4981B6A2CB000F3DF9F /* PBXTargetDependency */,
-			);
-			name = HoodTests;
-			productName = HoodTests;
-			productReference = D5B3E4961B6A2CB000F3DF9F /* HoodTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -318,11 +280,7 @@
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7G2XZXD8B4;
-					};
-					D5B3E4951B6A2CB000F3DF9F = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = D5B3E47C1B6A2CB000F3DF9F;
+						DevelopmentTeam = F3642YKY5X;
 					};
 				};
 			};
@@ -340,7 +298,6 @@
 			projectRoot = "";
 			targets = (
 				D5B3E47C1B6A2CB000F3DF9F /* Hood */,
-				D5B3E4951B6A2CB000F3DF9F /* HoodTests */,
 			);
 		};
 /* End PBXProject section */
@@ -366,13 +323,6 @@
 				D5B3E4B61B6A33E000F3DF9F /* Lato-Hairline.ttf in Resources */,
 				D547A4851B6F526000B556B4 /* AC.png in Resources */,
 				D5B3E48E1B6A2CB000F3DF9F /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D5B3E4941B6A2CB000F3DF9F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,23 +368,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5B3E4921B6A2CB000F3DF9F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D5B3E49D1B6A2CB000F3DF9F /* HoodTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D5B3E4981B6A2CB000F3DF9F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D5B3E47C1B6A2CB000F3DF9F /* Hood */;
-			targetProxy = D5B3E4971B6A2CB000F3DF9F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */ = {
@@ -575,40 +509,6 @@
 			};
 			name = Release;
 		};
-		D5B3E4A41B6A2CB000F3DF9F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = HoodTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hood.app/Hood";
-			};
-			name = Debug;
-		};
-		D5B3E4A51B6A2CB000F3DF9F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = HoodTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hood.app/Hood";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -626,15 +526,6 @@
 			buildConfigurations = (
 				D5B3E4A11B6A2CB000F3DF9F /* Debug */,
 				D5B3E4A21B6A2CB000F3DF9F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D5B3E4A31B6A2CB000F3DF9F /* Build configuration list for PBXNativeTarget "HoodTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D5B3E4A41B6A2CB000F3DF9F /* Debug */,
-				D5B3E4A51B6A2CB000F3DF9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

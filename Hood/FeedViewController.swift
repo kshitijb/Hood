@@ -39,17 +39,24 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var identifier:String
-//        if(indexPath.row == 1){
-//            identifier = "CellWithImage"
-//        }else{
+        let dataObject = dataArray[indexPath.row]
+        if let photo = dataObject["photo"].string{
+            identifier = "CellWithImage"
+            let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithImage
+            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.preservesSuperviewLayoutMargins = false
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.setContents(dataArray[indexPath.row])
+            return cell
+        }else{
             identifier = "CellWithoutImage"
-//        }
-        let cell:CellWithoutImage = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        cell.preservesSuperviewLayoutMargins = false
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.setContents(dataArray[indexPath.row])
-        return cell
+            let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
+            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.preservesSuperviewLayoutMargins = false
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.setContents(dataArray[indexPath.row])
+            return cell
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
