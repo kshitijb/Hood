@@ -48,7 +48,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,6 +114,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! CommentsViewController
         var info = notification.userInfo!
         commentsView.postID = info["postID"] as! Int
+        commentsView.post = JSON(info["post"]!)
         self.navigationController?.pushViewController(commentsView, animated: true)
     }
     

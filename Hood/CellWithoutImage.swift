@@ -44,6 +44,7 @@ class CellWithoutImage: UITableViewCell {
     func setContents(jsonObject:JSON)
     {
         print(jsonObject)
+        post = jsonObject
         postID = jsonObject["id"].int
         upvotesCount = jsonObject["upvotes_count"].int!
         var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
@@ -72,7 +73,8 @@ class CellWithoutImage: UITableViewCell {
     }
     
     func commentsPressed(){
-        let userInfo:Dictionary<String,JSON> = ["postID" : postID!, "postObject": post]
+        print(post)
+        let userInfo:Dictionary = ["post" : post.object , "postID" : postID!]
         NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
     

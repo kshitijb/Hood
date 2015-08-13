@@ -9,7 +9,9 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+import WebImage
+
+class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UITextViewDelegate{
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var postUserImage: UIImageView!
@@ -19,9 +21,13 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentsTextView: UITextView!
     var postID = 0
+    var post = JSON.nullJSON
     @IBOutlet weak var commentConstraint: NSLayoutConstraint!
     var comments = JSON.nullJSON
     
+    func textViewDidBeginEditing(textView: UITextView) {
+        commentsTextView.text = ""
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Comments"
@@ -50,7 +56,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         postUserImage.layer.masksToBounds = true
         commentsTextView.layoutManager.ensureLayoutForTextContainer(commentsTextView.textContainer)
         commentsTextView.text = "Add a comment"
-    
+        commentsTextView.delegate = self
     }
     
     @IBAction func sendComment(sender: AnyObject)
@@ -62,7 +68,13 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-
+            self.commentsTextView.resignFirstResponder()
+            self.commentsTextView.text = ""
+            Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
+                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+                self.tableView.reloadData()
+            })
         })
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -74,7 +86,10 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             {
                 cell = CommentsHeaderCell()
             }
-            
+            cell?.timeStamp.text = Utilities.timeStampFromDate(post["timestamp"].string!)
+            cell?.userName.text = post["author"]["firstname"].string! + Array(arrayLiteral: post["author"]["lastname"].string)[0]!
+            cell?.profileImage.sd_setImageWithURL(NSURL(string:post["author"]["profile_photo"].string! ), placeholderImage: UIImage(named: "Me.jpg"))
+            cell?.content.text = post["message"].string
             cell!.preservesSuperviewLayoutMargins = false
             cell!.layoutMargins = UIEdgeInsetsZero
             return cell!
@@ -145,6 +160,17 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     func keyboardWillHide(notification:NSNotification)
     {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        {
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
+            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                self.commentConstraint.constant -= keyboardSize.height
+                }, completion: { (completion) -> Void in
+                    
+            })
+        }
+
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
