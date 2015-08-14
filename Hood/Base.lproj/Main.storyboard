@@ -804,10 +804,10 @@ neighbours</string>
             </objects>
             <point key="canvasLocation" x="1684" y="1303"/>
         </scene>
-        <!--View Controller-->
+        <!--On Boarding View Controller-->
         <scene sceneID="kcD-yh-eZL">
             <objects>
-                <viewController id="fYn-5y-12Z" sceneMemberID="viewController">
+                <viewController id="fYn-5y-12Z" customClass="onBoardingViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vm5-ev-UzP"/>
                         <viewControllerLayoutGuide type="bottom" id="nL9-Uq-Xw7"/>
@@ -816,7 +816,7 @@ neighbours</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6Q-f0-G9r">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6Q-f0-G9r">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </scrollView>
                         </subviews>
@@ -829,6 +829,9 @@ neighbours</string>
                             <constraint firstItem="nL9-Uq-Xw7" firstAttribute="top" secondItem="a6Q-f0-G9r" secondAttribute="bottom" id="aiG-b4-VMI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="a6Q-f0-G9r" id="zXw-gU-vLB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dJA-YH-pai" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
