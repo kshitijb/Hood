@@ -84,45 +84,23 @@ class CellWithoutImage: UITableViewCell {
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
             println(postID)
-            let params = ["post_id" : postID!, "user_id": userID!]
-            Alamofire.request(.POST, API().downvotePost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                print(error)
-                if (error != nil)
-                {
-                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
-                    alert.show()
-                    self.upvotesCount++
-                    self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
-                    self.likesButton.selected = true
-
-                }
-                print(response)
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-
-                })
             self.likesButton.selected = false
+            PostController.VotePost(.Downvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+                self.upvotesCount++
+                self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                self.likesButton.selected = true
+            })
         }
         else
         {
             upvotesCount++
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
-            let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-            println(postID)
-            let params = ["post_id" : postID!, "user_id": userID!]
-            Alamofire.request(.POST, API().upvotePost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                print(error)
-                if (error != nil)
-                {
-                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
-                    alert.show()
-                    self.upvotesCount--
-                    self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
-                    self.likesButton.selected = false
-                }
-                print(response)
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            })
             self.likesButton.selected = true
+            PostController.VotePost(.Upvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+                self.upvotesCount--
+                self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                self.likesButton.selected = false
+            })
         }
     }
     

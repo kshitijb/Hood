@@ -25,6 +25,7 @@
 		D54B9BCE1B7B3BFA0075836C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BCB1B7B3BFA0075836C /* FBSDKLoginKit.framework */; };
 		D54B9BCF1B7B3BFA0075836C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BCC1B7B3BFA0075836C /* FBSDKShareKit.framework */; };
 		D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD21B7B52B20075836C /* UIColorExtension.swift */; };
+		D54B9BD51B7DD2520075836C /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD41B7DD2520075836C /* PostController.swift */; };
 		D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE51B721FFF002AD200 /* Alamofire.framework */; };
 		D5604CED1B72238E002AD200 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE51B721FFF002AD200 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; };
@@ -87,6 +88,7 @@
 		D54B9BCB1B7B3BFA0075836C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		D54B9BCC1B7B3BFA0075836C /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		D54B9BD21B7B52B20075836C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		D54B9BD41B7DD2520075836C /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		D5604CE51B721FFF002AD200 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D5604CE71B721FFF002AD200 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				D5B3E4801B6A2CB000F3DF9F /* Supporting Files */,
 				D57382A01B7359150080A4FA /* APIConstants.swift */,
 				D54B9BD21B7B52B20075836C /* UIColorExtension.swift */,
+				D54B9BD41B7DD2520075836C /* PostController.swift */,
 			);
 			path = Hood;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */,
 				D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */,
 				D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */,
+				D54B9BD51B7DD2520075836C /* PostController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

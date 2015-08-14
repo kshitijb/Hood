@@ -181,7 +181,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             let titleLabel:UILabel = UILabel()
             titleLabel.text = "#" + channel["name"].string!
             titleLabel.textAlignment = NSTextAlignment.Center
-            titleLabel.font = UIFont(name: "Lato-Light", size: 26)
+            titleLabel.font = UIFont(name: "Lato-Regular", size: 26)
             titleLabel.textColor = UIColor.whiteColor()
             let x:CGFloat = startingX * pageSize
             titleLabel.frame = CGRectMake(x, 0, pageSize, 40)

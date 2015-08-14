@@ -30,9 +30,12 @@ class CellWithImage: UITableViewCell {
         self.profileImage.layer.shouldRasterize = true
         self.profileImage.layer.rasterizationScale = UIScreen.mainScreen().scale
         Utilities.setUpLineSpacingForLabel(content)
-//        commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
-//        self.likesButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-//        self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
+        let aspectConstraint = NSLayoutConstraint(item: postImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImage, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
+        aspectConstraint.priority = 999
+        postImage.addConstraint(aspectConstraint)
+        commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        self.likesButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -74,6 +77,39 @@ class CellWithImage: UITableViewCell {
             postImage.sd_setImageWithURL(NSURL(string: imageURL))
         }
         
+    }
+
+    func commentsPressed(){
+        print(post)
+        let userInfo:Dictionary = ["post" : post.object , "postID" : postID!]
+        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
+    }
+    
+    func likePressed(){
+        if self.likesButton.selected
+        {
+            upvotesCount--
+            likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
+            let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
+            println(postID)
+            self.likesButton.selected = false
+            PostController.VotePost(.Downvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+                self.upvotesCount++
+                self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                self.likesButton.selected = true
+            })
+        }
+        else
+        {
+            upvotesCount++
+            likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
+            self.likesButton.selected = true
+            PostController.VotePost(.Upvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+                self.upvotesCount--
+                self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                self.likesButton.selected = false
+            })
+        }
     }
 
     

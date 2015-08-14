@@ -90,6 +90,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             cell?.userName.text = post["author"]["firstname"].string! + Array(arrayLiteral: post["author"]["lastname"].string)[0]!
             cell?.profileImage.sd_setImageWithURL(NSURL(string:post["author"]["profile_photo"].string! ), placeholderImage: UIImage(named: "Me.jpg"))
             cell?.content.text = post["message"].string
+            Utilities.setUpLineSpacingForLabel(cell!.content)
             cell!.preservesSuperviewLayoutMargins = false
             cell!.layoutMargins = UIEdgeInsetsZero
             return cell!
