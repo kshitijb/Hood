@@ -85,7 +85,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.contentInset = UIEdgeInsetsMake(10+(self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         }
     }
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let userInfo:Dictionary = ["post" : dataArray[indexPath.row].object , "postID" : dataArray[indexPath.row]["id"].intValue]
+        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
+    }
     func getPosts(){
         if(self.dataArray.count == 0){
             showLoader()

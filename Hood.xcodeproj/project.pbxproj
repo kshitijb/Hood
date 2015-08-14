@@ -12,6 +12,7 @@
 		42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EB28231B74BCE400AB0331 /* Utilities.swift */; };
 		42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; };
 		42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42ED1E451B7C91E600B0DE68 /* onBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */; };
 		42F01BE51B79E88E001386C1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F01BE21B79E88E001386C1 /* FBSDKCoreKit.framework */; };
 		42F01BE61B79E88E001386C1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F01BE31B79E88E001386C1 /* FBSDKLoginKit.framework */; };
 		42F01BE71B79E88E001386C1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F01BE41B79E88E001386C1 /* FBSDKShareKit.framework */; };
@@ -84,6 +85,7 @@
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		42EB28231B74BCE400AB0331 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		42EB28251B74D79100AB0331 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
+		42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onBoardingViewController.swift; sourceTree = "<group>"; };
 		42F01BE21B79E88E001386C1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		42F01BE31B79E88E001386C1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		42F01BE41B79E88E001386C1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				42EB28231B74BCE400AB0331 /* Utilities.swift */,
 				D547A4821B6B717600B556B4 /* CellWithoutImage.swift */,
 				D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */,
+				42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */,
 				425DF22D1B720CC900837B8C /* AddPostViewController.swift */,
 				D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */,
 				D5B3E48F1B6A2CB000F3DF9F /* LaunchScreen.xib */,
@@ -407,6 +410,7 @@
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
 				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
 				D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */,
+				42ED1E451B7C91E600B0DE68 /* onBoardingViewController.swift in Sources */,
 				425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */,
 				D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */,
 				D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */,
