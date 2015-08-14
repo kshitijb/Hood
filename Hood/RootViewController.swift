@@ -13,10 +13,10 @@ import SwiftyJSON
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
-class RootViewController: UIViewController, UIPageViewControllerDelegate {
+class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate {
 
     var pageViewController: UIPageViewController?
-
+    var titleScrollView: UIScrollView?
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
 
@@ -41,6 +41,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController?.view.backgroundColor = UIColor.whiteColor()
         self.pageViewController?.view.userInteractionEnabled = false
         self.pageViewController!.dataSource = self.modelController
+        for view in self.pageViewController!.view.subviews{
+            if(view.isKindOfClass(UIScrollView)){
+                (view as! UIScrollView).delegate = self
+            }
+        }
         self.addChildViewController(self.pageViewController!)
         self.view.insertSubview(self.pageViewController!.view, belowSubview: self.pageIndicatorContainer)
         var pageViewRect = self.view.bounds
@@ -52,7 +57,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -97,8 +101,14 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         if completed{
             let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
             let titleString = dataViewController.dataObject["name"]
-            updateTitleForString("\(titleString)")
-            self.pageControl.currentPage = self.modelController.indexOfViewController(dataViewController)
+            let count = self.modelController.indexOfViewController(dataViewController)
+            var frame = titleScrollView!.frame
+            frame.origin.x = frame.size.width * CGFloat(count)
+            frame.origin.y = 0;
+            self.titleScrollView?.setContentOffset(CGPointMake(frame.origin.x, frame.origin.y), animated: true)
+//            self.titleScrollView?.contentOffset = CGPointMake(pageOffset, 0)
+//            updateTitleForString("\(titleString)")
+            self.pageControl.currentPage = count
         }
     }
     
@@ -137,7 +147,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
                     self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
                     
                     //Update First title
-                    self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
+//                    self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
+                    self.updateTitleView()
                     self.pageViewController?.view.userInteractionEnabled = true
                     self.showPageControl()
                 }
@@ -159,7 +170,35 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         }
     }
     
+    func updateTitleView(){
+        self.titleScrollView = UIScrollView(frame: CGRectMake(0, 0, 160, 40))
+        self.titleScrollView?.pagingEnabled = true
+        self.titleScrollView?.userInteractionEnabled = false
+        var startingX:CGFloat = 0
+        let pageSize:CGFloat = 160
+        for (key, channel) in self.modelController.pageData {
+            let titleLabel:UILabel = UILabel()
+            titleLabel.text = channel["name"].string!
+            titleLabel.textAlignment = NSTextAlignment.Center
+            titleLabel.font = UIFont(name: "Lato-Regular", size: 26)
+            titleLabel.textColor = UIColor.whiteColor()
+            let x:CGFloat = startingX * pageSize
+            titleLabel.frame = CGRectMake(x, 0, pageSize, 40)
+            self.titleScrollView?.addSubview(titleLabel)
+            startingX = startingX + 1
+        }
+        self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
+        self.navigationItem.titleView = self.titleScrollView
+    }
     
+    //MARK: ScrollView Delegate
+    
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        println("Scrollview offset is \(scrollView.contentOffset.x)")
+//        let pageViewOffset = scrollView.contentOffset.x - self.pageViewController!.view.frame.size.width
+//        let titleViewOffset = (pageViewOffset/self.pageViewController!.view.frame.size.width) * 160
+//        self.titleScrollView!.contentOffset = CGPointMake(self.titleScrollView!.contentOffset.x + titleViewOffset, 0)
+//    }
     
 }
 

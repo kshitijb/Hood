@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
-
+import FBSDKCoreKit
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -95,7 +95,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             showLoader()
         }
         let url = API().getAllPostsForChannel(self.dataObject["id"].stringValue)
-        Alamofire.request(.GET, url, parameters: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
+        let manager = Alamofire.Manager.sharedInstance
+        let headers = ["Authorization":"Bearer \(FBSDKAccessToken.currentAccessToken().tokenString)"]
+        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
             self.hideLoader()
             if let e = error{
                 print(error)

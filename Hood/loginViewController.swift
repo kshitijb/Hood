@@ -17,7 +17,6 @@ class loginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = true
-        FBSDKSettings.setAppID("1465823280408418")
         self.navigationItem.leftBarButtonItem=nil
         self.navigationItem.hidesBackButton=true
         // Do any additional setup after loading the view.
