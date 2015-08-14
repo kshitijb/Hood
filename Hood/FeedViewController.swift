@@ -106,6 +106,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(error)
             }else{
                 let responseJSON = JSON(data!)
+                print(responseJSON)
                 self.dataArray = responseJSON["results"]
                 self.tableView.reloadData()
                 self.tableView.setNeedsLayout()

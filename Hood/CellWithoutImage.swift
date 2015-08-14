@@ -37,7 +37,6 @@ class CellWithoutImage: UITableViewCell {
     
     func setContents(jsonObject:JSON)
     {
-        print(jsonObject)
         post = jsonObject
         postID = jsonObject["id"].int
         upvotesCount = jsonObject["upvotes_count"].int!
