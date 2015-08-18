@@ -28,14 +28,8 @@ class CellWithoutImage: UITableViewCell {
         self.profileImage.layer.masksToBounds = true
         self.profileImage.layer.shouldRasterize = true
         self.profileImage.layer.rasterizationScale = UIScreen.mainScreen().scale
-        var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
-        
-        var attrString = NSMutableAttributedString(string: content.text!)
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
-        attrString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 18)!, range:NSMakeRange(0, attrString.length))
-        content.attributedText = attrString
-        content.updateConstraintsIfNeeded()
+        Utilities.setUpLineSpacingForLabel(content)
+        //        content.updateConstraintsIfNeeded()
         commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
         self.likesButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
@@ -43,14 +37,13 @@ class CellWithoutImage: UITableViewCell {
     
     func setContents(jsonObject:JSON)
     {
-        print(jsonObject)
         post = jsonObject
         postID = jsonObject["id"].int
         upvotesCount = jsonObject["upvotes_count"].int!
         var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
         let attributedString = NSAttributedString(string: jsonObject["message"].string!, attributes: attributes)
         content.attributedText = attributedString
-        content.updateConstraintsIfNeeded()
+        contentView.layoutIfNeeded()
         if let noOfComments = jsonObject["comments_count"].number{
             commentsButton.setTitle("\(noOfComments) Comments", forState: UIControlState.Normal)
         }
@@ -90,45 +83,23 @@ class CellWithoutImage: UITableViewCell {
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
             println(postID)
-            let params = ["post_id" : postID!, "user_id": userID!]
-            Alamofire.request(.POST, API().downvotePost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                print(error)
-                if (error != nil)
-                {
-                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
-                    alert.show()
-                    self.upvotesCount++
-                    self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
-                    self.likesButton.selected = true
-
-                }
-                print(response)
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-
-                })
             self.likesButton.selected = false
+            PostController.VotePost(.Downvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+                self.upvotesCount++
+                self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                self.likesButton.selected = true
+            })
         }
         else
         {
             upvotesCount++
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
-            let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-            println(postID)
-            let params = ["post_id" : postID!, "user_id": userID!]
-            Alamofire.request(.POST, API().upvotePost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                print(error)
-                if (error != nil)
-                {
-                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
-                    alert.show()
-                    self.upvotesCount--
-                    self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
-                    self.likesButton.selected = false
-                }
-                print(response)
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            })
             self.likesButton.selected = true
+            PostController.VotePost(.Upvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+                self.upvotesCount--
+                self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
+                self.likesButton.selected = false
+            })
         }
     }
     

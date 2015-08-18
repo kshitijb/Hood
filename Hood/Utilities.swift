@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let PipalGlobalColor:UIColor = UIColor(red: 97/255, green: 199/255, blue: 144/255, alpha: 1)
+let PipalGlobalColor:UIColor = UIColor(rgba: "#1FC055")
 
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
 {
@@ -58,5 +58,14 @@ struct Utilities
             return "unknown time"
         }
         
+    }
+    
+    static func setUpLineSpacingForLabel(label:UILabel){
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        var attrString = NSMutableAttributedString(string: label.text!)
+        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+        attrString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 18)!, range:NSMakeRange(0, attrString.length))
+        label.attributedText = attrString
     }
 }
