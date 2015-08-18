@@ -610,7 +610,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
+                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
                                 <rect key="frame" x="21" y="547" width="174" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="BRR-qe-bvv"/>
@@ -627,7 +627,7 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2c-ec-f8k">
                                 <rect key="frame" x="78" y="544" width="109" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="109" id="0o9-Co-CJB"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="0o9-Co-CJB"/>
                                     <constraint firstAttribute="height" constant="48" id="yXz-lr-dv8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
@@ -710,6 +710,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="qQc-hb-vhZ"/>
+                                <exclude reference="13x-ID-hIP"/>
                                 <exclude reference="3ei-vf-bxl"/>
                             </mask>
                         </variation>

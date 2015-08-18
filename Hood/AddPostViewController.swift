@@ -29,7 +29,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         var viewBindingsDict: NSMutableDictionary = NSMutableDictionary()
         viewBindingsDict.setValue(addPhotoButton, forKey: "addPhotoButton")
         viewBindingsDict.setValue(postNowButton, forKey: "postNowButton")
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[addPhotoButton]-(>=10)-[postNowButton]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewBindingsDict as [NSObject : AnyObject]))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[addPhotoButton]-(==10)-[postNowButton]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewBindingsDict as [NSObject : AnyObject]))
         addPhotoButton.addTarget(self, action: "addPhoto", forControlEvents: UIControlEvents.TouchUpInside)
         let aspectConstraint = NSLayoutConstraint(item: postImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImageView, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
         aspectConstraint.priority = 999
@@ -51,7 +51,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidHideNotification, object: nil)
     }
     
@@ -72,10 +72,6 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
 
     func textViewDidChange(textView: UITextView) {
         postScrollView.contentSize = CGSizeMake(0, postImageView.frame.size.height + postImageView.frame.origin.y)
-//        if(textView.contentSize.height > self.textViewHeightConstant.constant){
-//            textViewHeightConstant.constant = textView.contentSize.height
-//            self.view.layoutIfNeeded()
-//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,14 +88,14 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
             
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
-            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
-                if(self.buttonBottomConstraint.constant < keyboardSize.height){
-                    self.buttonBottomConstraint.constant += keyboardSize.height
-                    self.postScrollView.layoutIfNeeded()
-                }
-            }, completion: { (completion) -> Void in
-                
-            })
+            if(self.buttonBottomConstraint.constant < keyboardSize.height){
+                self.buttonBottomConstraint.constant += keyboardSize.height
+                UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                    }, completion: { (completion) -> Void in
+                        
+                })
+            }
         }
     }
     
@@ -110,9 +106,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
             
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
+            self.buttonBottomConstraint.constant -= keyboardSize.height
             UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
-                self.buttonBottomConstraint.constant -= keyboardSize.height
-                self.postScrollView.layoutIfNeeded()
+                self.view.layoutIfNeeded()
                 }, completion: { (completion) -> Void in
                     
             })
