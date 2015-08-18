@@ -66,8 +66,7 @@ class CellWithImage: UITableViewCell {
         }
         timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
         let lastName = jsonObject["author"]["lastname"].string
-        var firstChar = Array(lastName!)[0]
-        userName.text = jsonObject["author"]["firstname"].string! + " " + String(firstChar)
+        userName.text = jsonObject["author"]["firstname"].string! + " " + lastName!
         if let profileURL = jsonObject["author"]["profile_photo"].string
         {
             profileImage.sd_setImageWithURL(NSURL(string:profileURL), placeholderImage: UIImage(named: "Me.jpg"))
