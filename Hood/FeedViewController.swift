@@ -39,17 +39,24 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var identifier:String
-//        if(indexPath.row == 1){
-//            identifier = "CellWithImage"
-//        }else{
+        let dataObject = dataArray[indexPath.row]
+        if let photo = dataObject["photo"].string{
+            identifier = "CellWithImage"
+            let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithImage
+            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.preservesSuperviewLayoutMargins = false
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.setContents(dataArray[indexPath.row])
+            return cell
+        }else{
             identifier = "CellWithoutImage"
-//        }
-        let cell:CellWithoutImage = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        cell.preservesSuperviewLayoutMargins = false
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.setContents(dataArray[indexPath.row])
-        return cell
+            let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
+            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.preservesSuperviewLayoutMargins = false
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.setContents(dataArray[indexPath.row])
+            return cell
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,7 +92,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.contentInset = UIEdgeInsetsMake(10+(self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         }
     }
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let userInfo:Dictionary = ["post" : dataArray[indexPath.row].object , "postID" : dataArray[indexPath.row]["id"].intValue]
+        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
+    }
     func getPosts(){
         if(self.dataArray.count == 0){
             showLoader()
@@ -99,6 +110,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(error)
             }else{
                 let responseJSON = JSON(data!)
+                print(responseJSON)
                 self.dataArray = responseJSON["results"]
                 self.tableView.reloadData()
                 self.tableView.setNeedsLayout()

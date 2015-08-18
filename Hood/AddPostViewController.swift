@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class AddPostViewController: UIViewController,UITextViewDelegate
+class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
@@ -27,7 +27,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate
         viewBindingsDict.setValue(addPhotoButton, forKey: "addPhotoButton")
         viewBindingsDict.setValue(postNowButton, forKey: "postNowButton")
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[addPhotoButton]-(>=10)-[postNowButton]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewBindingsDict as [NSObject : AnyObject]))
-
+        addPhotoButton.addTarget(self, action: "addPhoto", forControlEvents: UIControlEvents.TouchUpInside)
     
     }
     
@@ -50,6 +50,11 @@ class AddPostViewController: UIViewController,UITextViewDelegate
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidHideNotification, object: nil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
+    }
+    
     func textViewDidBeginEditing(textView: UITextView)
     {
         if textView.text == "What's on your mind?"
@@ -63,7 +68,6 @@ class AddPostViewController: UIViewController,UITextViewDelegate
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 
 //  MARK: - animate Add photo button with Keyboard
 
@@ -83,9 +87,37 @@ class AddPostViewController: UIViewController,UITextViewDelegate
             })
         }
     }
+    
     func keyboardWillHide(notification:NSNotification)
     {
         
     }
 
+    func addPhoto(){
+        let imagePicker:UIImagePickerController = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        let pickedImage = image
+//        var attributedString:NSMutableAttributedString = NSMutableAttributedString(string: postTextView.text)
+//        let textAttachment:NSTextAttachment = NSTextAttachment()
+//        textAttachment.image = pickedImage
+//        let scaleFactor:CGFloat = image.size.width/postTextView.frame.size.width-10
+//        textAttachment.image = UIImage(CGImage: textAttachment.image?.CGImage, scale: scaleFactor, orientation: UIImageOrientation.Up)
+//        let attributedStringWithImage = NSAttributedString(attachment: textAttachment)
+//        attributedString.appendAttributedString(attributedStringWithImage)
+//        postTextView.attributedText = attributedString
+        let imageView = UIImageView(image: pickedImage)
+        imageView.frame = CGRectMake(0, 0, postTextView.frame.size.width, postTextView.frame.size.width * 16/9)
+        postTextView.insertSubview(imageView, atIndex: 0)
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+    }
+    
 }

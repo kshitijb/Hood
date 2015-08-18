@@ -9,15 +9,15 @@
 import UIKit
 
 extension UIColor {
-    public convenience init(rgba: String) {
+    public convenience init(hexString: String) {
         var red:   CGFloat = 0.0
         var green: CGFloat = 0.0
         var blue:  CGFloat = 0.0
         var alpha: CGFloat = 1.0
         
-        if rgba.hasPrefix("#") {
-            let index   = advance(rgba.startIndex, 1)
-            let hex     = rgba.substringFromIndex(index)
+        if hexString.hasPrefix("#") {
+            let index   = advance(hexString.startIndex, 1)
+            let hex     = hexString.substringFromIndex(index)
             let scanner = NSScanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
             if scanner.scanHexLongLong(&hexValue) {

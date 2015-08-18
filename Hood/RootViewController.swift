@@ -102,10 +102,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
             let titleString = dataViewController.dataObject["name"]
             let count = self.modelController.indexOfViewController(dataViewController)
-            var frame = titleScrollView!.frame
-            frame.origin.x = frame.size.width * CGFloat(count)
-            frame.origin.y = 0;
-            self.titleScrollView?.setContentOffset(CGPointMake(frame.origin.x, frame.origin.y), animated: true)
+            updateTitleViewForPageNumber(count, animated: true)
 //            self.titleScrollView?.contentOffset = CGPointMake(pageOffset, 0)
 //            updateTitleForString("\(titleString)")
             self.pageControl.currentPage = count
@@ -129,7 +126,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     }
     
     func getData(){
-        SVProgressHUD.showWithStatus("Loading")
+        if(self.modelController.pageData.count == 0){
+            SVProgressHUD.showWithStatus("Loading")
+        }
         Alamofire.request(.GET, API().getAllChannels(), parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
                 SVProgressHUD.dismiss()
@@ -140,17 +139,19 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     print(swiftyJSONObject)
                     self.modelController.pageData = swiftyJSONObject["results"]
                     self.pageControl.numberOfPages = self.modelController.pageData.count
-                    self.pageControl.currentPage = 0
                     print(self.modelController.pageData)
-                    let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
-                    let viewControllers = [startingViewController]
-                    self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+                    if(self.pageViewController!.viewControllers.count == 0){
+                        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
+                        let viewControllers = [startingViewController]
+                        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+                        self.pageControl.currentPage = 0
+                        self.showPageControl()
+                    }
                     
                     //Update First title
 //                    self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
                     self.updateTitleView()
                     self.pageViewController?.view.userInteractionEnabled = true
-                    self.showPageControl()
                 }
         }
     }
@@ -178,7 +179,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let pageSize:CGFloat = 160
         for (key, channel) in self.modelController.pageData {
             let titleLabel:UILabel = UILabel()
-            titleLabel.text = channel["name"].string!
+            titleLabel.text = "#" + channel["name"].string!
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.font = UIFont(name: "Lato-Regular", size: 26)
             titleLabel.textColor = UIColor.whiteColor()
@@ -189,7 +190,16 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
         self.navigationItem.titleView = self.titleScrollView
+        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
     }
+    
+    func updateTitleViewForPageNumber(page: Int, animated: Bool){
+        var frame = titleScrollView!.frame
+        frame.origin.x = frame.size.width * CGFloat(page)
+        frame.origin.y = 0;
+        self.titleScrollView?.setContentOffset(CGPointMake(frame.origin.x, frame.origin.y), animated: animated)
+    }
+    
     
     //MARK: ScrollView Delegate
     
