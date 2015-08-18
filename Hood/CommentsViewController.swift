@@ -25,9 +25,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var commentConstraint: NSLayoutConstraint!
     var comments = JSON.nullJSON
     
-    func textViewDidBeginEditing(textView: UITextView) {
-        commentsTextView.text = ""
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Comments"
@@ -58,6 +55,18 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         commentsTextView.text = "Add a comment"
         commentsTextView.delegate = self
     }
+    
+    //MARK: TextView delegate methods
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        commentsTextView.text = ""
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        
+    }
+    
+    // MARK: Other
     
     @IBAction func sendComment(sender: AnyObject)
     {

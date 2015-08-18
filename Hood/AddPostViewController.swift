@@ -11,11 +11,14 @@ import Alamofire
 
 class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
+    @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTextView: UITextView!
+    @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
     var channelID: Int?
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var textViewHeightConstant: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
@@ -28,7 +31,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         viewBindingsDict.setValue(postNowButton, forKey: "postNowButton")
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[addPhotoButton]-(>=10)-[postNowButton]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewBindingsDict as [NSObject : AnyObject]))
         addPhotoButton.addTarget(self, action: "addPhoto", forControlEvents: UIControlEvents.TouchUpInside)
-    
+        let aspectConstraint = NSLayoutConstraint(item: postImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImageView, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
+        aspectConstraint.priority = 999
+        postImageView.addConstraint(aspectConstraint)
     }
     
     @IBAction func postNow(sender: AnyObject)
@@ -65,6 +70,14 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         }
     }
 
+    func textViewDidChange(textView: UITextView) {
+        postScrollView.contentSize = CGSizeMake(0, postImageView.frame.size.height + postImageView.frame.origin.y)
+//        if(textView.contentSize.height > self.textViewHeightConstant.constant){
+//            textViewHeightConstant.constant = textView.contentSize.height
+//            self.view.layoutIfNeeded()
+//        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -80,8 +93,10 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
             UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
-                self.buttonBottomConstraint.constant += keyboardSize.height
-                self.postTextView.layoutIfNeeded()
+                if(self.buttonBottomConstraint.constant < keyboardSize.height){
+                    self.buttonBottomConstraint.constant += keyboardSize.height
+                    self.postScrollView.layoutIfNeeded()
+                }
             }, completion: { (completion) -> Void in
                 
             })
@@ -90,7 +105,19 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     func keyboardWillHide(notification:NSNotification)
     {
-        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        {
+            
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
+            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                self.buttonBottomConstraint.constant -= keyboardSize.height
+                self.postScrollView.layoutIfNeeded()
+                }, completion: { (completion) -> Void in
+                    
+            })
+        }
+
     }
 
     func addPhoto(){
@@ -110,9 +137,10 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
 //        let attributedStringWithImage = NSAttributedString(attachment: textAttachment)
 //        attributedString.appendAttributedString(attributedStringWithImage)
 //        postTextView.attributedText = attributedString
-        let imageView = UIImageView(image: pickedImage)
-        imageView.frame = CGRectMake(0, 0, postTextView.frame.size.width, postTextView.frame.size.width * 16/9)
-        postTextView.insertSubview(imageView, atIndex: 0)
+//        let imageView = UIImageView(image: pickedImage)
+//        imageView.frame = CGRectMake(0, 0, postTextView.frame.size.width, postTextView.frame.size.width * 16/9)
+//        postTextView.insertSubview(imageView, atIndex: 0)
+        postImageView.image = pickedImage
         dismissViewControllerAnimated(true, completion: nil)
     }
     
