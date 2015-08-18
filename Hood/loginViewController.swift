@@ -78,9 +78,11 @@ class loginViewController: UIViewController {
                         }
                     }
 
-                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
+//                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
                     SVProgressHUD.dismiss()
-                    })
+//                    })
+                    let onboarding:UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("onboarding") as! UIViewController
+                    self.navigationController?.pushViewController(onboarding, animated: true)
                 })
                 
                 

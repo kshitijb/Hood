@@ -73,7 +73,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
                 print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                 self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Right)
+                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
             })
         })
     }
@@ -87,8 +87,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 cell = CommentsHeaderCell()
             }
             cell?.timeStamp.text = Utilities.timeStampFromDate(post["timestamp"].string!)
-            cell?.userName.text = post["author"]["firstname"].string! + Array(arrayLiteral: post["author"]["lastname"].string)[0]!
+            cell?.userName.text = post["author"]["firstname"].string! + " " + post["author"]["lastname"].string!
             cell?.profileImage.sd_setImageWithURL(NSURL(string:post["author"]["profile_photo"].string! ), placeholderImage: UIImage(named: "Me.jpg"))
+            cell!.profileImage.layer.cornerRadius = cell!.profileImage.frame.size.width/2
             cell?.content.text = post["message"].string
             Utilities.setUpLineSpacingForLabel(cell!.content)
             cell!.preservesSuperviewLayoutMargins = false

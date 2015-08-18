@@ -15,7 +15,7 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize = CGSizeMake(view.frame.width*4, view.frame.height)
+        scrollView.contentSize = CGSizeMake(view.frame.width*4, 0)
         pageControl.frame = CGRectMake(0, 0, 400, 100)
 
         scrollView.delegate = self
@@ -70,19 +70,19 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             case 0:
                 channelTitle.text = "#home"
                 channelDesc.text = "Chat with your neighbours. \n Post news and get important alerts"
-                page.backgroundColor = UIColor(hexString: "#61C790")
+                page.backgroundColor = PipalGlobalColor
             case 1:
                 channelTitle.text = "#buy/sell"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = UIColor(hexString: "#F1836A")
+                page.backgroundColor = PipalGlobalPink
             case 2:
                 channelTitle.text = "help"
                 channelDesc.text = "Ask for help and share resources. \n We’re all in this together."
-                page.backgroundColor = UIColor(hexString: "#ECD062")
+                page.backgroundColor = PipalGlobalPurple
             case 3:
                 channelTitle.text = "#meetups"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = UIColor(hexString: "#5CC4D2")
+                page.backgroundColor = PipalGlobalYellow
             default:
                 print("sdaklfjnsal")
             }
@@ -92,18 +92,23 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
         self.view.bringSubviewToFront(pageControl)
         view.addSubview(pageControl)
         pageControl.numberOfPages = 4
-        
+        let tapGesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped")
+        view.addGestureRecognizer(tapGesture)
         pageControl.frame = CGRectMake(0.0, 55.0, view.frame.width, 54.0)
 
     }
-
-    func scrollViewDidScroll(scrollView: UIScrollView)
-    {
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x/view.frame.width)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    func viewTapped(){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }

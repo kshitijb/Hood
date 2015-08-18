@@ -89,7 +89,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         if(topLayoutGuide.length == 0){
             tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         }else{
-            tableView.contentInset = UIEdgeInsetsMake(10+(self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+            tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
