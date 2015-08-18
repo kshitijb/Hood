@@ -3,3 +3,4 @@ github "TransitApp/SVProgressHUD"
 github "SwiftyJSON/SwiftyJSON" >= 2.2.1
 github "rs/SDWebImage"
 github "IFTTT/RazzleDazzle"
+github "robb/Cartography"

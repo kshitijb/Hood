@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bU7-14-pHA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fYn-5y-12Z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -826,7 +826,6 @@ neighbours</string>
                             <constraint firstItem="a6Q-f0-G9r" firstAttribute="leading" secondItem="XMd-1r-3G6" secondAttribute="leadingMargin" constant="-16" id="Ief-sw-DS3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="a6Q-f0-G9r" secondAttribute="trailing" constant="-16" id="Mex-Lp-qv5"/>
                             <constraint firstItem="a6Q-f0-G9r" firstAttribute="top" secondItem="Vm5-ev-UzP" secondAttribute="bottom" constant="-20" id="UrT-yU-YbP"/>
-                            <constraint firstItem="nL9-Uq-Xw7" firstAttribute="top" secondItem="a6Q-f0-G9r" secondAttribute="bottom" id="aiG-b4-VMI"/>
                         </constraints>
                     </view>
                     <connections>
@@ -835,7 +834,7 @@ neighbours</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dJA-YH-pai" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3601" y="476"/>
+            <point key="canvasLocation" x="91" y="1355"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oVg-Al-eNj">
