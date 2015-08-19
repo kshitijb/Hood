@@ -70,19 +70,19 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             case 0:
                 channelTitle.text = "#home"
                 channelDesc.text = "Chat with your neighbours. \n Post news and get important alerts"
-                page.backgroundColor = PipalGlobalColor
+                page.backgroundColor = GlobalColors.Green
             case 1:
                 channelTitle.text = "#buy/sell"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = PipalGlobalPink
+                page.backgroundColor = GlobalColors.Pink
             case 2:
                 channelTitle.text = "help"
                 channelDesc.text = "Ask for help and share resources. \n We’re all in this together."
-                page.backgroundColor = PipalGlobalPurple
+                page.backgroundColor = GlobalColors.Purple
             case 3:
                 channelTitle.text = "#meetups"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = PipalGlobalYellow
+                page.backgroundColor = GlobalColors.Yellow
             default:
                 print("sdaklfjnsal")
             }

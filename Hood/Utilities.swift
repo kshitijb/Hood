@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-let PipalGlobalColor:UIColor = UIColor(hexString: "#1FC055")
-let PipalGlobalPurple: UIColor = UIColor(hexString: "#7323DC")
-let PipalGlobalPink: UIColor = UIColor(hexString: "#E62878")
-let PipalGlobalYellow: UIColor = UIColor(hexString: "#FFDC00")
-
+struct GlobalColors{
+    static let Green:UIColor = UIColor(hexString: "#1FC055")
+    static let Purple: UIColor = UIColor(hexString: "#7323DC")
+    static let Pink: UIColor = UIColor(hexString: "#E62878")
+    static let Yellow: UIColor = UIColor(hexString: "#FFDC00")
+}
 
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
 {
