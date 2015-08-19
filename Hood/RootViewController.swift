@@ -14,7 +14,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
 class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate {
-
+    let titleScrollViewWidth = CGFloat(160)
     var pageViewController: UIPageViewController?
     var titleScrollView: UIScrollView?
     @IBOutlet weak var pageIndicatorContainer: UIView!
@@ -102,10 +102,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
             let titleString = dataViewController.dataObject["name"]
             let count = self.modelController.indexOfViewController(dataViewController)
-            updateTitleViewForPageNumber(count, animated: true)
-//            self.titleScrollView?.contentOffset = CGPointMake(pageOffset, 0)
-//            updateTitleForString("\(titleString)")
             self.pageControl.currentPage = count
+            self.updateTitleViewForPageNumber(count,animated: false)
         }
     }
     
@@ -148,8 +146,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                         self.showPageControl()
                     }
                     
-                    //Update First title
-//                    self.updateTitleForString(self.modelController.pageData[0]["name"].string!)
+
                     self.updateTitleView()
                     self.pageViewController?.view.userInteractionEnabled = true
                 }
@@ -196,19 +193,21 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     func updateTitleViewForPageNumber(page: Int, animated: Bool){
         var frame = titleScrollView!.frame
         frame.origin.x = frame.size.width * CGFloat(page)
+        
         frame.origin.y = 0;
-        self.titleScrollView?.setContentOffset(CGPointMake(frame.origin.x, frame.origin.y), animated: animated)
+        self.titleScrollView?.setContentOffset(CGPointMake(CGFloat(pageControl.currentPage) * titleScrollViewWidth, frame.origin.y), animated: animated)
     }
+//
     
+//    MARK: ScrollView Delegate
     
-    //MARK: ScrollView Delegate
-    
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
 //        println("Scrollview offset is \(scrollView.contentOffset.x)")
-//        let pageViewOffset = scrollView.contentOffset.x - self.pageViewController!.view.frame.size.width
-//        let titleViewOffset = (pageViewOffset/self.pageViewController!.view.frame.size.width) * 160
-//        self.titleScrollView!.contentOffset = CGPointMake(self.titleScrollView!.contentOffset.x + titleViewOffset, 0)
-//    }
+        let pageViewOffset = scrollView.contentOffset.x - self.pageViewController!.view.frame.size.width
+        let titleViewOffset = CGFloat(pageControl.currentPage) * titleScrollViewWidth + (pageViewOffset/self.pageViewController!.view.frame.size.width) * 160
+        self.titleScrollView!.contentOffset = CGPointMake(titleViewOffset, 0)
+        print(self.titleScrollView!.contentOffset)
+    }
     
 }
 
