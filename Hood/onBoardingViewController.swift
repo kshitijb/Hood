@@ -10,9 +10,11 @@ import UIKit
 
 class onBoardingViewController: UIViewController,UIScrollViewDelegate {
     let pages = 0...3
-    var views :[UIView] = []
+    var pageViews :[UIView] = []
     let pageControl = UIPageControl()
+
     @IBOutlet weak var scrollView: UIScrollView!
+    let pageColors = [PipalGlobalColor,PipalGlobalPink, PipalGlobalPurple, PipalGlobalYellow]
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentSize = CGSizeMake(view.frame.width*4, 0)
@@ -44,7 +46,6 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             channelDesc.setTranslatesAutoresizingMaskIntoConstraints(false)
             iPhoneImage.setTranslatesAutoresizingMaskIntoConstraints(false)
             channelImageScrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
-            print("channel"+String(index))
             page.addSubview(channelTitle)
             page.addSubview(channelDesc)
             page.addSubview(iPhoneImage)
@@ -64,31 +65,27 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             page.addConstraints(channelImageConstraintH)
             page.addConstraints(channelImageConstraintV)
             scrollView.addSubview(page)
-
             switch index
             {
             case 0:
                 channelTitle.text = "#home"
                 channelDesc.text = "Chat with your neighbours. \n Post news and get important alerts"
-                page.backgroundColor = PipalGlobalColor
             case 1:
                 channelTitle.text = "#buy/sell"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = PipalGlobalPink
             case 2:
                 channelTitle.text = "help"
                 channelDesc.text = "Ask for help and share resources. \n We’re all in this together."
-                page.backgroundColor = PipalGlobalPurple
             case 3:
                 channelTitle.text = "#meetups"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = PipalGlobalYellow
             default:
                 print("sdaklfjnsal")
             }
             view.layoutSubviews()
-            print(channelDesc.frame)
+            pageViews.append(page)
         }
+        pageViews[0].backgroundColor = PipalGlobalColor
         self.view.bringSubviewToFront(pageControl)
         view.addSubview(pageControl)
         pageControl.numberOfPages = 4
@@ -109,6 +106,18 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
 
     func viewTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    {
+        
+        let index = Int(scrollView.contentOffset.x / view.frame.width)
+        pageViews[0].backgroundColor = UIColor.clearColor()
+        let perc = (scrollView.contentOffset.x - CGFloat(index) * view.frame.width)/view.frame.width
+        if (scrollView.contentOffset.x > 0.0) && (scrollView.contentOffset.x < CGFloat(pages.endIndex)*view.frame.width) && index < pageColors.count - 1
+        {
+                view.backgroundColor = Utilities.colorBetweenColors(pageColors[index], lastColor: pageColors[index+1], offsetAsFraction: perc)
+        }
     }
     
 }

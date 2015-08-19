@@ -26,6 +26,11 @@ func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
     return image
 }
 
+func linearTransition(x:CGFloat,y:CGFloat,offset:CGFloat)->CGFloat
+{
+    return x * (1.0 - offset) + offset * y
+}
+
 
 struct Utilities
 {
@@ -69,4 +74,23 @@ struct Utilities
         attrString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 18)!, range:NSMakeRange(0, attrString.length))
         label.attributedText = attrString
     }
+    
+    static func colorBetweenColors(firstColor:UIColor , lastColor:UIColor, offsetAsFraction:CGFloat)->UIColor
+    {
+        var c1Comp = CGColorGetComponents(firstColor.CGColor)
+        var c2Comp = CGColorGetComponents(lastColor.CGColor)
+        println(offsetAsFraction)
+        var colorComponents = [
+            c1Comp[0], c1Comp[1], c1Comp[2], c1Comp[3],
+            c2Comp[0], c2Comp[1], c2Comp[2], c2Comp[3]
+        ]
+        
+        let red  = linearTransition(c1Comp[0], c2Comp[0], offsetAsFraction)
+        let green = linearTransition(c1Comp[1], c2Comp[1], offsetAsFraction)
+        let blue = linearTransition(c1Comp[2], c2Comp[2], offsetAsFraction)
+        
+        return UIColor(red: red , green: green, blue: blue, alpha: 0.9)
+    }
+    
+    
 }

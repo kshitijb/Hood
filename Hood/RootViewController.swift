@@ -34,6 +34,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         // Configure the page view controller and add it as a child view controller.
         self.pageControl.hidden = true
         self.pageIndicatorContainer.backgroundColor = PipalGlobalColor.colorWithAlphaComponent(0.9)
+        self.navigationController?.navigationBar.setBackgroundImage(getImageWithColor(PipalGlobalColor.colorWithAlphaComponent(0.9), CGSizeMake(100, 100)), forBarMetrics: .Default)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.automaticallyAdjustsScrollViewInsets = false
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
@@ -103,7 +104,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             let titleString = dataViewController.dataObject["name"]
             let count = self.modelController.indexOfViewController(dataViewController)
             self.pageControl.currentPage = count
-            self.updateTitleViewForPageNumber(count,animated: false)
+            
         }
     }
     
@@ -187,27 +188,60 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
         self.navigationItem.titleView = self.titleScrollView
-        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
+//        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
     }
     
-    func updateTitleViewForPageNumber(page: Int, animated: Bool){
-        var frame = titleScrollView!.frame
-        frame.origin.x = frame.size.width * CGFloat(page)
-        
-        frame.origin.y = 0;
-        self.titleScrollView?.setContentOffset(CGPointMake(CGFloat(pageControl.currentPage) * titleScrollViewWidth, frame.origin.y), animated: animated)
-    }
+//    func updateTitleViewForPageNumber(page: Int, animated: Bool){
+//        var frame = titleScrollView!.frame
+//        frame.origin.x = frame.size.width * CGFloat(page)
+//        
+//        frame.origin.y = 0;
+//        self.titleScrollView?.setContentOffset(CGPointMake(CGFloat(pageControl.currentPage) * titleScrollViewWidth, frame.origin.y), animated: animated)
+//    }
 //
     
 //    MARK: ScrollView Delegate
     
+    let pageColors = [PipalGlobalColor,PipalGlobalPurple]
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-//        println("Scrollview offset is \(scrollView.contentOffset.x)")
         let pageViewOffset = scrollView.contentOffset.x - self.pageViewController!.view.frame.size.width
         let titleViewOffset = CGFloat(pageControl.currentPage) * titleScrollViewWidth + (pageViewOffset/self.pageViewController!.view.frame.size.width) * 160
         self.titleScrollView!.contentOffset = CGPointMake(titleViewOffset, 0)
-        print(self.titleScrollView!.contentOffset)
+        let perc = scrollView.contentOffset.x/self.view.frame.width - 1
+
+        if scrollView.contentOffset.x - view.frame.width < 0 && pageControl.currentPage == 0
+        {
+            //too much to the left
+        }
+        else if scrollView.contentOffset.x - view.frame.width > 0 && pageControl.currentPage == pageControl.numberOfPages - 1
+        {
+            //too much to the right
+        }
+        else
+        {
+
+            var colorToSet:UIColor
+            
+            //can find direction of scroll from currentPage and contentOffset
+            if (scrollView.contentOffset.x > 0) && (pageControl.currentPage != pageControl.numberOfPages - 1)
+            {
+                colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage], lastColor: pageColors[pageControl.currentPage + 1], offsetAsFraction: perc)
+                
+            }
+            else
+            {
+                colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage], lastColor: pageColors[pageControl.currentPage - 1], offsetAsFraction: -perc)
+            }
+            
+            self.navigationController?.navigationBar.setBackgroundImage(getImageWithColor(colorToSet, CGSizeMake(100, 100)), forBarMetrics: .Default)
+            pageIndicatorContainer.backgroundColor = colorToSet
+        }
+
+
+//        Utilities.colorBetweenColors(UIColor.redColor(), lastColor: UIColor.greenColor(), offsetAsFraction: scrollView.contentOffset.x/view.frame.width)
     }
+    
     
 }
 
