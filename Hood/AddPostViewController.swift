@@ -71,7 +71,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
 
     func textViewDidChange(textView: UITextView) {
-        postScrollView.contentSize = CGSizeMake(0, postImageView.frame.size.height + postImageView.frame.origin.y)
+        updateScrollViewContentSize()
     }
     
     override func didReceiveMemoryWarning() {
@@ -125,23 +125,17 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         let pickedImage = image
-//        var attributedString:NSMutableAttributedString = NSMutableAttributedString(string: postTextView.text)
-//        let textAttachment:NSTextAttachment = NSTextAttachment()
-//        textAttachment.image = pickedImage
-//        let scaleFactor:CGFloat = image.size.width/postTextView.frame.size.width-10
-//        textAttachment.image = UIImage(CGImage: textAttachment.image?.CGImage, scale: scaleFactor, orientation: UIImageOrientation.Up)
-//        let attributedStringWithImage = NSAttributedString(attachment: textAttachment)
-//        attributedString.appendAttributedString(attributedStringWithImage)
-//        postTextView.attributedText = attributedString
-//        let imageView = UIImageView(image: pickedImage)
-//        imageView.frame = CGRectMake(0, 0, postTextView.frame.size.width, postTextView.frame.size.width * 16/9)
-//        postTextView.insertSubview(imageView, atIndex: 0)
         postImageView.image = pickedImage
+        updateScrollViewContentSize()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+    }
+    
+    func updateScrollViewContentSize(){
+        postScrollView.contentSize = CGSizeMake(0, postImageView.frame.size.height + postImageView.frame.origin.y)
     }
     
 }
