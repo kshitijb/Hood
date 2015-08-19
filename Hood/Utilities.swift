@@ -31,7 +31,6 @@ struct Utilities
 {
     static func timeStampFromDate(str:String) -> String
     {
-        print(str)
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
@@ -39,7 +38,6 @@ struct Utilities
         {
             let now = NSDate()
             let timeInterval = now.timeIntervalSinceDate(date)
-            println(timeInterval)
             
             switch(timeInterval)
             {
@@ -51,8 +49,7 @@ struct Utilities
                     // change to a readable time format and change to local time zone
                     dateFormatter.dateFormat = "yyyy-MM-dd"
                     dateFormatter.timeZone = NSTimeZone(name: "IST")
-                    let timeStamp = dateFormatter.stringFromDate(date)
-                    print(timeStamp)
+                    let timeStamp = dateFormatter.stringFromDate(date) 
                     return timeStamp
             }
            
