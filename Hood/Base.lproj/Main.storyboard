@@ -646,16 +646,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="68"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="on9-ef-feJ">
-                                                <rect key="frame" x="0.0" y="103" width="600" height="35"/>
+                                                <rect key="frame" x="0.0" y="110" width="600" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="35" id="oxv-oa-vbu"/>
                                                 </constraints>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="What's on your mind?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Dw-guh">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="83"/>
+                                                <rect key="frame" x="0.0" y="15" width="600" height="75"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="83" id="5eO-ic-TSn"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="5eO-ic-TSn"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="30"/>
@@ -673,7 +673,7 @@
                                             <constraint firstItem="on9-ef-feJ" firstAttribute="top" secondItem="4hd-Dw-guh" secondAttribute="bottom" constant="20" id="e1u-9i-uXJ"/>
                                             <constraint firstAttribute="centerX" secondItem="on9-ef-feJ" secondAttribute="centerX" id="p1a-Zv-R0J"/>
                                             <constraint firstAttribute="width" secondItem="on9-ef-feJ" secondAttribute="width" id="rwm-9F-JdH"/>
-                                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="iiA-dn-g5L" secondAttribute="top" id="wwe-0g-y7m"/>
+                                            <constraint firstItem="4hd-Dw-guh" firstAttribute="top" secondItem="iiA-dn-g5L" secondAttribute="top" constant="15" id="wwe-0g-y7m"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
