@@ -23,7 +23,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         super.viewDidLoad()
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
-        postNowButton.layer.borderColor = UIColor(red: 243/255, green: 150/255, blue: 48/255, alpha: 1).CGColor
+        postNowButton.layer.borderColor = GlobalColors.Green.CGColor
         postNowButton.layer.borderWidth = 2.5
         postNowButton.layer.cornerRadius = 25
         var viewBindingsDict: NSMutableDictionary = NSMutableDictionary()
