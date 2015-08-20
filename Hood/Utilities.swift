@@ -79,7 +79,7 @@ struct Utilities
     {
         var c1Comp = CGColorGetComponents(firstColor.CGColor)
         var c2Comp = CGColorGetComponents(lastColor.CGColor)
-        println(offsetAsFraction)
+
         var colorComponents = [
             c1Comp[0], c1Comp[1], c1Comp[2], c1Comp[3],
             c2Comp[0], c2Comp[1], c2Comp[2], c2Comp[3]
