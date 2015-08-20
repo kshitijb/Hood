@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        UINavigationBar.appearance().barTintColor = PipalGlobalColor
-        UINavigationBar.appearance().setBackgroundImage(getImageWithColor(PipalGlobalColor, CGSizeMake(1, 64)), forBarMetrics: .Default)
+        UINavigationBar.appearance().barTintColor = GlobalColors.Green
+        UINavigationBar.appearance().setBackgroundImage(getImageWithColor(GlobalColors.Green, CGSizeMake(1, 64)), forBarMetrics: .Default)
         UINavigationBar.appearance().shadowImage = UIImage.new()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
