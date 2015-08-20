@@ -10,9 +10,11 @@ import UIKit
 
 class onBoardingViewController: UIViewController,UIScrollViewDelegate {
     let pages = 0...3
-    var views :[UIView] = []
+    var pageViews :[UIView] = []
     let pageControl = UIPageControl()
+
     @IBOutlet weak var scrollView: UIScrollView!
+    let pageColors = [PipalGlobalColor,PipalGlobalPink, PipalGlobalPurple, PipalGlobalYellow]
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentSize = CGSizeMake(view.frame.width*4, 0)
@@ -44,7 +46,6 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             channelDesc.setTranslatesAutoresizingMaskIntoConstraints(false)
             iPhoneImage.setTranslatesAutoresizingMaskIntoConstraints(false)
             channelImageScrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
-            print("channel"+String(index))
             page.addSubview(channelTitle)
             page.addSubview(channelDesc)
             page.addSubview(iPhoneImage)
@@ -64,7 +65,6 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             page.addConstraints(channelImageConstraintH)
             page.addConstraints(channelImageConstraintV)
             scrollView.addSubview(page)
-
             switch index
             {
             case 0:
@@ -87,8 +87,9 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
                 print("sdaklfjnsal")
             }
             view.layoutSubviews()
-            print(channelDesc.frame)
+            pageViews.append(page)
         }
+        pageViews[0].backgroundColor = PipalGlobalColor
         self.view.bringSubviewToFront(pageControl)
         view.addSubview(pageControl)
         pageControl.numberOfPages = 4
@@ -109,6 +110,18 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
 
     func viewTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    {
+        
+        let index = Int(scrollView.contentOffset.x / view.frame.width)
+        pageViews[0].backgroundColor = UIColor.clearColor()
+        let perc = (scrollView.contentOffset.x - CGFloat(index) * view.frame.width)/view.frame.width
+        if (scrollView.contentOffset.x > 0.0) && (scrollView.contentOffset.x < CGFloat(pages.endIndex)*view.frame.width) && index < pageColors.count - 1
+        {
+                view.backgroundColor = Utilities.colorBetweenColors(pageColors[index], lastColor: pageColors[index+1], offsetAsFraction: perc)
+        }
     }
     
 }
