@@ -17,6 +17,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     let titleScrollViewWidth = CGFloat(160)
     var pageViewController: UIPageViewController?
     var titleScrollView: UIScrollView?
+    let channelPicker:ChannelPickerView = ChannelPickerView()
+    
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
 
@@ -103,7 +105,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             let titleString = dataViewController.dataObject["name"]
             let count = self.modelController.indexOfViewController(dataViewController)
             self.pageControl.currentPage = count
-            
         }
     }
     
@@ -169,9 +170,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     }
     
     func updateTitleView(){
+        self.channelPicker.setUpForView(self.navigationController!.view)
         self.titleScrollView = UIScrollView(frame: CGRectMake(0, 0, 160, 40))
         self.titleScrollView?.pagingEnabled = true
-        self.titleScrollView?.userInteractionEnabled = false
+        self.titleScrollView?.scrollEnabled = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: "titleViewTapped")
+        self.titleScrollView?.addGestureRecognizer(tapGesture)
         var startingX:CGFloat = 0
         let pageSize:CGFloat = 160
         for (key, channel) in self.modelController.pageData {
@@ -184,24 +188,29 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             titleLabel.frame = CGRectMake(x, 0, pageSize, 40)
             self.titleScrollView?.addSubview(titleLabel)
             startingX = startingX + 1
+            self.channelPicker.addButtonForObject(channel, action: { () -> Void in
+                let title = channel["name"].string
+                println("tapped on \(title)")
+                self.jumpToPageForIndex(key.toInt()!)
+            })
         }
         self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
         self.navigationItem.titleView = self.titleScrollView
 //        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
     }
     
-//    func updateTitleViewForPageNumber(page: Int, animated: Bool){
-//        var frame = titleScrollView!.frame
-//        frame.origin.x = frame.size.width * CGFloat(page)
-//        
-//        frame.origin.y = 0;
-//        self.titleScrollView?.setContentOffset(CGPointMake(CGFloat(pageControl.currentPage) * titleScrollViewWidth, frame.origin.y), animated: animated)
-//    }
-//
+    func updateTitleViewForPageNumber(page: Int, animated: Bool){
+        var frame = titleScrollView!.frame
+        frame.origin.x = frame.size.width * CGFloat(page)
+        
+        frame.origin.y = 0;
+        self.titleScrollView?.setContentOffset(CGPointMake(CGFloat(pageControl.currentPage) * titleScrollViewWidth, frame.origin.y), animated: animated)
+    }
+
     
 //    MARK: ScrollView Delegate
     
-    let pageColors = [PipalGlobalColor,PipalGlobalPurple]
+    let pageColors = [GlobalColors.Green,GlobalColors.Purple]
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let pageViewOffset = scrollView.contentOffset.x - self.pageViewController!.view.frame.size.width
@@ -233,14 +242,35 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage], lastColor: pageColors[pageControl.currentPage - 1], offsetAsFraction: -perc)
             }
             
-            self.navigationController?.navigationBar.setBackgroundImage(getImageWithColor(colorToSet, CGSizeMake(100, 100)), forBarMetrics: .Default)
-            pageIndicatorContainer.backgroundColor = colorToSet
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
+                let img = getImageWithColor(colorToSet, CGSizeMake(1, 64))
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.navigationController?.navigationBar.setBackgroundImage(img,forBarMetrics: .Default)
+                    self.pageIndicatorContainer.backgroundColor = colorToSet
+                    
+                })
+                
+            })
+            
         }
 
 
 //        Utilities.colorBetweenColors(UIColor.redColor(), lastColor: UIColor.greenColor(), offsetAsFraction: scrollView.contentOffset.x/view.frame.width)
     }
     
+    func titleViewTapped(){
+        channelPicker.showInView(self.navigationController!.view)
+    }
+    
+    func jumpToPageForIndex(index: Int){
+        let viewController = self.modelController.viewControllerAtIndex(index, storyboard: self.storyboard!)
+        pageViewController!.setViewControllers([viewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: { (completed:Bool) -> Void in
+            pageViewController?.setViewControllers([viewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+        })
+    }
     
 }
+    
+    
+
 
