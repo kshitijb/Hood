@@ -43,7 +43,7 @@ class loginViewController: UIViewController {
             }
             else
             {
-                SVProgressHUD.showWithStatus("getting FB info...")
+                SVProgressHUD.showWithStatus("Logging in")
                 var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
                 fbRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                     print(result)
@@ -78,9 +78,7 @@ class loginViewController: UIViewController {
                         }
                     }
 
-//                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
                     SVProgressHUD.dismiss()
-//                    })
                     let onboarding:UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("onboarding") as! UIViewController
                     self.navigationController?.pushViewController(onboarding, animated: true)
                 })

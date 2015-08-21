@@ -8,6 +8,9 @@
 
 import UIKit
 import FBSDKCoreKit
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let titleDict: NSDictionary = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
             UINavigationBar.appearance().titleTextAttributes = titleDict as [NSObject : AnyObject]
         }
+        Fabric.with([Crashlytics()])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

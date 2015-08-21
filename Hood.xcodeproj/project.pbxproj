@@ -53,6 +53,8 @@
 		D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */; };
 		D5B3E4BC1B6A33E000F3DF9F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B11B6A33E000F3DF9F /* OFL.txt */; };
 		D5EBCFC71B85BEFE000E0656 /* ChannelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */; };
+		D5EBCFCA1B870ED2000E0656 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBCFC81B870ED2000E0656 /* Fabric.framework */; };
+		D5EBCFCB1B870ED2000E0656 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -119,6 +121,8 @@
 		D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D5B3E4B11B6A33E000F3DF9F /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelPickerView.swift; sourceTree = "<group>"; };
+		D5EBCFC81B870ED2000E0656 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +131,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */,
+				D5EBCFCB1B870ED2000E0656 /* Crashlytics.framework in Frameworks */,
 				D54B9BCF1B7B3BFA0075836C /* FBSDKShareKit.framework in Frameworks */,
 				D54B9BCE1B7B3BFA0075836C /* FBSDKLoginKit.framework in Frameworks */,
+				D5EBCFCA1B870ED2000E0656 /* Fabric.framework in Frameworks */,
 				D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */,
 				D54B9BCD1B7B3BFA0075836C /* FBSDKCoreKit.framework in Frameworks */,
 				D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */,
@@ -149,6 +155,8 @@
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
+				D5EBCFC81B870ED2000E0656 /* Fabric.framework */,
+				D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */,
 				D54B9BCA1B7B3BFA0075836C /* FBSDKCoreKit.framework */,
 				D54B9BCB1B7B3BFA0075836C /* FBSDKLoginKit.framework */,
 				D54B9BCC1B7B3BFA0075836C /* FBSDKShareKit.framework */,
@@ -349,7 +357,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n./Fabric.framework/run 82e2d034577b37c532c7339d0e032d91addd5373 86664007f0f9df941f5e32fce99d6c62e0356fd59dc749d1fd59a4573c2b6d14";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -495,6 +503,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"~/Documents/FacebookSDK",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -513,6 +522,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"~/Documents/FacebookSDK",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
