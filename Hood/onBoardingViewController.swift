@@ -14,7 +14,7 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
     let pageControl = UIPageControl()
 
     @IBOutlet weak var scrollView: UIScrollView!
-    let pageColors = [PipalGlobalColor,PipalGlobalPink, PipalGlobalPurple, PipalGlobalYellow]
+    let pageColors = [GlobalColors.Green,GlobalColors.Pink, GlobalColors.Purple, GlobalColors.Yellow]
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentSize = CGSizeMake(view.frame.width*4, 0)
@@ -70,19 +70,15 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             case 0:
                 channelTitle.text = "#home"
                 channelDesc.text = "Chat with your neighbours. \n Post news and get important alerts"
-                page.backgroundColor = GlobalColors.Green
             case 1:
                 channelTitle.text = "#buy/sell"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = GlobalColors.Pink
             case 2:
-                channelTitle.text = "help"
+                channelTitle.text = "#help"
                 channelDesc.text = "Ask for help and share resources. \n We’re all in this together."
-                page.backgroundColor = GlobalColors.Purple
             case 3:
                 channelTitle.text = "#meetups"
                 channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
-                page.backgroundColor = GlobalColors.Yellow
             default:
                 print("sdaklfjnsal")
             }
@@ -95,7 +91,7 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             }
             pageViews.append(page)
         }
-        pageViews[0].backgroundColor = PipalGlobalColor
+        pageViews[0].backgroundColor = GlobalColors.Green
         self.view.bringSubviewToFront(pageControl)
         view.addSubview(pageControl)
         pageControl.numberOfPages = 4
