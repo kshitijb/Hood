@@ -20,6 +20,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var commentConstraint: NSLayoutConstraint!
     var comments = JSON.nullJSON
     @IBOutlet weak var sendCommentButton: UIView!
+    let commentsActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,12 +151,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         {
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
-            self.commentConstraint.constant += keyboardSize.height
-            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
-                self.view.layoutIfNeeded()
-                }, completion: { (completion) -> Void in
-                
-            })
+            if(self.commentConstraint.constant < keyboardSize.height){
+                self.commentConstraint.constant += keyboardSize.height
+                UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                    }, completion: { (completion) -> Void in
+                        
+                })
+            }
         }
     }
     

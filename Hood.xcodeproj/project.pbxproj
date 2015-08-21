@@ -52,6 +52,7 @@
 		D5B3E4BA1B6A33E000F3DF9F /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4AF1B6A33E000F3DF9F /* Lato-LightItalic.ttf */; };
 		D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */; };
 		D5B3E4BC1B6A33E000F3DF9F /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5B3E4B11B6A33E000F3DF9F /* OFL.txt */; };
+		D5EBCFC71B85BEFE000E0656 /* ChannelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -117,6 +118,7 @@
 		D5B3E4AF1B6A33E000F3DF9F /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		D5B3E4B01B6A33E000F3DF9F /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D5B3E4B11B6A33E000F3DF9F /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				D57382A01B7359150080A4FA /* APIConstants.swift */,
 				D54B9BD21B7B52B20075836C /* UIColorExtension.swift */,
 				D54B9BD41B7DD2520075836C /* PostController.swift */,
+				D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */,
 			);
 			path = Hood;
 			sourceTree = "<group>";
@@ -286,7 +289,7 @@
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7G2XZXD8B4;
+						DevelopmentTeam = F3642YKY5X;
 					};
 				};
 			};
@@ -361,6 +364,7 @@
 				D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */,
 				D51FB2E51B7891FC00518DA2 /* PopButton.swift in Sources */,
 				D57382A11B7359150080A4FA /* APIConstants.swift in Sources */,
+				D5EBCFC71B85BEFE000E0656 /* ChannelPickerView.swift in Sources */,
 				D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */,
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
