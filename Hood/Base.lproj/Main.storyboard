@@ -532,7 +532,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcg-ja-8HC">
-                                                    <rect key="frame" x="527" y="29" width="58" height="17"/>
+                                                    <rect key="frame" x="528" y="25" width="58" height="17"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -554,6 +554,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="xei-FD-upk" firstAttribute="centerY" secondItem="bcg-ja-8HC" secondAttribute="centerY" id="Bjw-G1-YeD"/>
                                                 <constraint firstItem="xei-FD-upk" firstAttribute="leading" secondItem="Oep-FD-vPh" secondAttribute="leading" constant="15" id="Wdy-Om-p1D"/>
                                                 <constraint firstAttribute="trailing" secondItem="bcg-ja-8HC" secondAttribute="trailing" constant="15" id="cit-Sg-r7a"/>
                                                 <constraint firstItem="AAh-lP-vCx" firstAttribute="leading" secondItem="Oep-FD-vPh" secondAttribute="leading" constant="15" id="dO4-iP-EPB"/>
@@ -563,6 +564,11 @@
                                                 <constraint firstItem="xei-FD-upk" firstAttribute="top" secondItem="Oep-FD-vPh" secondAttribute="topMargin" constant="15" id="t8K-8o-dOE"/>
                                                 <constraint firstItem="bcg-ja-8HC" firstAttribute="top" secondItem="Oep-FD-vPh" secondAttribute="topMargin" constant="21" id="vx8-Jk-jW0"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="vx8-Jk-jW0"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
