@@ -19,6 +19,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var textViewHeightConstant: NSLayoutConstraint!
+    var pickedImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
@@ -39,12 +40,21 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBAction func postNow(sender: AnyObject)
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        let params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!+1, "message" : postTextView.text] as [String:AnyObject!]
-        print(params)
+        var params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!+1, "message" : postTextView.text] as [String:AnyObject!]
+        if let pickedImage = pickedImage{
+            let imageData = UIImagePNGRepresentation(pickedImage)
+            let base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
+            params["file"] = base64String
+        }
+//        print(params)
+        self.title = "Posting"
+        self.postNowButton.enabled = false
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            self.postNowButton.enabled = true
+            self.title = ""
             self.navigationController?.popViewControllerAnimated(true)
         })
 
@@ -125,7 +135,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        let pickedImage = image
+        pickedImage = image
         postImageView.image = pickedImage
         updateScrollViewContentSize()
         dismissViewControllerAnimated(true, completion: nil)
