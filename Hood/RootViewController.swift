@@ -18,6 +18,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     var pageViewController: UIPageViewController?
     var titleScrollView: UIScrollView?
     let channelPicker:ChannelPickerView = ChannelPickerView()
+    let pageColors: NSMutableArray = NSMutableArray()
     
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -180,6 +181,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let pageSize:CGFloat = 160
         for (key, channel) in self.modelController.pageData {
             let titleLabel:UILabel = UILabel()
+            if let color = channel["color"].string{
+                pageColors.addObject(UIColor(hexString: "#" + color))
+            }else{
+                pageColors.addObject(GlobalColors.Green)
+            }
             titleLabel.text = "#" + channel["name"].string!
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.font = UIFont(name: "Lato-Regular", size: 26)
@@ -210,8 +216,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
 //    MARK: ScrollView Delegate
     
-    let pageColors = [GlobalColors.Green,GlobalColors.Purple]
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let pageViewOffset = scrollView.contentOffset.x - self.pageViewController!.view.frame.size.width
         let titleViewOffset = CGFloat(pageControl.currentPage) * titleScrollViewWidth + (pageViewOffset/self.pageViewController!.view.frame.size.width) * 160
@@ -234,12 +238,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             //can find direction of scroll from currentPage and contentOffset
             if (scrollView.contentOffset.x > 0) && (pageControl.currentPage != pageControl.numberOfPages - 1)
             {
-                colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage], lastColor: pageColors[pageControl.currentPage + 1], offsetAsFraction: perc)
+                colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage] as! UIColor, lastColor: pageColors[pageControl.currentPage + 1] as! UIColor, offsetAsFraction: perc)
                 
             }
             else
             {
-                colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage], lastColor: pageColors[pageControl.currentPage - 1], offsetAsFraction: -perc)
+                colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage] as! UIColor, lastColor: pageColors[pageControl.currentPage - 1] as! UIColor, offsetAsFraction: -perc)
             }
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in

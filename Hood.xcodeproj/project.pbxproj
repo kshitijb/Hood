@@ -55,6 +55,7 @@
 		D5EBCFC71B85BEFE000E0656 /* ChannelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */; };
 		D5EBCFCA1B870ED2000E0656 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBCFC81B870ED2000E0656 /* Fabric.framework */; };
 		D5EBCFCB1B870ED2000E0656 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */; };
+		D5EBCFCE1B874832000E0656 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFCC1B874832000E0656 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -123,6 +124,7 @@
 		D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelPickerView.swift; sourceTree = "<group>"; };
 		D5EBCFC81B870ED2000E0656 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D5EBCFCD1B874832000E0656 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				D54B9BD21B7B52B20075836C /* UIColorExtension.swift */,
 				D54B9BD41B7DD2520075836C /* PostController.swift */,
 				D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */,
+				D5EBCFCC1B874832000E0656 /* Model.xcdatamodeld */,
 			);
 			path = Hood;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				D51FB2E51B7891FC00518DA2 /* PopButton.swift in Sources */,
 				D57382A11B7359150080A4FA /* APIConstants.swift in Sources */,
 				D5EBCFC71B85BEFE000E0656 /* ChannelPickerView.swift in Sources */,
+				D5EBCFCE1B874832000E0656 /* Model.xcdatamodeld in Sources */,
 				D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */,
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
@@ -516,8 +520,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Locon Solutions Private Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Locon Solutions Private Limited";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -553,6 +557,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D5EBCFCC1B874832000E0656 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D5EBCFCD1B874832000E0656 /* Model.xcdatamodel */,
+			);
+			currentVersion = D5EBCFCD1B874832000E0656 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D5B3E4751B6A2CB000F3DF9F /* Project object */;
 }
