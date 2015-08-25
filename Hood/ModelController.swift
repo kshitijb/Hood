@@ -19,7 +19,7 @@ import SwiftyJSON
 
 class ModelController: NSObject, UIPageViewControllerDataSource {
 
-    var pageData = JSON.nullJSON
+    var pageData:NSMutableArray = NSMutableArray()
 
 
     override init() {
@@ -45,13 +45,19 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     func indexOfViewController(viewController: FeedViewController) -> Int {
         // Return the index of the given data view controller.
         // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-        let dataObject = viewController.dataObject
-            let dataArray  = pageData.array!
-            let dataJSON = dataObject
-            return find(dataArray, dataJSON)!
+        let dataObject: Channel = viewController.dataObject as! Channel
+//            let dataArray  = pageData
+//            return dataArray.indexOfObject(dataObject)
+        for index in 0...self.pageData.count{
+            let currentObject = self.pageData[index] as! Channel
+            if currentObject.id == dataObject.id{
+                return index
+            }
+        }
+        
 //            return dataArray.indexOfObject(dataJSON)
 //        } else {
-//            return NSNotFound
+            return NSNotFound
 //        }
     }
 

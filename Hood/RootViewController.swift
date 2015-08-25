@@ -103,7 +103,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         if completed{
             let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
-            let titleString = dataViewController.dataObject["name"]
+            let titleString = (dataViewController.dataObject as! Channel).name
             let count = self.modelController.indexOfViewController(dataViewController)
             self.pageControl.currentPage = count
         }
@@ -136,8 +136,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     println(error)
                 }else{
                     let swiftyJSONObject = JSON(data!)
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     print(swiftyJSONObject)
-                    self.modelController.pageData = swiftyJSONObject["results"]
+                    var channels:NSMutableArray = NSMutableArray()
+                    for (key, channel) in swiftyJSONObject["results"]{
+                        let channelObject = Channel.generateObjectFromJSON(channel, context: appDelegate.managedObjectContext!)
+                        channels.addObject(channelObject)
+                    }
+                    self.modelController.pageData = channels
+//                    self.modelController.pageData = swiftyJSONObject["results"]
                     self.pageControl.numberOfPages = self.modelController.pageData.count
                     print(self.modelController.pageData)
                     if(self.pageViewController!.viewControllers.count == 0){
@@ -179,14 +186,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.titleScrollView?.addGestureRecognizer(tapGesture)
         var startingX:CGFloat = 0
         let pageSize:CGFloat = 160
-        for (key, channel) in self.modelController.pageData {
+        for item in self.modelController.pageData {
+            let channel = item as! Channel
             let titleLabel:UILabel = UILabel()
-            if let color = channel["color"].string{
-                pageColors.addObject(UIColor(hexString: "#" + color))
-            }else{
+//            if let color = channel.color{
+                pageColors.addObject(UIColor(hexString: "#" + channel.color))
+//            }else{
                 pageColors.addObject(GlobalColors.Green)
-            }
-            titleLabel.text = "#" + channel["name"].string!
+//            }
+            titleLabel.text = "#" + channel.name
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.font = UIFont(name: "Lato-Regular", size: 26)
             titleLabel.textColor = UIColor.whiteColor()
@@ -194,11 +202,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             titleLabel.frame = CGRectMake(x, 0, pageSize, 40)
             self.titleScrollView?.addSubview(titleLabel)
             startingX = startingX + 1
-            self.channelPicker.addButtonForObject(channel, action: { () -> Void in
-                let title = channel["name"].string
-                println("tapped on \(title)")
-                self.jumpToPageForIndex(key.toInt()!)
-            })
         }
         self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
         self.navigationItem.titleView = self.titleScrollView

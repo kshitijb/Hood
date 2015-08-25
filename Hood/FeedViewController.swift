@@ -15,7 +15,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var tableView: UITableView!
     var dataArray: JSON = JSON.nullJSON
-    var dataObject: JSON = JSON.nullJSON
+    var dataObject: AnyObject?
     var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -101,7 +101,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         if(self.dataArray.count == 0){
             showLoader()
         }
-        let url = API().getAllPostsForChannel(self.dataObject["id"].stringValue)
+        let channel = self.dataObject as! Channel
+        let url = API().getAllPostsForChannel("\(channel.id.intValue)")
         let manager = Alamofire.Manager.sharedInstance
         let headers = ["Authorization":"Bearer \(FBSDKAccessToken.currentAccessToken().tokenString)"]
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in

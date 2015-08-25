@@ -62,6 +62,7 @@
 		D5EBCFD71B8C4AF5000E0656 /* ParentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFD61B8C4AF5000E0656 /* ParentObject.swift */; };
 		D5EBCFD91B8C4AF5000E0656 /* Neighbourhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFD81B8C4AF5000E0656 /* Neighbourhood.swift */; };
 		D5EBCFDB1B8C4AF6000E0656 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFDA1B8C4AF6000E0656 /* Comment.swift */; };
+		D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBD00F1B8C5A67000E0656 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,6 +138,7 @@
 		D5EBCFD61B8C4AF5000E0656 /* ParentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentObject.swift; sourceTree = "<group>"; };
 		D5EBCFD81B8C4AF5000E0656 /* Neighbourhood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Neighbourhood.swift; sourceTree = "<group>"; };
 		D5EBCFDA1B8C4AF6000E0656 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D5EBD00F1B8C5A67000E0656 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */,
 				D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */,
 				D5EBCFCB1B870ED2000E0656 /* Crashlytics.framework in Frameworks */,
 				D54B9BCF1B7B3BFA0075836C /* FBSDKShareKit.framework in Frameworks */,
@@ -169,6 +172,7 @@
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
+				D5EBD00F1B8C5A67000E0656 /* CoreData.framework */,
 				D5EBCFC81B870ED2000E0656 /* Fabric.framework */,
 				D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */,
 				D54B9BCA1B7B3BFA0075836C /* FBSDKCoreKit.framework */,

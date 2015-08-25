@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Channel" representedClassName="PRODUCT_MODULE_NAME.Channel" parentEntity="ParentObject" syncable="YES">
+    <entity name="Channel" representedClassName="Hood.Channel" parentEntity="ParentObject" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,7 +17,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="channels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Channel" syncable="YES"/>
     </entity>
-    <entity name="ParentObject" representedClassName="PRODUCT_MODULE_NAME.ParentObject" syncable="YES">
+    <entity name="ParentObject" representedClassName="Hood.ParentObject" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Post" representedClassName="PRODUCT_MODULE_NAME.Post" parentEntity="ParentObject" syncable="YES">
