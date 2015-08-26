@@ -1150,36 +1150,36 @@ neighbours</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wfY-te-USf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wfY-te-USf">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationCell" rowHeight="101" id="hc9-5z-gAJ" customClass="NotificationCell" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationCell" rowHeight="85" id="hc9-5z-gAJ" customClass="NotificationCell" customModule="Hood" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hc9-5z-gAJ" id="jPg-9L-IQo">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Me.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VG6-Nh-Y5G">
-                                                    <rect key="frame" x="23" y="23" width="45" height="45"/>
+                                                    <rect key="frame" x="15" y="25" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="0gU-Sa-ElG"/>
                                                         <constraint firstAttribute="height" constant="45" id="9va-e7-KMF"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-3g-6rv">
-                                                    <rect key="frame" x="83" y="28" width="48.5" height="24"/>
-                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-3g-6rv">
+                                                    <rect key="frame" x="75" y="30" width="29" height="5.5"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYx-xR-pQ9">
-                                                    <rect key="frame" x="141" y="32" width="35.5" height="18"/>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYx-xR-pQ9">
+                                                    <rect key="frame" x="114" y="27" width="24" height="12"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="10"/>
                                                     <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYo-Xa-b41">
-                                                    <rect key="frame" x="83" y="60" width="32.5" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYo-Xa-b41">
+                                                    <rect key="frame" x="75" y="43" width="32.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1187,13 +1187,14 @@ neighbours</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="uYo-Xa-b41" firstAttribute="leading" secondItem="VG6-Nh-Y5G" secondAttribute="trailing" constant="15" id="8BW-u8-yh1"/>
-                                                <constraint firstItem="VG6-Nh-Y5G" firstAttribute="top" secondItem="jPg-9L-IQo" secondAttribute="topMargin" constant="15" id="AQ6-fc-QG8"/>
+                                                <constraint firstItem="VG6-Nh-Y5G" firstAttribute="top" secondItem="jPg-9L-IQo" secondAttribute="top" constant="25" id="AQ6-fc-QG8"/>
                                                 <constraint firstItem="GPD-3g-6rv" firstAttribute="leading" secondItem="VG6-Nh-Y5G" secondAttribute="trailing" constant="15" id="JID-zz-SEm"/>
-                                                <constraint firstItem="GPD-3g-6rv" firstAttribute="top" secondItem="jPg-9L-IQo" secondAttribute="topMargin" constant="20" id="K5Q-AK-Oqt"/>
-                                                <constraint firstItem="GPD-3g-6rv" firstAttribute="baseline" secondItem="aYx-xR-pQ9" secondAttribute="baseline" id="QLx-Sm-N6H"/>
+                                                <constraint firstItem="GPD-3g-6rv" firstAttribute="top" secondItem="jPg-9L-IQo" secondAttribute="top" constant="30" id="K5Q-AK-Oqt"/>
+                                                <constraint firstItem="GPD-3g-6rv" firstAttribute="centerY" secondItem="aYx-xR-pQ9" secondAttribute="centerY" id="QLx-Sm-N6H"/>
                                                 <constraint firstItem="aYx-xR-pQ9" firstAttribute="leading" secondItem="GPD-3g-6rv" secondAttribute="trailing" constant="10" id="YPH-wv-dFs"/>
                                                 <constraint firstItem="uYo-Xa-b41" firstAttribute="top" secondItem="GPD-3g-6rv" secondAttribute="bottom" constant="8" id="dDu-xL-GlS"/>
-                                                <constraint firstItem="VG6-Nh-Y5G" firstAttribute="leading" secondItem="jPg-9L-IQo" secondAttribute="leadingMargin" constant="15" id="mKB-9y-fCp"/>
+                                                <constraint firstAttribute="bottom" secondItem="uYo-Xa-b41" secondAttribute="bottom" constant="24" id="g89-e0-d9J"/>
+                                                <constraint firstItem="VG6-Nh-Y5G" firstAttribute="leading" secondItem="jPg-9L-IQo" secondAttribute="leading" constant="15" id="mKB-9y-fCp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1217,6 +1218,7 @@ neighbours</string>
                     </view>
                     <navigationItem key="navigationItem" title="Alerts" id="5Hr-Hi-wHX">
                         <barButtonItem key="rightBarButtonItem" image="Hash" id="rpv-e2-9q4">
+                            <inset key="imageInsets" minX="5" minY="6" maxX="4" maxY="3"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="dismiss:" destination="WYQ-7t-NiM" id="eCm-01-M9W"/>

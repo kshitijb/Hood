@@ -23,9 +23,11 @@ class NotificationCell: UITableViewCell {
     {
         json = jsonObject
         profileImage.sd_setImageWithURL(NSURL(string: jsonObject["actor"]["profile_photo"].string!), placeholderImage: UIImage(named: "Me.jpg"))
-        fullNameLabel.text = jsonObject["actor"]["firstname"].string! + " " + jsonObject["actor"]["lastname"].string!
+        fullNameLabel.text = jsonObject["actor"]["firstname"].string!.uppercaseString + " " + jsonObject["actor"]["lastname"].string!.uppercaseString
         timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
         commentLabel.text = jsonObject["action"].string
+        profileImage.layer.cornerRadius = profileImage.frame.width/2
+        profileImage.clipsToBounds = true
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

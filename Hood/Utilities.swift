@@ -51,9 +51,16 @@ struct Utilities
                     return "Just now"
                 case _ where timeInterval > 3600 && timeInterval < 24 * 3600 :
                     return "\(Int(timeInterval/3600)) hours ago"
+                case _ where timeInterval > 86400 && timeInterval < 7*86400 :
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekday, fromDate: date)
+                    return "\(calendar.shortWeekdaySymbols[dateComponents.weekday - 1])"
+                case _ where timeInterval > 7 * 86400 :
+                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                    dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+                    return "\(dateFormatter.stringFromDate(date))"
                 default :
                     // change to a readable time format and change to local time zone
-                    dateFormatter.dateFormat = "yyyy-MM-dd"
                     dateFormatter.timeZone = NSTimeZone(name: "IST")
                     let timeStamp = dateFormatter.stringFromDate(date) 
                     return timeStamp

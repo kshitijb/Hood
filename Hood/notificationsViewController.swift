@@ -19,8 +19,11 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         print(url)
 //        let headers = ["Authorization":"Bearer \(FBSDKAccessToken.currentAccessToken().tokenString)"]
 //        print(headers)
+
         notificationTableView.delegate = self
         notificationTableView.dataSource = self
+        notificationTableView.estimatedRowHeight = 2
+        notificationTableView.rowHeight = UITableViewAutomaticDimension
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
             if let e = error{
                 print(error)
