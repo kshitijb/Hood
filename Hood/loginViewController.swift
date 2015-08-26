@@ -48,7 +48,6 @@ class loginViewController: UIViewController {
                 SVProgressHUD.showWithStatus("Logging in")
                 var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
                 fbRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-                    print(result)
                     let userDefaults = NSUserDefaults.standardUserDefaults()
                     userDefaults.setValue(result["name"], forKey: "fbUserName")
                     let id = result["id"]
@@ -70,7 +69,6 @@ class loginViewController: UIViewController {
                     ]
                     
                     Alamofire.request(.POST, "http://128.199.179.151/user/register/", parameters: parameters as? [String : AnyObject], encoding: .JSON) .response { request, response, data, error in
-                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                         if let responseDict = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil) as? NSDictionary
                         {
                             let userDefaults = NSUserDefaults.standardUserDefaults()

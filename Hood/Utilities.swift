@@ -46,6 +46,14 @@ struct Utilities
                     return "Just now"
                 case _ where timeInterval > 3600 && timeInterval < 24 * 3600 :
                     return "\(Int(timeInterval/3600)) hours ago"
+                case _ where timeInterval > 86400 && timeInterval < 7*86400 :
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekday, fromDate: date)
+                    return "\(calendar.shortWeekdaySymbols[dateComponents.weekday - 1])"
+                case _ where timeInterval > 7 * 86400 :
+                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                    dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+                    return "\(dateFormatter.stringFromDate(date))"
                 default :
                     // change to a readable time format and change to local time zone
                     let dateFormatter = NSDateFormatter()
@@ -69,7 +77,7 @@ struct Utilities
     {
         var c1Comp = CGColorGetComponents(firstColor.CGColor)
         var c2Comp = CGColorGetComponents(lastColor.CGColor)
-        println(offsetAsFraction)
+
         var colorComponents = [
             c1Comp[0], c1Comp[1], c1Comp[2], c1Comp[3],
             c2Comp[0], c2Comp[1], c2Comp[2], c2Comp[3]

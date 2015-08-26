@@ -19,6 +19,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var textViewHeightConstant: NSLayoutConstraint!
+    var pickedImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
@@ -42,9 +43,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
         print(params)
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
-            print(error)
-            print(response)
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
+            self.postNowButton.enabled = true
+            self.title = ""
             self.navigationController?.popViewControllerAnimated(true)
         })
 
@@ -125,7 +126,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        let pickedImage = image
+        pickedImage = image
         postImageView.image = pickedImage
         updateScrollViewContentSize()
         dismissViewControllerAnimated(true, completion: nil)

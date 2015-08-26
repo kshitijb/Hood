@@ -34,9 +34,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         setupUI()
         
         
-        print(API().getCommentsForPost("\(postID)"))
+
         Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
             self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             self.tableView.reloadData()
         })
@@ -80,7 +80,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
             Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                 self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
                 self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
             })
@@ -112,7 +111,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             let cell = tableView.dequeueReusableCellWithIdentifier("Comment", forIndexPath: indexPath) as! commentCell
             if comments["results"].array?.count>0
             {
-                print(comments["results"].array!.count)
                 cell.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + comments["results"][indexPath.row]["author"]["lastname"].string!
                 
                 cell.commentLabel.text = comments["results"][indexPath.row]["comment"].string

@@ -41,8 +41,6 @@ class PostController {
                     successBlock()
                 }
             }
-            print(response)
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
             
         })
     }

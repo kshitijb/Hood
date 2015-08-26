@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bU7-14-pHA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bU7-14-pHA">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -18,6 +18,7 @@
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
+            <string>Lato-Bold</string>
         </mutableArray>
         <mutableArray key="Lato-Light.ttf">
             <string>Lato-Light</string>
@@ -25,8 +26,10 @@
             <string>Lato-Light</string>
             <string>Lato-Light</string>
             <string>Lato-Light</string>
+            <string>Lato-Light</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -949,6 +952,9 @@
                     <navigationItem key="navigationItem" id="7Gf-hM-8lt">
                         <barButtonItem key="leftBarButtonItem" image="Profile" id="uhQ-51-UTj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="QPd-JS-GU5" kind="presentation" identifier="showNotifications" id="p74-JD-Fhf"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Add" id="lRs-YM-avi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1132,11 +1138,125 @@ neighbours</string>
             </objects>
             <point key="canvasLocation" x="872" y="1303"/>
         </scene>
+        <!--Alerts-->
+        <scene sceneID="CcI-wW-iP1">
+            <objects>
+                <viewController id="WYQ-7t-NiM" customClass="notificationsViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dux-Bj-T8g"/>
+                        <viewControllerLayoutGuide type="bottom" id="OFl-P4-aFw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="86G-FE-sVW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wfY-te-USf">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationCell" rowHeight="85" id="hc9-5z-gAJ" customClass="NotificationCell" customModule="Hood" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hc9-5z-gAJ" id="jPg-9L-IQo">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Me.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VG6-Nh-Y5G">
+                                                    <rect key="frame" x="15" y="25" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="45" id="0gU-Sa-ElG"/>
+                                                        <constraint firstAttribute="height" constant="45" id="9va-e7-KMF"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-3g-6rv">
+                                                    <rect key="frame" x="75" y="30" width="29" height="5.5"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYx-xR-pQ9">
+                                                    <rect key="frame" x="114" y="27" width="24" height="12"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="10"/>
+                                                    <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYo-Xa-b41">
+                                                    <rect key="frame" x="75" y="43" width="32.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uYo-Xa-b41" firstAttribute="leading" secondItem="VG6-Nh-Y5G" secondAttribute="trailing" constant="15" id="8BW-u8-yh1"/>
+                                                <constraint firstItem="VG6-Nh-Y5G" firstAttribute="top" secondItem="jPg-9L-IQo" secondAttribute="top" constant="25" id="AQ6-fc-QG8"/>
+                                                <constraint firstItem="GPD-3g-6rv" firstAttribute="leading" secondItem="VG6-Nh-Y5G" secondAttribute="trailing" constant="15" id="JID-zz-SEm"/>
+                                                <constraint firstItem="GPD-3g-6rv" firstAttribute="top" secondItem="jPg-9L-IQo" secondAttribute="top" constant="30" id="K5Q-AK-Oqt"/>
+                                                <constraint firstItem="GPD-3g-6rv" firstAttribute="centerY" secondItem="aYx-xR-pQ9" secondAttribute="centerY" id="QLx-Sm-N6H"/>
+                                                <constraint firstItem="aYx-xR-pQ9" firstAttribute="leading" secondItem="GPD-3g-6rv" secondAttribute="trailing" constant="10" id="YPH-wv-dFs"/>
+                                                <constraint firstItem="uYo-Xa-b41" firstAttribute="top" secondItem="GPD-3g-6rv" secondAttribute="bottom" constant="8" id="dDu-xL-GlS"/>
+                                                <constraint firstAttribute="bottom" secondItem="uYo-Xa-b41" secondAttribute="bottom" constant="24" id="g89-e0-d9J"/>
+                                                <constraint firstItem="VG6-Nh-Y5G" firstAttribute="leading" secondItem="jPg-9L-IQo" secondAttribute="leading" constant="15" id="mKB-9y-fCp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="uYo-Xa-b41" id="a1M-Ii-pBq"/>
+                                            <outlet property="fullNameLabel" destination="GPD-3g-6rv" id="316-kk-sa2"/>
+                                            <outlet property="profileImage" destination="VG6-Nh-Y5G" id="eOz-Gl-J1w"/>
+                                            <outlet property="timestampLabel" destination="aYx-xR-pQ9" id="VbB-Fh-9wN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OFl-P4-aFw" firstAttribute="top" secondItem="wfY-te-USf" secondAttribute="bottom" id="ALd-VB-317"/>
+                            <constraint firstItem="wfY-te-USf" firstAttribute="leading" secondItem="86G-FE-sVW" secondAttribute="leading" id="Z6I-Y3-DqJ"/>
+                            <constraint firstAttribute="trailing" secondItem="wfY-te-USf" secondAttribute="trailing" id="fzN-BR-3zX"/>
+                            <constraint firstItem="wfY-te-USf" firstAttribute="top" secondItem="86G-FE-sVW" secondAttribute="topMargin" id="sF2-Fl-L1s"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Alerts" id="5Hr-Hi-wHX">
+                        <barButtonItem key="rightBarButtonItem" image="Hash" id="rpv-e2-9q4">
+                            <inset key="imageInsets" minX="5" minY="6" maxX="4" maxY="3"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="dismiss:" destination="WYQ-7t-NiM" id="eCm-01-M9W"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="notificationTableView" destination="wfY-te-USf" id="Yru-Qq-no1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LvL-S3-oY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2059" y="-259"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KC7-pT-ZBj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QPd-JS-GU5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iem-ne-E9Y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WYQ-7t-NiM" kind="relationship" relationship="rootViewController" id="SRy-jf-CEL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QEP-Go-yO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1247" y="-259"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AC.png" width="749" height="389"/>
         <image name="Add" width="22" height="22"/>
         <image name="Camera" width="28" height="24"/>
+        <image name="Hash" width="33" height="38"/>
         <image name="Heart" width="19" height="18"/>
         <image name="HeartSelected" width="20" height="18"/>
         <image name="Me.jpg" width="320" height="320"/>

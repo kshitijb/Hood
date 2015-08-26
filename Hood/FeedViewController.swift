@@ -125,7 +125,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
             self.hideLoader()
             if let e = error{
-                print(error)
             }else{
                 let responseJSON = JSON(data!)
                 print(responseJSON)

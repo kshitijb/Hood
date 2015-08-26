@@ -75,7 +75,7 @@ class CellWithoutImage: UITableViewCell {
             upvotesCount--
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-            println(postID)
+
             self.likesButton.selected = false
             PostController.VotePost(.Downvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount++

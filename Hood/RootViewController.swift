@@ -148,7 +148,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     self.modelController.pageData = channels
 //                    self.modelController.pageData = swiftyJSONObject["results"]
                     self.pageControl.numberOfPages = self.modelController.pageData.count
-                    print(self.modelController.pageData)
                     if(self.pageViewController!.viewControllers.count == 0){
                         let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
                         let viewControllers = [startingViewController]
@@ -242,18 +241,21 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
 
             var colorToSet:UIColor
-            
             //can find direction of scroll from currentPage and contentOffset
-            if (scrollView.contentOffset.x > 0) && (pageControl.currentPage != pageControl.numberOfPages - 1)
+            if (scrollView.contentOffset.x > self.view.frame.width) && (pageControl.currentPage != pageControl.numberOfPages - 1)
             {
                 colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage] as! UIColor, lastColor: pageColors[pageControl.currentPage + 1] as! UIColor, offsetAsFraction: perc)
-                
             }
             else
             {
+                print(pageControl.currentPage)
+                if pageControl.currentPage == 0
+                {
+                    colorToSet = pageColors[0] as! UIColor
+                    return
+                }
                 colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage] as! UIColor, lastColor: pageColors[pageControl.currentPage - 1] as! UIColor, offsetAsFraction: -perc)
             }
-            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
                 let img = getImageWithColor(colorToSet, CGSizeMake(1, 64))
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -270,6 +272,10 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 //        Utilities.colorBetweenColors(UIColor.redColor(), lastColor: UIColor.greenColor(), offsetAsFraction: scrollView.contentOffset.x/view.frame.width)
     }
     
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView)
+    {
+                    print(pageColors)
+    }
     func titleViewTapped(){
         channelPicker.showInView(self.navigationController!.view)
     }
