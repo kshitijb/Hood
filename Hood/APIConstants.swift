@@ -22,6 +22,8 @@ struct API {
         static let delete = "delete"
         static let comment = "comment"
         static let comments = "comments"
+        static let notifications = "alert"
+        static let show = "show"
      }
     private var fullUrl:String{
         return Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
@@ -71,5 +73,10 @@ struct API {
     func getCommentsForPost(postID:String) -> String
     {
         return "/".join([fullUrl,Static.posts,Static.comments,postID])
+    }
+    
+    func getNotificationsForUser() -> String
+    {
+        return "/".join([fullUrl, Static.notifications,Static.show])
     }
 }

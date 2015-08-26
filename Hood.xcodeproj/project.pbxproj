@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423983E11B7BC50200F9D4AF /* commentCell.swift */; };
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
+		42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */; };
+		42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */; };
 		42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EB28231B74BCE400AB0331 /* Utilities.swift */; };
 		42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; };
 		42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -75,6 +77,8 @@
 /* Begin PBXFileReference section */
 		423983E11B7BC50200F9D4AF /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
+		42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		42EB28231B74BCE400AB0331 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		42EB28251B74D79100AB0331 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onBoardingViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 				42EB28231B74BCE400AB0331 /* Utilities.swift */,
 				D547A4821B6B717600B556B4 /* CellWithoutImage.swift */,
 				D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */,
+				42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */,
+				42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */,
 				42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */,
 				425DF22D1B720CC900837B8C /* AddPostViewController.swift */,
 				D5B3E48D1B6A2CB000F3DF9F /* Images.xcassets */,
@@ -363,12 +369,14 @@
 				D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */,
 				D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */,
 				D51FB2E51B7891FC00518DA2 /* PopButton.swift in Sources */,
+				42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */,
 				D57382A11B7359150080A4FA /* APIConstants.swift in Sources */,
 				D5EBCFC71B85BEFE000E0656 /* ChannelPickerView.swift in Sources */,
 				D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */,
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
+				42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */,
 				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
 				D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */,
 				42ED1E451B7C91E600B0DE68 /* onBoardingViewController.swift in Sources */,
