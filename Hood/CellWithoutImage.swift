@@ -17,8 +17,8 @@ class CellWithoutImage: UITableViewCell {
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
-    var postID :Int?
-    var post = JSON.nullJSON
+    var postID: Int32?
+    var post: Post?
     var upvotesCount = 0
     @IBOutlet weak var timestampLabel: UILabel!
     override func awakeFromNib() {
@@ -35,32 +35,26 @@ class CellWithoutImage: UITableViewCell {
         self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
-    func setContents(jsonObject:JSON)
+    func setContents(post: Post)
     {
-        post = jsonObject
-        postID = jsonObject["id"].int
-        upvotesCount = jsonObject["upvotes_count"].int!
+        self.post = post
+        postID = post.id.intValue
+        upvotesCount = post.upvotes_count.integerValue
         var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
-        let attributedString = NSAttributedString(string: jsonObject["message"].string!, attributes: attributes)
+        let attributedString = NSAttributedString(string: post.message, attributes: attributes)
         content.attributedText = attributedString
         contentView.layoutIfNeeded()
-        if let noOfComments = jsonObject["comments_count"].number{
-            commentsButton.setTitle("\(noOfComments) Comments", forState: UIControlState.Normal)
+        commentsButton.setTitle("\(post.comments_count.integerValue) Comments", forState: UIControlState.Normal)
+        likesButton.setTitle("\(post.upvotes_count.integerValue) Likes", forState: UIControlState.Normal)
+        if post.is_upvoted.boolValue{
+            likesButton.selected = true
         }
-        if let noOfLikes = jsonObject["upvotes_count"].number{
-            likesButton.setTitle("\(noOfLikes) Likes", forState: UIControlState.Normal)
-        }
-        if let isLiked = jsonObject["is_upvoted"].bool{
-            if isLiked{
-                likesButton.selected = true
-            }
-        }
-        timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
-        let lastName = jsonObject["author"]["lastname"].string
-        userName.text = jsonObject["author"]["firstname"].string! + " " + lastName!
-        if let profileURL = jsonObject["author"]["profile_photo"].string
+//        timestampLabel.text = Utilities.timeStampFromDate(post.timestamp)
+        let lastName = post.author.lastname
+        userName.text = post.author.firstname + " " + lastName
+        if let profile_photo = post.author.profile_photo
         {
-            profileImage.sd_setImageWithURL(NSURL(string:profileURL), placeholderImage: UIImage(named: "Me.jpg"))
+            profileImage.sd_setImageWithURL(NSURL(string:profile_photo), placeholderImage: UIImage(named: "Me.jpg"))
         }
     }
 
@@ -71,8 +65,8 @@ class CellWithoutImage: UITableViewCell {
     
     func commentsPressed(){
         print(post)
-        let userInfo:Dictionary = ["post" : post.object , "postID" : postID!]
-        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
+//        let userInfo:Dictionary = ["post" : post.object , "postID" : postID!]
+//        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
     
     func likePressed(){
@@ -83,7 +77,7 @@ class CellWithoutImage: UITableViewCell {
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
             println(postID)
             self.likesButton.selected = false
-            PostController.VotePost(.Downvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+            PostController.VotePost(.Downvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount++
                 self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
                 self.likesButton.selected = true
@@ -94,7 +88,7 @@ class CellWithoutImage: UITableViewCell {
             upvotesCount++
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             self.likesButton.selected = true
-            PostController.VotePost(.Upvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
+            PostController.VotePost(.Upvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount--
                 self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
                 self.likesButton.selected = false

@@ -161,12 +161,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 }
         }
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addPost"
         {
-            (segue.destinationViewController as? AddPostViewController)?.channelID = pageControl.currentPage
+            let currentChannel = self.modelController.pageData.objectAtIndex(self.pageControl.currentPage) as! Channel
+            (segue.destinationViewController as? AddPostViewController)?.channelID = currentChannel.id.integerValue
         }
     }
+    
     func showPageControl(){
         self.pageControl.hidden = false
         self.pageControl.transform = CGAffineTransformMakeScale(0.6, 0.6)

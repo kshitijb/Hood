@@ -18,11 +18,13 @@ class Channel: ParentObject {
     @NSManaged var posts: NSSet
 
     static func generateObjectFromJSON(json: JSON, context: NSManagedObjectContext) -> Channel{
-        let entity = NSEntityDescription.entityForName("Channel", inManagedObjectContext: context)
-        let channel:Channel = Channel(entity: entity!, insertIntoManagedObjectContext: context)
+        
+        let channel:Channel = ParentObject.createOrUpateObjectFromJSON(json, context: context, entityName: "Channel") as! Channel
+        
         if let id = json["id"].int64{
             channel.id = NSNumber(longLong: id)
         }
+        
         if let name = json["name"].string{
             channel.name = name
         }

@@ -8,18 +8,42 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
-class User: NSManagedObject {
+class User: ParentObject {
 
     @NSManaged var firstname: String
     @NSManaged var lastname: String
-    @NSManaged var profile_photo: String
+    @NSManaged var profile_photo: String?
     @NSManaged var email: String
     @NSManaged var registration_time: String
     @NSManaged var access_token: String
     @NSManaged var fb_id: String
     @NSManaged var is_owner: NSNumber
-    @NSManaged var neighbourhood: NSManagedObject
+    @NSManaged var neighbourhood: Neighbourhood
     @NSManaged var posts: NSSet
 
+    static func generateObjectFromJSON(json: JSON, context: NSManagedObjectContext) -> User{
+        
+        let user:User = ParentObject.createOrUpateObjectFromJSON(json, context: context, entityName: "User") as! User
+        
+        if let id = json["id"].int64{
+            user.id = NSNumber(longLong: id)
+        }
+        
+        if let firstname = json["firstname"].string{
+            user.firstname = firstname
+        }
+        if let lastname = json["lastname"].string{
+            user.lastname = lastname
+        }
+        if let profile_photo = json["profile_photo"].string{
+            user.profile_photo = profile_photo
+        }
+        
+        //TODO
+        
+        return user
+    }
+    
 }

@@ -39,7 +39,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBAction func postNow(sender: AnyObject)
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        let params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!+1, "message" : postTextView.text] as [String:AnyObject!]
+        let params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
         print(params)
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
             print(error)

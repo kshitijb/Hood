@@ -91,14 +91,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         {
             if let photo = post["photo"].string{
                 let cell = tableView.dequeueReusableCellWithIdentifier("CellWithImage") as! CellWithImage
-                cell.setContents(post)
+//                cell.setContents(post)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
                 return cell
             }
             else{
                 let cell = tableView.dequeueReusableCellWithIdentifier("CellWithoutImage") as! CellWithoutImage
-                cell.setContents(post)
+//                cell.setContents(post)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
                 return cell

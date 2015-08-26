@@ -17,9 +17,9 @@ enum Vote: Int{
 }
 
 class PostController {
-    static func VotePost(type: Vote, sender: AnyObject, post: JSON, success: (() -> Void)?, failure: (() -> Void)?) -> Void{
+    static func VotePost(type: Vote, sender: AnyObject, post: Post, success: (() -> Void)?, failure: (() -> Void)?) -> Void{
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        let params = ["post_id" : post["id"].int!, "user_id": userID!]
+        let params = ["post_id" : post.id.integerValue, "user_id": userID!]
         
         var APIString:String
         switch type{

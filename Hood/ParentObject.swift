@@ -14,4 +14,21 @@ class ParentObject: NSManagedObject {
 
     @NSManaged var id: NSNumber
     
+    static func createOrUpateObjectFromJSON(json: JSON, context: NSManagedObjectContext, entityName: String) -> NSManagedObject{
+        let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: entityName)
+        fetchRequest.fetchLimit = 1
+        let id = NSNumber(longLong: json["id"].int64!)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [id])
+        var error: NSError?
+        var entity:NSManagedObject
+        if(context.countForFetchRequest(fetchRequest, error: &error) > 0){
+            entity = context.executeFetchRequest(fetchRequest, error: &error)!.last as! NSManagedObject
+        }
+        else{
+            entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as! NSManagedObject
+        }
+        
+        return entity
+    }
+    
 }
