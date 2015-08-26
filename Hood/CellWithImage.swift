@@ -78,7 +78,7 @@ class CellWithImage: UITableViewCell {
     }
 
     func commentsPressed(){
-        print(post)
+
         let userInfo:Dictionary = ["post" : post.object , "postID" : postID!]
         NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
@@ -89,7 +89,7 @@ class CellWithImage: UITableViewCell {
             upvotesCount--
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-            println(postID)
+
             self.likesButton.selected = false
             PostController.VotePost(.Downvote, sender: likesButton, post: post, success: nil, failure: { () -> Void in
                 self.upvotesCount++

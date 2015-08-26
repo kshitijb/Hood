@@ -121,8 +121,9 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
         let perc = (scrollView.contentOffset.x - CGFloat(index) * view.frame.width)/view.frame.width
         if (scrollView.contentOffset.x > 0.0) && (scrollView.contentOffset.x < CGFloat(pages.endIndex)*view.frame.width) && index < pageColors.count - 1
         {
-                view.backgroundColor = Utilities.colorBetweenColors(pageColors[index], lastColor: pageColors[index+1], offsetAsFraction: perc)
+            view.backgroundColor = Utilities.colorBetweenColors(pageColors[index], lastColor: pageColors[index+1], offsetAsFraction: perc)
         }
+
     }
     
 }

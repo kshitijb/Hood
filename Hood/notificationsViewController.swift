@@ -24,7 +24,6 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
             if let e = error{
                 print(error)
-                print(response)
             }else{
                 let responseJSON = JSON(data!)
                 self.notifications =  responseJSON["results"]

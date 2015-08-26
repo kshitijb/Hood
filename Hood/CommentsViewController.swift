@@ -33,9 +33,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         setupUI()
         
         
-        print(API().getCommentsForPost("\(postID)"))
+
         Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
             self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             self.tableView.reloadData()
         })
@@ -70,15 +70,10 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
         let params = [ "user_id": userID! ,"post_id" : postID, "comment":commentsTextView.text] as [String:AnyObject!]
-        print(params)
         Alamofire.request(.POST, API().addComment(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
-            print(error)
-            print(response)
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
             Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                 self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
                 self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
             })
@@ -110,7 +105,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             let cell = tableView.dequeueReusableCellWithIdentifier("Comment", forIndexPath: indexPath) as! commentCell
             if comments["results"].array?.count>0
             {
-                print(comments["results"].array!.count)
                 cell.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + comments["results"][indexPath.row]["author"]["lastname"].string!
                 
                 cell.commentLabel.text = comments["results"][indexPath.row]["comment"].string
