@@ -50,9 +50,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         self.title = "Posting"
         self.postNowButton.enabled = false
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
-            print(error)
-            print(response)
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
             self.postNowButton.enabled = true
             self.title = ""
             self.navigationController?.popViewControllerAnimated(true)
