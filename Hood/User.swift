@@ -22,6 +22,7 @@ class User: ParentObject {
     @NSManaged var is_owner: NSNumber
     @NSManaged var neighbourhood: Neighbourhood
     @NSManaged var posts: NSSet
+    @NSManaged var uuid: String
 
     static func generateObjectFromJSON(json: JSON, context: NSManagedObjectContext) -> User{
         
@@ -40,9 +41,15 @@ class User: ParentObject {
         if let profile_photo = json["profile_photo"].string{
             user.profile_photo = profile_photo
         }
-        
-        //TODO
-        
+        if let email = json["email"].string{
+            user.email = email
+        }
+        if let fb_id = json["fb_id"].string{
+            user.fb_id = fb_id
+        }
+        if let uuid = json["uuid"].string{
+            user.uuid = uuid
+        }
         return user
     }
     

@@ -10,13 +10,14 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import WebImage
+import FBSDKCoreKit
 
 class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UITextViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentsTextView: UITextView!
     var postID = 0
-    var post = JSON.nullJSON
+    var post: Post?
     @IBOutlet weak var commentConstraint: NSLayoutConstraint!
     var comments = JSON.nullJSON
     @IBOutlet weak var sendCommentButton: UIView!
@@ -69,9 +70,10 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBAction func sendComment(sender: AnyObject)
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        let params = [ "user_id": userID! ,"post_id" : postID, "comment":commentsTextView.text] as [String:AnyObject!]
+        let params = ["post_id" : post!.id.integerValue, "comment":commentsTextView.text] as [String:AnyObject!]
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         print(params)
-        Alamofire.request(.POST, API().addComment(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
+        Alamofire.request(.POST, API().addComment(), parameters: params,encoding: .JSON, headers: headers).response({ (request, response, data, error) -> Void in
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
@@ -89,16 +91,16 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         var identifier:String
         if(indexPath.section == 0)
         {
-            if let photo = post["photo"].string{
+            if let photo = post!.photo{
                 let cell = tableView.dequeueReusableCellWithIdentifier("CellWithImage") as! CellWithImage
-//                cell.setContents(post)
+                cell.setContents(post!)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
                 return cell
             }
             else{
                 let cell = tableView.dequeueReusableCellWithIdentifier("CellWithoutImage") as! CellWithoutImage
-//                cell.setContents(post)
+                cell.setContents(post!)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
                 return cell
@@ -114,7 +116,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 cell.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + comments["results"][indexPath.row]["author"]["lastname"].string!
                 
                 cell.commentLabel.text = comments["results"][indexPath.row]["comment"].string
-                cell.timestampLabel.text = Utilities.timeStampFromDate(comments["results"][indexPath.row]["timestamp"].string!)
+//                cell.timestampLabel.text = Utilities.timeStampFromDate(comments["results"][indexPath.row]["timestamp"].string!)
                 Utilities.setUpLineSpacingForLabel(cell.commentLabel)
             }
             cell.preservesSuperviewLayoutMargins = false

@@ -49,7 +49,7 @@ class CellWithoutImage: UITableViewCell {
         if post.is_upvoted.boolValue{
             likesButton.selected = true
         }
-//        timestampLabel.text = Utilities.timeStampFromDate(post.timestamp)
+        timestampLabel.text = Utilities.timeStampFromDate(post.timestamp!)
         let lastName = post.author.lastname
         userName.text = post.author.firstname + " " + lastName
         if let profile_photo = post.author.profile_photo

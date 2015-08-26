@@ -13,6 +13,7 @@ import SwiftyJSON
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
+
 class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate {
     let titleScrollViewWidth = CGFloat(160)
     var pageViewController: UIPageViewController?
@@ -121,7 +122,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! CommentsViewController
         var info = notification.userInfo!
         commentsView.postID = info["postID"] as! Int
-        commentsView.post = JSON(info["post"]!)
+        commentsView.post = info["post"] as? Post
         self.navigationController?.pushViewController(commentsView, animated: true)
     }
     
@@ -143,6 +144,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                         let channelObject = Channel.generateObjectFromJSON(channel, context: appDelegate.managedObjectContext!)
                         channels.addObject(channelObject)
                     }
+                    appDelegate.saveContext()
                     self.modelController.pageData = channels
 //                    self.modelController.pageData = swiftyJSONObject["results"]
                     self.pageControl.numberOfPages = self.modelController.pageData.count

@@ -15,9 +15,8 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
+    static var owner:User?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -33,6 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().titleTextAttributes = titleDict as [NSObject : AnyObject]
         }
         Fabric.with([Crashlytics()])
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
+        fetchRequest.predicate = NSPredicate(format: "is_owner == %@", argumentArray: [NSNumber(bool: true)])
+        fetchRequest.fetchLimit = 1
+        if(managedObjectContext!.countForFetchRequest(fetchRequest, error: nil) > 0){
+            AppDelegate.owner = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil)!.last as! User
+        }
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

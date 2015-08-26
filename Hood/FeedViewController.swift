@@ -121,7 +121,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let channel = self.dataObject as! Channel
         let url = API().getAllPostsForChannel("\(channel.id.intValue)")
         let manager = Alamofire.Manager.sharedInstance
-        let headers = ["Authorization":"Bearer \(FBSDKAccessToken.currentAccessToken().tokenString)"]
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
             self.hideLoader()
             if let e = error{
