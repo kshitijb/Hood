@@ -12,6 +12,7 @@ struct API {
     struct Static {
         static let apiProtocol = "http://"
         static let baseURL = "128.199.179.151"
+//        static let baseURL = "169.254.223.134"
         static let portNumber = "80"
         static let channels = "channel"
         static let posts = "post"
