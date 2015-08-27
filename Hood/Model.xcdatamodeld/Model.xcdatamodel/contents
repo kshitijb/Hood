@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Channel" representedClassName="Hood.Channel" parentEntity="ParentObject" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Channel" representedClassName="Pipal.Channel" parentEntity="ParentObject" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,10 +17,10 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="channels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Channel" syncable="YES"/>
     </entity>
-    <entity name="ParentObject" representedClassName="Hood.ParentObject" syncable="YES">
+    <entity name="ParentObject" representedClassName="Pipal.ParentObject" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Post" representedClassName="Hood.Post" parentEntity="ParentObject" syncable="YES">
+    <entity name="Post" representedClassName="Pipal.Post" parentEntity="ParentObject" syncable="YES">
         <attribute name="comments_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="is_upvoted" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,7 +32,7 @@
         <relationship name="channel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Channel" inverseName="posts" inverseEntity="Channel" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="post" inverseEntity="Comment" syncable="YES"/>
     </entity>
-    <entity name="User" representedClassName="Hood.User" parentEntity="ParentObject" syncable="YES">
+    <entity name="User" representedClassName="Pipal.User" parentEntity="ParentObject" syncable="YES">
         <attribute name="access_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fb_id" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,11 +46,11 @@
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="author" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Channel" positionX="-587" positionY="18" width="128" height="103"/>
+        <element name="Channel" positionX="-587" positionY="18" width="128" height="105"/>
         <element name="Comment" positionX="-153" positionY="255" width="128" height="103"/>
         <element name="Neighbourhood" positionX="-369" positionY="-288" width="128" height="88"/>
-        <element name="ParentObject" positionX="142" positionY="102" width="128" height="58"/>
-        <element name="Post" positionX="-74" positionY="-297" width="128" height="193"/>
-        <element name="User" positionX="-486" positionY="216" width="128" height="208"/>
+        <element name="ParentObject" positionX="142" positionY="102" width="128" height="60"/>
+        <element name="Post" positionX="-74" positionY="-297" width="128" height="195"/>
+        <element name="User" positionX="-486" positionY="216" width="128" height="210"/>
     </elements>
 </model>
