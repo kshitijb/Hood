@@ -80,6 +80,7 @@ class loginViewController: UIViewController {
                             let user:User = User.generateObjectFromJSON(responseJSON, context: appDelegate.managedObjectContext!)
                             user.is_owner = NSNumber(bool: true)
                             AppDelegate.owner = user
+                            appDelegate.saveContext()
                         }
                     }
 

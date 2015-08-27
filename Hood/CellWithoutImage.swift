@@ -35,6 +35,10 @@ class CellWithoutImage: UITableViewCell {
         self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
+    override func prepareForReuse() {
+        likesButton.selected = false
+    }
+    
     func setContents(post: Post)
     {
         self.post = post
@@ -73,6 +77,8 @@ class CellWithoutImage: UITableViewCell {
         if self.likesButton.selected
         {
             upvotesCount--
+            self.post?.upvotes_count = upvotesCount
+            self.post?.is_upvoted = false
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
 
@@ -86,6 +92,8 @@ class CellWithoutImage: UITableViewCell {
         else
         {
             upvotesCount++
+            self.post?.upvotes_count = upvotesCount
+            self.post?.is_upvoted = true
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             self.likesButton.selected = true
             PostController.VotePost(.Upvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in

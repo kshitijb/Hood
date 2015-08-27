@@ -20,14 +20,14 @@ class PostController {
     static func VotePost(type: Vote, sender: AnyObject, post: Post, success: (() -> Void)?, failure: (() -> Void)?) -> Void{
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
         let params = ["post_id" : post.id.integerValue, "user_id": userID!]
-        
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         var APIString:String
         switch type{
         case .Downvote: APIString = API().downvotePost()
         case .Upvote: APIString = API().upvotePost()
         }
         
-        Alamofire.request(.POST, APIString, parameters: params, encoding: .JSON).response({ (request, response, data, error) -> Void in
+        Alamofire.request(.POST, APIString, parameters: params, encoding: .JSON, headers:headers).response({ (request, response, data, error) -> Void in
             print(error)
             if (error != nil)
             {
@@ -37,6 +37,7 @@ class PostController {
                 let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
                 alert.show()
             }else{
+                Utilities.appDelegate.saveContext()
                 if let successBlock = success{
                     successBlock()
                 }

@@ -135,11 +135,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.dataArray.addObject(postObject)
                 }
                 appDelegate.saveContext()
-//                self.dataArray = responseJSON["results"]
-//                self.tableView.reloadData()
-//                self.tableView.setNeedsLayout()
-//                self.tableView.layoutIfNeeded()
-//                self.tableView.reloadData()
             }
         }
     }
@@ -194,9 +189,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch type {
         case .Insert:
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-//        case .Update:
-//            let cell = self.tableView.cellForRowAtIndexPath(indexPath!)
-//            
+        case .Update:
+            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!){
+                if cell.isKindOfClass(CellWithImage){
+                    (cell as! CellWithImage).setContents(fetchedResultsController.objectAtIndexPath(indexPath!) as! Post)
+                }else{
+                    (cell as! CellWithoutImage).setContents(fetchedResultsController.objectAtIndexPath(indexPath!) as! Post)
+                }
+            }
+
 //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 //        case .Move:
 //            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

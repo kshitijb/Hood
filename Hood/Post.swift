@@ -60,6 +60,10 @@ class Post: ParentObject {
             post.timestamp = dateFormatter.dateFromString(timestamp)
         }
         
+        if let is_upvoted = json["is_upvoted"].bool{
+            post.is_upvoted = is_upvoted
+        }
+        
         if let photo = json["photo"].string{
             post.photo = photo
         }

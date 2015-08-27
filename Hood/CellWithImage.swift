@@ -44,6 +44,10 @@ class CellWithImage: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    override func prepareForReuse() {
+        likesButton.selected = false
+    }
+    
     func setContents(post:Post)
     {
         self.post = post

@@ -418,6 +418,7 @@
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
+				42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */,
 				D5EBCFD51B8C4AF5000E0656 /* Post.swift in Sources */,
 				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
 				D5EBCFD71B8C4AF5000E0656 /* ParentObject.swift in Sources */,
