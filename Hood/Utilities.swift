@@ -35,16 +35,12 @@ func linearTransition(x:CGFloat,y:CGFloat,offset:CGFloat)->CGFloat
 
 struct Utilities
 {
-    static func timeStampFromDate(str:String) -> String
+    static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    static func timeStampFromDate(date:NSDate) -> String
     {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        if let date = dateFormatter.dateFromString(str)
-        {
             let now = NSDate()
             let timeInterval = now.timeIntervalSinceDate(date)
-            
+            let dateFormatter = NSDateFormatter()
             switch(timeInterval)
             {
                 case _ where timeInterval < 3600:
@@ -61,17 +57,11 @@ struct Utilities
                     return "\(dateFormatter.stringFromDate(date))"
                 default :
                     // change to a readable time format and change to local time zone
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
                     dateFormatter.timeZone = NSTimeZone(name: "IST")
                     let timeStamp = dateFormatter.stringFromDate(date) 
                     return timeStamp
             }
-           
-        }
-        else
-        {
-            return "unknown time"
-        }
-        
     }
     
     static func setUpLineSpacingForLabel(label:UILabel){

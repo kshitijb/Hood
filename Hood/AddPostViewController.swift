@@ -40,15 +40,8 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBAction func postNow(sender: AnyObject)
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        var params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!+1, "message" : postTextView.text] as [String:AnyObject!]
-        if let pickedImage = pickedImage{
-            let imageData = UIImagePNGRepresentation(pickedImage)
-            let base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
-            params["file"] = base64String
-        }
-//        print(params)
-        self.title = "Posting"
-        self.postNowButton.enabled = false
+        let params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
+        print(params)
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON).response({ (request, response, data, error) -> Void in
 
             self.postNowButton.enabled = true

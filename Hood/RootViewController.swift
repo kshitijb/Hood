@@ -13,6 +13,7 @@ import SwiftyJSON
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
+
 class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate {
     let titleScrollViewWidth = CGFloat(160)
     var pageViewController: UIPageViewController?
@@ -103,7 +104,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         if completed{
             let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
-            let titleString = dataViewController.dataObject["name"]
+            let titleString = (dataViewController.dataObject as! Channel).name
             let count = self.modelController.indexOfViewController(dataViewController)
             self.pageControl.currentPage = count
         }
@@ -121,7 +122,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! CommentsViewController
         var info = notification.userInfo!
         commentsView.postID = info["postID"] as! Int
-        commentsView.post = JSON(info["post"]!)
+        commentsView.post = info["post"] as? Post
         self.navigationController?.pushViewController(commentsView, animated: true)
     }
     
@@ -136,7 +137,16 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     println(error)
                 }else{
                     let swiftyJSONObject = JSON(data!)
-                    self.modelController.pageData = swiftyJSONObject["results"]
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    print(swiftyJSONObject)
+                    var channels:NSMutableArray = NSMutableArray()
+                    for (key, channel) in swiftyJSONObject["results"]{
+                        let channelObject = Channel.generateObjectFromJSON(channel, context: appDelegate.managedObjectContext!)
+                        channels.addObject(channelObject)
+                    }
+                    appDelegate.saveContext()
+                    self.modelController.pageData = channels
+//                    self.modelController.pageData = swiftyJSONObject["results"]
                     self.pageControl.numberOfPages = self.modelController.pageData.count
                     if(self.pageViewController!.viewControllers.count == 0){
                         let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
@@ -152,12 +162,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 }
         }
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addPost"
         {
-            (segue.destinationViewController as? AddPostViewController)?.channelID = pageControl.currentPage
+            let currentChannel = self.modelController.pageData.objectAtIndex(self.pageControl.currentPage) as! Channel
+            (segue.destinationViewController as? AddPostViewController)?.channelID = currentChannel.id.integerValue
         }
     }
+    
     func showPageControl(){
         self.pageControl.hidden = false
         self.pageControl.transform = CGAffineTransformMakeScale(0.6, 0.6)
@@ -177,14 +190,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.titleScrollView?.addGestureRecognizer(tapGesture)
         var startingX:CGFloat = 0
         let pageSize:CGFloat = 160
-        for (key, channel) in self.modelController.pageData {
+        for item in self.modelController.pageData {
+            let channel = item as! Channel
             let titleLabel:UILabel = UILabel()
-            if let color = channel["color"].string{
-                pageColors.addObject(UIColor(hexString: "#" + color))
-            }else{
+//            if let color = channel.color{
+                pageColors.addObject(UIColor(hexString: "#" + channel.color))
+//            }else{
                 pageColors.addObject(GlobalColors.Green)
-            }
-            titleLabel.text = "#" + channel["name"].string!
+//            }
+            titleLabel.text = "#" + channel.name
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.font = UIFont(name: "Lato-Regular", size: 26)
             titleLabel.textColor = UIColor.whiteColor()
@@ -192,11 +206,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             titleLabel.frame = CGRectMake(x, 0, pageSize, 40)
             self.titleScrollView?.addSubview(titleLabel)
             startingX = startingX + 1
-            self.channelPicker.addButtonForObject(channel, action: { () -> Void in
-                let title = channel["name"].string
-                println("tapped on \(title)")
-                self.jumpToPageForIndex(key.toInt()!)
-            })
         }
         self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
         self.navigationItem.titleView = self.titleScrollView
