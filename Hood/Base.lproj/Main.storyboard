@@ -57,7 +57,7 @@
         <!--Feed View Controller-->
         <scene sceneID="1Zh-sY-1GH">
             <objects>
-                <viewController storyboardIdentifier="FeedViewController" id="mJt-NO-m2Q" customClass="FeedViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" id="mJt-NO-m2Q" customClass="FeedViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bau-ul-EjV"/>
                         <viewControllerLayoutGuide type="bottom" id="LVA-QH-jzu"/>
@@ -71,7 +71,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.31764705882352939" green="0.31764705882352939" blue="0.31764705882352939" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithoutImage" rowHeight="183" id="esq-81-yKZ" customClass="CellWithoutImage" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithoutImage" rowHeight="183" id="esq-81-yKZ" customClass="CellWithoutImage" customModule="Pipal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="esq-81-yKZ" id="WU4-Pf-rlh">
@@ -105,7 +105,7 @@
                                                     <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31R-oc-IpB" customClass="PopButton" customModule="Hood" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31R-oc-IpB" customClass="PopButton" customModule="Pipal" customModuleProvider="target">
                                                     <rect key="frame" x="18" y="141" width="97" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="96.5" id="eiN-M2-baK"/>
@@ -173,7 +173,7 @@
                                             <outlet property="userName" destination="Pei-jR-FLY" id="sIX-IQ-IAP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithImage" rowHeight="386" id="43s-lU-DqQ" customClass="CellWithImage" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithImage" rowHeight="386" id="43s-lU-DqQ" customClass="CellWithImage" customModule="Pipal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="43s-lU-DqQ" id="ai7-K2-ZuY">
@@ -207,7 +207,7 @@
                                                     <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ac3-Va-oa7" customClass="PopButton" customModule="Hood" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ac3-Va-oa7" customClass="PopButton" customModule="Pipal" customModuleProvider="target">
                                                     <rect key="frame" x="13" y="344" width="96" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95.5" id="bg0-aL-VOq"/>
@@ -326,7 +326,7 @@
         <!--Comments View Controller-->
         <scene sceneID="zey-Tj-qFo">
             <objects>
-                <viewController storyboardIdentifier="Comments" automaticallyAdjustsScrollViewInsets="NO" id="yBB-lD-5wj" customClass="CommentsViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Comments" automaticallyAdjustsScrollViewInsets="NO" id="yBB-lD-5wj" customClass="CommentsViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Se-xv-num"/>
                         <viewControllerLayoutGuide type="bottom" id="HLM-Ze-bPT"/>
@@ -403,7 +403,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithImage" rowHeight="386" id="oKS-VG-Qbw" customClass="CellWithImage" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithImage" rowHeight="386" id="oKS-VG-Qbw" customClass="CellWithImage" customModule="Pipal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oKS-VG-Qbw" id="QfE-UP-bDN">
@@ -437,7 +437,7 @@
                                                     <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5u-OR-0lM" customClass="PopButton" customModule="Hood" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5u-OR-0lM" customClass="PopButton" customModule="Pipal" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="344" width="96" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95.5" id="NjI-te-5d8"/>
@@ -528,7 +528,7 @@
                                             <outlet property="userName" destination="vAF-0F-fc0" id="JIA-t7-bJx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Comment" rowHeight="145" id="uEj-CO-MkI" customClass="commentCell" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Comment" rowHeight="145" id="uEj-CO-MkI" customClass="commentCell" customModule="Pipal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uEj-CO-MkI" id="Oep-FD-vPh">
@@ -580,7 +580,7 @@
                                             <outlet property="timestampLabel" destination="bcg-ja-8HC" id="M3R-qt-AGU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="138" id="2pV-ML-CNT" customClass="CommentsHeaderCell" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="138" id="2pV-ML-CNT" customClass="CommentsHeaderCell" customModule="Pipal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2pV-ML-CNT" id="AN9-OT-aE9">
@@ -651,7 +651,7 @@
                                             <outlet property="userName" destination="HTE-67-sX7" id="9Nv-tl-C1t"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithoutImage" rowHeight="183" id="T9G-Ri-ngj" customClass="CellWithoutImage" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithoutImage" rowHeight="183" id="T9G-Ri-ngj" customClass="CellWithoutImage" customModule="Pipal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T9G-Ri-ngj" id="pE2-ec-qnB">
@@ -685,7 +685,7 @@
                                                     <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbY-ZI-FwA" customClass="PopButton" customModule="Hood" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbY-ZI-FwA" customClass="PopButton" customModule="Pipal" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="141" width="97" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="96.5" id="GzU-xG-a0J"/>
@@ -781,7 +781,7 @@
         <!--Add Post View Controller-->
         <scene sceneID="jEt-ip-RrF">
             <objects>
-                <viewController id="XXA-Y3-OCx" customClass="AddPostViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XXA-Y3-OCx" customClass="AddPostViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kLw-fU-Xuh"/>
                         <viewControllerLayoutGuide type="bottom" id="XGd-Qj-I2w"/>
@@ -912,7 +912,7 @@
         <!--Root View Controller-->
         <scene sceneID="3GU-QQ-JyJ">
             <objects>
-                <viewController id="PxF-Ax-wPy" customClass="RootViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PxF-Ax-wPy" customClass="RootViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="17i-ZA-3zy"/>
                         <viewControllerLayoutGuide type="bottom" id="8Yh-h8-jIR"/>
@@ -976,7 +976,7 @@
         <!--Login View Controller-->
         <scene sceneID="vk5-Ww-jFJ">
             <objects>
-                <viewController id="oy6-tt-Yff" customClass="loginViewController" customModule="Hood" sceneMemberID="viewController">
+                <viewController id="oy6-tt-Yff" customClass="loginViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ghk-Wi-caT"/>
                         <viewControllerLayoutGuide type="bottom" id="8KS-Oj-eNN"/>
@@ -1062,7 +1062,7 @@ neighbours</string>
         <!--On Boarding View Controller-->
         <scene sceneID="kcD-yh-eZL">
             <objects>
-                <viewController storyboardIdentifier="onboarding" automaticallyAdjustsScrollViewInsets="NO" id="fYn-5y-12Z" customClass="onBoardingViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onboarding" automaticallyAdjustsScrollViewInsets="NO" id="fYn-5y-12Z" customClass="onBoardingViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vm5-ev-UzP"/>
                         <viewControllerLayoutGuide type="bottom" id="nL9-Uq-Xw7"/>
@@ -1141,7 +1141,7 @@ neighbours</string>
         <!--Alerts-->
         <scene sceneID="CcI-wW-iP1">
             <objects>
-                <viewController id="WYQ-7t-NiM" customClass="notificationsViewController" customModule="Hood" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WYQ-7t-NiM" customClass="notificationsViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dux-Bj-T8g"/>
                         <viewControllerLayoutGuide type="bottom" id="OFl-P4-aFw"/>
@@ -1154,7 +1154,7 @@ neighbours</string>
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationCell" rowHeight="85" id="hc9-5z-gAJ" customClass="NotificationCell" customModule="Hood" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationCell" rowHeight="85" id="hc9-5z-gAJ" customClass="NotificationCell" customModule="Pipal" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hc9-5z-gAJ" id="jPg-9L-IQo">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1167,9 +1167,9 @@ neighbours</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-3g-6rv">
-                                                    <rect key="frame" x="75" y="30" width="29" height="5.5"/>
+                                                    <rect key="frame" x="75" y="30" width="29" height="6"/>
                                                     <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYx-xR-pQ9">
@@ -1179,9 +1179,9 @@ neighbours</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYo-Xa-b41">
-                                                    <rect key="frame" x="75" y="43" width="32.5" height="17"/>
+                                                    <rect key="frame" x="75" y="43" width="33" height="17"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
