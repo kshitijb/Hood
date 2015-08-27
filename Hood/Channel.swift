@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class Channel: ParentObject {
 
-    @NSManaged var color: String
+    @NSManaged var color: String?
     @NSManaged var name: String
     @NSManaged var info: String
     @NSManaged var posts: NSSet

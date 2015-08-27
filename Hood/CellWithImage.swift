@@ -69,9 +69,9 @@ class CellWithImage: UITableViewCell {
         {
             profileImage.sd_setImageWithURL(NSURL(string:profile_photo), placeholderImage: UIImage(named: "Me.jpg"))
         }
-//        if let imageURL = jsonObject["photo"].string{
-            postImage.sd_setImageWithURL(NSURL(string: post.photo!))
-//        }
+        if let imageURL = post.photo{
+            postImage.sd_setImageWithURL(NSURL(string: imageURL))
+        }
         
     }
 

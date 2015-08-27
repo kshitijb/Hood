@@ -18,6 +18,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var dataArray: NSMutableArray = NSMutableArray()
     var dataObject: AnyObject?
     var activityIndicator: UIActivityIndicatorView?
+    var context = Utilities.appDelegate.privateContext()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,11 +80,30 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-        fetchedResultsController.performFetch(nil)
-        self.tableView.reloadData()
-        self.tableView.setNeedsLayout()
-        self.tableView.layoutIfNeeded()
-        self.tableView.reloadData()
+//        fetchedResultsController.managedObjectContext.performBlock { () -> Void in
+            self.fetchedResultsController.performFetch(nil)
+//            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+//                self.tableView.reloadData()
+//                self.tableView.setNeedsLayout()
+//                self.tableView.layoutIfNeeded()
+//                self.tableView.reloadData()
+//
+//            })
+//        }
+        
+//        NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextDidSaveNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification: NSNotification!) -> Void in
+//            let mainContext: NSManagedObjectContext = notification.object as! NSManagedObjectContext
+//            if(mainContext.isEqual(self.context) == false){
+//                self.context.performBlock({ () -> Void in
+//                    self.context.mergeChangesFromContextDidSaveNotification(notification)
+//                })
+//            }
+//        }
+        
+//        self.tableView.reloadData()
+//        self.tableView.setNeedsLayout()
+//        self.tableView.layoutIfNeeded()
+//        self.tableView.reloadData()
 //        print("contentInset on will appear \(tableView.contentInset.top)")
 //        println("Table View Frame on appear \(self.tableView.frame)")
 //        tableView.reloadData()
@@ -103,12 +123,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         }
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         let selectedPost: Post = fetchedResultsController.objectAtIndexPath(indexPath) as! Post
         let userInfo:Dictionary = ["post" : selectedPost , "postID" : selectedPost.id.integerValue]
         NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
+    
     func getPosts(){
         if let count = self.fetchedResultsController.sections?.count{
             if (count == 0){
@@ -128,12 +149,26 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }else{
                 let responseJSON = JSON(data!)
                 print(responseJSON)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                self.dataArray = NSMutableArray()
+                let fetchRequest = NSFetchRequest(entityName: "Post")
+                fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [self.dataObject as! Channel])
+                let appDelegate = Utilities.appDelegate
                 for (key, post) in responseJSON["results"]{
                     let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)
                     postObject.channel = self.dataObject as! Channel
                     self.dataArray.addObject(postObject)
                 }
+//                let results = appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+//                if(results?.count > 0){
+//                    let objectsToDelete = NSMutableSet(array: results!)
+//                    objectsToDelete.minusSet(NSSet(array: self.dataArray as [AnyObject]) as Set<NSObject>)
+//                    let objectsToDeleteArray = objectsToDelete.allObjects
+//                    if objectsToDeleteArray.count > 0{
+//                        for index in 0...objectsToDeleteArray.count-1{
+//                            appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+//                        }
+//                    }
+//                }
                 appDelegate.saveContext()
             }
         }
@@ -158,10 +193,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let postFetchRequest = NSFetchRequest(entityName: "Post")
         postFetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [(self.dataObject as! Channel)])
         postFetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
         let frc = NSFetchedResultsController(
             fetchRequest: postFetchRequest,
-            managedObjectContext: appDelegate.managedObjectContext!,
+            managedObjectContext: Utilities.appDelegate.managedObjectContext!,
             sectionNameKeyPath: nil,
             cacheName: nil)
         
@@ -197,13 +232,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     (cell as! CellWithoutImage).setContents(fetchedResultsController.objectAtIndexPath(indexPath!) as! Post)
                 }
             }
-
 //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 //        case .Move:
 //            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 //            self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-//        case .Delete:
-//            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        case .Delete:
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         default:
             return
         }
