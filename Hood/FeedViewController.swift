@@ -80,16 +80,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-//        fetchedResultsController.managedObjectContext.performBlock { () -> Void in
+        fetchedResultsController.managedObjectContext.performBlock { () -> Void in
             self.fetchedResultsController.performFetch(nil)
-//            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-//                self.tableView.reloadData()
-//                self.tableView.setNeedsLayout()
-//                self.tableView.layoutIfNeeded()
-//                self.tableView.reloadData()
-//
-//            })
-//        }
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.tableView.reloadData()
+                self.tableView.setNeedsLayout()
+                self.tableView.layoutIfNeeded()
+                self.tableView.reloadData()
+
+            })
+        }
         
 //        NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextDidSaveNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification: NSNotification!) -> Void in
 //            let mainContext: NSManagedObjectContext = notification.object as! NSManagedObjectContext
@@ -158,17 +158,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     postObject.channel = self.dataObject as! Channel
                     self.dataArray.addObject(postObject)
                 }
-//                let results = appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
-//                if(results?.count > 0){
-//                    let objectsToDelete = NSMutableSet(array: results!)
-//                    objectsToDelete.minusSet(NSSet(array: self.dataArray as [AnyObject]) as Set<NSObject>)
-//                    let objectsToDeleteArray = objectsToDelete.allObjects
-//                    if objectsToDeleteArray.count > 0{
-//                        for index in 0...objectsToDeleteArray.count-1{
-//                            appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
-//                        }
-//                    }
-//                }
+                let results = appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+                if(results?.count > 0){
+                    let objectsToDelete = NSMutableSet(array: results!)
+                    objectsToDelete.minusSet(NSSet(array: self.dataArray as [AnyObject]) as Set<NSObject>)
+                    let objectsToDeleteArray = objectsToDelete.allObjects
+                    if objectsToDeleteArray.count > 0{
+                        for index in 0...objectsToDeleteArray.count-1{
+                            appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+                        }
+                    }
+                }
                 appDelegate.saveContext()
             }
         }
@@ -225,14 +225,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         case .Insert:
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         case .Update:
-            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!){
-                if cell.isKindOfClass(CellWithImage){
-                    (cell as! CellWithImage).setContents(fetchedResultsController.objectAtIndexPath(indexPath!) as! Post)
-                }else{
-                    (cell as! CellWithoutImage).setContents(fetchedResultsController.objectAtIndexPath(indexPath!) as! Post)
-                }
-            }
-//            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.None)
 //        case .Move:
 //            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 //            self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
