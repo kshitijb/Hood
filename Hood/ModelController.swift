@@ -20,7 +20,7 @@ import SwiftyJSON
 class ModelController: NSObject, UIPageViewControllerDataSource {
 
     var pageData:NSMutableArray = NSMutableArray()
-
+    var pagesCache: NSMutableArray = NSMutableArray()
 
     override init() {
         super.init()
@@ -36,10 +36,16 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         }
 
         // Create a new view controller and pass suitable data.
-        let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
-        println(dataViewController.view.frame)
-        dataViewController.dataObject = self.pageData[index]
-        return dataViewController
+        if(self.pagesCache.count<=index){
+            let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
+            println(dataViewController.view.frame)
+            dataViewController.dataObject = self.pageData[index]
+            dataViewController.fetchData()
+            self.pagesCache.addObject(dataViewController)
+            return dataViewController
+        }else{
+            return self.pagesCache[index] as? FeedViewController
+        }
     }
 
     func indexOfViewController(viewController: FeedViewController) -> Int {

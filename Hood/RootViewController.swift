@@ -193,11 +193,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         for item in self.modelController.pageData {
             let channel = item as! Channel
             let titleLabel:UILabel = UILabel()
-//            if let color = channel.color{
-                pageColors.addObject(UIColor(hexString: "#" + channel.color))
-//            }else{
+            if let color = channel.color{
+                pageColors.addObject(UIColor(hexString: "#" + color))
+            }else{
                 pageColors.addObject(GlobalColors.Green)
-//            }
+            }
             titleLabel.text = "#" + channel.name
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.font = UIFont(name: "Lato-Regular", size: 26)
@@ -248,7 +248,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             }
             else
             {
-                print(pageControl.currentPage)
                 if pageControl.currentPage == 0
                 {
                     colorToSet = pageColors[0] as! UIColor
@@ -274,7 +273,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView)
     {
-                    print(pageColors)
+
     }
     func titleViewTapped(){
         channelPicker.showInView(self.navigationController!.view)
