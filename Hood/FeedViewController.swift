@@ -80,17 +80,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-        fetchedResultsController.managedObjectContext.performBlock { () -> Void in
-            self.fetchedResultsController.performFetch(nil)
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                self.tableView.reloadData()
-                self.tableView.setNeedsLayout()
-                self.tableView.layoutIfNeeded()
-                self.tableView.reloadData()
-
-            })
-        }
-        
 //        NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextDidSaveNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification: NSNotification!) -> Void in
 //            let mainContext: NSManagedObjectContext = notification.object as! NSManagedObjectContext
 //            if(mainContext.isEqual(self.context) == false){
@@ -198,7 +187,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             fetchRequest: postFetchRequest,
             managedObjectContext: Utilities.appDelegate.managedObjectContext!,
             sectionNameKeyPath: nil,
-            cacheName: nil)
+            cacheName: "\((self.dataObject as! Channel).id)")
         
         frc.delegate = self
         
@@ -233,6 +222,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         default:
             return
+        }
+    }
+    
+    func fetchData(){
+        fetchedResultsController.managedObjectContext.performBlock { () -> Void in
+            self.fetchedResultsController.performFetch(nil)
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.tableView.reloadData()
+                self.tableView.setNeedsLayout()
+                self.tableView.layoutIfNeeded()
+                self.tableView.reloadData()
+                
+            })
         }
     }
     
