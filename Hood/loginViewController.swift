@@ -45,18 +45,22 @@ class loginViewController: UIViewController {
             }
             else
             {
+                
                 SVProgressHUD.showWithStatus("Logging in")
-                var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+                var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,first_name,last_name"])
                 fbRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+                    print(result)
                     let userDefaults = NSUserDefaults.standardUserDefaults()
-                    userDefaults.setValue(result["name"], forKey: "fbUserName")
+                userDefaults.setValue(result["first_name"], forKey: "first_name")
+                    userDefaults.setValue(result["last_name"], forKey: "last_name")
                     let id = result["id"]
+                    
+                    let email = result["email"]
                     userDefaults.setValue("https://graph.facebook.com/\(id!)/picture?type=normal", forKey: "fbProfilePhoto")
                     userDefaults.setValue(id, forKey: "fb_id")
                     userDefaults.synchronize()
-                    var fullNameArr = split(result["name"] as! String) {$0 == " "}
-                    var firstName: String = fullNameArr[0]
-                    var lastName: String? = fullNameArr.count > 1 ? fullNameArr[fullNameArr.endIndex - 1] : nil
+                    var firstName: String = result["first_name"] as! String
+                    var lastName: String = result["last_name"] as! String
                     let parameters = [
                         "firstname":firstName,
                         "lastname" : lastName,
@@ -64,7 +68,7 @@ class loginViewController: UIViewController {
                         "access_token" : FBSDKAccessToken.currentAccessToken().tokenString,
                         "fb_id" : result["id"],
                         "about" : "",
-                        "email": "",
+                        "email": email,
                         "profile_photo" : "https://graph.facebook.com/\(id!)/picture?type=normal"
                     ]
                     
