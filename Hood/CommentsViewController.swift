@@ -22,6 +22,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var comments = JSON.nullJSON
     @IBOutlet weak var sendCommentButton: UIView!
     let commentsActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+    var tapGesture :UITapGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +52,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         commentsTextView.layoutManager.ensureLayoutForTextContainer(commentsTextView.textContainer)
         commentsTextView.text = "Add a comment"
         commentsTextView.delegate = self
-        let tapGesture = UITapGestureRecognizer(target: self, action: "sendComment:")
-        sendCommentButton.addGestureRecognizer(tapGesture)
+        tapGesture = UITapGestureRecognizer(target: self, action: "sendComment:")
+        sendCommentButton.addGestureRecognizer(tapGesture!)
+        tapGesture?.enabled = false
     }
     
     //MARK: TextView delegate methods
@@ -62,13 +64,16 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     func textViewDidChange(textView: UITextView) {
-        
+        if(textView.text != ""){
+            tapGesture?.enabled = true
+        }
     }
     
     // MARK: Other
     
     @IBAction func sendComment(sender: AnyObject)
     {
+        
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
         let params = ["post_id" : post!.id.integerValue, "comment":commentsTextView.text] as [String:AnyObject!]
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]

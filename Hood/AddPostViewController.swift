@@ -49,19 +49,25 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         self.title = "Posting"
         self.postNowButton.enabled = false
+        self.navigationController?.popViewControllerAnimated(true)
+        let userInfo:Dictionary = ["channelID":self.channelID!]
+        NSNotificationCenter.defaultCenter().postNotificationName("AddingPost", object: nil, userInfo: userInfo)
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON, headers: headers).response({ (request, response, data, error) -> Void in
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            NSNotificationCenter.defaultCenter().postNotificationName("AddedPost", object: nil, userInfo: userInfo)
             self.postNowButton.enabled = true
             self.title = ""
-            self.navigationController?.popViewControllerAnimated(true)
         })
 
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        //Todo: Use UIKeyboardWillChangeFrameNotification here
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidHideNotification, object: nil)
     }
     
@@ -69,6 +75,11 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func textViewDidBeginEditing(textView: UITextView)

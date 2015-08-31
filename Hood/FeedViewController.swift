@@ -19,6 +19,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var dataObject: AnyObject?
     var activityIndicator: UIActivityIndicatorView?
     var context = Utilities.appDelegate.privateContext()
+    var shouldHideHeader: Bool = false
+    
+    @IBOutlet var addPostHeaderTopConstraint: NSLayoutConstraint!
+    @IBOutlet var addingPostHeaderView: UIView!
+    @IBOutlet var addingPostLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +33,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length + 30, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = true
+        self.addingPostHeaderView.hidden = true
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingPost:", name: "AddingPost", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addedPost:", name: "AddedPost", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -236,6 +244,55 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
             })
         }
+    }
+    
+    //Mark: managing table header view
+    
+    func addingPost(notification: NSNotification){
+        if let userInfo = notification.userInfo{
+            let channelID:Int = userInfo["channelID"] as! Int
+            let channel = self.dataObject as! Channel
+            if(channelID == channel.id.integerValue){
+                self.addingPostLabel.text = "Adding post to #\(channel.name)"
+                if let color = channel.color{
+                    self.addingPostLabel.textColor = UIColor(hexString: "#" + color)
+                }
+                self.showAddPostHeader()
+            }
+        }
+    }
+    
+    func addedPost(notification: NSNotification){
+        if let userInfo = notification.userInfo{
+            let channelID:Int = userInfo["channelID"] as! Int
+            let channel = self.dataObject as! Channel
+            if(channelID == channel.id.integerValue){
+                self.hideAddPostHeader()
+                self.getPosts()
+            }
+        }
+    }
+    
+    func hideAddPostHeader(){
+        tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+        addingPostHeaderView.layer.opacity = 1
+        addingPostHeaderView.hidden = false
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.addingPostHeaderView.layer.opacity = 0
+            }) { (completed: Bool) -> Void in
+            self.addingPostHeaderView.hidden = true
+        }
+    }
+    
+    func showAddPostHeader(){
+        addPostHeaderTopConstraint.constant = 89
+        tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height + 50, 0, 0, 0)
+        addingPostHeaderView.layer.opacity = 0
+        addingPostHeaderView.hidden = false
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.addingPostHeaderView.layer.opacity = 1
+            self.view.layoutSubviews()
+        })
     }
     
 }

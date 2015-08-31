@@ -51,6 +51,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -91,7 +92,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just Now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ex-4M-a9d">
-                                                    <rect key="frame" x="525" y="29" width="58" height="17"/>
+                                                    <rect key="frame" x="524" y="29" width="58" height="17"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -193,7 +194,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gy6-bh-312">
-                                                    <rect key="frame" x="525" y="29" width="58" height="17"/>
+                                                    <rect key="frame" x="524" y="29" width="58" height="17"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.72156862745098038" green="0.74509803921568629" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -300,13 +301,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOa-TP-nDW">
+                                <rect key="frame" x="0.0" y="20" width="600" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adding your post to #help" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8e-Kt-3fd">
+                                        <rect key="frame" x="205" y="14.5" width="191" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="s8e-Kt-3fd" secondAttribute="centerX" id="2Pz-hA-4Vi"/>
+                                    <constraint firstAttribute="centerY" secondItem="s8e-Kt-3fd" secondAttribute="centerY" constant="0.5" id="KML-Lz-whC"/>
+                                    <constraint firstAttribute="height" constant="50" id="jjH-a0-cO3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cYa-ru-O8a" firstAttribute="leading" secondItem="kGh-zr-JxU" secondAttribute="leadingMargin" constant="-16" id="34C-fl-FZN"/>
+                            <constraint firstItem="cYa-ru-O8a" firstAttribute="leading" secondItem="kGh-zr-JxU" secondAttribute="leading" id="34C-fl-FZN"/>
                             <constraint firstItem="LVA-QH-jzu" firstAttribute="top" secondItem="cYa-ru-O8a" secondAttribute="bottom" id="7OH-nH-8ue"/>
+                            <constraint firstAttribute="trailing" secondItem="fOa-TP-nDW" secondAttribute="trailing" id="Cid-tc-fgr"/>
+                            <constraint firstItem="fOa-TP-nDW" firstAttribute="top" secondItem="bau-ul-EjV" secondAttribute="top" id="H29-SN-vsi"/>
+                            <constraint firstItem="fOa-TP-nDW" firstAttribute="leading" secondItem="kGh-zr-JxU" secondAttribute="leading" id="N1f-jr-yzH"/>
                             <constraint firstItem="cYa-ru-O8a" firstAttribute="top" secondItem="kGh-zr-JxU" secondAttribute="top" id="VEe-4X-grS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cYa-ru-O8a" secondAttribute="trailing" constant="-16" id="nNg-Rr-X6B"/>
+                            <constraint firstAttribute="trailing" secondItem="cYa-ru-O8a" secondAttribute="trailing" id="nNg-Rr-X6B"/>
                             <constraint firstItem="cYa-ru-O8a" firstAttribute="top" secondItem="bau-ul-EjV" secondAttribute="bottom" constant="-20" id="whO-66-UVD"/>
                         </constraints>
                         <variation key="default">
@@ -316,6 +337,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="addPostHeaderTopConstraint" destination="H29-SN-vsi" id="Ven-vZ-Rgj"/>
+                        <outlet property="addingPostHeaderView" destination="fOa-TP-nDW" id="TH0-ad-bSy"/>
+                        <outlet property="addingPostLabel" destination="s8e-Kt-3fd" id="cKx-hr-RKH"/>
                         <outlet property="tableView" destination="cYa-ru-O8a" id="8ep-Y2-pa3"/>
                     </connections>
                 </viewController>
