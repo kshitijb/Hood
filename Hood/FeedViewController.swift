@@ -137,7 +137,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let e = error{
             }else{
                 let responseJSON = JSON(data!)
-                print(responseJSON)
+//                print(responseJSON)
                 self.dataArray = NSMutableArray()
                 let fetchRequest = NSFetchRequest(entityName: "Post")
                 fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [self.dataObject as! Channel])
