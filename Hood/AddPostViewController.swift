@@ -136,6 +136,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         pickedImage = image
+        println("Original size \(pickedImage?.size)")
+        pickedImage = resizeImage(pickedImage!)
+        println("Changed size \(pickedImage?.size)")
         postImageView.image = pickedImage
         updateScrollViewContentSize()
         dismissViewControllerAnimated(true, completion: nil)
@@ -147,6 +150,20 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     func updateScrollViewContentSize(){
         postScrollView.contentSize = CGSizeMake(0, postImageView.frame.size.height + postImageView.frame.origin.y)
+    }
+    
+    func resizeImage(image: UIImage) -> UIImage{
+        let originalWidth = image.size.width
+        let originalHeight = image.size.height
+        let targetWidth = UIScreen.mainScreen().bounds.width
+        let targetHeight = (originalHeight/originalWidth)*targetWidth
+        let targetSize = CGSizeMake(targetWidth, targetHeight)
+        UIGraphicsBeginImageContext(targetSize)
+        let targetRect = CGRectMake(0, 0, targetSize.width, targetSize.height)
+        image.drawInRect(targetRect)
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        return resizedImage
+        
     }
     
 }

@@ -871,7 +871,7 @@
                                     <constraint firstItem="iiA-dn-g5L" firstAttribute="top" secondItem="PfU-Fn-mzh" secondAttribute="top" id="jMc-Er-jmi"/>
                                     <constraint firstAttribute="centerX" secondItem="iiA-dn-g5L" secondAttribute="centerX" id="nvd-wI-Bs2"/>
                                     <constraint firstItem="iiA-dn-g5L" firstAttribute="leading" secondItem="PfU-Fn-mzh" secondAttribute="leading" id="sK7-om-COR"/>
-                                    <constraint firstAttribute="centerY" secondItem="iiA-dn-g5L" secondAttribute="centerY" constant="200" id="yfV-6g-eIl"/>
+                                    <constraint firstAttribute="centerY" secondItem="iiA-dn-g5L" secondAttribute="centerY" priority="999" constant="200" id="yfV-6g-eIl"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
