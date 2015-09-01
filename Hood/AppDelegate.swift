@@ -39,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(managedObjectContext!.countForFetchRequest(fetchRequest, error: nil) > 0){
             AppDelegate.owner = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil)!.last as! User
         }
+        Lookback.setupWithAppToken("3kok372o2DpYeWKFF")
+        Lookback.sharedLookback().shakeToRecord = true
+        Lookback.sharedLookback().feedbackBubbleVisible = true
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
