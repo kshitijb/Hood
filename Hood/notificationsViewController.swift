@@ -74,8 +74,8 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func fetchNotifications(){
         let url = API().getNotificationsForUser()
         print(url)
-        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.id)"]
-        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
             if let e = error{
                 print(error)
             }else{
