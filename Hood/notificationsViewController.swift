@@ -15,27 +15,15 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
     var notifications :JSON?
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = API().getNotificationsForUser()
-        print(url)
-//        let headers = ["Authorization":"Bearer \(FBSDKAccessToken.currentAccessToken().tokenString)"]
-//        print(headers)
-
         notificationTableView.delegate = self
         notificationTableView.dataSource = self
         notificationTableView.estimatedRowHeight = 2
         notificationTableView.rowHeight = UITableViewAutomaticDimension
-        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
-            if let e = error{
-                print(error)
-            }else{
-                let responseJSON = JSON(data!)
-                self.notifications =  responseJSON["results"]
-                self.notificationTableView.reloadData()
-                
-            }
-        }
-        
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.fetchNotifications()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -55,7 +43,6 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         return 1
     }
 
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath) as! NotificationCell
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -72,9 +59,9 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
             notificationCell.setContents(notifications[indexPath.row])
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     @IBAction func dismiss(sender: AnyObject)
@@ -83,15 +70,24 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
             
         })
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func fetchNotifications(){
+        let url = API().getNotificationsForUser()
+        print(url)
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.id)"]
+        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: nil).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
+            if let e = error{
+                print(error)
+            }else{
+                let responseJSON = JSON(data!)
+                self.notifications =  responseJSON["results"]
+                self.notificationTableView.reloadData()
+                self.notificationTableView.setNeedsLayout()
+                self.notificationTableView.layoutSubviews()
+                self.notificationTableView.reloadData()
+            }
+        }
+        
     }
-    */
 
 }
