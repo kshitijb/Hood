@@ -269,6 +269,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             if(channelID == channel.id.integerValue){
                 self.hideAddPostHeader()
                 self.getPosts()
+                self.tableView.scrollsToTop = true
             }
         }
     }
