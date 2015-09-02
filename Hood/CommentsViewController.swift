@@ -23,6 +23,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var sendCommentButton: UIView!
     let commentsActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
     var tapGesture :UITapGestureRecognizer?
+    @IBOutlet var checkmark: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +74,11 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     @IBAction func sendComment(sender: AnyObject)
     {
-        
+        checkmark.hidden = true
+        let activityIndicator = UIActivityIndicatorView(frame: checkmark.frame)
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.White
+        checkmark.superview?.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
         let params = ["post_id" : post!.id.integerValue, "comment":commentsTextView.text] as [String:AnyObject!]
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
@@ -82,6 +87,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            activityIndicator.removeFromSuperview()
+            self.checkmark.hidden = false
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
             Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
@@ -100,6 +107,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 cell.setContents(post!)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
+                cell.commentsButton.hidden = true
                 return cell
             }
             else{
@@ -107,6 +115,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 cell.setContents(post!)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
+                cell.commentsButton.hidden = true
                 return cell
             }
         }
@@ -119,7 +128,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 cell.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + comments["results"][indexPath.row]["author"]["lastname"].string!
                 
                 cell.commentLabel.text = comments["results"][indexPath.row]["comment"].string
-//                cell.timestampLabel.text = Utilities.timeStampFromDate(comments["results"][indexPath.row]["timestamp"].string!)
+                cell.timestampLabel.text = Utilities.timeStampFromDateString(comments["results"][indexPath.row]["timestamp"].string!)
                 Utilities.setUpLineSpacingForLabel(cell.commentLabel)
             }
             cell.preservesSuperviewLayoutMargins = false

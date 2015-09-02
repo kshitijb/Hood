@@ -25,6 +25,8 @@ struct API {
         static let comments = "comments"
         static let notifications = "alert"
         static let show = "show"
+        static let neighbourhoods = "neighbourhood"
+        static let currentNeighbourhoodID = "3"
      }
     private var fullUrl:String{
         return Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
@@ -46,12 +48,16 @@ struct API {
         return allChannels
     }
 
+    func getAllChannelsForNeighbourhood() -> String{
+        return "/".join([fullUrl,Static.neighbourhoods,Static.all,Static.currentNeighbourhoodID])
+    }
+    
     func getAllPosts() -> String{
         return allPosts
     }
     
     func getAllPostsForChannel(channel: String) -> String{
-        return "/".join([fullUrl,Static.posts,Static.filter,"1",channel])
+        return "/".join([fullUrl,Static.posts,Static.filter,Static.currentNeighbourhoodID,channel])
     }
     
     func upvotePost()->String{

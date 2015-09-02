@@ -74,11 +74,17 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
-        else
+        else if(self.modelController.pageData.count == 0)
         {
             getData()
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+    }
+    
     var modelController: ModelController {
         // Return the model controller object, creating it if necessary.
         // In more complex implementations, the model controller may be passed to the view controller.
@@ -130,7 +136,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         if(self.modelController.pageData.count == 0){
             SVProgressHUD.showWithStatus("Loading")
         }
-        Alamofire.request(.GET, API().getAllChannels(), parameters: nil)
+        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood(), parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
                 SVProgressHUD.dismiss()
                 if let _error = error{
@@ -140,7 +146,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     print(swiftyJSONObject)
                     var channels:NSMutableArray = NSMutableArray()
-                    for (key, channel) in swiftyJSONObject["results"]{
+                    for (key, channel) in swiftyJSONObject["channels"]{
                         let channelObject = Channel.generateObjectFromJSON(channel, context: appDelegate.managedObjectContext!)
                         channels.addObject(channelObject)
                     }
