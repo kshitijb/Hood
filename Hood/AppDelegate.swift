@@ -40,8 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppDelegate.owner = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil)!.last as! User
         }
         Lookback.setupWithAppToken("3kok372o2DpYeWKFF")
+        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
         Lookback.sharedLookback().shakeToRecord = true
         Lookback.sharedLookback().feedbackBubbleVisible = true
+
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

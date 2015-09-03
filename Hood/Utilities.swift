@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+let AddedPostNotificationName = "AddedPost"
+let AddingPostNotificationName = "AddingPost"
+
 struct GlobalColors{
     static let Green:UIColor = UIColor(hexString: "#1FC055")
     static let Purple: UIColor = UIColor(hexString: "#7323DC")
@@ -119,7 +122,7 @@ struct Utilities
         let green = linearTransition(c1Comp[1], c2Comp[1], offsetAsFraction)
         let blue = linearTransition(c1Comp[2], c2Comp[2], offsetAsFraction)
         
-        return UIColor(red: red , green: green, blue: blue, alpha: 0.9)
+        return UIColor(red: red , green: green, blue: blue, alpha: 1.0)
     }
     
     

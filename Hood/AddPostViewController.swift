@@ -22,6 +22,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     var pickedImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.hidesBarsOnSwipe = false
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
         postNowButton.layer.borderColor = GlobalColors.Green.CGColor
@@ -51,12 +52,12 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         self.postNowButton.enabled = false
         self.navigationController?.popViewControllerAnimated(true)
         let userInfo:Dictionary = ["channelID":self.channelID!]
-        NSNotificationCenter.defaultCenter().postNotificationName("AddingPost", object: nil, userInfo: userInfo)
+        NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON, headers: headers).response({ (request, response, data, error) -> Void in
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            NSNotificationCenter.defaultCenter().postNotificationName("AddedPost", object: nil, userInfo: userInfo)
+            NSNotificationCenter.defaultCenter().postNotificationName(AddedPostNotificationName, object: nil, userInfo: userInfo)
             self.postNowButton.enabled = true
             self.title = ""
         })
@@ -65,6 +66,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        postTextView.becomeFirstResponder()
         //Todo: Use UIKeyboardWillChangeFrameNotification here
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)

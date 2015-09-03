@@ -194,6 +194,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.hidesBarsOnSwipe = false
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     }
