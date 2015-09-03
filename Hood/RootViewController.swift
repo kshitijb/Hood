@@ -193,11 +193,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         for item in self.modelController.pageData {
             let channel = item as! Channel
             let titleLabel:UILabel = UILabel()
-//            if let color = channel.color{
-                pageColors.addObject(UIColor(hexString: "#" + channel.color))
-//            }else{
+            if let color = channel.color{
+                pageColors.addObject(UIColor(hexString: "#" + color))
+            }else{
                 pageColors.addObject(GlobalColors.Green)
-//            }
+            }
             titleLabel.text = "#" + channel.name
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.font = UIFont(name: "Lato-Regular", size: 26)

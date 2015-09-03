@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import WebImage
 import FBSDKCoreKit
-
+import CoreData
 class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UITextViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
@@ -19,7 +19,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var postID = 0
     var post: Post?
     @IBOutlet weak var commentConstraint: NSLayoutConstraint!
-    var comments = JSON.nullJSON
+    var commentsJSON = JSON.nullJSON
+    var comments = [NSManagedObject]()
     @IBOutlet weak var sendCommentButton: UIView!
     let commentsActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
     
@@ -33,12 +34,24 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.tableView.tableFooterView = UIView()
         setupUI()
         
-        
-
+        performFetchFromCoreData()
         Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
 
-            self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            self.tableView.reloadData()
+            self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            for (key, comment) in self.commentsJSON["results"]{
+//                let request = NSFetchRequest(entityName: "Comment")
+//                request.predicate = NSPredicate(format: "id == %@", argumentArray: [NSNumber(longLong:comment["id"].int64!)])
+//                if appDelegate.managedObjectContext?.countForFetchRequest(request, error: nil) == 0
+//                {
+                    let commentObject = Comment.generateObjectFromJSON(comment, context: appDelegate.managedObjectContext!)
+                    commentObject.post = self.post!
+//                }
+                
+            }
+            appDelegate.saveContext()
+            self.performFetchFromCoreData()
+
         })
         
     }
@@ -47,6 +60,29 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
+    func performFetchFromCoreData()
+    {
+        let request = NSFetchRequest(entityName: "Comment")
+        request.predicate = NSPredicate(format: "post == %@", argumentArray: [self.post!])
+        request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request) { (result) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.processAsyncResults(result)
+            })
+        }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.managedObjectContext?.performBlock({ () -> Void in
+            let error = NSErrorPointer()
+            let asyncResult = appDelegate.managedObjectContext?.executeRequest(asyncRequest, error: error)
+            if error != nil
+            {
+                print("Unable to execute asynchronous fetch result.");
+                print(error)
+            }
+        })
+
+    }
     func setupUI(){
         commentsTextView.layoutManager.ensureLayoutForTextContainer(commentsTextView.textContainer)
         commentsTextView.text = "Add a comment"
@@ -80,7 +116,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
             Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                self.comments = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+                self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
                 self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
             })
         })
@@ -107,16 +143,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         }
         else
         {
+            let record = comments[indexPath.row] as! Comment
             identifier = "Comment"
             let cell = tableView.dequeueReusableCellWithIdentifier("Comment", forIndexPath: indexPath) as! commentCell
-            if comments["results"].array?.count>0
-            {
-                cell.authorLabel.text = comments["results"][indexPath.row]["author"]["firstname"].string! + " " + comments["results"][indexPath.row]["author"]["lastname"].string!
-                
-                cell.commentLabel.text = comments["results"][indexPath.row]["comment"].string
-//                cell.timestampLabel.text = Utilities.timeStampFromDate(comments["results"][indexPath.row]["timestamp"].string!)
-                Utilities.setUpLineSpacingForLabel(cell.commentLabel)
-            }
+            cell.authorLabel.text = record.author.firstname + " " + record.author.lastname
+
+            cell.commentLabel.text = record.comment
+            cell.timestampLabel.text = Utilities.timeStampFromDate(record.timestamp)
+            Utilities.setUpLineSpacingForLabel(cell.commentLabel)
             cell.preservesSuperviewLayoutMargins = false
             cell.layoutMargins = UIEdgeInsetsZero
             return cell
@@ -130,14 +164,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         if(section == 0){
             return 1
         }else{
-            if let commentsCount = comments["results"].array?.count
-            {
-                return commentsCount
-            }
-            else
-            {
-                return 0
-            }
+            return comments.count
         }
     }
     
@@ -186,5 +213,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     override func viewDidLayoutSubviews() {
         self.tableView.reloadData()
+    }
+    
+    func processAsyncResults(result:NSAsynchronousFetchResult)
+    {
+        if let finalResult = result.finalResult as? [(NSManagedObject)]
+        {
+            self.comments = finalResult
+            self.tableView.reloadData()
+        }
     }
 }

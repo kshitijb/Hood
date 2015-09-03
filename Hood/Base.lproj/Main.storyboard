@@ -1159,7 +1159,7 @@ neighbours</string>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hc9-5z-gAJ" id="jPg-9L-IQo">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Me.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VG6-Nh-Y5G">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Me.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VG6-Nh-Y5G">
                                                     <rect key="frame" x="15" y="25" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="0gU-Sa-ElG"/>
@@ -1218,7 +1218,7 @@ neighbours</string>
                     </view>
                     <navigationItem key="navigationItem" title="Alerts" id="5Hr-Hi-wHX">
                         <barButtonItem key="rightBarButtonItem" image="Hash" id="rpv-e2-9q4">
-                            <inset key="imageInsets" minX="5" minY="6" maxX="4" maxY="3"/>
+                            <inset key="imageInsets" minX="14" minY="13" maxX="6" maxY="5"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="dismiss:" destination="WYQ-7t-NiM" id="eCm-01-M9W"/>

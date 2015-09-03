@@ -84,15 +84,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.setNeedsLayout()
         self.tableView.layoutIfNeeded()
         self.tableView.reloadData()
-//        print("contentInset on will appear \(tableView.contentInset.top)")
-//        println("Table View Frame on appear \(self.tableView.frame)")
-//        tableView.reloadData()
-//        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
     override func viewWillLayoutSubviews() {
         print("Top layout guide is \(self.topLayoutGuide.length)" )
-//        println("Table View Frame on layout \(self.tableView.frame)")
         let frame:CGRect = self.tableView.frame;
         if(frame.size.width > self.view.frame.size.width) {
             self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height)
@@ -127,7 +122,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let e = error{
             }else{
                 let responseJSON = JSON(data!)
-                print(responseJSON)
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 for (key, post) in responseJSON["results"]{
                     let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)

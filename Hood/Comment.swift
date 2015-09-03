@@ -8,12 +8,48 @@
 
 import Foundation
 import CoreData
-
+import SwiftyJSON
 class Comment: ParentObject {
 
-    @NSManaged var timestamp: String
+    @NSManaged var timestamp: NSDate
     @NSManaged var comment: String
     @NSManaged var post: Post
     @NSManaged var author: User
 
+    static func generateObjectFromJSON(json: JSON, context: NSManagedObjectContext) -> Comment{
+        
+        let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Comment")
+        fetchRequest.fetchLimit = 1
+        let id = NSNumber(longLong: json["id"].int64!)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [id])
+        var error: NSError?
+        var entity:ParentObject
+        if(context.countForFetchRequest(fetchRequest, error: &error) > 0){
+            entity = context.executeFetchRequest(fetchRequest, error: &error)!.last as! ParentObject
+        }
+        else{
+            entity = NSEntityDescription.insertNewObjectForEntityForName("Comment", inManagedObjectContext: context) as! ParentObject
+        }
+
+        if let id = json["id"].int64{
+            entity.id = NSNumber(longLong: id)
+        }
+        
+        let comment:Comment = entity as! Comment
+        
+        if let commentString = json["comment"].string{
+            comment.comment = commentString
+        }
+        if let timestamp = json["timestamp"].string{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+            dateFormatter.timeZone = NSTimeZone(name: "UTC")
+            comment.timestamp = dateFormatter.dateFromString(timestamp)!
+        }
+        
+        comment.author = User.generateObjectFromJSON(json["author"], context: context)
+        return comment
+    }
+    
+    
 }
