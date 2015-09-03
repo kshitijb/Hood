@@ -824,11 +824,11 @@
                         <viewControllerLayoutGuide type="bottom" id="XGd-Qj-I2w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j6q-UG-sag">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-qT-rTF">
-                                <rect key="frame" x="21" y="547" width="174" height="45"/>
+                                <rect key="frame" x="21" y="483" width="174" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="BRR-qe-bvv"/>
                                     <constraint firstAttribute="height" constant="45" id="XuL-TX-JkE"/>
@@ -842,7 +842,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2c-ec-f8k">
-                                <rect key="frame" x="475" y="544" width="109" height="48"/>
+                                <rect key="frame" x="475" y="480" width="109" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="0o9-Co-CJB"/>
                                     <constraint firstAttribute="height" constant="48" id="yXz-lr-dv8"/>
@@ -856,7 +856,7 @@
                                     <action selector="postNow:" destination="XXA-Y3-OCx" eventType="touchUpInside" id="X0E-aI-ypj"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PfU-Fn-mzh">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PfU-Fn-mzh">
                                 <rect key="frame" x="0.0" y="64" width="600" height="468"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iiA-dn-g5L">
@@ -956,11 +956,11 @@
                         <viewControllerLayoutGuide type="bottom" id="8Yh-h8-jIR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cc6-cB-pgf">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjg-F2-s6c">
-                                <rect key="frame" x="-8" y="64" width="616" height="25"/>
+                                <rect key="frame" x="-8" y="0.0" width="616" height="25"/>
                                 <subviews>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="rTU-PP-B0B">
                                         <rect key="frame" x="289" y="-6" width="39" height="37"/>
@@ -1142,9 +1142,9 @@ neighbours</string>
         <!--Navigation Controller-->
         <scene sceneID="oVg-Al-eNj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bU7-14-pHA" sceneMemberID="viewController">
+                <navigationController id="bU7-14-pHA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Cz-Rw-PNP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6Cz-Rw-PNP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.3803921569" green="0.78039215689999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1179,7 +1179,7 @@ neighbours</string>
         <!--Alerts-->
         <scene sceneID="CcI-wW-iP1">
             <objects>
-                <viewController id="WYQ-7t-NiM" customClass="notificationsViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationsViewController" id="WYQ-7t-NiM" customClass="notificationsViewController" customModule="Pipal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dux-Bj-T8g"/>
                         <viewControllerLayoutGuide type="bottom" id="OFl-P4-aFw"/>

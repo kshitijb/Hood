@@ -30,12 +30,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 138
-//        tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length + 30, 0, 0, 0)
+        //        tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length + 30, 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = true
         self.addingPostHeaderView.hidden = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingPost:", name: "AddingPost", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addedPost:", name: "AddedPost", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingPost:", name: AddingPostNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addedPost:", name: AddedPostNotificationName, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,9 +115,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height)
         }
         if(topLayoutGuide.length == 0){
-            tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+            tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         }else{
-            tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+            tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         }
     }
     
@@ -275,7 +275,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func hideAddPostHeader(){
-        tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
         addingPostHeaderView.layer.opacity = 1
         addingPostHeaderView.hidden = false
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -286,8 +286,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func showAddPostHeader(){
-        addPostHeaderTopConstraint.constant = 89
-        tableView.contentInset = UIEdgeInsetsMake(64 + (self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height + 50, 0, 0, 0)
+        addPostHeaderTopConstraint.constant = 25
+        tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height + 50, 0, 0, 0)
         addingPostHeaderView.layer.opacity = 0
         addingPostHeaderView.hidden = false
         UIView.animateWithDuration(0.3, animations: { () -> Void in

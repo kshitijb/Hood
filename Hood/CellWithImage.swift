@@ -95,7 +95,7 @@ class CellWithImage: UITableViewCell {
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
 
-            self.likesButton.selected = false
+            (self.likesButton as! PopButton).setSelectedWithAnimation(false)
             PostController.VotePost(.Downvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount++
                 self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
@@ -106,7 +106,7 @@ class CellWithImage: UITableViewCell {
         {
             upvotesCount++
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
-            self.likesButton.selected = true
+            (self.likesButton as! PopButton).setSelectedWithAnimation(true)
             PostController.VotePost(.Upvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount--
                 self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
