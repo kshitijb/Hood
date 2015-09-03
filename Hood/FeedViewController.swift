@@ -88,11 +88,23 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-        fetchedResultsController.performFetch(nil)
-        self.tableView.reloadData()
-        self.tableView.setNeedsLayout()
-        self.tableView.layoutIfNeeded()
-        self.tableView.reloadData()
+//        NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextDidSaveNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification: NSNotification!) -> Void in
+//            let mainContext: NSManagedObjectContext = notification.object as! NSManagedObjectContext
+//            if(mainContext.isEqual(self.context) == false){
+//                self.context.performBlock({ () -> Void in
+//                    self.context.mergeChangesFromContextDidSaveNotification(notification)
+//                })
+//            }
+//        }
+        
+//        self.tableView.reloadData()
+//        self.tableView.setNeedsLayout()
+//        self.tableView.layoutIfNeeded()
+//        self.tableView.reloadData()
+//        print("contentInset on will appear \(tableView.contentInset.top)")
+//        println("Table View Frame on appear \(self.tableView.frame)")
+//        tableView.reloadData()
+//        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
     override func viewWillLayoutSubviews() {
@@ -132,7 +144,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let e = error{
             }else{
                 let responseJSON = JSON(data!)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//                print(responseJSON)
+                self.dataArray = NSMutableArray()
+                let fetchRequest = NSFetchRequest(entityName: "Post")
+                fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [self.dataObject as! Channel])
+                let appDelegate = Utilities.appDelegate
                 for (key, post) in responseJSON["results"]{
                     let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)
                     postObject.channel = self.dataObject as! Channel

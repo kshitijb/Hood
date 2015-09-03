@@ -78,16 +78,30 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
             if let e = error{
                 print(error)
-            }else{
+            }
+            else
+            {
+                print(data!)
                 let responseJSON = JSON(data!)
                 self.notifications =  responseJSON["results"]
                 self.notificationTableView.reloadData()
                 self.notificationTableView.setNeedsLayout()
                 self.notificationTableView.layoutSubviews()
                 self.notificationTableView.reloadData()
+                
             }
         }
         
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let commentVC:CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments") as! CommentsViewController
+        commentVC.postID = notifications![indexPath.row]["post"]["id"].int!
+        
+        
+        
+        self.navigationController?.pushViewController(commentVC, animated: true)
     }
 
 }

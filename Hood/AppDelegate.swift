@@ -39,10 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(managedObjectContext!.countForFetchRequest(fetchRequest, error: nil) > 0){
             AppDelegate.owner = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil)!.last as! User
         }
-        Lookback.setupWithAppToken("3kok372o2DpYeWKFF")
-        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
-        Lookback.sharedLookback().shakeToRecord = true
-        Lookback.sharedLookback().feedbackBubbleVisible = true
+//        Lookback.setupWithAppToken("3kok372o2DpYeWKFF")
+//        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
+//        Lookback.sharedLookback().shakeToRecord = true
+//        Lookback.sharedLookback().feedbackBubbleVisible = true
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -117,8 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if coordinator == nil {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
         }()
@@ -141,6 +140,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
+    {
+        return FBSDKApplicationDelegate.sharedInstance().application(
+            app,
+            openURL: url,
+            sourceApplication: options["UIApplicationOpenURLOptionsSourceApplicationKey"] as! String,
+            annotation: nil)
     }
 
 

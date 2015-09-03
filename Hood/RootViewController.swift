@@ -28,6 +28,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        channelPicker.userInteractionEnabled = false
         setNeedsStatusBarAppearanceUpdate()
         if (FBSDKAccessToken.currentAccessToken() == nil)
         {

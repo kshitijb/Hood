@@ -35,20 +35,16 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.tableFooterView = UIView()
         setupUI()
-        
+
         performFetchFromCoreData()
         Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
 
             self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             for (key, comment) in self.commentsJSON["results"]{
-//                let request = NSFetchRequest(entityName: "Comment")
-//                request.predicate = NSPredicate(format: "id == %@", argumentArray: [NSNumber(longLong:comment["id"].int64!)])
-//                if appDelegate.managedObjectContext?.countForFetchRequest(request, error: nil) == 0
-//                {
+
                     let commentObject = Comment.generateObjectFromJSON(comment, context: appDelegate.managedObjectContext!)
                     commentObject.post = self.post!
-//                }
                 
             }
             appDelegate.saveContext()
@@ -62,14 +58,35 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
+    func processAsyncResults(result:NSAsynchronousFetchResult)
+    {
+        if let finalResult = result.finalResult as? [(NSManagedObject)]
+        {
+            self.comments = finalResult
+            self.tableView.reloadData()
+        }
+    }
+    func setPostFromCoreData(result:NSAsynchronousFetchResult)
+    {
+        if result.finalResult?.count == 0
+        {
+            
+        }
+        if let finalResult = result.finalResult as? [(NSManagedObject)]
+        {
+            self.post = finalResult[0] as? Post
+            self.tableView.reloadData()
+        }
+    }
     func performFetchFromCoreData()
     {
-        let request = NSFetchRequest(entityName: "Comment")
-        request.predicate = NSPredicate(format: "post == %@", argumentArray: [self.post!])
+        let request = NSFetchRequest(entityName: "Post")
+        request.predicate = NSPredicate(format: "id == %@", argumentArray: [self.postID])
         request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
         let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request) { (result) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.processAsyncResults(result)
+                self.setPostFromCoreData(result)
+                self.getCommentsFromCoreData()
             })
         }
         
@@ -83,7 +100,29 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 print(error)
             }
         })
-
+    }
+    
+    func getCommentsFromCoreData()
+    {
+        let commentRequest = NSFetchRequest(entityName: "Comment")
+        commentRequest.predicate = NSPredicate(format: "post.id == %@", argumentArray: [self.postID])
+        commentRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        let commentAsyncRequest = NSAsynchronousFetchRequest(fetchRequest: commentRequest) { (result) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.processAsyncResults(result)
+            })
+        }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.managedObjectContext?.performBlock({ () -> Void in
+            let error = NSErrorPointer()
+            let asyncResult = appDelegate.managedObjectContext?.executeRequest(commentAsyncRequest, error: error)
+            if error != nil
+            {
+                print("Unable to execute asynchronous fetch result.");
+                print(error)
+            }
+        })
     }
     func setupUI(){
         commentsTextView.layoutManager.ensureLayoutForTextContainer(commentsTextView.textContainer)
@@ -176,7 +215,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0){
-            return 1
+            if post != nil
+            {
+                return 1
+            }
+            else
+            {
+                return 0
+            }
         }else{
             return comments.count
         }
@@ -230,12 +276,5 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.tableView.reloadData()
     }
     
-    func processAsyncResults(result:NSAsynchronousFetchResult)
-    {
-        if let finalResult = result.finalResult as? [(NSManagedObject)]
-        {
-            self.comments = finalResult
-            self.tableView.reloadData()
-        }
-    }
+
 }
