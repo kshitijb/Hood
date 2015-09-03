@@ -65,6 +65,7 @@
 		D5EBCFD91B8C4AF5000E0656 /* Neighbourhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFD81B8C4AF5000E0656 /* Neighbourhood.swift */; };
 		D5EBCFDB1B8C4AF6000E0656 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFDA1B8C4AF6000E0656 /* Comment.swift */; };
 		D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBD00F1B8C5A67000E0656 /* CoreData.framework */; };
+		EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +86,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pipal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.debug.xcconfig"; sourceTree = "<group>"; };
 		423983E11B7BC50200F9D4AF /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +96,9 @@
 		42EB28251B74D79100AB0331 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onBoardingViewController.swift; sourceTree = "<group>"; };
 		42F01BEA1B79EAAB001386C1 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
+		A069B87B32A12C58B4670050 /* Pods-Pipal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.release.xcconfig"; sourceTree = "<group>"; };
 		D51FB2E41B7891FC00518DA2 /* PopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopButton.swift; sourceTree = "<group>"; };
+		D523439D1B94742400A8B7DC /* Pipal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pipal-Bridging-Header.h"; sourceTree = "<group>"; };
 		D547A47E1B6B5C4300B556B4 /* Me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Me.jpg; sourceTree = "<group>"; };
 		D547A4801B6B69DB00B556B4 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D547A4821B6B717600B556B4 /* CellWithoutImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithoutImage.swift; sourceTree = "<group>"; };
@@ -160,12 +165,30 @@
 				D54B9BCD1B7B3BFA0075836C /* FBSDKCoreKit.framework in Frameworks */,
 				D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */,
 				42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */,
+				EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13C83B23F3C981F233DA618A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		74F0A7C0E9AF33422FD0E659 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */,
+				A069B87B32A12C58B4670050 /* Pods-Pipal.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D5604CF31B722C68002AD200 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +212,8 @@
 				D5B3E47F1B6A2CB000F3DF9F /* Hood */,
 				D5B3E4991B6A2CB000F3DF9F /* HoodTests */,
 				D5B3E47E1B6A2CB000F3DF9F /* Products */,
+				74F0A7C0E9AF33422FD0E659 /* Pods */,
+				13C83B23F3C981F233DA618A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -232,6 +257,7 @@
 				D54B9BD41B7DD2520075836C /* PostController.swift */,
 				D5EBCFC61B85BEFE000E0656 /* ChannelPickerView.swift */,
 				D5EBCFCC1B874832000E0656 /* Model.xcdatamodeld */,
+				D523439D1B94742400A8B7DC /* Pipal-Bridging-Header.h */,
 			);
 			path = Hood;
 			sourceTree = "<group>";
@@ -309,11 +335,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5B3E4A01B6A2CB000F3DF9F /* Build configuration list for PBXNativeTarget "Pipal" */;
 			buildPhases = (
+				B2025DDA0FE85880F72D316C /* Check Pods Manifest.lock */,
 				D5B3E4791B6A2CB000F3DF9F /* Sources */,
 				D5B3E47A1B6A2CB000F3DF9F /* Frameworks */,
 				D5B3E47B1B6A2CB000F3DF9F /* Resources */,
 				D5604CEB1B7222A3002AD200 /* ShellScript */,
 				D5604CF21B72238E002AD200 /* Embed Frameworks */,
+				DE23EB1CEC4A061D2359E900 /* Copy Pods Resources */,
+				5F910EB43B72D1662E3985FA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -385,6 +414,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5F910EB43B72D1662E3985FA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pipal/Pods-Pipal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2025DDA0FE85880F72D316C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		D5604CEB1B7222A3002AD200 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -397,6 +456,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n./Fabric.framework/run 82e2d034577b37c532c7339d0e032d91addd5373 86664007f0f9df941f5e32fce99d6c62e0356fd59dc749d1fd59a4573c2b6d14";
+		};
+		DE23EB1CEC4A061D2359E900 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pipal/Pods-Pipal-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -543,8 +617,10 @@
 		};
 		D5B3E4A11B6A2CB000F3DF9F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -557,13 +633,17 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Pipal;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hood/Pipal-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		D5B3E4A21B6A2CB000F3DF9F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A069B87B32A12C58B4670050 /* Pods-Pipal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Locon Solutions Private Limited";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Locon Solutions Private Limited";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -576,6 +656,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Pipal;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hood/Pipal-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -24,8 +24,8 @@ class NotificationCell: UITableViewCell {
         json = jsonObject
         profileImage.sd_setImageWithURL(NSURL(string: jsonObject["actor"]["profile_photo"].string!), placeholderImage: UIImage(named: "Me.jpg"))
         fullNameLabel.text = jsonObject["actor"]["firstname"].string!.uppercaseString + " " + jsonObject["actor"]["lastname"].string!.uppercaseString
-//        timestampLabel.text = Utilities.timeStampFromDate(jsonObject["timestamp"].string!)
-        commentLabel.text = jsonObject["action"].string
+        timestampLabel.text = Utilities.timeStampFromDateString(jsonObject["timestamp"].string!)
+        commentLabel.text = self.generateMessage(jsonObject["action"].string!, message: jsonObject["post"]["message"].string!)
         profileImage.layer.cornerRadius = profileImage.frame.width/2
         profileImage.clipsToBounds = true
     }
@@ -36,6 +36,16 @@ class NotificationCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func generateMessage(action: String, message: String) -> String{
+        var intermediateString:String
+        if action == "liked"{
+            intermediateString = "your"
+        }else{
+            intermediateString = "on your"
+        }
+        let generatedMessage = action + " " + intermediateString + " " + "post" + " \"" + message + "\""
+        return generatedMessage
+    }
     
 
 }

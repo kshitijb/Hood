@@ -23,6 +23,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var comments = [NSManagedObject]()
     @IBOutlet weak var sendCommentButton: UIView!
     let commentsActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+    var tapGesture :UITapGestureRecognizer?
+    @IBOutlet var checkmark: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,8 +89,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         commentsTextView.layoutManager.ensureLayoutForTextContainer(commentsTextView.textContainer)
         commentsTextView.text = "Add a comment"
         commentsTextView.delegate = self
-        let tapGesture = UITapGestureRecognizer(target: self, action: "sendComment:")
-        sendCommentButton.addGestureRecognizer(tapGesture)
+        tapGesture = UITapGestureRecognizer(target: self, action: "sendComment:")
+        sendCommentButton.addGestureRecognizer(tapGesture!)
+        tapGesture?.enabled = false
     }
     
     //MARK: TextView delegate methods
@@ -98,13 +101,20 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     func textViewDidChange(textView: UITextView) {
-        
+        if(textView.text != ""){
+            tapGesture?.enabled = true
+        }
     }
     
     // MARK: Other
     
     @IBAction func sendComment(sender: AnyObject)
     {
+        checkmark.hidden = true
+        let activityIndicator = UIActivityIndicatorView(frame: checkmark.frame)
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.White
+        checkmark.superview?.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
         let params = ["post_id" : post!.id.integerValue, "comment":commentsTextView.text] as [String:AnyObject!]
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
@@ -113,6 +123,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            activityIndicator.removeFromSuperview()
+            self.checkmark.hidden = false
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
             Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
@@ -131,6 +143,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 cell.setContents(post!)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
+                cell.commentsButton.hidden = true
                 return cell
             }
             else{
@@ -138,6 +151,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 cell.setContents(post!)
                 cell.preservesSuperviewLayoutMargins = false
                 cell.layoutMargins = UIEdgeInsetsZero
+                cell.commentsButton.hidden = true
                 return cell
             }
         }
@@ -207,6 +221,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.hidesBarsOnSwipe = false
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     }

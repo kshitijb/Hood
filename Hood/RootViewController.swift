@@ -20,12 +20,15 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     var titleScrollView: UIScrollView?
     let channelPicker:ChannelPickerView = ChannelPickerView()
     let pageColors: NSMutableArray = NSMutableArray()
+    let shouldHideStatusBar: Bool = false
+    var statusBarBackgroundView: UIView?
     
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
         if (FBSDKAccessToken.currentAccessToken() == nil)
         {
             performSegueWithIdentifier("showLogin", sender: self)
@@ -37,7 +40,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
         self.pageControl.hidden = true
-        self.pageIndicatorContainer.backgroundColor = GlobalColors.Green.colorWithAlphaComponent(0.9)
+        self.pageIndicatorContainer.backgroundColor = GlobalColors.Green
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.automaticallyAdjustsScrollViewInsets = false
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
@@ -57,6 +60,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +69,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.barHideOnSwipeGestureRecognizer.addTarget(self, action: "handleSwipeForNavigationBar:")
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let profile: AnyObject = userDefaults.valueForKey("fbProfilePhoto")
         {
@@ -74,11 +80,24 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
-        else
+        else if(self.modelController.pageData.count == 0)
         {
             getData()
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        if(self.navigationController?.navigationBarHidden == true){
+           self.navigationController?.navigationBarHidden = false
+        }
+    }
+    
     var modelController: ModelController {
         // Return the model controller object, creating it if necessary.
         // In more complex implementations, the model controller may be passed to the view controller.
@@ -130,7 +149,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         if(self.modelController.pageData.count == 0){
             SVProgressHUD.showWithStatus("Loading")
         }
-        Alamofire.request(.GET, API().getAllChannels(), parameters: nil)
+        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood(), parameters: nil)
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
                 SVProgressHUD.dismiss()
                 if let _error = error{
@@ -140,7 +159,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     print(swiftyJSONObject)
                     var channels:NSMutableArray = NSMutableArray()
-                    for (key, channel) in swiftyJSONObject["results"]{
+                    for (key, channel) in swiftyJSONObject["channels"]{
                         let channelObject = Channel.generateObjectFromJSON(channel, context: appDelegate.managedObjectContext!)
                         channels.addObject(channelObject)
                     }
@@ -248,7 +267,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             }
             else
             {
-                print(pageControl.currentPage)
                 if pageControl.currentPage == 0
                 {
                     colorToSet = pageColors[0] as! UIColor
@@ -261,7 +279,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.navigationController?.navigationBar.setBackgroundImage(img,forBarMetrics: .Default)
                     self.pageIndicatorContainer.backgroundColor = colorToSet
-                    
+                    if let statusBarBackground = self.statusBarBackgroundView{
+                        statusBarBackground.backgroundColor = colorToSet
+                    }
                 })
                 
             })
@@ -274,7 +294,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView)
     {
-                    print(pageColors)
+
     }
     func titleViewTapped(){
         channelPicker.showInView(self.navigationController!.view)
@@ -287,8 +307,31 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         })
     }
     
-}
+    func handleSwipeForNavigationBar(gestureRecognizer: UISwipeGestureRecognizer){
+        if(self.navigationController?.navigationBar.frame.origin.y<0){
+            if self.statusBarBackgroundView == nil{
+                self.statusBarBackgroundView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 20))
+                var colorToSet: UIColor
+                if(self.modelController.pageData.count>0){
+                    let channel = self.modelController.pageData.objectAtIndex(self.pageControl.currentPage) as! Channel
+                    colorToSet = UIColor(hexString: "#" + channel.color!)
+                }else{
+                    colorToSet = GlobalColors.Green
+                }
+                self.statusBarBackgroundView?.backgroundColor = colorToSet
+                self.view.addSubview(self.statusBarBackgroundView!)
+            }
+        }else{
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.statusBarBackgroundView?.layer.opacity = 0
+                    }, completion: { (completed: Bool) -> Void in
+                        self.statusBarBackgroundView?.removeFromSuperview()
+                        self.statusBarBackgroundView = nil
+                })
+        }
+    }
     
+}
     
 
 

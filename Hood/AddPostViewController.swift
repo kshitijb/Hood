@@ -22,6 +22,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     var pickedImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.hidesBarsOnSwipe = false
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
         postNowButton.layer.borderColor = GlobalColors.Green.CGColor
@@ -40,7 +41,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBAction func postNow(sender: AnyObject)
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        var params = [ "user_id": userID! ,"locality_id" : 1, "channel_id" : channelID!+1, "message" : postTextView.text] as [String:AnyObject!]
+        var params = [ "user_id": userID! ,"locality_id" : API.Static.currentNeighbourhoodID, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
         if let pickedImage = pickedImage{
             let imageData = UIImagePNGRepresentation(pickedImage)
             let base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
@@ -49,19 +50,26 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         self.title = "Posting"
         self.postNowButton.enabled = false
+        self.navigationController?.popViewControllerAnimated(true)
+        let userInfo:Dictionary = ["channelID":self.channelID!]
+        NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON, headers: headers).response({ (request, response, data, error) -> Void in
             print(error)
             print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            NSNotificationCenter.defaultCenter().postNotificationName(AddedPostNotificationName, object: nil, userInfo: userInfo)
             self.postNowButton.enabled = true
             self.title = ""
-            self.navigationController?.popViewControllerAnimated(true)
         })
 
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        postTextView.becomeFirstResponder()
+        //Todo: Use UIKeyboardWillChangeFrameNotification here
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidHideNotification, object: nil)
     }
     
@@ -69,6 +77,11 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func textViewDidBeginEditing(textView: UITextView)
@@ -136,6 +149,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         pickedImage = image
+        println("Original size \(pickedImage?.size)")
+        pickedImage = resizeImage(pickedImage!)
+        println("Changed size \(pickedImage?.size)")
         postImageView.image = pickedImage
         updateScrollViewContentSize()
         dismissViewControllerAnimated(true, completion: nil)
@@ -147,6 +163,20 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     func updateScrollViewContentSize(){
         postScrollView.contentSize = CGSizeMake(0, postImageView.frame.size.height + postImageView.frame.origin.y)
+    }
+    
+    func resizeImage(image: UIImage) -> UIImage{
+        let originalWidth = image.size.width
+        let originalHeight = image.size.height
+        let targetWidth = UIScreen.mainScreen().bounds.width
+        let targetHeight = (originalHeight/originalWidth)*targetWidth
+        let targetSize = CGSizeMake(targetWidth, targetHeight)
+        UIGraphicsBeginImageContext(targetSize)
+        let targetRect = CGRectMake(0, 0, targetSize.width, targetSize.height)
+        image.drawInRect(targetRect)
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        return resizedImage
+        
     }
     
 }

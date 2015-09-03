@@ -20,8 +20,9 @@ import SwiftyJSON
 class ModelController: NSObject, UIPageViewControllerDataSource {
 
     var pageData:NSMutableArray = NSMutableArray()
-
-
+    var pagesCache: NSMutableArray = NSMutableArray()
+    var storyboard: UIStoryboard?
+    
     override init() {
         super.init()
         // Create the data model.
@@ -34,12 +35,18 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         if (self.pageData.count == 0) || (index >= self.pageData.count) {
             return nil
         }
-
+        self.storyboard = storyboard
         // Create a new view controller and pass suitable data.
-        let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
-        println(dataViewController.view.frame)
-        dataViewController.dataObject = self.pageData[index]
-        return dataViewController
+        if(self.pagesCache.count<=index){
+            let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
+            println(dataViewController.view.frame)
+            dataViewController.dataObject = self.pageData[index]
+            dataViewController.fetchData()
+            self.pagesCache.addObject(dataViewController)
+            return dataViewController
+        }else{
+            return self.pagesCache[index] as? FeedViewController
+        }
     }
 
     func indexOfViewController(viewController: FeedViewController) -> Int {
@@ -65,7 +72,15 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         var index = self.indexOfViewController(viewController as! FeedViewController)
-        if (index == 0) || (index == NSNotFound) {
+        if (index == 0) {
+//  TODO: Show notifications view controller from the side
+//
+//            if let viewController: UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("NotificationsViewController") as? UIViewController{
+//            return viewController
+//            }else {
+             return nil
+//            }
+        }else if(index == NSNotFound){
             return nil
         }
         

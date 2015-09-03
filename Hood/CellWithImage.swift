@@ -14,13 +14,13 @@ class CellWithImage: UITableViewCell {
     var postID :Int32?
     var post:Post?
     var upvotesCount = 0
+    var placeholderImage: UIImage?
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var timestampLabel: UILabel!
-
     @IBOutlet weak var postImage: UIImageView!
     
     override func awakeFromNib() {
@@ -65,20 +65,27 @@ class CellWithImage: UITableViewCell {
         timestampLabel.text = Utilities.timeStampFromDate(post.timestamp!)
         let lastName = post.author.lastname
         userName.text = post.author.firstname + " " + lastName
+        
+        if let placeholderImage = placeholderImage{
+            
+        }else{
+            placeholderImage = getImageWithColor(UIColor.lightGrayColor(), profileImage.frame.size)
+        }
+        
         if let profile_photo = post.author.profile_photo
         {
-            profileImage.sd_setImageWithURL(NSURL(string:profile_photo), placeholderImage: UIImage(named: "Me.jpg"))
+            profileImage.sd_setImageWithURL(NSURL(string:profile_photo), placeholderImage: placeholderImage)
         }
-//        if let imageURL = jsonObject["photo"].string{
-            postImage.sd_setImageWithURL(NSURL(string: post.photo!))
-//        }
+        if let imageURL = post.photo{
+            postImage.sd_setImageWithURL(NSURL(string: imageURL), placeholderImage: placeholderImage)
+        }
         
     }
 
     func commentsPressed(){
 //        print(post)
-//        let userInfo:Dictionary = ["post" : post.object , "postID" : postID!]
-//        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
+        let userInfo:Dictionary = ["post" : post! , "postID" : post!.id.integerValue]
+        NSNotificationCenter.defaultCenter().postNotificationName("commentsPressed", object: nil, userInfo: userInfo)
     }
     
     func likePressed(){
@@ -88,7 +95,7 @@ class CellWithImage: UITableViewCell {
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
             let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
 
-            self.likesButton.selected = false
+            (self.likesButton as! PopButton).setSelectedWithAnimation(false)
             PostController.VotePost(.Downvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount++
                 self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
@@ -99,7 +106,7 @@ class CellWithImage: UITableViewCell {
         {
             upvotesCount++
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
-            self.likesButton.selected = true
+            (self.likesButton as! PopButton).setSelectedWithAnimation(true)
             PostController.VotePost(.Upvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount--
                 self.likesButton.setTitle("\(self.upvotesCount) likes", forState: UIControlState.Normal)
