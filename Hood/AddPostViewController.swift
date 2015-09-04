@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
-
-class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate
+import RSKImageCropper
+import ALCameraViewController
+class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
 {
     @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTextView: UITextView!
@@ -141,21 +142,25 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
 
     func addPhoto(){
-        let imagePicker:UIImagePickerController = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        presentViewController(imagePicker, animated: true, completion: nil)
+        let cameraViewController = ALCameraViewController(croppingEnabled: false) { (image) -> Void in
+            self.pickedImage = image
+            self.pickedImage = self.resizeImage(self.pickedImage!)
+            self.postImageView.image = self.pickedImage
+            self.updateScrollViewContentSize()
+            let imageCropVC = RSKImageCropViewController(image: self.pickedImage)
+            imageCropVC.delegate = self;
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                self.presentViewController(imageCropVC, animated: true) { () -> Void in
+                    
+                }
+            })
+            
+        }
+        presentViewController(cameraViewController, animated: true) { () -> Void in
+            
+        }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        pickedImage = image
-        println("Original size \(pickedImage?.size)")
-        pickedImage = resizeImage(pickedImage!)
-        println("Changed size \(pickedImage?.size)")
-        postImageView.image = pickedImage
-        updateScrollViewContentSize()
-        dismissViewControllerAnimated(true, completion: nil)
-    }
     
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
@@ -178,5 +183,24 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         return resizedImage
         
     }
+    
+    
+    // MARK: image cropping
+    
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController!)
+    {
+        dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
+    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect)
+    {
+        postImageView.image = croppedImage
+        dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
     
 }

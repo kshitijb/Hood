@@ -37,20 +37,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         setupUI()
 
         performFetchFromCoreData()
-        Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
 
-            self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            for (key, comment) in self.commentsJSON["results"]{
-
-                    let commentObject = Comment.generateObjectFromJSON(comment, context: appDelegate.managedObjectContext!)
-                    commentObject.post = self.post!
-                
-            }
-            appDelegate.saveContext()
-            self.performFetchFromCoreData()
-
-        })
         
     }
 
@@ -58,9 +45,44 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
+    func networkRequestForComments()
+    {
+        Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
+            
+            self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            for (key, comment) in self.commentsJSON["results"]{
+                
+                let commentObject = Comment.generateObjectFromJSON(comment, context: appDelegate.managedObjectContext!)
+                commentObject.post = self.post!
+                
+            }
+            appDelegate.saveContext()
+            self.performFetchFromCoreData()
+        })
+    }
+    
+    func networkRequestForPost()
+    {
+        Alamofire.request(.GET, API().getPostWithID("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
+            
+            let resultJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            print(resultJSON)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+            let postObject = Post.generateObjectFromJSON(resultJSON, context: appDelegate.managedObjectContext!)
+            appDelegate.saveContext()
+            self.performFetchFromCoreData()
+        })
+
+    }
     func processAsyncResults(result:NSAsynchronousFetchResult)
     {
-        if let finalResult = result.finalResult as? [(NSManagedObject)]
+        if result.finalResult?.count == 0
+        {
+            networkRequestForComments()
+        }
+        else if let finalResult = result.finalResult as? [(NSManagedObject)]
         {
             self.comments = finalResult
             self.tableView.reloadData()
@@ -70,11 +92,13 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     {
         if result.finalResult?.count == 0
         {
-            
+            networkRequestForPost()
         }
-        if let finalResult = result.finalResult as? [(NSManagedObject)]
+        
+        else if let finalResult = result.finalResult as? [(NSManagedObject)]
         {
             self.post = finalResult[0] as? Post
+            self.getCommentsFromCoreData()
             self.tableView.reloadData()
         }
     }
@@ -86,7 +110,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request) { (result) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.setPostFromCoreData(result)
-                self.getCommentsFromCoreData()
+                
             })
         }
         
