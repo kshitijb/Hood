@@ -60,6 +60,11 @@ struct API {
         return "/".join([fullUrl,Static.posts,Static.filter,Static.currentNeighbourhoodID,channel])
     }
     
+    func getPostWithID(postID:String)->String
+    {
+        return "/".join([fullUrl,Static.posts,Static.all,postID])
+    }
+    
     func upvotePost()->String{
         return "/".join([fullUrl,Static.upvote,Static.add])
     }
