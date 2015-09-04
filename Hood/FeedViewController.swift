@@ -109,7 +109,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillLayoutSubviews() {
         print("Top layout guide is \(self.topLayoutGuide.length)" )
-//        println("Table View Frame on layout \(self.tableView.frame)")
         let frame:CGRect = self.tableView.frame;
         if(frame.size.width > self.view.frame.size.width) {
             self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height)

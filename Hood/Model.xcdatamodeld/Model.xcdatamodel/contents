@@ -6,9 +6,9 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="channel" inverseEntity="Post" syncable="YES"/>
     </entity>
-    <entity name="Comment" representedClassName="PRODUCT_MODULE_NAME.Comment" parentEntity="ParentObject" syncable="YES">
+    <entity name="Comment" representedClassName="Pipal.Comment" parentEntity="ParentObject" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="timestamp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post" syncable="YES"/>
     </entity>
@@ -47,7 +47,7 @@
     </entity>
     <elements>
         <element name="Channel" positionX="-587" positionY="18" width="128" height="105"/>
-        <element name="Comment" positionX="-153" positionY="255" width="128" height="103"/>
+        <element name="Comment" positionX="-153" positionY="255" width="128" height="105"/>
         <element name="Neighbourhood" positionX="-369" positionY="-288" width="128" height="88"/>
         <element name="ParentObject" positionX="142" positionY="102" width="128" height="60"/>
         <element name="Post" positionX="-74" positionY="-297" width="128" height="195"/>

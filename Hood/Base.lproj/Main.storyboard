@@ -430,7 +430,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oNw-F3-X5p">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oNw-F3-X5p">
                                 <rect key="frame" x="0.0" y="20" width="600" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
@@ -813,7 +813,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9pz-KM-L6h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2765" y="475"/>
+            <point key="canvasLocation" x="2761" y="539"/>
         </scene>
         <!--Add Post View Controller-->
         <scene sceneID="jEt-ip-RrF">
@@ -1274,7 +1274,7 @@ neighbours</string>
                     </view>
                     <navigationItem key="navigationItem" title="Alerts" id="5Hr-Hi-wHX">
                         <barButtonItem key="rightBarButtonItem" image="Hash" id="rpv-e2-9q4">
-                            <inset key="imageInsets" minX="5" minY="6" maxX="4" maxY="3"/>
+                            <inset key="imageInsets" minX="14" minY="13" maxX="6" maxY="5"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="dismiss:" destination="WYQ-7t-NiM" id="eCm-01-M9W"/>
@@ -1283,11 +1283,12 @@ neighbours</string>
                     </navigationItem>
                     <connections>
                         <outlet property="notificationTableView" destination="wfY-te-USf" id="Yru-Qq-no1"/>
+                        <segue destination="yBB-lD-5wj" kind="show" identifier="showPost" id="GGi-E3-6Qh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LvL-S3-oY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2059" y="-259"/>
+            <point key="canvasLocation" x="2491" y="-269"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KC7-pT-ZBj">
