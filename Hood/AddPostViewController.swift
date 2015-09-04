@@ -161,20 +161,6 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        pickedImage = image
-        println("Original size \(pickedImage?.size)")
-        pickedImage = resizeImage(pickedImage!)
-        println("Changed size \(pickedImage?.size)")
-        postImageView.image = pickedImage
-        updateScrollViewContentSize()
-        dismissViewControllerAnimated(true, completion: nil)
-        let imageCropVC = RSKImageCropViewController(image: pickedImage)
-        imageCropVC.delegate = self;
-        presentViewController(imageCropVC, animated: true) { () -> Void in
-            
-        }
-    }
     
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
