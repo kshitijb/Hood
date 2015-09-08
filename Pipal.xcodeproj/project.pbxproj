@@ -11,6 +11,20 @@
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
 		42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */; };
 		42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */; };
+		42E55C261B9EE4BC000C102E /* ALCameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E55C141B9EE4BC000C102E /* ALCameraView.strings */; };
+		42E55C271B9EE4BC000C102E /* ALCameraViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E55C151B9EE4BC000C102E /* ALCameraViewAssets.xcassets */; };
+		42E55C281B9EE4BC000C102E /* ALImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C171B9EE4BC000C102E /* ALImageModel.swift */; };
+		42E55C291B9EE4BC000C102E /* ALCameraShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C191B9EE4BC000C102E /* ALCameraShot.swift */; };
+		42E55C2A1B9EE4BC000C102E /* ALImageFetchingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C1A1B9EE4BC000C102E /* ALImageFetchingInteractor.swift */; };
+		42E55C2B1B9EE4BC000C102E /* ALUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C1B1B9EE4BC000C102E /* ALUtilities.swift */; };
+		42E55C2C1B9EE4BC000C102E /* ALCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C1D1B9EE4BC000C102E /* ALCameraViewController.swift */; };
+		42E55C2D1B9EE4BC000C102E /* ALConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C1E1B9EE4BC000C102E /* ALConfirmViewController.swift */; };
+		42E55C2E1B9EE4BC000C102E /* ALImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C1F1B9EE4BC000C102E /* ALImagePickerViewController.swift */; };
+		42E55C2F1B9EE4BC000C102E /* ALImagePickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C201B9EE4BC000C102E /* ALImagePickerViewDelegate.swift */; };
+		42E55C301B9EE4BC000C102E /* ALCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C221B9EE4BC000C102E /* ALCameraView.swift */; };
+		42E55C311B9EE4BC000C102E /* ALCropOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C231B9EE4BC000C102E /* ALCropOverlay.swift */; };
+		42E55C321B9EE4BC000C102E /* ALImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C241B9EE4BC000C102E /* ALImageCell.swift */; };
+		42E55C331B9EE4BC000C102E /* ALPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C251B9EE4BC000C102E /* ALPermissionsView.swift */; };
 		42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EB28231B74BCE400AB0331 /* Utilities.swift */; };
 		42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; };
 		42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -92,6 +106,20 @@
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
 		42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		42E55C141B9EE4BC000C102E /* ALCameraView.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ALCameraView.strings; sourceTree = "<group>"; };
+		42E55C151B9EE4BC000C102E /* ALCameraViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ALCameraViewAssets.xcassets; sourceTree = "<group>"; };
+		42E55C171B9EE4BC000C102E /* ALImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALImageModel.swift; sourceTree = "<group>"; };
+		42E55C191B9EE4BC000C102E /* ALCameraShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALCameraShot.swift; sourceTree = "<group>"; };
+		42E55C1A1B9EE4BC000C102E /* ALImageFetchingInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALImageFetchingInteractor.swift; sourceTree = "<group>"; };
+		42E55C1B1B9EE4BC000C102E /* ALUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALUtilities.swift; sourceTree = "<group>"; };
+		42E55C1D1B9EE4BC000C102E /* ALCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALCameraViewController.swift; sourceTree = "<group>"; };
+		42E55C1E1B9EE4BC000C102E /* ALConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALConfirmViewController.swift; sourceTree = "<group>"; };
+		42E55C1F1B9EE4BC000C102E /* ALImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALImagePickerViewController.swift; sourceTree = "<group>"; };
+		42E55C201B9EE4BC000C102E /* ALImagePickerViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALImagePickerViewDelegate.swift; sourceTree = "<group>"; };
+		42E55C221B9EE4BC000C102E /* ALCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALCameraView.swift; sourceTree = "<group>"; };
+		42E55C231B9EE4BC000C102E /* ALCropOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALCropOverlay.swift; sourceTree = "<group>"; };
+		42E55C241B9EE4BC000C102E /* ALImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALImageCell.swift; sourceTree = "<group>"; };
+		42E55C251B9EE4BC000C102E /* ALPermissionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALPermissionsView.swift; sourceTree = "<group>"; };
 		42EB28231B74BCE400AB0331 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		42EB28251B74D79100AB0331 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onBoardingViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +208,59 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		42E55C131B9EE4BC000C102E /* ALCameraViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42E55C141B9EE4BC000C102E /* ALCameraView.strings */,
+				42E55C151B9EE4BC000C102E /* ALCameraViewAssets.xcassets */,
+				42E55C161B9EE4BC000C102E /* Models */,
+				42E55C181B9EE4BC000C102E /* Utilities */,
+				42E55C1C1B9EE4BC000C102E /* ViewController */,
+				42E55C211B9EE4BC000C102E /* Views */,
+			);
+			path = ALCameraViewController;
+			sourceTree = "<group>";
+		};
+		42E55C161B9EE4BC000C102E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				42E55C171B9EE4BC000C102E /* ALImageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		42E55C181B9EE4BC000C102E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				42E55C191B9EE4BC000C102E /* ALCameraShot.swift */,
+				42E55C1A1B9EE4BC000C102E /* ALImageFetchingInteractor.swift */,
+				42E55C1B1B9EE4BC000C102E /* ALUtilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		42E55C1C1B9EE4BC000C102E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42E55C1D1B9EE4BC000C102E /* ALCameraViewController.swift */,
+				42E55C1E1B9EE4BC000C102E /* ALConfirmViewController.swift */,
+				42E55C1F1B9EE4BC000C102E /* ALImagePickerViewController.swift */,
+				42E55C201B9EE4BC000C102E /* ALImagePickerViewDelegate.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		42E55C211B9EE4BC000C102E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				42E55C221B9EE4BC000C102E /* ALCameraView.swift */,
+				42E55C231B9EE4BC000C102E /* ALCropOverlay.swift */,
+				42E55C241B9EE4BC000C102E /* ALImageCell.swift */,
+				42E55C251B9EE4BC000C102E /* ALPermissionsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		74F0A7C0E9AF33422FD0E659 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,13 +268,6 @@
 				A069B87B32A12C58B4670050 /* Pods-Pipal.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		D5604CF31B722C68002AD200 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Libraries;
 			sourceTree = "<group>";
 		};
 		D5B3E4741B6A2CB000F3DF9F = {
@@ -228,9 +302,9 @@
 		D5B3E47F1B6A2CB000F3DF9F /* Hood */ = {
 			isa = PBXGroup;
 			children = (
+				42E55C131B9EE4BC000C102E /* ALCameraViewController */,
 				D5EBCFCF1B8C4AB5000E0656 /* Models */,
 				423983E11B7BC50200F9D4AF /* commentCell.swift */,
-				D5604CF31B722C68002AD200 /* Libraries */,
 				D5B3E4BE1B6A33EC00F3DF9F /* Assets */,
 				D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */,
 				42F01BEA1B79EAAB001386C1 /* loginViewController.swift */,
@@ -396,6 +470,7 @@
 				D5B3E4B81B6A33E000F3DF9F /* Lato-Italic.ttf in Resources */,
 				D5B3E4B21B6A33E000F3DF9F /* Lato-Black.ttf in Resources */,
 				D5B3E4B41B6A33E000F3DF9F /* Lato-Bold.ttf in Resources */,
+				42E55C261B9EE4BC000C102E /* ALCameraView.strings in Resources */,
 				D5B3E4B91B6A33E000F3DF9F /* Lato-Light.ttf in Resources */,
 				D547A47F1B6B5C4300B556B4 /* Me.jpg in Resources */,
 				D5B3E48C1B6A2CB000F3DF9F /* Main.storyboard in Resources */,
@@ -404,6 +479,7 @@
 				D5B3E4BA1B6A33E000F3DF9F /* Lato-LightItalic.ttf in Resources */,
 				D5B3E4B71B6A33E000F3DF9F /* Lato-HairlineItalic.ttf in Resources */,
 				D5B3E4B51B6A33E000F3DF9F /* Lato-BoldItalic.ttf in Resources */,
+				42E55C271B9EE4BC000C102E /* ALCameraViewAssets.xcassets in Resources */,
 				D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */,
 				D5B3E4B61B6A33E000F3DF9F /* Lato-Hairline.ttf in Resources */,
 				D547A4851B6F526000B556B4 /* AC.png in Resources */,
@@ -480,9 +556,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */,
+				42E55C2A1B9EE4BC000C102E /* ALImageFetchingInteractor.swift in Sources */,
 				42F01BEB1B79EAAB001386C1 /* loginViewController.swift in Sources */,
+				42E55C2C1B9EE4BC000C102E /* ALCameraViewController.swift in Sources */,
 				D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */,
 				D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */,
+				42E55C281B9EE4BC000C102E /* ALImageModel.swift in Sources */,
 				D51FB2E51B7891FC00518DA2 /* PopButton.swift in Sources */,
 				42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */,
 				D57382A11B7359150080A4FA /* APIConstants.swift in Sources */,
@@ -492,21 +571,30 @@
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
+				42E55C2D1B9EE4BC000C102E /* ALConfirmViewController.swift in Sources */,
 				42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */,
+				42E55C2F1B9EE4BC000C102E /* ALImagePickerViewDelegate.swift in Sources */,
 				D5EBCFD51B8C4AF5000E0656 /* Post.swift in Sources */,
 				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
 				D5EBCFD71B8C4AF5000E0656 /* ParentObject.swift in Sources */,
+				42E55C331B9EE4BC000C102E /* ALPermissionsView.swift in Sources */,
+				42E55C2E1B9EE4BC000C102E /* ALImagePickerViewController.swift in Sources */,
 				D5EBCFD31B8C4AF5000E0656 /* Channel.swift in Sources */,
 				D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */,
+				42E55C2B1B9EE4BC000C102E /* ALUtilities.swift in Sources */,
 				D5EBCFD91B8C4AF5000E0656 /* Neighbourhood.swift in Sources */,
 				42ED1E451B7C91E600B0DE68 /* onBoardingViewController.swift in Sources */,
 				425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */,
 				D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */,
 				D5EBCFDB1B8C4AF6000E0656 /* Comment.swift in Sources */,
+				42E55C291B9EE4BC000C102E /* ALCameraShot.swift in Sources */,
 				D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */,
 				D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */,
+				42E55C321B9EE4BC000C102E /* ALImageCell.swift in Sources */,
 				D54B9BD51B7DD2520075836C /* PostController.swift in Sources */,
+				42E55C301B9EE4BC000C102E /* ALCameraView.swift in Sources */,
 				D5EBCFD11B8C4AF5000E0656 /* User.swift in Sources */,
+				42E55C311B9EE4BC000C102E /* ALCropOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,8 +709,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robin Malhotra (Q7B4ER6Z34)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robin Malhotra (Q7B4ER6Z34)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
