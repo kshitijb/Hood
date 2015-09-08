@@ -8,9 +8,8 @@
 
 import UIKit
 import Alamofire
-import RSKImageCropper
-import ALCameraViewController
-class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource
+
+class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTextView: UITextView!
@@ -142,18 +141,20 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
 
     func addPhoto(){
-        let cameraViewController = ALCameraViewController(croppingEnabled: false) { (image) -> Void in
-            self.pickedImage = image
-            self.pickedImage = self.resizeImage(self.pickedImage!)
+        let cameraViewController = ALCameraViewController(croppingEnabled: true) { (image) -> Void in
+            if(image?.size.width > 2*self.view.frame.width)
+            {
+                self.pickedImage = self.resizeImage(image!)
+            }
+            else
+            {
+                self.pickedImage = image
+            }
+                        
             self.postImageView.image = self.pickedImage
             self.updateScrollViewContentSize()
-            let imageCropVC = RSKImageCropViewController(image: self.pickedImage)
-            imageCropVC.delegate = self
-            imageCropVC.dataSource = self as RSKImageCropViewControllerDataSource
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                self.presentViewController(imageCropVC, animated: true) { () -> Void in
-                    
-                }
+                
             })
             
         }
@@ -186,34 +187,6 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
     
     
-    // MARK: image cropping
-    
-    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController!)
-    {
-        dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
-    }
-    
-    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect)
-    {
-        postImageView.image = croppedImage
-        dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
-    }
-    
-    func imageCropViewControllerCustomMaskRect(controller: RSKImageCropViewController!) -> CGRect {
-        return CGRectMake(0, 0, view.frame.width, view.frame.width*9/16)
-    }
-    
-    func imageCropViewControllerCustomMaskPath(controller: RSKImageCropViewController!) -> UIBezierPath! {
-        return UIBezierPath(rect: CGRectMake(0, 0, view.frame.width, view.frame.width*9/16))
-    }
-    
-    func imageCropViewControllerCustomMovementRect(controller: RSKImageCropViewController!) -> CGRect {
-        return controller.maskRect
-    }
 
     
 }

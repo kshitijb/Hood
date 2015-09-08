@@ -6,8 +6,6 @@ target 'Pipal' do
 
 pod 'Lookback', :configurations => ['Debug']
 pod 'LookbackSafe', :configurations => ['Release']
-pod 'RSKImageCropper'
-pod 'ALCameraViewController'
 
 end
 
