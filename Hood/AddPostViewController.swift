@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import RSKImageCropper
 import ALCameraViewController
-class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
+class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource
 {
     @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTextView: UITextView!
@@ -148,7 +148,8 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
             self.postImageView.image = self.pickedImage
             self.updateScrollViewContentSize()
             let imageCropVC = RSKImageCropViewController(image: self.pickedImage)
-            imageCropVC.delegate = self;
+            imageCropVC.delegate = self
+            imageCropVC.dataSource = self as RSKImageCropViewControllerDataSource
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 self.presentViewController(imageCropVC, animated: true) { () -> Void in
                     
@@ -202,5 +203,17 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         })
     }
     
+    func imageCropViewControllerCustomMaskRect(controller: RSKImageCropViewController!) -> CGRect {
+        return CGRectMake(0, 0, view.frame.width, view.frame.width*9/16)
+    }
+    
+    func imageCropViewControllerCustomMaskPath(controller: RSKImageCropViewController!) -> UIBezierPath! {
+        return UIBezierPath(rect: CGRectMake(0, 0, view.frame.width, view.frame.width*9/16))
+    }
+    
+    func imageCropViewControllerCustomMovementRect(controller: RSKImageCropViewController!) -> CGRect {
+        return controller.maskRect
+    }
+
     
 }
