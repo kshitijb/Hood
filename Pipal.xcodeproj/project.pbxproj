@@ -25,6 +25,8 @@
 		42E55C311B9EE4BC000C102E /* ALCropOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C231B9EE4BC000C102E /* ALCropOverlay.swift */; };
 		42E55C321B9EE4BC000C102E /* ALImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C241B9EE4BC000C102E /* ALImageCell.swift */; };
 		42E55C331B9EE4BC000C102E /* ALPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C251B9EE4BC000C102E /* ALPermissionsView.swift */; };
+		42E92AA11BA0313F003973B0 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E92AA01BA0313F003973B0 /* EmptyView.swift */; };
+		42E92AA51BA04BF8003973B0 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42E92AA41BA04BF8003973B0 /* EmptyView.xib */; };
 		42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EB28231B74BCE400AB0331 /* Utilities.swift */; };
 		42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; };
 		42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -120,6 +122,8 @@
 		42E55C231B9EE4BC000C102E /* ALCropOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALCropOverlay.swift; sourceTree = "<group>"; };
 		42E55C241B9EE4BC000C102E /* ALImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALImageCell.swift; sourceTree = "<group>"; };
 		42E55C251B9EE4BC000C102E /* ALPermissionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALPermissionsView.swift; sourceTree = "<group>"; };
+		42E92AA01BA0313F003973B0 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = ALCameraViewController/EmptyView.swift; sourceTree = "<group>"; };
+		42E92AA41BA04BF8003973B0 /* EmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
 		42EB28231B74BCE400AB0331 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		42EB28251B74D79100AB0331 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onBoardingViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 				42E55C131B9EE4BC000C102E /* ALCameraViewController */,
 				D5EBCFCF1B8C4AB5000E0656 /* Models */,
 				423983E11B7BC50200F9D4AF /* commentCell.swift */,
+				42E92AA01BA0313F003973B0 /* EmptyView.swift */,
+				42E92AA41BA04BF8003973B0 /* EmptyView.xib */,
 				D5B3E4BE1B6A33EC00F3DF9F /* Assets */,
 				D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */,
 				42F01BEA1B79EAAB001386C1 /* loginViewController.swift */,
@@ -476,6 +482,7 @@
 				D5B3E48C1B6A2CB000F3DF9F /* Main.storyboard in Resources */,
 				D5B3E4B31B6A33E000F3DF9F /* Lato-BlackItalic.ttf in Resources */,
 				D5B3E4911B6A2CB000F3DF9F /* LaunchScreen.xib in Resources */,
+				42E92AA51BA04BF8003973B0 /* EmptyView.xib in Resources */,
 				D5B3E4BA1B6A33E000F3DF9F /* Lato-LightItalic.ttf in Resources */,
 				D5B3E4B71B6A33E000F3DF9F /* Lato-HairlineItalic.ttf in Resources */,
 				D5B3E4B51B6A33E000F3DF9F /* Lato-BoldItalic.ttf in Resources */,
@@ -577,6 +584,7 @@
 				D5EBCFD51B8C4AF5000E0656 /* Post.swift in Sources */,
 				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
 				D5EBCFD71B8C4AF5000E0656 /* ParentObject.swift in Sources */,
+				42E92AA11BA0313F003973B0 /* EmptyView.swift in Sources */,
 				42E55C331B9EE4BC000C102E /* ALPermissionsView.swift in Sources */,
 				42E55C2E1B9EE4BC000C102E /* ALImagePickerViewController.swift in Sources */,
 				D5EBCFD31B8C4AF5000E0656 /* Channel.swift in Sources */,
