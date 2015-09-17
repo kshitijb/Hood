@@ -1,3 +1,4 @@
+
 //
 //  RootViewController.swift
 //  Hood
@@ -13,8 +14,10 @@ import SwiftyJSON
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
+import Sheriff
+class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate,UIViewControllerTransitioningDelegate {
 
-class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate {
+    @IBOutlet weak var notificationBarButton: UIBarButtonItem!
     let titleScrollViewWidth = CGFloat(160)
     var pageViewController: UIPageViewController?
     var titleScrollView: UIScrollView?
@@ -25,6 +28,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
+    let badge = GIBadgeView.new()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         else
         {
             getData()
+            fetchNotificationsCount()
         }
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
@@ -61,9 +66,24 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
-        
+        setUpNotificationButton()
     }
-
+    func setUpNotificationButton()
+    {
+        let notifButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
+        notifButton.contentMode = UIViewContentMode.ScaleAspectFit
+        notifButton.addSubview(badge)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: notifButton)
+        badge.increment()
+        
+        notifButton.setImage(UIImage(named: "Profile"), forState: UIControlState.Normal)
+        notifButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        notifButton.addTarget(self, action:Selector("showNotifs") , forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    func showNotifs()
+    {
+        self.performSegueWithIdentifier("showNotifications", sender: self)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -189,6 +209,23 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             let currentChannel = self.modelController.pageData.objectAtIndex(self.pageControl.currentPage) as! Channel
             (segue.destinationViewController as? AddPostViewController)?.channelID = currentChannel.id.integerValue
         }
+        else if segue.identifier == "showNotifications"
+        {
+            let toViewController = segue.destinationViewController as! UIViewController
+            toViewController.transitioningDelegate = self
+        }
+    }
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let show = leftToRightNavController()
+        show.isDismissing = false
+        return show
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let dismiss = leftToRightNavController()
+        dismiss.isDismissing = true
+        return dismiss
     }
     
     func showPageControl(){
@@ -331,6 +368,34 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 })
         }
     }
+    
+    
+    func fetchNotificationsCount(){
+        let url = API().getNotificationsForUser()
+        print(url)
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
+            if let e = error{
+                print(error)
+            }
+            else
+            {
+                print(data!)
+                let responseJSON = JSON(data!)
+                self.badge.badgeValue = responseJSON["count"].int!
+                
+                
+            }
+        }
+        
+    }
+    
+    
+    
+
+    
+    
+
     
 }
     

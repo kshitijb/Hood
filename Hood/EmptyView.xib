@@ -47,7 +47,7 @@
                     <color key="textColor" red="0.66274509803921566" green="0.69019607843137254" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's on your mind? Share your first post." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6J-QB-JHA">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What's on your mind? Share your first post." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6J-QB-JHA">
                     <rect key="frame" x="15" y="52" width="308" height="20.5"/>
                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="17"/>
                     <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,7 +78,7 @@
         </view>
     </objects>
     <resources>
-        <image name="emptyMap" width="545" height="338"/>
+        <image name="emptyMap" width="750" height="388"/>
         <image name="personThing" width="59" height="59"/>
     </resources>
 </document>
