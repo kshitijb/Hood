@@ -55,11 +55,16 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
         Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON, headers: headers).response({ (request, response, data, error) -> Void in
             print(error)
-            print(response)
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            NSNotificationCenter.defaultCenter().postNotificationName(AddedPostNotificationName, object: nil, userInfo: userInfo)
-            self.postNowButton.enabled = true
-            self.title = ""
+            if error != nil
+            {
+            }
+            else
+            {
+                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                NSNotificationCenter.defaultCenter().postNotificationName(AddedPostNotificationName, object: nil, userInfo: userInfo)
+                self.postNowButton.enabled = true
+                self.title = ""
+            }
         })
 
     }

@@ -51,7 +51,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         var identifier:String
         let dataObject: AnyObject = fetchedResultsController.objectAtIndexPath(indexPath)
         let post = dataObject as! Post
@@ -63,7 +64,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.layoutMargins = UIEdgeInsetsZero
             cell.setContents(post)
             return cell
-        }else{
+        }
+        else
+        {
             identifier = "CellWithoutImage"
             let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
             cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -77,6 +80,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRowsInSection = fetchedResultsController.sections?[section].numberOfObjects
         return numberOfRowsInSection!
+
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -155,6 +159,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.dataArray.addObject(postObject)
                 }
                 let results = appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+                if(results?.count == 0)
+                {
+                    let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView
+                    
+                    emptyView!.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
+                    self.tableView.addSubview(emptyView!)
+                }
                 if(results?.count > 0){
                     let objectsToDelete = NSMutableSet(array: results!)
                     objectsToDelete.minusSet(NSSet(array: self.dataArray as [AnyObject]) as Set<NSObject>)

@@ -25,10 +25,13 @@
 		42E55C311B9EE4BC000C102E /* ALCropOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C231B9EE4BC000C102E /* ALCropOverlay.swift */; };
 		42E55C321B9EE4BC000C102E /* ALImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C241B9EE4BC000C102E /* ALImageCell.swift */; };
 		42E55C331B9EE4BC000C102E /* ALPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E55C251B9EE4BC000C102E /* ALPermissionsView.swift */; };
+		42E92AA11BA0313F003973B0 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E92AA01BA0313F003973B0 /* EmptyView.swift */; };
+		42E92AA51BA04BF8003973B0 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42E92AA41BA04BF8003973B0 /* EmptyView.xib */; };
 		42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EB28231B74BCE400AB0331 /* Utilities.swift */; };
 		42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; };
 		42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42EB28251B74D79100AB0331 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42ED1E451B7C91E600B0DE68 /* onBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */; };
+		42EF7C611BAAB16C00F112CE /* leftToRightNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EF7C601BAAB16C00F112CE /* leftToRightNavController.swift */; };
 		42F01BEB1B79EAAB001386C1 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F01BEA1B79EAAB001386C1 /* loginViewController.swift */; };
 		D51FB2E51B7891FC00518DA2 /* PopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51FB2E41B7891FC00518DA2 /* PopButton.swift */; };
 		D547A47F1B6B5C4300B556B4 /* Me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D547A47E1B6B5C4300B556B4 /* Me.jpg */; };
@@ -120,9 +123,12 @@
 		42E55C231B9EE4BC000C102E /* ALCropOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALCropOverlay.swift; sourceTree = "<group>"; };
 		42E55C241B9EE4BC000C102E /* ALImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALImageCell.swift; sourceTree = "<group>"; };
 		42E55C251B9EE4BC000C102E /* ALPermissionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALPermissionsView.swift; sourceTree = "<group>"; };
+		42E92AA01BA0313F003973B0 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = ALCameraViewController/EmptyView.swift; sourceTree = "<group>"; };
+		42E92AA41BA04BF8003973B0 /* EmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
 		42EB28231B74BCE400AB0331 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		42EB28251B74D79100AB0331 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onBoardingViewController.swift; sourceTree = "<group>"; };
+		42EF7C601BAAB16C00F112CE /* leftToRightNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leftToRightNavController.swift; sourceTree = "<group>"; };
 		42F01BEA1B79EAAB001386C1 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		A069B87B32A12C58B4670050 /* Pods-Pipal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.release.xcconfig"; sourceTree = "<group>"; };
 		D51FB2E41B7891FC00518DA2 /* PopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopButton.swift; sourceTree = "<group>"; };
@@ -305,6 +311,8 @@
 				42E55C131B9EE4BC000C102E /* ALCameraViewController */,
 				D5EBCFCF1B8C4AB5000E0656 /* Models */,
 				423983E11B7BC50200F9D4AF /* commentCell.swift */,
+				42E92AA01BA0313F003973B0 /* EmptyView.swift */,
+				42E92AA41BA04BF8003973B0 /* EmptyView.xib */,
 				D5B3E4BE1B6A33EC00F3DF9F /* Assets */,
 				D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */,
 				42F01BEA1B79EAAB001386C1 /* loginViewController.swift */,
@@ -319,6 +327,7 @@
 				42EB28231B74BCE400AB0331 /* Utilities.swift */,
 				D547A4821B6B717600B556B4 /* CellWithoutImage.swift */,
 				D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */,
+				42EF7C601BAAB16C00F112CE /* leftToRightNavController.swift */,
 				42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */,
 				42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */,
 				42ED1E441B7C91E600B0DE68 /* onBoardingViewController.swift */,
@@ -476,6 +485,7 @@
 				D5B3E48C1B6A2CB000F3DF9F /* Main.storyboard in Resources */,
 				D5B3E4B31B6A33E000F3DF9F /* Lato-BlackItalic.ttf in Resources */,
 				D5B3E4911B6A2CB000F3DF9F /* LaunchScreen.xib in Resources */,
+				42E92AA51BA04BF8003973B0 /* EmptyView.xib in Resources */,
 				D5B3E4BA1B6A33E000F3DF9F /* Lato-LightItalic.ttf in Resources */,
 				D5B3E4B71B6A33E000F3DF9F /* Lato-HairlineItalic.ttf in Resources */,
 				D5B3E4B51B6A33E000F3DF9F /* Lato-BoldItalic.ttf in Resources */,
@@ -559,6 +569,7 @@
 				42E55C2A1B9EE4BC000C102E /* ALImageFetchingInteractor.swift in Sources */,
 				42F01BEB1B79EAAB001386C1 /* loginViewController.swift in Sources */,
 				42E55C2C1B9EE4BC000C102E /* ALCameraViewController.swift in Sources */,
+				42EF7C611BAAB16C00F112CE /* leftToRightNavController.swift in Sources */,
 				D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */,
 				D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */,
 				42E55C281B9EE4BC000C102E /* ALImageModel.swift in Sources */,
@@ -577,6 +588,7 @@
 				D5EBCFD51B8C4AF5000E0656 /* Post.swift in Sources */,
 				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
 				D5EBCFD71B8C4AF5000E0656 /* ParentObject.swift in Sources */,
+				42E92AA11BA0313F003973B0 /* EmptyView.swift in Sources */,
 				42E55C331B9EE4BC000C102E /* ALPermissionsView.swift in Sources */,
 				42E55C2E1B9EE4BC000C102E /* ALImagePickerViewController.swift in Sources */,
 				D5EBCFD31B8C4AF5000E0656 /* Channel.swift in Sources */,
