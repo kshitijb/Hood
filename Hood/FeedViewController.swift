@@ -54,7 +54,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         var identifier:String
         let dataObject: AnyObject = fetchedResultsController.objectAtIndexPath(indexPath)
         let post = dataObject as! Post
@@ -66,7 +67,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.layoutMargins = UIEdgeInsetsZero
             cell.setContents(post)
             return cell
-        }else{
+        }
+        else
+        {
             identifier = "CellWithoutImage"
             let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! CellWithoutImage
             cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -80,6 +83,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRowsInSection = fetchedResultsController.sections?[section].numberOfObjects
         return numberOfRowsInSection!
+
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
