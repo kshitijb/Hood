@@ -55,7 +55,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         let dataObject: Channel = viewController.dataObject as! Channel
 //            let dataArray  = pageData
 //            return dataArray.indexOfObject(dataObject)
-        for index in 0...self.pageData.count{
+        for index in 0...self.pageData.count-1{
             let currentObject = self.pageData[index] as! Channel
             if currentObject.id == dataObject.id{
                 return index

@@ -82,9 +82,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
-        else if(self.modelController.pageData.count == 0)
+        else
         {
-            fetchChannels()
+            getData()
         }
     }
     
