@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         UINavigationBar.appearance().barTintColor = GlobalColors.Green
-        UINavigationBar.appearance().setBackgroundImage(getImageWithColor(GlobalColors.Green, CGSizeMake(1, 64)), forBarMetrics: .Default)
-        UINavigationBar.appearance().shadowImage = UIImage.new()
+        UINavigationBar.appearance().setBackgroundImage(getImageWithColor(GlobalColors.Green, size: CGSizeMake(1, 64)), forBarMetrics: .Default)
+        UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         let fontNames = UIFont.fontNamesForFamilyName("Lato")
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fetchRequest.predicate = NSPredicate(format: "is_owner == %@", argumentArray: [NSNumber(bool: true)])
         fetchRequest.fetchLimit = 1
         if(managedObjectContext!.countForFetchRequest(fetchRequest, error: nil) > 0){
-            AppDelegate.owner = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil)!.last as! User
+            AppDelegate.owner = managedObjectContext!.executeFetchRequest(fetchRequest)!.last as! User
         }
 //        Lookback.setupWithAppToken("3kok372o2DpYeWKFF")
 //        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 

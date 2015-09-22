@@ -118,9 +118,9 @@ struct Utilities
             c2Comp[0], c2Comp[1], c2Comp[2], c2Comp[3]
         ]
         
-        let red  = linearTransition(c1Comp[0], c2Comp[0], offsetAsFraction)
-        let green = linearTransition(c1Comp[1], c2Comp[1], offsetAsFraction)
-        let blue = linearTransition(c1Comp[2], c2Comp[2], offsetAsFraction)
+        let red  = linearTransition(c1Comp[0], y: c2Comp[0], offset: offsetAsFraction)
+        let green = linearTransition(c1Comp[1], y: c2Comp[1], offset: offsetAsFraction)
+        let blue = linearTransition(c1Comp[2], y: c2Comp[2], offset: offsetAsFraction)
         
         return UIColor(red: red , green: green, blue: blue, alpha: 1.0)
     }

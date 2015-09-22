@@ -91,7 +91,7 @@ public class ALCameraView: UIView {
                 var correctedImage = image
                 print(image.size)
                 if self.currentPosition == AVCaptureDevicePosition.Front {
-                    correctedImage = UIImage(CGImage: image.CGImage, scale: image.scale, orientation:.UpMirrored)!
+                    correctedImage = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation:.UpMirrored)!
                     print(correctedImage.size)
                 }
                 
@@ -113,7 +113,7 @@ public class ALCameraView: UIView {
                 device = cameraWithPosition(currentPosition)
             }
             
-            var error = NSErrorPointer()
+            let error = NSErrorPointer()
             input = AVCaptureDeviceInput(device: device, error: error)
             
             session.addInput(input)

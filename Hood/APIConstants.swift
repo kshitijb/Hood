@@ -33,11 +33,12 @@ struct API {
     }
     
     private var allChannels:String{
-        return "/".join([fullUrl, Static.channels, Static.all])
+        return ([fullUrl, Static.channels, Static.all]).joinWithSeparator("/")
+        
     }
     
     private var allPosts:String{
-        return "/".join([fullUrl, Static.posts, Static.all])
+        return ([fullUrl, Static.posts, Static.all]).joinWithSeparator("/")
     }
     
     func getFullUrl() -> String{
@@ -49,7 +50,7 @@ struct API {
     }
 
     func getAllChannelsForNeighbourhood() -> String{
-        return "/".join([fullUrl,Static.neighbourhoods,Static.all,Static.currentNeighbourhoodID])
+        return ([fullUrl,Static.neighbourhoods,Static.all,Static.currentNeighbourhoodID]).joinWithSeparator("/")
     }
     
     func getAllPosts() -> String{
@@ -57,38 +58,38 @@ struct API {
     }
     
     func getAllPostsForChannel(channel: String) -> String{
-        return "/".join([fullUrl,Static.posts,Static.filter,Static.currentNeighbourhoodID,channel])
+        return ([fullUrl,Static.posts,Static.filter,Static.currentNeighbourhoodID,channel]).joinWithSeparator("/")
     }
     
     func getPostWithID(postID:String)->String
     {
-        return "/".join([fullUrl,Static.posts,Static.all,postID])
+        return ([fullUrl,Static.posts,Static.all,postID]).joinWithSeparator("/")
     }
     
     func upvotePost()->String{
-        return "/".join([fullUrl,Static.upvote,Static.add])
+        return ([fullUrl,Static.upvote,Static.add]).joinWithSeparator("/")
     }
     func downvotePost()->String{
-        return "/".join([fullUrl,Static.upvote,Static.delete])
+        return ([fullUrl,Static.upvote,Static.delete]).joinWithSeparator("/")
     }
     
     func addPost() -> String
     {
-        return "/".join([fullUrl,Static.posts,Static.add])
+        return ([fullUrl,Static.posts,Static.add]).joinWithSeparator("/")
     }
     
     func addComment() -> String
     {
-        return "/".join([fullUrl,Static.comment,Static.add])
+        return ([fullUrl,Static.comment,Static.add]).joinWithSeparator("/")
     }
     
     func getCommentsForPost(postID:String) -> String
     {
-        return "/".join([fullUrl,Static.posts,Static.comments,postID])
+        return ([fullUrl,Static.posts,Static.comments,postID]).joinWithSeparator("/")
     }
     
     func getNotificationsForUser() -> String
     {
-        return "/".join([fullUrl, Static.notifications,Static.show])
+        return ([fullUrl, Static.notifications,Static.show]).joinWithSeparator("/")
     }
 }

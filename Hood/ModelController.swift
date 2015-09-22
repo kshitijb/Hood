@@ -39,7 +39,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         // Create a new view controller and pass suitable data.
         if(self.pagesCache.count<=index){
             let dataViewController = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as! FeedViewController
-            println(dataViewController.view.frame)
+            print(dataViewController.view.frame)
             dataViewController.dataObject = self.pageData[index]
             dataViewController.fetchData()
             self.pagesCache.addObject(dataViewController)

@@ -28,7 +28,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
-    let badge = GIBadgeView.new()
+    let badge = GIBadgeView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +143,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         if completed{
-            let dataViewController:FeedViewController = pageViewController.viewControllers.last as! FeedViewController
+            let dataViewController:FeedViewController = pageViewController.viewControllers!.last as! FeedViewController
             let titleString = (dataViewController.dataObject as! Channel).name
             let count = self.modelController.indexOfViewController(dataViewController)
             self.pageControl.currentPage = count
@@ -159,7 +159,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     }
     
     func showComments(notification: NSNotification){
-        let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments")! as! CommentsViewController
+        let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments") as! CommentsViewController
         var info = notification.userInfo!
         commentsView.postID = info["postID"] as! Int
         commentsView.post = info["post"] as? Post
@@ -313,7 +313,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage] as! UIColor, lastColor: pageColors[pageControl.currentPage - 1] as! UIColor, offsetAsFraction: -perc)
             }
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
-                let img = getImageWithColor(colorToSet, CGSizeMake(1, 64))
+                let img = getImageWithColor(colorToSet, size: CGSizeMake(1, 64))
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.navigationController?.navigationBar.setBackgroundImage(img,forBarMetrics: .Default)
                     self.pageIndicatorContainer.backgroundColor = colorToSet

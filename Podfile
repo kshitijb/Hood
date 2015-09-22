@@ -8,4 +8,3 @@ pod 'Lookback', :configurations => ['Debug']
 pod 'LookbackSafe', :configurations => ['Release']
 pod 'Sheriff'
 end
-

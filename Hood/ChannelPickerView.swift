@@ -13,7 +13,7 @@ class ChannelPickerView: UIView {
     
     let statusBarHeight = 20
     let buttonHeight = 75
-    var channels: JSON = JSON.nullJSON
+    var channels: JSON = JSON.null
     var buttonsArray: NSMutableArray = NSMutableArray()
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
     

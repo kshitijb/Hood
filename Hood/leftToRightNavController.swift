@@ -11,7 +11,7 @@ import UIKit
 class leftToRightNavController: NSObject, UIViewControllerAnimatedTransitioning
 {
     var isDismissing:Bool = true
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.3
     }
     
@@ -31,7 +31,7 @@ class leftToRightNavController: NSObject, UIViewControllerAnimatedTransitioning
         {
             toViewController.view.frame = CGRectOffset(finalFrameForVC, -bounds.size.width, 0)
         }
-            containerView.addSubview(toViewController.view)
+            containerView!.addSubview(toViewController.view)
 //        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .CurveLinear, animations: {
 //            fromViewController.view.alpha = 0.5
 //            toViewController.view.frame = finalFrameForVC

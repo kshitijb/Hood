@@ -89,7 +89,7 @@ class loginViewController: UIViewController {
                     }
 
                     SVProgressHUD.dismiss()
-                    let onboarding:UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("onboarding") as! UIViewController
+                    let onboarding:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("onboarding"))!
                     self.navigationController?.pushViewController(onboarding, animated: true)
                 })
                 

@@ -19,7 +19,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     var postID = 0
     var post: Post?
     @IBOutlet weak var commentConstraint: NSLayoutConstraint!
-    var commentsJSON = JSON.nullJSON
+    var commentsJSON = JSON.null
     var comments = [NSManagedObject]()
     @IBOutlet weak var sendCommentButton: UIView!
     let commentsActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)

@@ -44,7 +44,7 @@ class CellWithoutImage: UITableViewCell {
         self.post = post
         postID = post.id.intValue
         upvotesCount = post.upvotes_count.integerValue
-        var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
+        var attributes = content.attributedText!.attributesAtIndex(0, effectiveRange: nil)
         let attributedString = NSAttributedString(string: post.message, attributes: attributes)
         content.attributedText = attributedString
         contentView.layoutIfNeeded()

@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 class NotificationCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
-    var json = JSON.nullJSON
+    var json = JSON.null
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var fullNameLabel: UILabel!

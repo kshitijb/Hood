@@ -20,7 +20,7 @@ internal class ALPermissionsView: UIView {
     let verticalSpacing: CGFloat = 10
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         commonInit()
     }
     
