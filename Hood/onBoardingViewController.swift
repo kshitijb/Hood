@@ -45,11 +45,11 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             let iPhoneImage = UIImageView(image: UIImage(named: "iPhone"))
             iPhoneImage.frame = CGRectMake(0,100,100,100)
             var channelImageScrollView = UIScrollView(frame: CGRectMake(0,0,100,100))
-            channelTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
-            channelDesc.setTranslatesAutoresizingMaskIntoConstraints(false)
-            iPhoneImage.setTranslatesAutoresizingMaskIntoConstraints(false)
-            channelImageScrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
-            clearView.setTranslatesAutoresizingMaskIntoConstraints(false)
+            channelTitle.translatesAutoresizingMaskIntoConstraints = false
+            channelDesc.translatesAutoresizingMaskIntoConstraints = false
+            iPhoneImage.translatesAutoresizingMaskIntoConstraints = false
+            channelImageScrollView.translatesAutoresizingMaskIntoConstraints = false
+            clearView.translatesAutoresizingMaskIntoConstraints = false
             page.addSubview(channelTitle)
             page.addSubview(channelDesc)
             page.addSubview(iPhoneImage)
@@ -57,13 +57,13 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             let channelImage = UIImageView()
 
             let views = Dictionary(dictionaryLiteral: ("channelTitle",channelTitle),("channelDesc",channelDesc),("channelImageScrollView",channelImageScrollView),("iPhoneImage",iPhoneImage),("pageControl",pageControl),("channelImage",channelImage),("clearView",clearView))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[channelTitle]|", options: nil, metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[channelDesc]|", options: nil, metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[clearView]|", options: nil, metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(30)-[channelTitle]-(15)-[channelDesc]-(25)-[clearView(>=9)]-(25)-[iPhoneImage]|", options: nil, metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[iPhoneImage]-20-|", options: nil, metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(22)-[channelImageScrollView]-(22)-|", options: nil, metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(80)-[channelImageScrollView]|", options: nil, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[channelTitle]|", options: .DirectionLeftToRight , metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[channelDesc]|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[clearView]|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(30)-[channelTitle]-(15)-[channelDesc]-(25)-[clearView(>=9)]-(25)-[iPhoneImage]|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[iPhoneImage]-20-|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(22)-[channelImageScrollView]-(22)-|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(80)-[channelImageScrollView]|", options: .DirectionLeftToRight, metrics: nil, views: views))
             scrollView.addSubview(page)
             switch index
             {

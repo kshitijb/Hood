@@ -25,11 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-        let fontNames = UIFont.fontNamesForFamilyName("Lato")
         let font = UIFont(name: "Lato-Regular", size: 26)
         if let font = font{
             let titleDict: NSDictionary = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
-            UINavigationBar.appearance().titleTextAttributes = titleDict as [NSObject : AnyObject]
+            UINavigationBar.appearance().titleTextAttributes = titleDict as? [String : AnyObject]
         }
         Fabric.with([Crashlytics()])
         let fetchRequest = NSFetchRequest()
@@ -37,7 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fetchRequest.predicate = NSPredicate(format: "is_owner == %@", argumentArray: [NSNumber(bool: true)])
         fetchRequest.fetchLimit = 1
         if(managedObjectContext!.countForFetchRequest(fetchRequest, error: nil) > 0){
-            AppDelegate.owner = managedObjectContext!.executeFetchRequest(fetchRequest)!.last as! User
+            
+        do
+        {
+            AppDelegate.owner = try self.managedObjectContext!.executeFetchRequest(fetchRequest).last as? User
+        }
+        catch
+        {
+        
+        }
+            
         }
 //        Lookback.setupWithAppToken("3kok372o2DpYeWKFF")
 //        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
@@ -78,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "housing.core_data" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -94,18 +102,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Model.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        
+        do
+        {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+        }
+        catch
+        {
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
-            dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(error), \(error!.userInfo)")
+//            dict[NSUnderlyingErrorKey] = error
+//            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+//            // Replace this with code to handle the error appropriately.
+//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            NSLog("Unresolved error \(error), \(error!.userInfo)")
+            
+            print("Shit happened, and I∫m in no mood to fix it")
             abort()
+            
+
         }
         
         return coordinator
@@ -133,12 +151,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            do
+            {
+                try moc.save()
             }
+            catch
+            {
+                
+            }
+            
+//            if moc.hasChanges && !moc.save() {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                NSLog("Unresolved error \(error), \(error!.userInfo)")
+//                abort()
+//            }
         }
     }
     

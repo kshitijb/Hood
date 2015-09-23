@@ -84,7 +84,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView.new()
+        return UIView()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -245,7 +245,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchData(){
         fetchedResultsController.managedObjectContext.performBlock { () -> Void in
-            self.fetchedResultsController.performFetch(nil)
+            do
+            {
+                try self.fetchedResultsController.performFetch()
+            }
+            catch
+            {
+            }
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.tableView.reloadData()
                 self.tableView.setNeedsLayout()

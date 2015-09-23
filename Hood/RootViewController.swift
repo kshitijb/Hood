@@ -133,15 +133,17 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     // MARK: - UIPageViewController delegate methods
 
     func pageViewController(pageViewController: UIPageViewController, spineLocationForInterfaceOrientation orientation: UIInterfaceOrientation) -> UIPageViewControllerSpineLocation {
-        let currentViewController = self.pageViewController!.viewControllers[0] as! UIViewController
-        let viewControllers = [currentViewController]
-        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: {done in })
+        
+        if let currentViewController = self.pageViewController!.viewControllers?[0]
+        {
+            let viewControllers = [currentViewController]
+            self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: {done in })
 
-        self.pageViewController!.doubleSided = false
+            self.pageViewController!.doubleSided = false
+        }
         return .Min
     }
-
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed{
             let dataViewController:FeedViewController = pageViewController.viewControllers!.last as! FeedViewController
             let titleString = (dataViewController.dataObject as! Channel).name
@@ -149,6 +151,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             self.pageControl.currentPage = count
         }
     }
+    
+    
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
@@ -171,15 +175,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             SVProgressHUD.showWithStatus("Loading")
         }
         Alamofire.request(.GET, API().getAllChannelsForNeighbourhood(), parameters: nil)
-            .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, response, data, error) -> Void in
+            .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, result) -> Void in
                 SVProgressHUD.dismiss()
-                if let _error = error{
-                    println(error)
-                }else{
-                    let swiftyJSONObject = JSON(data!)
+                    let swiftyJSONObject = JSON(result.value!)
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     print(swiftyJSONObject)
-                    var channels:NSMutableArray = NSMutableArray()
+                    let channels:NSMutableArray = NSMutableArray()
                     for (key, channel) in swiftyJSONObject["channels"]{
                         let channelObject = Channel.generateObjectFromJSON(channel, context: appDelegate.managedObjectContext!)
                         channels.addObject(channelObject)
@@ -188,7 +189,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     self.modelController.pageData = channels
 //                    self.modelController.pageData = swiftyJSONObject["results"]
                     self.pageControl.numberOfPages = self.modelController.pageData.count
-                    if(self.pageViewController!.viewControllers.count == 0){
+                    if(self.pageViewController!.viewControllers!.count == 0){
                         let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
                         let viewControllers = [startingViewController]
                         self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
@@ -201,7 +202,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     self.pageViewController?.view.userInteractionEnabled = true
                 }
         }
-    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addPost"
@@ -211,7 +212,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         else if segue.identifier == "showNotifications"
         {
-            let toViewController = segue.destinationViewController as! UIViewController
+            let toViewController = segue.destinationViewController 
             toViewController.transitioningDelegate = self
         }
     }
@@ -374,20 +375,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let url = API().getNotificationsForUser()
         print(url)
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
-        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
-            if let e = error{
-                print(error)
-            }
-            else
-            {
-                print(data!)
-                let responseJSON = JSON(data!)
+        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (_, _, result) -> Void in
+            
+                let responseJSON = JSON(result.value!)
                 self.badge.badgeValue = responseJSON["count"].int!
-                
-                
-            }
         }
-        
     }
     
     
@@ -398,6 +390,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     
 }
-    
+
 
 

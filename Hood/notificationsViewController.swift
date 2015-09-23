@@ -75,21 +75,16 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let url = API().getNotificationsForUser()
         print(url)
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
-        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, response, data, error) -> Void in
-            if let e = error{
-                print(error)
-            }
-            else
-            {
-                print(data!)
-                let responseJSON = JSON(data!)
+        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (_,_, result) -> Void in
+            
+                print(result.value!)
+                let responseJSON = JSON(result.value!)
                 self.notifications =  responseJSON["results"]
                 self.notificationTableView.reloadData()
                 self.notificationTableView.setNeedsLayout()
                 self.notificationTableView.layoutSubviews()
                 self.notificationTableView.reloadData()
-                
-            }
+            
         }
         
     }

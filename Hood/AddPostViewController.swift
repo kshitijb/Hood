@@ -28,10 +28,8 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         postNowButton.layer.borderColor = GlobalColors.Green.CGColor
         postNowButton.layer.borderWidth = 2.5
         postNowButton.layer.cornerRadius = 25
-        var viewBindingsDict: NSMutableDictionary = NSMutableDictionary()
-        viewBindingsDict.setValue(addPhotoButton, forKey: "addPhotoButton")
-        viewBindingsDict.setValue(postNowButton, forKey: "postNowButton")
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[addPhotoButton]-(==10)-[postNowButton]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewBindingsDict as [NSObject : AnyObject]))
+        let views = Dictionary(dictionaryLiteral: ("addPhotoButton",addPhotoButton),("postNowButton",postNowButton))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[addPhotoButton]-(==10)-[postNowButton]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         addPhotoButton.addTarget(self, action: "addPhoto", forControlEvents: UIControlEvents.TouchUpInside)
         let aspectConstraint = NSLayoutConstraint(item: postImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImageView, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
         aspectConstraint.priority = 999
@@ -44,7 +42,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         var params = [ "user_id": userID! ,"locality_id" : API.Static.currentNeighbourhoodID, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
         if let pickedImage = pickedImage{
             let imageData = UIImagePNGRepresentation(pickedImage)
-            let base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
+            let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
             params["file"] = base64String
         }
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
@@ -119,7 +117,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
             if(self.buttonBottomConstraint.constant < keyboardSize.height){
                 self.buttonBottomConstraint.constant += keyboardSize.height
-                UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
                     self.view.layoutIfNeeded()
                     }, completion: { (completion) -> Void in
                         
@@ -136,7 +134,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
             self.buttonBottomConstraint.constant -= keyboardSize.height
-            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+            UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
                 self.view.layoutIfNeeded()
                 }, completion: { (completion) -> Void in
                     

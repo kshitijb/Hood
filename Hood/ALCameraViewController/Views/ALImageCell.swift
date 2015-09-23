@@ -26,7 +26,7 @@ class ALImageCell: UICollectionViewCell {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         commonInit()
     }
     

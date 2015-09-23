@@ -19,13 +19,20 @@ class ParentObject: NSManagedObject {
         fetchRequest.fetchLimit = 1
         let id = NSNumber(longLong: json["id"].int64!)
         fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [id])
-        var error: NSError?
         var entity:NSManagedObject
-        if(context.countForFetchRequest(fetchRequest, error: &error) > 0){
-            entity = context.executeFetchRequest(fetchRequest, error: &error)!.last as! NSManagedObject
+//        if(context.countForFetchRequest(fetchRequest, error: &error) > 0){
+//            entity = context.executeFetchRequest(fetchRequest, error: &error)!.last as! NSManagedObject
+//        }
+//        else{
+//            entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as! NSManagedObject
+//        }
+        do
+        {
+            entity = try context.executeFetchRequest(fetchRequest).last as! NSManagedObject
         }
-        else{
-            entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as! NSManagedObject
+        catch
+        {
+            entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context)
         }
         
         return entity

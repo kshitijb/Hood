@@ -27,23 +27,29 @@ class PostController {
         case .Upvote: APIString = API().upvotePost()
         }
         
-        Alamofire.request(.POST, APIString, parameters: params, encoding: .JSON, headers:headers).response({ (request, response, data, error) -> Void in
-            print(error)
-            if (error != nil)
-            {
-                if let failureBlock = failure{
-                    failureBlock()
+        Alamofire.request(.POST, APIString, parameters: params,encoding: .JSON,headers:headers)
+            .response { request, response, data, error in
+                print(request)
+                print(response)
+                print(error)
+                if error != nil
+                {
+                    if let failureBlock = failure{
+                        failureBlock()
+                    }
+                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
+                    alert.show()
                 }
-                let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
-                alert.show()
-            }else{
-                Utilities.appDelegate.saveContext()
-                if let successBlock = success{
-                    successBlock()
+                else
+                {
+                    Utilities.appDelegate.saveContext()
+                    if let successBlock = success{
+                        successBlock()
+                    }
+
                 }
-            }
-            
-        })
+        }
+    
     }
     
     

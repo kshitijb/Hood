@@ -52,7 +52,7 @@ struct Utilities
                     return "\(Int(timeInterval/3600)) hours ago"
                 case _ where timeInterval > 86400 && timeInterval < 7*86400 :
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekday, fromDate: date)
+                    let dateComponents = calendar.components([.Day,.Weekday], fromDate: date)
                     return "\(calendar.shortWeekdaySymbols[dateComponents.weekday - 1])"
                 case _ where timeInterval > 7 * 86400 :
                     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle

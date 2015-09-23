@@ -47,7 +47,7 @@ class loginViewController: UIViewController {
             {
                 
                 SVProgressHUD.showWithStatus("Logging in")
-                var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,first_name,last_name"])
+                let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,first_name,last_name"])
                 fbRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                     print(result)
                     let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -59,8 +59,8 @@ class loginViewController: UIViewController {
                     userDefaults.setValue("https://graph.facebook.com/\(id!)/picture?type=normal", forKey: "fbProfilePhoto")
                     userDefaults.setValue(id, forKey: "fb_id")
                     userDefaults.synchronize()
-                    var firstName: String = result["first_name"] as! String
-                    var lastName: String = result["last_name"] as! String
+                    let firstName: String = result["first_name"] as! String
+                    let lastName: String = result["last_name"] as! String
                     let parameters = [
                         "firstname":firstName,
                         "lastname" : lastName,
@@ -72,19 +72,28 @@ class loginViewController: UIViewController {
                         "profile_photo" : "https://graph.facebook.com/\(id!)/picture?type=normal"
                     ]
                     
-                    Alamofire.request(.POST, "http://128.199.179.151/user/register/", parameters: parameters as? [String : AnyObject], encoding: .JSON) .response { request, response, data, error in
-                        if let responseDict = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: nil) as? NSDictionary
+                    Alamofire.request(.POST, "http://128.199.179.151/user/register/", parameters: parameters, encoding: .JSON).responseData{_, _, result in
+                        
+                        
+                        let responseDict:AnyObject
+                        do
                         {
+                         responseDict = try NSJSONSerialization.JSONObjectWithData(result.value!, options: NSJSONReadingOptions.AllowFragments)
+                        
                             let userDefaults = NSUserDefaults.standardUserDefaults()
                             userDefaults.setValue(responseDict["id"], forKey: "id")
                             userDefaults.setValue(responseDict["access_token"], forKey: "accessToken")
                             userDefaults.synchronize()
-                            let responseJSON = JSON(data: data!, options: .AllowFragments, error: nil)
+                            let responseJSON = JSON(data: result.data!, options: .AllowFragments, error: nil)
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             let user:User = User.generateObjectFromJSON(responseJSON, context: appDelegate.managedObjectContext!)
                             user.is_owner = NSNumber(bool: true)
                             AppDelegate.owner = user
                             appDelegate.saveContext()
+                        }
+                        catch
+                        {
+                            print("fuck")
                         }
                     }
 

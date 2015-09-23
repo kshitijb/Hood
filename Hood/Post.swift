@@ -31,13 +31,29 @@ class Post: ParentObject {
         fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [id])
         var error: NSError?
         var entity:ParentObject
-        if(context.countForFetchRequest(fetchRequest, error: &error) > 0){
-            entity = context.executeFetchRequest(fetchRequest, error: &error)!.last as! ParentObject
+//        if(context.countForFetchRequest(fetchRequest, error: &error) > 0)
+//        {
+//            do
+//            {
+//                entity = try context.executeFetchRequest(fetchRequest).last as! ParentObject
+//            }
+//            catch
+//            {
+//                //Honestly, if we're here, we're fucked anyway.
+//            }
+//        }
+//        else{
+//            entity = NSEntityDescription.insertNewObjectForEntityForName("Post", inManagedObjectContext: context) as! ParentObject
+//        }
+
+        do
+        {
+            entity = try context.executeFetchRequest(fetchRequest).last as! ParentObject
         }
-        else{
+        catch
+        {
             entity = NSEntityDescription.insertNewObjectForEntityForName("Post", inManagedObjectContext: context) as! ParentObject
         }
-        
         if let id = json["id"].int64{
             entity.id = NSNumber(longLong: id)
         }

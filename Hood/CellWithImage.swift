@@ -54,7 +54,7 @@ class CellWithImage: UITableViewCell {
         postID = post.id.intValue
         print(post.id.intValue)
         upvotesCount = post.upvotes_count.integerValue
-        var attributes = content.attributedText.attributesAtIndex(0, effectiveRange: nil)
+        var attributes = content.attributedText!.attributesAtIndex(0, effectiveRange: nil)
         let attributedString = NSAttributedString(string: post.message, attributes: attributes)
         content.attributedText = attributedString
         contentView.layoutIfNeeded()
@@ -70,7 +70,7 @@ class CellWithImage: UITableViewCell {
         if let placeholderImage = placeholderImage{
             
         }else{
-            placeholderImage = getImageWithColor(UIColor.lightGrayColor(), profileImage.frame.size)
+            placeholderImage = getImageWithColor(UIColor.lightGrayColor(), size: profileImage.frame.size)
         }
         
         if let profile_photo = post.author.profile_photo

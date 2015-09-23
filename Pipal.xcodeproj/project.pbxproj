@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423983E11B7BC50200F9D4AF /* commentCell.swift */; };
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
+		42CE5F4A1BB15F1B00AF3D24 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE5F471BB15F1B00AF3D24 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		42CE5F4B1BB15F1B00AF3D24 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE5F481BB15F1B00AF3D24 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		42CE5F4C1BB15F1B00AF3D24 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE5F491BB15F1B00AF3D24 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */; };
 		42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */; };
 		42E55C261B9EE4BC000C102E /* ALCameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E55C141B9EE4BC000C102E /* ALCameraView.strings */; };
@@ -41,9 +44,6 @@
 		D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4861B70B87C00B556B4 /* CommentsViewController.swift */; };
 		D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */; };
 		D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A48A1B70D29B00B556B4 /* CellWithImage.swift */; };
-		D54B9BCD1B7B3BFA0075836C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BCA1B7B3BFA0075836C /* FBSDKCoreKit.framework */; };
-		D54B9BCE1B7B3BFA0075836C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BCB1B7B3BFA0075836C /* FBSDKLoginKit.framework */; };
-		D54B9BCF1B7B3BFA0075836C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D54B9BCC1B7B3BFA0075836C /* FBSDKShareKit.framework */; };
 		D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD21B7B52B20075836C /* UIColorExtension.swift */; };
 		D54B9BD51B7DD2520075836C /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD41B7DD2520075836C /* PostController.swift */; };
 		D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE51B721FFF002AD200 /* Alamofire.framework */; };
@@ -107,6 +107,9 @@
 		3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.debug.xcconfig"; sourceTree = "<group>"; };
 		423983E11B7BC50200F9D4AF /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		42CE5F471BB15F1B00AF3D24 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		42CE5F481BB15F1B00AF3D24 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		42CE5F491BB15F1B00AF3D24 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
 		42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		42E55C141B9EE4BC000C102E /* ALCameraView.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ALCameraView.strings; sourceTree = "<group>"; };
@@ -140,9 +143,6 @@
 		D547A4861B70B87C00B556B4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsHeaderCell.swift; sourceTree = "<group>"; };
 		D547A48A1B70D29B00B556B4 /* CellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithImage.swift; sourceTree = "<group>"; };
-		D54B9BCA1B7B3BFA0075836C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		D54B9BCB1B7B3BFA0075836C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		D54B9BCC1B7B3BFA0075836C /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		D54B9BD21B7B52B20075836C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		D54B9BD41B7DD2520075836C /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		D5604CE51B721FFF002AD200 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -191,14 +191,14 @@
 			files = (
 				D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */,
 				D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */,
+				42CE5F4B1BB15F1B00AF3D24 /* FBSDKLoginKit.framework in Frameworks */,
 				D5EBCFCB1B870ED2000E0656 /* Crashlytics.framework in Frameworks */,
-				D54B9BCF1B7B3BFA0075836C /* FBSDKShareKit.framework in Frameworks */,
-				D54B9BCE1B7B3BFA0075836C /* FBSDKLoginKit.framework in Frameworks */,
 				D5EBCFCA1B870ED2000E0656 /* Fabric.framework in Frameworks */,
 				D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */,
-				D54B9BCD1B7B3BFA0075836C /* FBSDKCoreKit.framework in Frameworks */,
+				42CE5F4C1BB15F1B00AF3D24 /* FBSDKShareKit.framework in Frameworks */,
 				D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */,
 				42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */,
+				42CE5F4A1BB15F1B00AF3D24 /* FBSDKCoreKit.framework in Frameworks */,
 				EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,12 +279,12 @@
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
+				42CE5F471BB15F1B00AF3D24 /* FBSDKCoreKit.framework */,
+				42CE5F481BB15F1B00AF3D24 /* FBSDKLoginKit.framework */,
+				42CE5F491BB15F1B00AF3D24 /* FBSDKShareKit.framework */,
 				D5EBD00F1B8C5A67000E0656 /* CoreData.framework */,
 				D5EBCFC81B870ED2000E0656 /* Fabric.framework */,
 				D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */,
-				D54B9BCA1B7B3BFA0075836C /* FBSDKCoreKit.framework */,
-				D54B9BCB1B7B3BFA0075836C /* FBSDKLoginKit.framework */,
-				D54B9BCC1B7B3BFA0075836C /* FBSDKShareKit.framework */,
 				42EB28251B74D79100AB0331 /* WebImage.framework */,
 				D5604CE51B721FFF002AD200 /* Alamofire.framework */,
 				D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */,
@@ -443,7 +443,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Housing Labs";
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
@@ -654,6 +654,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -731,6 +732,7 @@
 				);
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "housing.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Pipal;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hood/Pipal-Bridging-Header.h";
@@ -754,6 +756,7 @@
 				);
 				INFOPLIST_FILE = Hood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "housing.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Pipal;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hood/Pipal-Bridging-Header.h";

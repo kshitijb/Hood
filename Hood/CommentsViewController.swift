@@ -47,7 +47,13 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func networkRequestForComments()
     {
-        Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
+        Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: ["foo": "bar"])
+            .response { request, response, data, error in
+                print(request)
+                print(response)
+                print(error)
+        }
+        Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (_, _, result) -> Void in
             
             self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -116,9 +122,11 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.managedObjectContext?.performBlock({ () -> Void in
-            let error = NSErrorPointer()
-            let asyncResult = appDelegate.managedObjectContext?.executeRequest(asyncRequest, error: error)
-            if error != nil
+            do
+            {
+                try appDelegate.managedObjectContext?.executeRequest(asyncRequest)
+            }
+            catch
             {
                 print("Unable to execute asynchronous fetch result.");
                 print(error)
@@ -139,9 +147,11 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.managedObjectContext?.performBlock({ () -> Void in
-            let error = NSErrorPointer()
-            let asyncResult = appDelegate.managedObjectContext?.executeRequest(commentAsyncRequest, error: error)
-            if error != nil
+            do
+            {
+                try appDelegate.managedObjectContext?.executeRequest(commentAsyncRequest)
+            }
+            catch
             {
                 print("Unable to execute asynchronous fetch result.");
                 print(error)
@@ -264,7 +274,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
             if(self.commentConstraint.constant < keyboardSize.height){
                 self.commentConstraint.constant += keyboardSize.height
-                UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+                UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
                     self.view.layoutIfNeeded()
                     }, completion: { (completion) -> Void in
                         
@@ -280,7 +290,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
             self.commentConstraint.constant -= keyboardSize.height
-            UIView.animateWithDuration(duration!, delay: 0, options: nil, animations: { () -> Void in
+            UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
                 self.view.layoutIfNeeded()
                 }, completion: { (completion) -> Void in
                     

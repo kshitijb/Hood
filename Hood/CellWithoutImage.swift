@@ -44,7 +44,7 @@ class CellWithoutImage: UITableViewCell {
         self.post = post
         postID = post.id.intValue
         upvotesCount = post.upvotes_count.integerValue
-        var attributes = content.attributedText!.attributesAtIndex(0, effectiveRange: nil)
+        let attributes = content.attributedText!.attributesAtIndex(0, effectiveRange: nil)
         let attributedString = NSAttributedString(string: post.message, attributes: attributes)
         content.attributedText = attributedString
         contentView.layoutIfNeeded()
@@ -79,8 +79,6 @@ class CellWithoutImage: UITableViewCell {
             self.post?.upvotes_count = upvotesCount
             self.post?.is_upvoted = false
             likesButton.setTitle("\(upvotesCount) likes", forState: UIControlState.Normal)
-            let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-
             self.likesButton.selected = false
             PostController.VotePost(.Downvote, sender: likesButton, post: post!, success: nil, failure: { () -> Void in
                 self.upvotesCount++
