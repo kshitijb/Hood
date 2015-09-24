@@ -53,9 +53,10 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 print(response)
                 print(error)
         }
-        Alamofire.request(.GET, API().getCommentsForPost("\(postID)"), parameters: nil,encoding: .JSON).response({ (_, _, result) -> Void in
+
+        Alamofire.request(.GET,API().getCommentsForPost("\(postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
             
-            self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            self.commentsJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             for (key, comment) in self.commentsJSON["results"]{
                 
@@ -65,22 +66,23 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             }
             appDelegate.saveContext()
             self.performFetchFromCoreData()
-        })
+        }
+
     }
     
     func networkRequestForPost()
     {
-        Alamofire.request(.GET, API().getPostWithID("\(postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
+        Alamofire.request(.GET,API().getCommentsForPost("\(postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
             
-            let resultJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            let resultJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             print(resultJSON)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
+            
             let postObject = Post.generateObjectFromJSON(resultJSON, context: appDelegate.managedObjectContext!)
             appDelegate.saveContext()
             self.performFetchFromCoreData()
-        })
 
+        }
     }
     func processAsyncResults(result:NSAsynchronousFetchResult)
     {
@@ -192,19 +194,23 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         let params = ["post_id" : post!.id.integerValue, "comment":commentsTextView.text] as [String:AnyObject!]
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         print(params)
-        Alamofire.request(.POST, API().addComment(), parameters: params,encoding: .JSON, headers: headers).response({ (request, response, data, error) -> Void in
-            print(error)
-            print(response)
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        
+        Alamofire.request(.POST, API().addComment(), parameters: params, encoding: .JSON,headers:headers).responseData{_, _, result in
+            
+            
             activityIndicator.removeFromSuperview()
             self.checkmark.hidden = false
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
-            Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil,encoding: .JSON).response({ (request, response, data, error) -> Void in
-                self.commentsJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            
+            Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
+                self.commentsJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
                 self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
-            })
-        })
+                
+            }
+
+        }
+
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

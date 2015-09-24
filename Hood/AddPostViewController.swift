@@ -51,20 +51,14 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         self.navigationController?.popViewControllerAnimated(true)
         let userInfo:Dictionary = ["channelID":self.channelID!]
         NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
-        Alamofire.request(.POST, API().addPost(), parameters: params,encoding: .JSON, headers: headers).response({ (request, response, data, error) -> Void in
-            print(error)
-            if error != nil
-            {
-            }
-            else
-            {
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-                NSNotificationCenter.defaultCenter().postNotificationName(AddedPostNotificationName, object: nil, userInfo: userInfo)
-                self.postNowButton.enabled = true
-                self.title = ""
-            }
-        })
-
+        
+        Alamofire.request(.POST, API().addPost(), parameters: params, encoding: .JSON, headers: headers).responseData{_, _, result in
+            
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(AddedPostNotificationName, object: nil, userInfo: userInfo)
+            self.postNowButton.enabled = true
+            self.title = ""
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

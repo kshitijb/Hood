@@ -49,7 +49,7 @@ class loginViewController: UIViewController {
                 SVProgressHUD.showWithStatus("Logging in")
                 let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,first_name,last_name"])
                 fbRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-                    print(result)
+
                     let userDefaults = NSUserDefaults.standardUserDefaults()
                 userDefaults.setValue(result["first_name"], forKey: "first_name")
                     userDefaults.setValue(result["last_name"], forKey: "last_name")
