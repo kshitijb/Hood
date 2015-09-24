@@ -147,45 +147,46 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         Alamofire.request(.GET,url, parameters: nil, encoding: ParameterEncoding.URL, headers:headers).responseJSON{_, _, result in
             
            self.hideLoader()
-            let responseJSON = JSON(result.value!)
-            //                print(responseJSON)
-            self.dataArray = NSMutableArray()
-            let fetchRequest = NSFetchRequest(entityName: "Post")
-            fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [self.dataObject as! Channel])
-            let appDelegate = Utilities.appDelegate
-            for (key, post) in responseJSON["results"]{
-                let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)
-                postObject.channel = self.dataObject as! Channel
-                self.dataArray.addObject(postObject)
-            }
-            
-            var results:[AnyObject]?
-            do{
-                results = try appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest)
-            }
-            catch
-            {
-                results = []
-            }
-            if(results?.count == 0)
-            {
-                let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView
+            if(result.isSuccess){
+                let responseJSON = JSON(result.value!)
+                //                print(responseJSON)
+                self.dataArray = NSMutableArray()
+                let fetchRequest = NSFetchRequest(entityName: "Post")
+                fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [self.dataObject as! Channel])
+                let appDelegate = Utilities.appDelegate
+                for (key, post) in responseJSON["results"]{
+                    let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)
+                    postObject.channel = self.dataObject as! Channel
+                    self.dataArray.addObject(postObject)
+                }
                 
-                emptyView!.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
-                self.tableView.addSubview(emptyView!)
-            }
-            if(results?.count > 0){
-                let objectsToDelete = NSMutableSet(array: results!)
-                objectsToDelete.minusSet(NSSet(array: self.dataArray as [AnyObject]) as Set<NSObject>)
-                let objectsToDeleteArray = objectsToDelete.allObjects
-                if objectsToDeleteArray.count > 0{
-                    for index in 0...objectsToDeleteArray.count-1{
-                        appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+                var results:[AnyObject]?
+                do{
+                    results = try appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest)
+                }
+                catch
+                {
+                    results = []
+                }
+                if(results?.count == 0)
+                {
+                    let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView
+                    
+                    emptyView!.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
+                    self.tableView.addSubview(emptyView!)
+                }
+                if(results?.count > 0){
+                    let objectsToDelete = NSMutableSet(array: results!)
+                    objectsToDelete.minusSet(NSSet(array: self.dataArray as [AnyObject]) as Set<NSObject>)
+                    let objectsToDeleteArray = objectsToDelete.allObjects
+                    if objectsToDeleteArray.count > 0{
+                        for index in 0...objectsToDeleteArray.count-1{
+                            appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+                        }
                     }
                 }
+                appDelegate.saveContext()
             }
-            appDelegate.saveContext()
-        
         }
     }
     
