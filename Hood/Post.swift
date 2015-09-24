@@ -48,7 +48,12 @@ class Post: ParentObject {
 
         do
         {
-            entity = try context.executeFetchRequest(fetchRequest).last as! ParentObject
+            let results = try context.executeFetchRequest(fetchRequest)
+            if(results.count > 0){
+                entity = results.last as! ParentObject
+            }else{
+                entity = NSEntityDescription.insertNewObjectForEntityForName("Post", inManagedObjectContext: context) as! ParentObject
+            }
         }
         catch
         {

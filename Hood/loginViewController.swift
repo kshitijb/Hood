@@ -84,7 +84,7 @@ class loginViewController: UIViewController {
                             userDefaults.setValue(responseDict["id"], forKey: "id")
                             userDefaults.setValue(responseDict["access_token"], forKey: "accessToken")
                             userDefaults.synchronize()
-                            let responseJSON = JSON(data: result.data!, options: .AllowFragments, error: nil)
+                            let responseJSON = JSON(data: result.value!, options: .AllowFragments, error: nil)
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             let user:User = User.generateObjectFromJSON(responseJSON, context: appDelegate.managedObjectContext!)
                             user.is_owner = NSNumber(bool: true)

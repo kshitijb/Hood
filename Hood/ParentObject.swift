@@ -28,9 +28,14 @@ class ParentObject: NSManagedObject {
 //        }
         do
         {
-            entity = try context.executeFetchRequest(fetchRequest).last as! NSManagedObject
+            let results = try context.executeFetchRequest(fetchRequest)
+            if(results.count > 0){
+                entity = results.last as! NSManagedObject
+            }else{
+                entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context)
+            }
         }
-        catch
+        catch _ as NSError
         {
             entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context)
         }
