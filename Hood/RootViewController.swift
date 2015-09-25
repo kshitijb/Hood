@@ -15,6 +15,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
 import Sheriff
+import CoreData
 class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate,UIViewControllerTransitioningDelegate {
 
     @IBOutlet weak var notificationBarButton: UIBarButtonItem!
@@ -101,7 +102,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
-        else if(self.modelController.pageData.count == 0)
+        else
         {
             getData()
         }
@@ -186,21 +187,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                         channels.addObject(channelObject)
                     }
                     appDelegate.saveContext()
-                    self.modelController.pageData = channels
-//                    self.modelController.pageData = swiftyJSONObject["results"]
-                    self.pageControl.numberOfPages = self.modelController.pageData.count
-                    if(self.pageViewController!.viewControllers!.count == 0){
-                        let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
-                        let viewControllers = [startingViewController]
-                        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
-                        self.pageControl.currentPage = 0
-                        self.showPageControl()
-                    }
-                    
-
-                    self.updateTitleView()
-                    self.pageViewController?.view.userInteractionEnabled = true
-                }
+                    self.populateData()
+            }
         }
     
     
@@ -380,6 +368,42 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 let responseJSON = JSON(result.value!)
                 self.badge.badgeValue = responseJSON["count"].int!
         }
+    }
+    
+    func fetchChannels(){
+        let fetchRequest = NSFetchRequest(entityName: "Channel")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        let context = Utilities.appDelegate.managedObjectContext
+        do
+        {
+            var results = try context?.executeFetchRequest(fetchRequest)
+            if results?.count > 0{
+                var mutableArray = NSMutableArray(array: results!)
+                self.modelController.pageData = mutableArray
+                self.populateData()
+            }else{
+                getData()
+            }
+        }
+        catch
+        {
+            
+        }
+    }
+    
+    func populateData(){
+        self.pageControl.numberOfPages = self.modelController.pageData.count
+        if(self.pageViewController!.viewControllers!.count == 0){
+            let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
+            let viewControllers = [startingViewController]
+            self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
+            self.pageControl.currentPage = 0
+            self.showPageControl()
+        }
+        
+        
+        self.updateTitleView()
+        self.pageViewController?.view.userInteractionEnabled = true
     }
     
     

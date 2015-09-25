@@ -20,6 +20,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var activityIndicator: UIActivityIndicatorView?
     var context = Utilities.appDelegate.privateContext()
     var shouldHideHeader: Bool = false
+    var count: Int?
+    var page: Int = 1
+    let isLoading:Bool = false
     
     @IBOutlet var addPostHeaderTopConstraint: NSLayoutConstraint!
     @IBOutlet var addingPostHeaderView: UIView!
@@ -135,59 +138,26 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             if (count == 0){
                 showLoader()
             }
+            else if(self.count == count)
+            {
+                //reached end
+                return
+            }
         }else{
             showLoader()
         }
         
-        let channel = self.dataObject as! Channel
-        let url = API().getAllPostsForChannel("\(channel.id.intValue)")
-        let manager = Alamofire.Manager.sharedInstance
-        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
-        
-        Alamofire.request(.GET,url, parameters: nil, encoding: ParameterEncoding.URL, headers:headers).responseJSON{_, _, result in
-            
-           self.hideLoader()
-            if(result.isSuccess){
-                let responseJSON = JSON(result.value!)
-                //                print(responseJSON)
-                self.dataArray = NSMutableArray()
-                let fetchRequest = NSFetchRequest(entityName: "Post")
-                fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [self.dataObject as! Channel])
-                let appDelegate = Utilities.appDelegate
-                for (key, post) in responseJSON["results"]{
-                    let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)
-                    postObject.channel = self.dataObject as! Channel
-                    self.dataArray.addObject(postObject)
-                }
-                
-                var results:[AnyObject]?
-                do{
-                    results = try appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest)
-                }
-                catch
-                {
-                    results = []
-                }
-                if(results?.count == 0)
-                {
-                    let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView
-                    
-                    emptyView!.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
-                    self.tableView.addSubview(emptyView!)
-                }
-                if(results?.count > 0){
-                    let objectsToDelete = NSMutableSet(array: results!)
-                    objectsToDelete.minusSet(NSSet(array: self.dataArray as [AnyObject]) as Set<NSObject>)
-                    let objectsToDeleteArray = objectsToDelete.allObjects
-                    if objectsToDeleteArray.count > 0{
-                        for index in 0...objectsToDeleteArray.count-1{
-                            appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
-                        }
-                    }
-                }
-                appDelegate.saveContext()
+        Post.getPosts(self.dataObject as! Channel, pageSize: 5, page: page) { (responseData, error) -> Void in
+            self.hideLoader()
+            if let error = error{
+                print("Error in fetching posts \(error.description)")
+            }else{
+                let responseJSON = JSON(responseData!)
+                self.count = responseJSON["count"].int
+                self.page++
             }
         }
+        
     }
     
     func showLoader(){
@@ -209,6 +179,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let postFetchRequest = NSFetchRequest(entityName: "Post")
         postFetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [(self.dataObject as! Channel)])
         postFetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        postFetchRequest.fetchBatchSize = 5
         
         let frc = NSFetchedResultsController(
             fetchRequest: postFetchRequest,
@@ -319,6 +290,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.addingPostHeaderView.layer.opacity = 1
             self.view.layoutSubviews()
         })
+    }
+    
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offset = scrollView.contentOffset
+        let bounds = scrollView.bounds
+        let size = scrollView.contentSize
+        let inset = scrollView.contentInset
+        let y = offset.y + bounds.size.height - inset.bottom
+        let h = size.height
+        if(y >= h){
+            getPosts()
+        }
     }
     
 }

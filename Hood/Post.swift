@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
-
+import Alamofire
 class Post: ParentObject {
 
     @NSManaged var message: String
@@ -97,6 +97,63 @@ class Post: ParentObject {
         
         return post
     }
+    
+    
+    
+    static func getPosts(channel: Channel, pageSize: Int, page: Int, completion: ((responseData: AnyObject?, error: NSError?) -> Void)?){
+        let url = API().getAllPostsForChannel("\(channel.id.intValue)")
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        let parameters = ["page":page, "page_size": pageSize]
+        
+        
+        
+        Alamofire.request(.POST, url, parameters: parameters,encoding: .JSON,headers:headers)
+            .response { request, response, data, error in
+                
+                if let completion = completion{
+                    completion(responseData: data, error: nil);
+                }
+                
+                let responseJSON = JSON(data!)
+                //                print(responseJSON)
+                var dataArray = NSMutableArray()
+                let fetchRequest = NSFetchRequest(entityName: "Post")
+                fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [channel])
+                fetchRequest.fetchBatchSize = pageSize
+                fetchRequest.fetchOffset = pageSize * page
+                let appDelegate = Utilities.appDelegate
+                for (key, post) in responseJSON["results"]{
+                    let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)
+                    postObject.channel = channel
+                    dataArray.addObject(postObject)
+                }
+                do
+                {
+                let results = try appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest)
+                if(results?.count > 0){
+                    let objectsToDelete = NSMutableSet(array: results!)
+                    objectsToDelete.minusSet(NSSet(array: dataArray as [AnyObject]) as Set<NSObject>)
+                    let objectsToDeleteArray = objectsToDelete.allObjects
+                    if objectsToDeleteArray.count > 0{
+                        for index in 0...objectsToDeleteArray.count-1{
+                            appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+                        }
+                    }
+                }
+                appDelegate.saveContext()
+                }
+                catch
+                {
+                    
+                }
+
+        }
+
+        
+    }
+    
+    
+    
 
     
 }

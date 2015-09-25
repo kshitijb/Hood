@@ -22,7 +22,6 @@ class Comment: ParentObject {
         fetchRequest.fetchLimit = 1
         let id = NSNumber(longLong: json["id"].int64!)
         fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [id])
-        var error: NSError?
         var entity:ParentObject
 //        if(context.countForFetchRequest(fetchRequest, error: &error) > 0){
 //            entity = context.executeFetchRequest(fetchRequest).last as! ParentObject
