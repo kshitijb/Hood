@@ -187,7 +187,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                         channels.addObject(channelObject)
                     }
                     appDelegate.saveContext()
-                    self.populateData()
+                    self.fetchChannels()
+//                    self.populateData()
             }
         }
     

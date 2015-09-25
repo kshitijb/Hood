@@ -26,7 +26,7 @@ struct API {
         static let notifications = "alert"
         static let show = "show"
         static let neighbourhoods = "neighbourhood"
-        static let currentNeighbourhoodID = "1"
+        static let currentNeighbourhoodID = "3"
      }
     private var fullUrl:String{
         return Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
