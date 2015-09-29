@@ -270,44 +270,28 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         return 2
     }
     
-    func keyboardWillShow(notification:NSNotification)
-    {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
-        {
-            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
-            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
-            if(self.commentConstraint.constant < keyboardSize.height){
-                self.commentConstraint.constant += keyboardSize.height
-                UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
-                    self.view.layoutIfNeeded()
-                    }, completion: { (completion) -> Void in
-                        
-                })
-            }
-        }
-    }
-    
-    func keyboardWillHide(notification:NSNotification)
-    {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
-        {
-            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
-            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
-            self.commentConstraint.constant -= keyboardSize.height
-            UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
+    func keyboardWillChangeFrame(notification: NSNotification){
+        var userInfo = notification.userInfo!
+        let frameEnd = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+        let convertedFrameEnd = self.view.convertRect(frameEnd, fromView: nil)
+        let heightOffset = self.view.bounds.size.height - convertedFrameEnd.origin.y
+        self.commentConstraint.constant = heightOffset
+        
+        UIView.animateWithDuration(
+            userInfo[UIKeyboardAnimationDurationUserInfoKey]!.doubleValue,
+            delay: 0,
+            options: .TransitionNone,
+            animations: {
                 self.view.layoutIfNeeded()
-                }, completion: { (completion) -> Void in
-                    
-            })
-        }
-
+            },
+            completion: nil
+        )
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = false
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {

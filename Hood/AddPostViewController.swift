@@ -64,14 +64,11 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         postTextView.becomeFirstResponder()
-        //Todo: Use UIKeyboardWillChangeFrameNotification here
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardDidHideNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
     }
@@ -100,41 +97,23 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     }
 
 //  MARK: - animate Add photo button with Keyboard
-
     
-    func keyboardWillShow(notification:NSNotification)
-    {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
-        {
-            
-            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
-            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
-            if(self.buttonBottomConstraint.constant < keyboardSize.height){
-                self.buttonBottomConstraint.constant += keyboardSize.height
-                UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
-                    self.view.layoutIfNeeded()
-                    }, completion: { (completion) -> Void in
-                        
-                })
-            }
-        }
-    }
-    
-    func keyboardWillHide(notification:NSNotification)
-    {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
-        {
-            
-            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
-            let curve: AnyObject? = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey]
-            self.buttonBottomConstraint.constant -= keyboardSize.height
-            UIView.animateWithDuration(duration!, delay: 0, options: .TransitionNone, animations: { () -> Void in
+    func keyboardWillChangeFrame(notification: NSNotification){
+        var userInfo = notification.userInfo!
+        let frameEnd = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+        let convertedFrameEnd = self.view.convertRect(frameEnd, fromView: nil)
+        let heightOffset = self.view.bounds.size.height - convertedFrameEnd.origin.y
+        self.buttonBottomConstraint.constant = heightOffset+10
+        
+        UIView.animateWithDuration(
+            userInfo[UIKeyboardAnimationDurationUserInfoKey]!.doubleValue,
+            delay: 0,
+            options: .TransitionNone,
+            animations: {
                 self.view.layoutIfNeeded()
-                }, completion: { (completion) -> Void in
-                    
-            })
-        }
-
+            },
+            completion: nil
+        )
     }
 
     func addPhoto(){
