@@ -175,9 +175,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         if(self.modelController.pageData.count == 0){
             SVProgressHUD.showWithStatus("Loading")
         }
-        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood(), parameters: nil)
-            .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (_, _, result) -> Void in
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood() + "/", headers:headers).validate()
+            .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, _, result) -> Void in
                 SVProgressHUD.dismiss()
+                if(result.isSuccess){
                     let swiftyJSONObject = JSON(result.value!)
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     print(swiftyJSONObject)
@@ -188,7 +190,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     }
                     appDelegate.saveContext()
                     self.fetchChannels()
-//                    self.populateData()
+                }else{
+                    print(result.error)
+                }
             }
         }
     
@@ -364,7 +368,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let url = API().getNotificationsForUser()
         print(url)
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
-        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (_, _, result) -> Void in
+        Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, _, result) -> Void in
             
                 let responseJSON = JSON(result.value!)
                 self.badge.badgeValue = responseJSON["count"].int!

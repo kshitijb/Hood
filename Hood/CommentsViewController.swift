@@ -65,7 +65,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func networkRequestForPost()
     {
-        Alamofire.request(.GET,API().getCommentsForPost("\(postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
+        Alamofire.request(.GET,API().getPostWithID("\(postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
             
             let resultJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             print(resultJSON)
@@ -77,6 +77,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
 
         }
     }
+    
     func processAsyncResults(result:NSAsynchronousFetchResult)
     {
         if result.finalResult?.count == 0
@@ -89,6 +90,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             self.tableView.reloadData()
         }
     }
+    
     func setPostFromCoreData(result:NSAsynchronousFetchResult)
     {
         if result.finalResult?.count == 0
@@ -103,6 +105,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             self.tableView.reloadData()
         }
     }
+    
     func performFetchFromCoreData()
     {
         let request = NSFetchRequest(entityName: "Post")
@@ -131,6 +134,12 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func getCommentsFromCoreData()
     {
+        if let count = commentsJSON["count"].int64{
+            if count == 0{
+                return
+            }
+        }
+        
         let commentRequest = NSFetchRequest(entityName: "Comment")
         commentRequest.predicate = NSPredicate(format: "post.id == %@", argumentArray: [self.postID])
         commentRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
@@ -153,6 +162,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             }
         })
     }
+    
     func setupUI(){
         commentsTextView.layoutManager.ensureLayoutForTextContainer(commentsTextView.textContainer)
         commentsTextView.text = "Add a comment"
@@ -195,12 +205,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             self.checkmark.hidden = false
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
-            
-            Alamofire.request(.GET, API().getCommentsForPost("\(self.postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
-                self.commentsJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
-                
-            }
+            self.networkRequestForComments()
 
         }
 

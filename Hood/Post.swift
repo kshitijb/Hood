@@ -76,7 +76,7 @@ class Post: ParentObject {
         }
         if let timestamp = json["timestamp"].string{
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             dateFormatter.timeZone = NSTimeZone(name: "UTC")
             post.timestamp = dateFormatter.dateFromString(timestamp)
         }
@@ -107,15 +107,15 @@ class Post: ParentObject {
         
         
         
-        Alamofire.request(.POST, url, parameters: parameters,encoding: .JSON,headers:headers)
+        Alamofire.request(.GET, url, parameters: parameters,encoding: .URL,headers:headers)
             .response { request, response, data, error in
                 
                 if let completion = completion{
                     completion(responseData: data, error: nil);
                 }
                 
-                let responseJSON = JSON(data!)
-                //                print(responseJSON)
+                let responseJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+                print(String(data: data!, encoding: NSUTF8StringEncoding))
                 var dataArray = NSMutableArray()
                 let fetchRequest = NSFetchRequest(entityName: "Post")
                 fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [channel])

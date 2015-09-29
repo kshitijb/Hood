@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423983E11B7BC50200F9D4AF /* commentCell.swift */; };
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
-		42CE5F4A1BB15F1B00AF3D24 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE5F471BB15F1B00AF3D24 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		42CE5F4B1BB15F1B00AF3D24 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE5F481BB15F1B00AF3D24 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
-		42CE5F4C1BB15F1B00AF3D24 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE5F491BB15F1B00AF3D24 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */; };
 		42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */; };
 		42E55C261B9EE4BC000C102E /* ALCameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E55C141B9EE4BC000C102E /* ALCameraView.strings */; };
@@ -107,9 +104,6 @@
 		3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.debug.xcconfig"; sourceTree = "<group>"; };
 		423983E11B7BC50200F9D4AF /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
-		42CE5F471BB15F1B00AF3D24 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		42CE5F481BB15F1B00AF3D24 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		42CE5F491BB15F1B00AF3D24 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
 		42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		42E55C141B9EE4BC000C102E /* ALCameraView.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ALCameraView.strings; sourceTree = "<group>"; };
@@ -191,14 +185,11 @@
 			files = (
 				D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */,
 				D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */,
-				42CE5F4B1BB15F1B00AF3D24 /* FBSDKLoginKit.framework in Frameworks */,
 				D5EBCFCB1B870ED2000E0656 /* Crashlytics.framework in Frameworks */,
 				D5EBCFCA1B870ED2000E0656 /* Fabric.framework in Frameworks */,
 				D5604CEC1B72238E002AD200 /* Alamofire.framework in Frameworks */,
-				42CE5F4C1BB15F1B00AF3D24 /* FBSDKShareKit.framework in Frameworks */,
 				D5604CF01B72238E002AD200 /* SwiftyJSON.framework in Frameworks */,
 				42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */,
-				42CE5F4A1BB15F1B00AF3D24 /* FBSDKCoreKit.framework in Frameworks */,
 				EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,9 +270,6 @@
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
-				42CE5F471BB15F1B00AF3D24 /* FBSDKCoreKit.framework */,
-				42CE5F481BB15F1B00AF3D24 /* FBSDKLoginKit.framework */,
-				42CE5F491BB15F1B00AF3D24 /* FBSDKShareKit.framework */,
 				D5EBD00F1B8C5A67000E0656 /* CoreData.framework */,
 				D5EBCFC81B870ED2000E0656 /* Fabric.framework */,
 				D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */,
@@ -724,6 +712,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Robin Malhotra (Q7B4ER6Z34)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robin Malhotra (Q7B4ER6Z34)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -748,6 +737,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Locon Solutions Private Limited";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Locon Solutions Private Limited";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
