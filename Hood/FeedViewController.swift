@@ -114,6 +114,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        tableView.contentInset = UIEdgeInsetsMake(24, 0, 0, 0)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.count = nil
+    }
+    
     override func viewWillLayoutSubviews() {
         print("Top layout guide is \(self.topLayoutGuide.length)" )
         let frame:CGRect = self.tableView.frame;
@@ -153,8 +158,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Error in fetching posts \(error)")
             }else{
                 let responseJSON = JSON(data: responseData! as! NSData, options:NSJSONReadingOptions.AllowFragments, error:nil)
+                if(self.count != nil && self.count != responseJSON["count"].int){
+                    self.page++
+                }
                 self.count = responseJSON["count"].int
-                self.page++
             }
         }
         
