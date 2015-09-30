@@ -153,11 +153,24 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Error in fetching posts \(error)")
             }else{
                 let responseJSON = JSON(data: responseData! as! NSData, options:NSJSONReadingOptions.AllowFragments, error:nil)
+
                 self.count = responseJSON["count"].int
+                if(self.count == 0)
+                {
+                    self.createEmptyView()
+                }
                 self.page++
             }
         }
         
+    }
+    
+    func createEmptyView()
+    {
+        let channel = self.dataObject as! Channel
+        let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView
+        emptyView!.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
+        self.tableView.addSubview(emptyView!)
     }
     
     func showLoader(){
