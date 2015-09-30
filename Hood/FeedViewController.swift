@@ -171,6 +171,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView
         emptyView!.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
         self.tableView.addSubview(emptyView!)
+        let gr = UITapGestureRecognizer(target: self, action: Selector("segueAddPost"))
+        emptyView?.addGestureRecognizer(gr)
+    }
+    
+    func segueAddPost()
+    {
+
+        (self.parentViewController?.parentViewController as! RootViewController).performSegueWithIdentifier("addPost", sender: nil)
     }
     
     func showLoader(){
