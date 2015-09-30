@@ -100,55 +100,53 @@ class Post: ParentObject {
     
     
     
-    static func getPosts(channel: Channel, pageSize: Int, page: Int, completion: ((responseData: AnyObject?, error: NSError?) -> Void)?){
+    static func getPosts(channel: Channel, pageSize: Int, page: Int, completion: ((responseData: AnyObject?, error: ErrorType?) -> Void)?){
         let url = API().getAllPostsForChannel("\(channel.id.intValue)")
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         let parameters = ["page":page, "page_size": pageSize]
         
-        
-        
-        Alamofire.request(.GET, url, parameters: parameters,encoding: .URL,headers:headers)
-            .response { request, response, data, error in
-                
-                if let completion = completion{
-                    completion(responseData: data, error: nil);
-                }
-                
-                let responseJSON = JSON(data: data!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-                print(String(data: data!, encoding: NSUTF8StringEncoding))
-                var dataArray = NSMutableArray()
+        Alamofire.request(.GET, url, parameters: parameters,encoding: .URL,headers:headers).responseData { (request, response, result) -> Void in
+            if let completion = completion{
+                completion(responseData: result.value, error: result.error);
+            }
+            
+            if(result.isSuccess){
+                let responseJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+//                print(String(data: data!, encoding: NSUTF8StringEncoding))
+                let dataArray = NSMutableArray()
                 let fetchRequest = NSFetchRequest(entityName: "Post")
                 fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [channel])
                 fetchRequest.fetchBatchSize = pageSize
                 fetchRequest.fetchOffset = pageSize * page
                 let appDelegate = Utilities.appDelegate
-                for (key, post) in responseJSON["results"]{
+                for (_, post) in responseJSON["results"]{
                     let postObject = Post.generateObjectFromJSON(post, context: appDelegate.managedObjectContext!)
                     postObject.channel = channel
                     dataArray.addObject(postObject)
                 }
                 do
                 {
-                let results = try appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest)
-                if(results?.count > 0){
-                    let objectsToDelete = NSMutableSet(array: results!)
-                    objectsToDelete.minusSet(NSSet(array: dataArray as [AnyObject]) as Set<NSObject>)
-                    let objectsToDeleteArray = objectsToDelete.allObjects
-                    if objectsToDeleteArray.count > 0{
-                        for index in 0...objectsToDeleteArray.count-1{
-                            appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+                    let results = try appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest)
+                    if(results?.count > 0){
+                        let objectsToDelete = NSMutableSet(array: results!)
+                        objectsToDelete.minusSet(NSSet(array: dataArray as [AnyObject]) as Set<NSObject>)
+                        let objectsToDeleteArray = objectsToDelete.allObjects
+                        if objectsToDeleteArray.count > 0{
+                            for index in 0...objectsToDeleteArray.count-1{
+                                appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+                            }
                         }
                     }
-                }
-                appDelegate.saveContext()
+                    appDelegate.saveContext()
                 }
                 catch
                 {
                     
                 }
 
+            }
+            
         }
-
         
     }
     

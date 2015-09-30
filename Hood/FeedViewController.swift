@@ -150,9 +150,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         Post.getPosts(self.dataObject as! Channel, pageSize: 5, page: page) { (responseData, error) -> Void in
             self.hideLoader()
             if let error = error{
-                print("Error in fetching posts \(error.description)")
+                print("Error in fetching posts \(error)")
             }else{
-                let responseJSON = JSON(responseData!)
+                let responseJSON = JSON(data: responseData! as! NSData, options:NSJSONReadingOptions.AllowFragments, error:nil)
                 self.count = responseJSON["count"].int
                 self.page++
             }

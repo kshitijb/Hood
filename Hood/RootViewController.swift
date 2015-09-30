@@ -69,8 +69,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
         setUpNotificationButton()
     }
-    func setUpNotificationButton()
-    {
+    
+    func setUpNotificationButton(){
         let notifButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
         notifButton.contentMode = UIViewContentMode.ScaleAspectFit
         notifButton.addSubview(badge)
@@ -81,10 +81,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         notifButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         notifButton.addTarget(self, action:Selector("showNotifs") , forControlEvents: UIControlEvents.TouchUpInside)
     }
-    func showNotifs()
-    {
+    
+    func showNotifs(){
         self.performSegueWithIdentifier("showNotifications", sender: self)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -144,6 +145,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         return .Min
     }
+    
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed{
             let dataViewController:FeedViewController = pageViewController.viewControllers!.last as! FeedViewController
@@ -152,8 +154,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             self.pageControl.currentPage = count
         }
     }
-    
-    
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
@@ -328,6 +328,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     {
 
     }
+    
     func titleViewTapped(){
         channelPicker.showInView(self.navigationController!.view)
     }
