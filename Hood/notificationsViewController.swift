@@ -19,6 +19,9 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         notificationTableView.dataSource = self
         notificationTableView.estimatedRowHeight = 2
         notificationTableView.rowHeight = UITableViewAutomaticDimension
+        let gr = UISwipeGestureRecognizer(target: self, action: Selector("dismiss:"))
+        gr.direction = UISwipeGestureRecognizerDirection.Left
+        view.addGestureRecognizer(gr)
     }
     
     override func viewWillAppear(animated: Bool) {
