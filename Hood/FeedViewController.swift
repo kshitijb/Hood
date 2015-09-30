@@ -162,6 +162,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.page++
                 }
                 self.count = responseJSON["count"].int
+                if(self.count == 0)
+                {
+                    self.createEmptyView()
+                }
             }
         }
         

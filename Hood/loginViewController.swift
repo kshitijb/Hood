@@ -72,7 +72,7 @@ class loginViewController: UIViewController {
                         "profile_photo" : "https://graph.facebook.com/\(id!)/picture?type=normal"
                     ]
                     
-                    Alamofire.request(.POST, "http://128.199.179.151/user/register/", parameters: parameters, encoding: .JSON).responseData{_, _, result in
+                    Alamofire.request(.POST, API().registerUser(), parameters: parameters, encoding: .JSON).responseData{_, _, result in
                         
                         
                         let responseDict:AnyObject

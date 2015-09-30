@@ -27,7 +27,10 @@ struct API {
         static let show = "show"
         static let neighbourhoods = "neighbourhood"
         static let currentNeighbourhoodID = "1"
-     }
+        static let register = "register"
+        static let user = "user"
+    }
+    
     private var fullUrl:String{
         return Static.apiProtocol + Static.baseURL + ":" + Static.portNumber
     }
@@ -91,5 +94,9 @@ struct API {
     func getNotificationsForUser() -> String
     {
         return ([fullUrl, Static.notifications,Static.show]).joinWithSeparator("/")
+    }
+    
+    func registerUser() -> String{
+        return ([fullUrl, Static.user, Static.register]).joinWithSeparator("/")
     }
 }
