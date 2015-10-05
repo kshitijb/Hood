@@ -47,7 +47,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func networkRequestForComments()
     {
-        Alamofire.request(.GET,API().getCommentsForPost("\(postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.GET,API().getCommentsForPost("\(postID)"), parameters: nil, encoding: .URL, headers: headers).responseData{_, _, result in
             
             self.commentsJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

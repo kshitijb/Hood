@@ -55,7 +55,7 @@ class Comment: ParentObject {
         }
         if let timestamp = json["timestamp"].string{
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             dateFormatter.timeZone = NSTimeZone(name: "UTC")
             comment.timestamp = dateFormatter.dateFromString(timestamp)!
         }
