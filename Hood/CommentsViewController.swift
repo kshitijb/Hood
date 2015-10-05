@@ -51,7 +51,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             
             self.commentsJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            for (key, comment) in self.commentsJSON["results"]{
+            for (_, comment) in self.commentsJSON["results"]{
                 
                 let commentObject = Comment.generateObjectFromJSON(comment, context: appDelegate.managedObjectContext!)
                 commentObject.post = self.post!

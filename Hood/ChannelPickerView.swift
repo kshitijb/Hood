@@ -8,32 +8,41 @@
 
 import UIKit
 import SwiftyJSON
+import CoreData
 
 class ChannelPickerView: UIView {
     
     let statusBarHeight = 20
     let buttonHeight = 75
-    var channels: JSON = JSON.null
+    var channels:[Channel] = []
     var buttonsArray: NSMutableArray = NSMutableArray()
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+    var inView = UIView()
     
-    func setUpWithChannels(channelsArray:JSON, inView:UIView){
-        channels = channelsArray
+    func setUpWithChannels(inView:UIView)
+    {
+
+        self.inView = inView
+        performFetchFromCoreData()
+    }
+    
+    func createSubViews()
+    {
         frame = inView.frame
         let blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         blurView.frame = frame
         addSubview(blurView)
         var startingY = 0
-        for (key, channel) in channels {
+        for (key,channel) in channels.enumerate() {
             let buttonHeightToUse:CGFloat
-            if(key == "0"){
+            if(key == 0){
                 buttonHeightToUse = CGFloat(statusBarHeight) + CGFloat(buttonHeight)
             }else{
                 buttonHeightToUse = CGFloat(buttonHeight)
             }
             let button: UIButton = UIButton(frame: CGRectMake(CGFloat(0), CGFloat(startingY), frame.size.width, buttonHeightToUse))
-            button.setTitle("#" + channel["name"].string!, forState: UIControlState.Normal)
-            if let colorString = channel["color"].string{
+            button.setTitle("#" + channel.name, forState: UIControlState.Normal)
+            if let colorString = channel.color{
                 button.backgroundColor = UIColor(hexString: "#" + colorString)
             }
             button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
@@ -41,7 +50,36 @@ class ChannelPickerView: UIView {
             blurView.contentView.addSubview(button)
             startingY += Int(buttonHeightToUse)
         }
+
     }
+    
+    func performFetchFromCoreData()
+    {
+        let request = NSFetchRequest(entityName: "Channel")
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request) { (result) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.channels = result.finalResult as! [Channel]
+                print(result.finalResult!.count)
+                self.createSubViews()
+                
+            })
+        }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.managedObjectContext?.performBlock({ () -> Void in
+            do
+            {
+                try appDelegate.managedObjectContext?.executeRequest(asyncRequest)
+            }
+            catch
+            {
+                print("Unable to execute asynchronous fetch result.");
+                print(error)
+            }
+        })
+    }
+
     
     func setUpForView(view: UIView){
         frame = view.frame
@@ -50,6 +88,7 @@ class ChannelPickerView: UIView {
         blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         blurView.frame = frame
         addSubview(blurView)
+        self.setUpWithChannels(view)
     }
     
     func addButtonForObject(object: JSON, action: (() -> Void)?){
@@ -69,7 +108,8 @@ class ChannelPickerView: UIView {
         }
         button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
         button.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
-        if let passedAction = action{
+        if action != nil
+        {
             button.action = action
         }
         buttonsArray.addObject(button)

@@ -19,9 +19,14 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var textViewHeightConstant: NSLayoutConstraint!
+    let channelPicker = ChannelPickerView()
     var pickedImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGesture = UITapGestureRecognizer(target: self, action: "titleViewTapped")
+        self.navigationController?.view?.addGestureRecognizer(tapGesture)
+        channelPicker.userInteractionEnabled = false
+        channelPicker.setUpForView((self.navigationController?.view)!)
         self.navigationController?.hidesBarsOnSwipe = false
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
@@ -34,6 +39,10 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let aspectConstraint = NSLayoutConstraint(item: postImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImageView, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
         aspectConstraint.priority = 999
         postImageView.addConstraint(aspectConstraint)
+    }
+    func titleViewTapped()
+    {
+        channelPicker.showInView((self.navigationController?.view)!)
     }
     
     @IBAction func postNow(sender: AnyObject)
