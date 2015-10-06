@@ -18,10 +18,11 @@ class ChannelPickerView: UIView {
     var buttonsArray: NSMutableArray = NSMutableArray()
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
     var inView = UIView()
+    var navController:UINavigationController?
     
     func setUpWithChannels(inView:UIView)
     {
-
+        
         self.inView = inView
         performFetchFromCoreData()
     }
@@ -81,8 +82,9 @@ class ChannelPickerView: UIView {
     }
 
     
-    func setUpForView(view: UIView){
+    func setUpForViewAndNavController(view: UIView,navControl:UINavigationController){
         frame = view.frame
+        navController = navControl
         blurView.removeFromSuperview()
         buttonsArray.removeAllObjects()
         blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
@@ -107,7 +109,7 @@ class ChannelPickerView: UIView {
             button.backgroundColor = UIColor(hexString: "#" + colorString)
         }
         button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
-        button.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: Selector("buttonTapped:"), forControlEvents: UIControlEvents.TouchUpInside)
         if action != nil
         {
             button.action = action
@@ -141,15 +143,19 @@ class ChannelPickerView: UIView {
     }
 
     func buttonTapped(sender: ChannelPickerButton){
-        if let senderAction = sender.action{
-            senderAction()
-        }
+//        if let senderAction = sender.action{
+//            senderAction()
+//        }
+        print(sender.backgroundColor)
+        
+        self.navController?.navigationBar.setBackgroundImage(getImageWithColor(sender.backgroundColor!, size: CGSizeMake(1, 64)), forBarMetrics: .Default)
         dismissView()
+        
         
     }
     
     class ChannelPickerButton: UIButton {
-        var action: (() -> Void)?
+        var action: (() -> ())?
     }
     
 }

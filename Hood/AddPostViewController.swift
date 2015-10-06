@@ -24,9 +24,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: "titleViewTapped")
+
         self.navigationController?.view?.addGestureRecognizer(tapGesture)
-        channelPicker.userInteractionEnabled = false
-        channelPicker.setUpForView((self.navigationController?.view)!)
+        channelPicker.setUpForViewAndNavController((self.navigationController?.view)!, navControl: self.navigationController!)
         self.navigationController?.hidesBarsOnSwipe = false
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
@@ -39,6 +39,8 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let aspectConstraint = NSLayoutConstraint(item: postImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImageView, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
         aspectConstraint.priority = 999
         postImageView.addConstraint(aspectConstraint)
+        
+
     }
     func titleViewTapped()
     {

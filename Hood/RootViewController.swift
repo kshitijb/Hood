@@ -22,7 +22,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     let titleScrollViewWidth = CGFloat(160)
     var pageViewController: UIPageViewController?
     var titleScrollView: UIScrollView?
-    let channelPicker:ChannelPickerView = ChannelPickerView()
     let pageColors: NSMutableArray = NSMutableArray()
     let shouldHideStatusBar: Bool = false
     var statusBarBackgroundView: UIView?
@@ -33,7 +32,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        channelPicker.userInteractionEnabled = false
         setNeedsStatusBarAppearanceUpdate()
         if (FBSDKAccessToken.currentAccessToken() == nil)
         {
@@ -233,12 +231,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     }
     
     func updateTitleView(){
-        self.channelPicker.setUpForView(self.navigationController!.view)
         self.titleScrollView = UIScrollView(frame: CGRectMake(0, 0, 160, 40))
         self.titleScrollView?.pagingEnabled = true
         self.titleScrollView?.scrollEnabled = false
-        let tapGesture = UITapGestureRecognizer(target: self, action: "titleViewTapped")
-        self.titleScrollView?.addGestureRecognizer(tapGesture)
         var startingX:CGFloat = 0
         let pageSize:CGFloat = 160
         for item in self.modelController.pageData {
@@ -329,9 +324,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     }
     
-    func titleViewTapped(){
-        channelPicker.showInView(self.navigationController!.view)
-    }
     
     func jumpToPageForIndex(index: Int){
         let viewController = self.modelController.viewControllerAtIndex(index, storyboard: self.storyboard!)
