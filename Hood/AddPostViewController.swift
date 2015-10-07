@@ -27,6 +27,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
 
         self.navigationController?.view?.addGestureRecognizer(tapGesture)
         channelPicker.setUpForViewAndNavController((self.navigationController?.view)!, navControl: self.navigationController!)
+        channelPicker.channelID = self.channelID!
         self.navigationController?.hidesBarsOnSwipe = false
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
@@ -50,7 +51,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBAction func postNow(sender: AnyObject)
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        var params = [ "user_id": userID! ,"locality_id" : API.Static.currentNeighbourhoodID, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
+        var params = [ "user_id": userID! ,"locality_id" : API.Static.currentNeighbourhoodID, "channel_id" : channelPicker.channelID!, "message" : postTextView.text] as [String:AnyObject!]
         if let pickedImage = pickedImage{
             let imageData = UIImagePNGRepresentation(pickedImage)
             let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
@@ -60,7 +61,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         self.title = "Posting"
         self.postNowButton.enabled = false
         self.navigationController?.popViewControllerAnimated(true)
-        let userInfo:Dictionary = ["channelID":self.channelID!]
+        let userInfo:Dictionary = ["channelID":channelPicker.channelID!]
         NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
         
         Alamofire.request(.POST, API().addPost(), parameters: params, encoding: .JSON, headers: headers).responseData{_, _, result in

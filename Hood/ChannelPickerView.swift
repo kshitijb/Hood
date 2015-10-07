@@ -19,7 +19,7 @@ class ChannelPickerView: UIView {
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
     var inView = UIView()
     var navController:UINavigationController?
-    
+    var channelID:Int?
     func setUpWithChannels(inView:UIView)
     {
         
@@ -46,10 +46,12 @@ class ChannelPickerView: UIView {
             if let colorString = channel.color{
                 button.backgroundColor = UIColor(hexString: "#" + colorString)
             }
+            print(button.backgroundColor)
             button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
             button.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
             blurView.contentView.addSubview(button)
             startingY += Int(buttonHeightToUse)
+            buttonsArray.addObject(button)
         }
 
     }
@@ -57,7 +59,7 @@ class ChannelPickerView: UIView {
     func performFetchFromCoreData()
     {
         let request = NSFetchRequest(entityName: "Channel")
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request) { (result) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.channels = result.finalResult as! [Channel]
@@ -86,38 +88,14 @@ class ChannelPickerView: UIView {
         frame = view.frame
         navController = navControl
         blurView.removeFromSuperview()
-        buttonsArray.removeAllObjects()
+//        buttonsArray.removeAllObjects()
         blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         blurView.frame = frame
         addSubview(blurView)
         self.setUpWithChannels(view)
     }
     
-    func addButtonForObject(object: JSON, action: (() -> Void)?){
-        let y:CGFloat
-        let height:CGFloat
-        if(self.buttonsArray.count == 0){
-            y = 0
-            height = CGFloat(buttonHeight + statusBarHeight)
-        }else{
-            y = CGFloat(buttonHeight * buttonsArray.count + statusBarHeight)
-            height = CGFloat(buttonHeight)
-        }
-        let button: ChannelPickerButton = ChannelPickerButton(frame: CGRectMake(0, y, frame.size.width, height))
-        button.setTitle("#" + object["name"].string!, forState: UIControlState.Normal)
-        if let colorString = object["color"].string{
-            button.backgroundColor = UIColor(hexString: "#" + colorString)
-        }
-        button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
-        button.addTarget(self, action: Selector("buttonTapped:"), forControlEvents: UIControlEvents.TouchUpInside)
-        if action != nil
-        {
-            button.action = action
-        }
-        buttonsArray.addObject(button)
-        blurView.contentView.addSubview(button)
-    }
-    
+
     func showInView(view:UIView){
         layer.opacity = 0
         view.addSubview(self)
@@ -147,11 +125,16 @@ class ChannelPickerView: UIView {
 //            senderAction()
 //        }
         print(sender.backgroundColor)
-        
-        self.navController?.navigationBar.setBackgroundImage(getImageWithColor(sender.backgroundColor!, size: CGSizeMake(1, 64)), forBarMetrics: .Default)
+        for (index,button) in buttonsArray.enumerate()
+        {
+
+            if(sender.backgroundColor == button.backgroundColor)
+            {
+                channelID = index + 1
+            }
+        }
+    self.navController?.navigationBar.setBackgroundImage(getImageWithColor(sender.backgroundColor!, size: CGSizeMake(1, 64)), forBarMetrics: .Default)
         dismissView()
-        
-        
     }
     
     class ChannelPickerButton: UIButton {
