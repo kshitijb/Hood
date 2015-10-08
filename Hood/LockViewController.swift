@@ -14,7 +14,7 @@ class LockViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var lockTextField: UITextField!
     @IBOutlet var submitButton: UIButton!
-    let activityIndicator: UIActivityIndicatorView  = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,11 @@ class LockViewController: UIViewController, UITextFieldDelegate {
     
     func submit(){
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator.frame = self.submitButton.frame
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        submitButton.hidden = true
         Alamofire.request(.POST, API().updateUserLocality(), parameters: ["locality_code":lockTextField.text!], encoding: .JSON, headers: headers).responseJSON { (request, response, result) -> Void in
             if(result.isSuccess){
                 if let _ = result.value?.valueForKey("error"){
@@ -46,6 +51,8 @@ class LockViewController: UIViewController, UITextFieldDelegate {
             }else{
                 print(result.error)
             }
+            self.activityIndicator.removeFromSuperview()
+            self.submitButton.hidden = false
         }
     }
     

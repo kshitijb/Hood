@@ -99,13 +99,17 @@ struct Utilities
         
     }
     
-    static func setUpLineSpacingForLabel(label:UILabel){
+    static func setUpLineSpacingForLabel(label:UILabel, font: UIFont){
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 5
         var attrString = NSMutableAttributedString(string: label.text!)
         attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
-        attrString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 18)!, range:NSMakeRange(0, attrString.length))
+        attrString.addAttribute(NSFontAttributeName, value: font, range:NSMakeRange(0, attrString.length))
         label.attributedText = attrString
+    }
+    
+    static func setUpLineSpacingForLabel(label:UILabel){
+        setUpLineSpacingForLabel(label, font: UIFont(name: "Lato-Regular", size: 18)!)
     }
     
     static func colorBetweenColors(firstColor:UIColor , lastColor:UIColor, offsetAsFraction:CGFloat)->UIColor

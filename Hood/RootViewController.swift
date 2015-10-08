@@ -60,7 +60,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         self.addChildViewController(self.pageViewController!)
         self.view.insertSubview(self.pageViewController!.view, belowSubview: self.pageIndicatorContainer)
-        var pageViewRect = self.view.bounds
+        let pageViewRect = self.view.bounds
         self.pageViewController!.view.frame = pageViewRect
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
@@ -110,6 +110,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        if let _ = self.titleScrollView{
+            updateTitleBarColor(pageColors[pageControl.currentPage] as! UIColor)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -179,7 +182,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 SVProgressHUD.dismiss()
                 if(result.isSuccess){
                     let swiftyJSONObject = JSON(result.value!)
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let appDelegate = Utilities.appDelegate
                     print(swiftyJSONObject)
                     let channels:NSMutableArray = NSMutableArray()
                     for (key, channel) in swiftyJSONObject["channels"]{
@@ -255,7 +258,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
         self.navigationItem.titleView = self.titleScrollView
-//        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
+        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
     }
     
     func updateTitleViewForPageNumber(page: Int, animated: Bool){
@@ -301,22 +304,25 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 }
                 colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage] as! UIColor, lastColor: pageColors[pageControl.currentPage - 1] as! UIColor, offsetAsFraction: -perc)
             }
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
-                let img = getImageWithColor(colorToSet, size: CGSizeMake(1, 64))
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.navigationController?.navigationBar.setBackgroundImage(img,forBarMetrics: .Default)
-                    self.pageIndicatorContainer.backgroundColor = colorToSet
-                    if let statusBarBackground = self.statusBarBackgroundView{
-                        statusBarBackground.backgroundColor = colorToSet
-                    }
-                })
-                
-            })
-            
+            updateTitleBarColor(colorToSet)
         }
 
 
 //        Utilities.colorBetweenColors(UIColor.redColor(), lastColor: UIColor.greenColor(), offsetAsFraction: scrollView.contentOffset.x/view.frame.width)
+    }
+    
+    func updateTitleBarColor(colorToSet: UIColor){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
+            let img = getImageWithColor(colorToSet, size: CGSizeMake(1, 64))
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.navigationController?.navigationBar.setBackgroundImage(img,forBarMetrics: .Default)
+                self.pageIndicatorContainer.backgroundColor = colorToSet
+                if let statusBarBackground = self.statusBarBackgroundView{
+                    statusBarBackground.backgroundColor = colorToSet
+                }
+            })
+            
+        })
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView)

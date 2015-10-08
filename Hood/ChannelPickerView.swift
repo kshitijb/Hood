@@ -20,6 +20,8 @@ class ChannelPickerView: UIView {
     var inView = UIView()
     var navController:UINavigationController?
     var channelID:Int?
+    var dismissAction: () -> Void = {}
+    
     func setUpWithChannels(inView:UIView)
     {
         
@@ -46,7 +48,6 @@ class ChannelPickerView: UIView {
             if let colorString = channel.color{
                 button.backgroundColor = UIColor(hexString: "#" + colorString)
             }
-            print(button.backgroundColor)
             button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
             button.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
             blurView.contentView.addSubview(button)
@@ -113,6 +114,7 @@ class ChannelPickerView: UIView {
     }
     
     func dismissView(){
+        self.dismissAction()
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
             self.layer.opacity = 0
             }) { (completed:Bool) -> Void in
@@ -124,7 +126,6 @@ class ChannelPickerView: UIView {
 //        if let senderAction = sender.action{
 //            senderAction()
 //        }
-        print(sender.backgroundColor)
         for (index,button) in buttonsArray.enumerate()
         {
 

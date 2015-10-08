@@ -18,8 +18,7 @@ enum Vote: Int{
 
 class PostController {
     static func VotePost(type: Vote, sender: AnyObject, post: Post, success: (() -> Void)?, failure: (() -> Void)?) -> Void{
-        let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        let params = ["post_id" : post.id.integerValue, "user_id": userID!]
+        let params = ["post_id" : post.id.integerValue]
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         var APIString:String
         switch type{
@@ -37,8 +36,8 @@ class PostController {
                     if let failureBlock = failure{
                         failureBlock()
                     }
-                    let alert = UIAlertView(title: "no Interwebs", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
-                    alert.show()
+//                    let alert = UIAlertView(title: "Error", message: "Sorry,your message wasn't sent", delegate: self, cancelButtonTitle: "okay")
+//                    alert.show()
                 }
                 else
                 {

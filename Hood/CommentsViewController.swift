@@ -168,6 +168,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         commentsTextView.layoutManager.ensureLayoutForTextContainer(commentsTextView.textContainer)
         commentsTextView.text = "Add a comment"
         commentsTextView.delegate = self
+        commentsTextView.layer.cornerRadius = 4
         tapGesture = UITapGestureRecognizer(target: self, action: "sendComment:")
         sendCommentButton.addGestureRecognizer(tapGesture!)
         tapGesture?.enabled = false
@@ -242,7 +243,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
 
             cell.commentLabel.text = record.comment
             cell.timestampLabel.text = Utilities.timeStampFromDate(record.timestamp)
-            Utilities.setUpLineSpacingForLabel(cell.commentLabel)
+            Utilities.setUpLineSpacingForLabel(cell.commentLabel, font: UIFont(name: "Lato-Regular", size: 16)!)
             cell.preservesSuperviewLayoutMargins = false
             cell.layoutMargins = UIEdgeInsetsZero
             return cell
