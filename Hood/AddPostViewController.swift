@@ -19,9 +19,15 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var textViewHeightConstant: NSLayoutConstraint!
+    let channelPicker = ChannelPickerView()
     var pickedImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGesture = UITapGestureRecognizer(target: self, action: "titleViewTapped")
+
+        self.navigationController?.view?.addGestureRecognizer(tapGesture)
+        channelPicker.setUpForViewAndNavController((self.navigationController?.view)!, navControl: self.navigationController!)
+        channelPicker.channelID = self.channelID!
         self.navigationController?.hidesBarsOnSwipe = false
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
@@ -34,6 +40,12 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let aspectConstraint = NSLayoutConstraint(item: postImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImageView, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
         aspectConstraint.priority = 999
         postImageView.addConstraint(aspectConstraint)
+        
+
+    }
+    func titleViewTapped()
+    {
+        channelPicker.showInView((self.navigationController?.view)!)
     }
     
     @IBAction func postNow(sender: AnyObject)
@@ -49,7 +61,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         self.title = "Posting"
         self.postNowButton.enabled = false
         self.navigationController?.popViewControllerAnimated(true)
-        let userInfo:Dictionary = ["channelID":self.channelID!]
+        let userInfo:Dictionary = ["channelID":channelPicker.channelID!]
         NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
         
         Alamofire.request(.POST, API().addPost(), parameters: params, encoding: .JSON, headers: headers).responseData{_, _, result in
