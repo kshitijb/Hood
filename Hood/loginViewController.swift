@@ -75,31 +75,21 @@ class loginViewController: UIViewController {
                     Alamofire.request(.POST, API().registerUser(), parameters: parameters, encoding: .JSON).responseData{_, _, result in
                         
                         
-                        let responseDict:AnyObject
-                        do
-                        {
-                         responseDict = try NSJSONSerialization.JSONObjectWithData(result.value!, options: NSJSONReadingOptions.AllowFragments)
-                        
-                            let userDefaults = NSUserDefaults.standardUserDefaults()
-                            userDefaults.setValue(responseDict["id"], forKey: "id")
-                            userDefaults.setValue(responseDict["access_token"], forKey: "accessToken")
-                            userDefaults.synchronize()
+                        if(result.isSuccess){
                             let responseJSON = JSON(data: result.value!, options: .AllowFragments, error: nil)
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             let user:User = User.generateObjectFromJSON(responseJSON, context: appDelegate.managedObjectContext!)
                             user.is_owner = NSNumber(bool: true)
                             AppDelegate.owner = user
-                            appDelegate.saveContext()
-                        }
-                        catch
-                        {
-                            print("fuck")
+                            SVProgressHUD.dismiss()
+                            self.performSegueWithIdentifier("showLockScreen", sender: nil)
+//                            appDelegate.saveContext()
+                        }else{
+                            UIAlertView(title: "Error", message: "Could not log you in. Please try again", delegate: self, cancelButtonTitle: "Ok").show()
+                            FBSDKLoginManager().logOut()
                         }
                     }
 
-                    SVProgressHUD.dismiss()
-                    let onboarding:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("onboarding"))!
-                    self.navigationController?.pushViewController(onboarding, animated: true)
                 })
                 
                 

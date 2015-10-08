@@ -39,7 +39,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBAction func postNow(sender: AnyObject)
     {
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        var params = [ "user_id": userID! ,"locality_id" : API.Static.currentNeighbourhoodID, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
+        var params = [ "user_id": userID! ,"locality_id" : AppDelegate.owner!.neighbourhood.id, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
         if let pickedImage = pickedImage{
             let imageData = UIImagePNGRepresentation(pickedImage)
             let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())

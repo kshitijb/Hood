@@ -35,7 +35,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         super.viewDidLoad()
         channelPicker.userInteractionEnabled = false
         setNeedsStatusBarAppearanceUpdate()
-        if (FBSDKAccessToken.currentAccessToken() == nil)
+        if (AppDelegate.owner == nil)
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
@@ -99,7 +99,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
             print(profile)
         }
-        if (FBSDKAccessToken.currentAccessToken() == nil)
+        if (AppDelegate.owner == nil)
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
@@ -176,7 +176,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             SVProgressHUD.showWithStatus("Loading")
         }
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
-        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood() + "/", headers:headers).validate()
+        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood("\(AppDelegate.owner!.neighbourhood.id.intValue)") + "/", headers:headers).validate()
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, _, result) -> Void in
                 SVProgressHUD.dismiss()
                 if(result.isSuccess){
@@ -370,9 +370,10 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         print(url)
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, _, result) -> Void in
-            
+            if(result.isSuccess){
                 let responseJSON = JSON(result.value!)
                 self.badge.badgeValue = responseJSON["count"].int!
+            }
         }
     }
     
@@ -382,7 +383,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let context = Utilities.appDelegate.managedObjectContext
         do
         {
-            var results = try context?.executeFetchRequest(fetchRequest)
+            let results = try context?.executeFetchRequest(fetchRequest)
             if results?.count > 0{
                 var mutableArray = NSMutableArray(array: results!)
                 self.modelController.pageData = mutableArray

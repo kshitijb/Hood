@@ -16,7 +16,7 @@ class Neighbourhood: ParentObject {
     @NSManaged var google_id: String
     @NSManaged var channels: NSSet
     static func generateObjectFromJSON(json: JSON, context: NSManagedObjectContext) -> Neighbourhood{
-        let neighbourhood:Neighbourhood = ParentObject.createOrUpateObjectFromJSON(json, context: context, entityName: "Neightbourhood") as! Neighbourhood
+        let neighbourhood:Neighbourhood = ParentObject.createOrUpateObjectFromJSON(json, context: context, entityName: "Neighbourhood") as! Neighbourhood
         if let name = json["name"].string{
             neighbourhood.name = name
         }

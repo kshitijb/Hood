@@ -20,12 +20,6 @@ class ParentObject: NSManagedObject {
         let id = NSNumber(longLong: json["id"].int64!)
         fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [id])
         var entity:NSManagedObject
-//        if(context.countForFetchRequest(fetchRequest, error: &error) > 0){
-//            entity = context.executeFetchRequest(fetchRequest, error: &error)!.last as! NSManagedObject
-//        }
-//        else{
-//            entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as! NSManagedObject
-//        }
         do
         {
             let results = try context.executeFetchRequest(fetchRequest)
@@ -39,6 +33,8 @@ class ParentObject: NSManagedObject {
         {
             entity = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context)
         }
+        
+        (entity as! ParentObject).id = id
         
         return entity
     }
