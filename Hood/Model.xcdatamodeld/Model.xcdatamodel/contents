@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 4.3">
     <entity name="Channel" representedClassName="Pipal.Channel" parentEntity="ParentObject" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,7 +12,7 @@
         <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post" syncable="YES"/>
     </entity>
-    <entity name="Neighbourhood" representedClassName="PRODUCT_MODULE_NAME.Neighbourhood" parentEntity="ParentObject" syncable="YES">
+    <entity name="Neighbourhood" representedClassName="Pipal.Neighbourhood" parentEntity="ParentObject" syncable="YES">
         <attribute name="google_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="channels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Channel" syncable="YES"/>
@@ -48,7 +48,7 @@
     <elements>
         <element name="Channel" positionX="-587" positionY="18" width="128" height="105"/>
         <element name="Comment" positionX="-153" positionY="255" width="128" height="105"/>
-        <element name="Neighbourhood" positionX="-369" positionY="-288" width="128" height="88"/>
+        <element name="Neighbourhood" positionX="-369" positionY="-288" width="128" height="90"/>
         <element name="ParentObject" positionX="142" positionY="102" width="128" height="60"/>
         <element name="Post" positionX="-74" positionY="-297" width="128" height="195"/>
         <element name="User" positionX="-486" positionY="216" width="128" height="210"/>

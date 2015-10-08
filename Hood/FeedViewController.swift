@@ -139,7 +139,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getPosts(){
-        if let count = self.fetchedResultsController.sections?.count{
+        if let count = self.fetchedResultsController.fetchedObjects?.count{
             if (count == 0){
                 showLoader()
             }

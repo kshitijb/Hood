@@ -22,7 +22,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     let titleScrollViewWidth = CGFloat(160)
     var pageViewController: UIPageViewController?
     var titleScrollView: UIScrollView?
-    let channelPicker:ChannelPickerView = ChannelPickerView()
     let pageColors: NSMutableArray = NSMutableArray()
     let shouldHideStatusBar: Bool = false
     var statusBarBackgroundView: UIView?
@@ -33,9 +32,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        channelPicker.userInteractionEnabled = false
         setNeedsStatusBarAppearanceUpdate()
-        if (FBSDKAccessToken.currentAccessToken() == nil)
+        if (AppDelegate.owner == nil)
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
@@ -62,7 +60,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         self.addChildViewController(self.pageViewController!)
         self.view.insertSubview(self.pageViewController!.view, belowSubview: self.pageIndicatorContainer)
-        var pageViewRect = self.view.bounds
+        let pageViewRect = self.view.bounds
         self.pageViewController!.view.frame = pageViewRect
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
@@ -99,7 +97,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
             print(profile)
         }
-        if (FBSDKAccessToken.currentAccessToken() == nil)
+        if (AppDelegate.owner == nil)
         {
             performSegueWithIdentifier("showLogin", sender: self)
         }
@@ -112,6 +110,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        if let _ = self.titleScrollView{
+            updateTitleBarColor(pageColors[pageControl.currentPage] as! UIColor)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -176,12 +177,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             SVProgressHUD.showWithStatus("Loading")
         }
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
-        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood() + "/", headers:headers).validate()
+        Alamofire.request(.GET, API().getAllChannelsForNeighbourhood("\(AppDelegate.owner!.neighbourhood.id.intValue)") + "/", headers:headers).validate()
             .responseJSON(options: NSJSONReadingOptions.MutableContainers) { (request, _, result) -> Void in
                 SVProgressHUD.dismiss()
                 if(result.isSuccess){
                     let swiftyJSONObject = JSON(result.value!)
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let appDelegate = Utilities.appDelegate
                     print(swiftyJSONObject)
                     let channels:NSMutableArray = NSMutableArray()
                     for (key, channel) in swiftyJSONObject["channels"]{
@@ -233,12 +234,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     }
     
     func updateTitleView(){
-        self.channelPicker.setUpForView(self.navigationController!.view)
         self.titleScrollView = UIScrollView(frame: CGRectMake(0, 0, 160, 40))
         self.titleScrollView?.pagingEnabled = true
         self.titleScrollView?.scrollEnabled = false
-        let tapGesture = UITapGestureRecognizer(target: self, action: "titleViewTapped")
-        self.titleScrollView?.addGestureRecognizer(tapGesture)
         var startingX:CGFloat = 0
         let pageSize:CGFloat = 160
         for item in self.modelController.pageData {
@@ -260,7 +258,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         self.titleScrollView?.contentSize = CGSizeMake(startingX * pageSize, 0)
         self.navigationItem.titleView = self.titleScrollView
-//        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
+        self.updateTitleViewForPageNumber(pageControl.currentPage, animated: false)
     }
     
     func updateTitleViewForPageNumber(page: Int, animated: Bool){
@@ -306,22 +304,25 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 }
                 colorToSet = Utilities.colorBetweenColors(pageColors[pageControl.currentPage] as! UIColor, lastColor: pageColors[pageControl.currentPage - 1] as! UIColor, offsetAsFraction: -perc)
             }
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
-                let img = getImageWithColor(colorToSet, size: CGSizeMake(1, 64))
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.navigationController?.navigationBar.setBackgroundImage(img,forBarMetrics: .Default)
-                    self.pageIndicatorContainer.backgroundColor = colorToSet
-                    if let statusBarBackground = self.statusBarBackgroundView{
-                        statusBarBackground.backgroundColor = colorToSet
-                    }
-                })
-                
-            })
-            
+            updateTitleBarColor(colorToSet)
         }
 
 
 //        Utilities.colorBetweenColors(UIColor.redColor(), lastColor: UIColor.greenColor(), offsetAsFraction: scrollView.contentOffset.x/view.frame.width)
+    }
+    
+    func updateTitleBarColor(colorToSet: UIColor){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
+            let img = getImageWithColor(colorToSet, size: CGSizeMake(1, 64))
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.navigationController?.navigationBar.setBackgroundImage(img,forBarMetrics: .Default)
+                self.pageIndicatorContainer.backgroundColor = colorToSet
+                if let statusBarBackground = self.statusBarBackgroundView{
+                    statusBarBackground.backgroundColor = colorToSet
+                }
+            })
+            
+        })
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView)
@@ -329,9 +330,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     }
     
-    func titleViewTapped(){
-        channelPicker.showInView(self.navigationController!.view)
-    }
     
     func jumpToPageForIndex(index: Int){
         let viewController = self.modelController.viewControllerAtIndex(index, storyboard: self.storyboard!)
@@ -370,9 +368,10 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         print(url)
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, _, result) -> Void in
-            
+            if(result.isSuccess){
                 let responseJSON = JSON(result.value!)
                 self.badge.badgeValue = responseJSON["count"].int!
+            }
         }
     }
     
@@ -382,7 +381,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         let context = Utilities.appDelegate.managedObjectContext
         do
         {
-            var results = try context?.executeFetchRequest(fetchRequest)
+            let results = try context?.executeFetchRequest(fetchRequest)
             if results?.count > 0{
                 var mutableArray = NSMutableArray(array: results!)
                 self.modelController.pageData = mutableArray

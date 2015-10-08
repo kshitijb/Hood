@@ -11,8 +11,10 @@ import Alamofire
 import FBSDKCoreKit
 import SwiftyJSON
 class notificationsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+    
     @IBOutlet weak var notificationTableView: UITableView!
     var notifications :JSON?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         notificationTableView.delegate = self

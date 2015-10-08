@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CoreData
 
 class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
@@ -19,9 +20,14 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     @IBOutlet weak var postNowButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var textViewHeightConstant: NSLayoutConstraint!
+    let channelPicker = ChannelPickerView()
     var pickedImage: UIImage?
+    var channels: Array<Channel>?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchChannels()
+        channelPicker.setUpForViewAndNavController((self.navigationController?.view)!, navControl: self.navigationController!)
+        channelPicker.channelID = self.channelID!
         self.navigationController?.hidesBarsOnSwipe = false
         addPhotoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         postTextView.delegate = self
@@ -34,12 +40,33 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let aspectConstraint = NSLayoutConstraint(item: postImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: postImageView, attribute: NSLayoutAttribute.Height, multiplier: 16/9, constant: 0)
         aspectConstraint.priority = 999
         postImageView.addConstraint(aspectConstraint)
+        let pickChannelBarButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "DownArrow"), style: .Plain, target: self, action: "titleViewTapped")
+        self.navigationItem.rightBarButtonItem = pickChannelBarButton
+        updateColors()
+        channelPicker.dismissAction = {
+            self.channelID = self.channelPicker.channelID
+            self.updateColors()
+        }
+    }
+    
+    func titleViewTapped()
+    {
+        channelPicker.showInView((self.navigationController?.view)!)
+    }
+    
+    func updateColors(){
+        if let channels = channels{
+            let channelObject = channels.filter{ $0.id == channelID }.first
+            self.title = "#" + (channelObject?.name)!
+            postNowButton.setTitleColor(UIColor(hexString: "#" + (channelObject?.color)!), forState: .Normal)
+            postNowButton.layer.borderColor = UIColor(hexString: "#" + (channelObject?.color)!).CGColor
+        }
+        
     }
     
     @IBAction func postNow(sender: AnyObject)
     {
-        let userID = NSUserDefaults.standardUserDefaults().valueForKey("id") as? Int
-        var params = [ "user_id": userID! ,"locality_id" : API.Static.currentNeighbourhoodID, "channel_id" : channelID!, "message" : postTextView.text] as [String:AnyObject!]
+        var params = ["locality_id" : AppDelegate.owner!.neighbourhood.id, "channel_id" : channelPicker.channelID!, "message" : postTextView.text] as [String:AnyObject!]
         if let pickedImage = pickedImage{
             let imageData = UIImagePNGRepresentation(pickedImage)
             let base64String = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
@@ -49,7 +76,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         self.title = "Posting"
         self.postNowButton.enabled = false
         self.navigationController?.popViewControllerAnimated(true)
-        let userInfo:Dictionary = ["channelID":self.channelID!]
+        let userInfo:Dictionary = ["channelID":channelPicker.channelID!]
         NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
         
         Alamofire.request(.POST, API().addPost(), parameters: params, encoding: .JSON, headers: headers).responseData{_, _, result in
@@ -162,7 +189,22 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         
     }
     
-    
+    func fetchChannels(){
+        let fetchRequest = NSFetchRequest(entityName: "Channel")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        let context = Utilities.appDelegate.managedObjectContext
+        do
+        {
+            let results = try context?.executeFetchRequest(fetchRequest)
+            if results?.count > 0{
+                self.channels = results as? [Channel]
+            }
+        }
+        catch
+        {
+            
+        }
+    }
 
     
 }

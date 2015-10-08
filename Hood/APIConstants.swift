@@ -26,9 +26,11 @@ struct API {
         static let notifications = "alert"
         static let show = "show"
         static let neighbourhoods = "neighbourhood"
-        static let currentNeighbourhoodID = "1"
+        static var currentNeighbourhoodID = "1"
         static let register = "register"
         static let user = "user"
+        static let update = "update"
+        static let locality = "locality"
     }
     
     private var fullUrl:String{
@@ -52,16 +54,16 @@ struct API {
         return allChannels
     }
 
-    func getAllChannelsForNeighbourhood() -> String{
-        return ([fullUrl,Static.neighbourhoods,Static.all,Static.currentNeighbourhoodID]).joinWithSeparator("/")
+    func getAllChannelsForNeighbourhood(neighbourhood:String) -> String{
+        return ([fullUrl,Static.neighbourhoods,Static.all,neighbourhood]).joinWithSeparator("/")
     }
     
     func getAllPosts() -> String{
         return allPosts
     }
     
-    func getAllPostsForChannel(channel: String) -> String{
-        return ([fullUrl,Static.posts,Static.filter,Static.currentNeighbourhoodID,channel]).joinWithSeparator("/")
+    func getAllPostsForChannel(channel: String, neighbourhood: String) -> String{
+        return ([fullUrl,Static.posts,Static.filter,neighbourhood,channel]).joinWithSeparator("/")
     }
     
     func getPostWithID(postID:String)->String
@@ -98,5 +100,9 @@ struct API {
     
     func registerUser() -> String{
         return ([fullUrl, Static.user, Static.register]).joinWithSeparator("/")
+    }
+    
+    func updateUserLocality() -> String{
+        return ([fullUrl, Static.user, Static.update, Static.locality]).joinWithSeparator("/")
     }
 }

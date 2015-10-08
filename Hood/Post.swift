@@ -101,7 +101,7 @@ class Post: ParentObject {
     
     
     static func getPosts(channel: Channel, pageSize: Int, page: Int, completion: ((responseData: AnyObject?, error: ErrorType?) -> Void)?){
-        let url = API().getAllPostsForChannel("\(channel.id.intValue)")
+        let url = API().getAllPostsForChannel("\(channel.id.intValue)", neighbourhood: "\(AppDelegate.owner!.neighbourhood.id.intValue)")
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         let parameters = ["page":page, "page_size": pageSize]
         
@@ -112,7 +112,6 @@ class Post: ParentObject {
             
             if(result.isSuccess){
                 let responseJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-//                print(String(data: data!, encoding: NSUTF8StringEncoding))
                 let dataArray = NSMutableArray()
                 let fetchRequest = NSFetchRequest(entityName: "Post")
                 fetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [channel])
