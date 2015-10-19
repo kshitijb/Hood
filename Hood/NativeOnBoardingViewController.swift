@@ -11,12 +11,14 @@ import UIKit
 class NativeOnBoardingViewController: UIViewController {
     var currentObjectsOnScreen:[AnyObject] = []
     let BURROW_WIDTH = CGFloat(743/2)
-    let BURROW_HEIGHT = CGFloat(332)
-    let BURROW_BUILDING_WIDTH = CGFloat(272/2)
+    var BURROW_HEIGHT = CGFloat(331.5)
+    let BURROW_BUILDING_WIDTH = CGFloat(136)
+    let LEFT_BUILDING_OFFSET = CGFloat(126)
     override func viewDidLoad()
     {
         super.viewDidLoad()
         view.backgroundColor = GlobalColors.Green
+        BURROW_HEIGHT = BURROW_HEIGHT * self.view.frame.width/BURROW_WIDTH
         firstScreen()
 
         // Do any additional setup after loading the view.
@@ -77,18 +79,18 @@ class NativeOnBoardingViewController: UIViewController {
             { () -> Void in
                 titleLabel.alpha = 0
                 yellowArrow.alpha = 0
-                burrowImageView.frame.origin.y = 204
+                burrowImageView.frame.origin.y = 56+108+40
                 subtextLabel.alpha = 0
                 subtextLabel.transform = CGAffineTransformMakeTranslation(-self.view.frame.width, 0)
             })
             
             UIView.animateWithDuration(0.73, animations: { () -> Void in
-                burrowImageView.frame.origin.x = -self.BURROW_WIDTH/(2*self.BURROW_BUILDING_WIDTH)*self.view.frame.width
+                burrowImageView.frame.origin.x = -self.LEFT_BUILDING_OFFSET * self.view.frame.width/self.BURROW_BUILDING_WIDTH
             })
             
             UIView.animateWithDuration(0.94, animations: { () -> Void in
-                let aspectRatio = self.BURROW_WIDTH/self.BURROW_BUILDING_WIDTH
-                burrowImageView.frame.size = CGSizeMake(aspectRatio*self.view.frame.width, aspectRatio*self.BURROW_HEIGHT )
+                let scale = self.view.frame.width/self.BURROW_BUILDING_WIDTH
+                burrowImageView.frame.size = CGSizeMake(self.view.frame.width*scale, self.BURROW_HEIGHT*scale)
                 
                 }, completion: { (completed) -> Void in
                     yellowArrow.removeFromSuperview()
