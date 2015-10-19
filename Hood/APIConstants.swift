@@ -31,6 +31,7 @@ struct API {
         static let user = "user"
         static let update = "update"
         static let locality = "locality"
+        static let device = "device"
     }
     
     private var fullUrl:String{
@@ -104,5 +105,9 @@ struct API {
     
     func updateUserLocality() -> String{
         return ([fullUrl, Static.user, Static.update, Static.locality]).joinWithSeparator("/")
+    }
+    
+    func registerDevice() -> String{
+        return ([registerUser(), Static.device]).joinWithSeparator("/")
     }
 }

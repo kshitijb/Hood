@@ -26,6 +26,13 @@ class NotificationCell: UITableViewCell {
         fullNameLabel.text = jsonObject["actor"]["firstname"].string!.uppercaseString + " " + jsonObject["actor"]["lastname"].string!.uppercaseString
         timestampLabel.text = Utilities.timeStampFromDateString(jsonObject["timestamp"].string!)
         commentLabel.text = self.generateMessage(jsonObject["action"].string!, message: jsonObject["post"]["message"].string!)
+        if let read_status = jsonObject["read_status"].bool{
+            if read_status == true{
+                commentLabel.font = UIFont(name: "Lato-Light", size: 14)
+            }else{
+                commentLabel.font = UIFont(name: "Lato-Regular", size: 14)
+            }
+        }
         profileImage.layer.cornerRadius = profileImage.frame.width/2
         profileImage.clipsToBounds = true
     }

@@ -99,9 +99,11 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let commentVC:CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments") as! CommentsViewController
         commentVC.postID = notifications![indexPath.row]["post"]["id"].int!
         
-        
-        
         self.navigationController?.pushViewController(commentVC, animated: true)
     }
 
+    func markNotificationAsRead(notificationID: Int){
+        
+    }
+    
 }

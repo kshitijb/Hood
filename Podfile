@@ -10,5 +10,6 @@ pod 'Sheriff'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'Google/CloudMessaging'
 
 end

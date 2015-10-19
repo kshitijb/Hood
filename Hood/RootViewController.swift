@@ -172,6 +172,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.navigationController?.pushViewController(commentsView, animated: true)
     }
     
+    func showCommentsWithPostID(id: Int){
+        let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments") as! CommentsViewController
+        commentsView.postID = id
+        self.navigationController?.pushViewController(commentsView, animated: true)
+    }
+    
     func getData(){
         if(self.modelController.pageData.count == 0){
             SVProgressHUD.showWithStatus("Loading")

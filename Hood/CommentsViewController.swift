@@ -41,8 +41,21 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.networkRequestForComments()
+        self.navigationController?.hidesBarsOnSwipe = false
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pushNotificationReceived:"), name: "PushNotification", object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.tableView.reloadData()
     }
     
     func networkRequestForComments()
@@ -59,23 +72,26 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 
             }
             appDelegate.saveContext()
-            self.performFetchFromCoreData()
+            self.getCommentsFromCoreData()
         }
 
     }
     
     func networkRequestForPost()
     {
-        Alamofire.request(.GET,API().getPostWithID("\(postID)"), parameters: nil, encoding: .JSON).responseData{_, _, result in
-            
-            let resultJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            print(resultJSON)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            let postObject = Post.generateObjectFromJSON(resultJSON, context: appDelegate.managedObjectContext!)
-            appDelegate.saveContext()
-            self.performFetchFromCoreData()
-
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.GET, API().getPostWithID("\(postID)") + "/", parameters: nil, encoding: .URL, headers: headers).validate().responseData{request, _, result in
+            if(result.isSuccess){
+                let resultJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+                print(resultJSON)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                _ = Post.generateObjectFromJSON(resultJSON, context: appDelegate.managedObjectContext!)
+                appDelegate.saveContext()
+                self.performFetchFromCoreData()
+            }else{
+                UIAlertView(title: "Pipal", message: "Could not load your post at this time, Please try again", delegate: self, cancelButtonTitle: "Ok").show()
+            }
         }
     }
     
@@ -87,8 +103,24 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         }
         else if let finalResult = result.finalResult as? [(NSManagedObject)]
         {
-            self.comments = finalResult
-            self.tableView.reloadData()
+            if(comments.count>0){
+            let originalCommentsSet = Set(self.comments)
+            let resultsSet = Set(finalResult)
+            let intersection = resultsSet.subtract(originalCommentsSet)
+            if(intersection.count>0){
+                comments.insertContentsOf(intersection, at: 0)
+                var indexPaths = Array<NSIndexPath>()
+                for(var i = 0; i<intersection.count;i++){
+                    indexPaths.append(NSIndexPath(forRow: i, inSection: 1))
+                }
+                tableView.beginUpdates()
+                tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Left)
+                tableView.endUpdates()
+            }
+            }else{
+                comments = finalResult
+                tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .None)
+            }
         }
     }
     
@@ -290,15 +322,13 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         )
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.hidesBarsOnSwipe = false
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
+    func pushNotificationReceived(notification: NSNotification){
+        let userInfo = notification.userInfo!
+        if let id = userInfo["NOTIFICATION_POST_ID"]{
+            if(id.integerValue == self.postID){
+                self.networkRequestForComments()
+            }
+        }
     }
-    
-    override func viewDidLayoutSubviews() {
-        self.tableView.reloadData()
-    }
-    
 
 }

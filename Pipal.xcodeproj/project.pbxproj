@@ -81,6 +81,7 @@
 		D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBD00F1B8C5A67000E0656 /* CoreData.framework */; };
 		D5F5D6451BC3EA97001BC322 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5D6441BC3EA97001BC322 /* LockViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		D5F5D6471BC534BC001BC322 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5D6461BC534BC001BC322 /* WelcomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D5F5D6491BC7B536001BC322 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5F5D6481BC7B536001BC322 /* GoogleService-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -180,6 +181,7 @@
 		D5EBD00F1B8C5A67000E0656 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D5F5D6441BC3EA97001BC322 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		D5F5D6461BC534BC001BC322 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		D5F5D6481BC7B536001BC322 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 		D5B3E4801B6A2CB000F3DF9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D5F5D6481BC7B536001BC322 /* GoogleService-Info.plist */,
 				D5B3E4811B6A2CB000F3DF9F /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -502,6 +505,7 @@
 				42E55C271B9EE4BC000C102E /* ALCameraViewAssets.xcassets in Resources */,
 				D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */,
 				D5B3E4B61B6A33E000F3DF9F /* Lato-Hairline.ttf in Resources */,
+				D5F5D6491BC7B536001BC322 /* GoogleService-Info.plist in Resources */,
 				D547A4851B6F526000B556B4 /* AC.png in Resources */,
 				D5B3E48E1B6A2CB000F3DF9F /* Images.xcassets in Resources */,
 			);
