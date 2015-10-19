@@ -52,3 +52,15 @@ extension UIColor {
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
 }
+
+extension Array {
+    func getFourRandomElements() -> [Element] {
+        return [self[3],
+            self[9],
+            self[0],
+            self[10]]
+    }
+}
+
+
+

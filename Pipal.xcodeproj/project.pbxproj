@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423983E11B7BC50200F9D4AF /* commentCell.swift */; };
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
+		427617B01BCD9786008BE58F /* NativeOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427617AF1BCD9786008BE58F /* NativeOnBoardingViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		42DF2BA91BCD0146001992E2 /* ReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DF2BA81BCD0146001992E2 /* ReactView.swift */; settings = {ASSET_TAGS = (); }; };
+		42DF2BAD1BCD0396001992E2 /* reactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DF2BAC1BCD0396001992E2 /* reactViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */; };
 		42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */; };
 		42E55C261B9EE4BC000C102E /* ALCameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E55C141B9EE4BC000C102E /* ALCameraView.strings */; };
@@ -79,7 +82,7 @@
 		D5EBCFD91B8C4AF5000E0656 /* Neighbourhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFD81B8C4AF5000E0656 /* Neighbourhood.swift */; };
 		D5EBCFDB1B8C4AF6000E0656 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBCFDA1B8C4AF6000E0656 /* Comment.swift */; };
 		D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EBD00F1B8C5A67000E0656 /* CoreData.framework */; };
-		EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -104,6 +107,9 @@
 		3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.debug.xcconfig"; sourceTree = "<group>"; };
 		423983E11B7BC50200F9D4AF /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		427617AF1BCD9786008BE58F /* NativeOnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeOnBoardingViewController.swift; sourceTree = "<group>"; };
+		42DF2BA81BCD0146001992E2 /* ReactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactView.swift; sourceTree = "<group>"; };
+		42DF2BAC1BCD0396001992E2 /* reactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reactViewController.swift; sourceTree = "<group>"; };
 		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
 		42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		42E55C141B9EE4BC000C102E /* ALCameraView.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ALCameraView.strings; sourceTree = "<group>"; };
@@ -296,6 +302,7 @@
 		D5B3E47F1B6A2CB000F3DF9F /* Hood */ = {
 			isa = PBXGroup;
 			children = (
+				42DF2BAC1BCD0396001992E2 /* reactViewController.swift */,
 				42E55C131B9EE4BC000C102E /* ALCameraViewController */,
 				D5EBCFCF1B8C4AB5000E0656 /* Models */,
 				423983E11B7BC50200F9D4AF /* commentCell.swift */,
@@ -305,6 +312,8 @@
 				D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */,
 				42F01BEA1B79EAAB001386C1 /* loginViewController.swift */,
 				D51FB2E41B7891FC00518DA2 /* PopButton.swift */,
+				42DF2BA81BCD0146001992E2 /* ReactView.swift */,
+				427617AF1BCD9786008BE58F /* NativeOnBoardingViewController.swift */,
 				D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */,
 				D547A4861B70B87C00B556B4 /* CommentsViewController.swift */,
 				D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */,
@@ -436,7 +445,7 @@
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = F3642YKY5X;
+						DevelopmentTeam = 7G2XZXD8B4;
 					};
 				};
 			};
@@ -568,6 +577,7 @@
 				D5EBCFCE1B874832000E0656 /* Model.xcdatamodeld in Sources */,
 				D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */,
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
+				427617B01BCD9786008BE58F /* NativeOnBoardingViewController.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
 				42E55C2D1B9EE4BC000C102E /* ALConfirmViewController.swift in Sources */,
@@ -575,11 +585,13 @@
 				42E55C2F1B9EE4BC000C102E /* ALImagePickerViewDelegate.swift in Sources */,
 				D5EBCFD51B8C4AF5000E0656 /* Post.swift in Sources */,
 				42EB28241B74BCE400AB0331 /* Utilities.swift in Sources */,
+				42DF2BAD1BCD0396001992E2 /* reactViewController.swift in Sources */,
 				D5EBCFD71B8C4AF5000E0656 /* ParentObject.swift in Sources */,
 				42E92AA11BA0313F003973B0 /* EmptyView.swift in Sources */,
 				42E55C331B9EE4BC000C102E /* ALPermissionsView.swift in Sources */,
 				42E55C2E1B9EE4BC000C102E /* ALImagePickerViewController.swift in Sources */,
 				D5EBCFD31B8C4AF5000E0656 /* Channel.swift in Sources */,
+				42DF2BA91BCD0146001992E2 /* ReactView.swift in Sources */,
 				D547A4811B6B69DB00B556B4 /* FeedViewController.swift in Sources */,
 				42E55C2B1B9EE4BC000C102E /* ALUtilities.swift in Sources */,
 				D5EBCFD91B8C4AF5000E0656 /* Neighbourhood.swift in Sources */,
