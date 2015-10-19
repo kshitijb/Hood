@@ -3,3 +3,4 @@
 //
 
 #import <Lookback/Lookback.h>
+#import <Google/CloudMessaging.h>

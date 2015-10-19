@@ -11,12 +11,17 @@ import FBSDKCoreKit
 import Fabric
 import Crashlytics
 import CoreData
-
+import Alamofire
+import Foundation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
     var window: UIWindow?
     static var owner:User?
+    var gcmSenderID: String?
+    var registrationToken: String?
+    let registrationKey = "onRegistrationCompleted"
+    var registrationOptions = [String: AnyObject]()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -51,7 +56,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
 //        Lookback.sharedLookback().shakeToRecord = true
 //        Lookback.sharedLookback().feedbackBubbleVisible = true
-
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID
+        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+//        if let options = launchOptions{
+//            if let notification = options[UIApplicationLaunchOptionsRemoteNotificationKey]{
+//                processPushNotification(notification)
+//            }
+//        }
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -80,6 +96,85 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+        var tokenString = ""
+        
+        for var i = 0; i < deviceToken.length; i++ {
+            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+        }
+        let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
+        instanceIDConfig.delegate = self
+        // Start the GGLInstanceID shared instance with that config and request a registration
+        // token to enable reception of notifications
+        if(deviceToken.length == 0){
+            print("deviceToken is empty")
+        }
+        print("Device token is \(tokenString)")
+        GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
+        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
+            kGGLInstanceIDAPNSServerTypeSandboxOption:false]
+        GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID,
+            scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+        
+    }
+    
+    func application( application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
+        error: NSError ) {
+            print("Registration for remote notification failed with error: \(error.localizedDescription)")
+            let userInfo = ["error": error.localizedDescription]
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                registrationKey, object: nil, userInfo: userInfo)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+        print("notification received with completion handler \(userInfo)")
+        if(UIApplication.sharedApplication().applicationState != UIApplicationState.Active){
+            processPushNotification(userInfo)
+        }else if(UIApplication.sharedApplication().applicationState == UIApplicationState.Active){
+            NSNotificationCenter.defaultCenter().postNotificationName("PushNotification", object: nil, userInfo: userInfo)
+        }
+        
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        print("handle pressed")
+    }
+    
+    func registrationHandler(registrationToken: String!, error: NSError!) {
+        if (registrationToken != nil) {
+            self.registrationToken = registrationToken
+            print("Registration Token: \(registrationToken)")
+            if(AppDelegate.owner != nil){
+                sendTokenToServer(registrationToken)
+            }
+            let userInfo = ["registrationToken": registrationToken]
+            NSNotificationCenter.defaultCenter().postNotificationName(self.registrationKey, object: nil, userInfo: userInfo)
+        } else {
+            print("Registration to GCM failed with error: \(error.localizedDescription)")
+            let userInfo = ["error": error.localizedDescription]
+            NSNotificationCenter.defaultCenter().postNotificationName(self.registrationKey, object: nil, userInfo: userInfo)
+        }
+    }
+    
+    func sendTokenToServer(token: String){
+        let parameters = ["device_id": token]
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.POST, API().registerDevice(), parameters: parameters, encoding: .JSON, headers: headers).responseData { (request, response, result) -> Void in
+            if(result.isSuccess){
+                print("Token sent successfully")
+            }else{
+                print("Error sending token \(result.error)")
+            }
+        }
+    }
+    
+    func onTokenRefresh() {
+        print("The GCM registration token needs to be changed.")
+        GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID,
+            scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+    }
     
     // MARK: - Core Data stack
     
@@ -150,7 +245,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func saveContext () {
         if let moc = self.managedObjectContext {
-            var error: NSError? = nil
+            let _ : NSError? = nil
             do
             {
                 try moc.save()
@@ -178,7 +273,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             annotation: nil)
     }
 
-
-    
+    func processPushNotification(notification: AnyObject){
+        if((notification["NOTIFICATION_POST_ID"]) != nil){
+            if let id = notification["NOTIFICATION_POST_ID"]{
+                if let rootViewController = (window?.rootViewController as? UINavigationController)?.viewControllers.first as? RootViewController{
+                    rootViewController.showCommentsWithPostID(id.integerValue)
+                }
+            }
+        }
+    }
 }
 
