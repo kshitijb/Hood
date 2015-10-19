@@ -8,12 +8,15 @@
 
 import UIKit
 
-class NativeOnBoardingViewController: UIViewController {
+class NativeOnBoardingViewController: UIViewController
+{
     var currentObjectsOnScreen:[AnyObject] = []
+
     let BURROW_WIDTH = CGFloat(743/2)
     var BURROW_HEIGHT = CGFloat(331.5)
     let BURROW_BUILDING_WIDTH = CGFloat(136)
     let LEFT_BUILDING_OFFSET = CGFloat(126)
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -37,6 +40,7 @@ class NativeOnBoardingViewController: UIViewController {
         yellowArrow.addTarget(self, action: "secondScreenTransition", forControlEvents: .TouchUpInside)
         view.addSubview(yellowArrow)
         
+
         let subtextLabel = UILabel(frame: CGRectMake(-view.frame.width, 158, view.frame.width, 72))
         subtextLabel.text = "Your neighborhood \n gathers here"
         subtextLabel.numberOfLines = 0
@@ -47,6 +51,7 @@ class NativeOnBoardingViewController: UIViewController {
         subtextLabel.textColor = UIColor.whiteColor()
         view.addSubview(subtextLabel)
         
+
         
         let titleLabel = UILabel(frame: CGRectMake( 0,80, view.frame.width, 50))
         titleLabel.font = UIFont(name: "Lato-Black", size: 42)
@@ -91,8 +96,10 @@ class NativeOnBoardingViewController: UIViewController {
             UIView.animateWithDuration(0.94, animations: { () -> Void in
                 let scale = self.view.frame.width/self.BURROW_BUILDING_WIDTH
                 burrowImageView.frame.size = CGSizeMake(self.view.frame.width*scale, self.BURROW_HEIGHT*scale)
-                
-                }, completion: { (completed) -> Void in
+                burrowImageView.frame.origin.y = 204
+                subtextLabel.alpha = 0
+                subtextLabel.frame.origin.x = -143
+            }, completion: { (completed) -> Void in
                     yellowArrow.removeFromSuperview()
                     titleLabel.removeFromSuperview()
                     subtextLabel.removeFromSuperview()
@@ -105,7 +112,7 @@ class NativeOnBoardingViewController: UIViewController {
     
     func secondScreenRender()
     {
-        let subtext2 = UILabel(frame: CGRectMake(30, 56, 314, 108))
+        let subtext2 = UILabel(frame: CGRectMake(0, 56, view.frame.width, 108))
         subtext2.text = "Meet \nthe neighbours \n you don't know"
         subtext2.font = UIFont(name: "Lato-light", size: 28)
         subtext2.numberOfLines = 3
@@ -160,10 +167,10 @@ class NativeOnBoardingViewController: UIViewController {
             view.addSubview(subtextLabel2)
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
+                subtextLabel.transform = CGAffineTransformMakeTranslation(-2*self.view.frame.width, 0)
                 subtextLabel2.transform = CGAffineTransformMakeTranslation(-self.view.frame.width, 0)
                 subtextLabel2.alpha = 1
                 burrowImageView.alpha = 0
-                subtextLabel.transform = CGAffineTransformMakeTranslation(-self.view.frame.width, 0)
                 for (index,personView) in fourRandomConversationalists.enumerate()
                 {
                     personView.frame = CGRectMake(34, CGRectGetMaxY(yellowArrow.frame) + 75 + CGFloat(95*index), 45, 45)
@@ -183,6 +190,7 @@ class NativeOnBoardingViewController: UIViewController {
             }, completion: { (completed) -> Void in
                 burrowImageView.removeFromSuperview()
                 subtextLabel.removeFromSuperview()
+
                 self.currentObjectsOnScreen = [yellowArrow,subtextLabel2] + fourRandomConversationalists
                 yellowArrow.removeTarget(self, action: Selector("thirdScreenTransition"), forControlEvents: .TouchUpInside)
                 
@@ -194,18 +202,13 @@ class NativeOnBoardingViewController: UIViewController {
     
     func thirdScreenRender()
     {
-        if let yellowArrow = currentObjectsOnScreen[0] as? UIButton, let subtextLabel = currentObjectsOnScreen[1] as? UILabel
+        
+        if let yellowArrow = currentObjectsOnScreen[0] as? UIButton,subtextLabel = currentObjectsOnScreen[1] as? UILabel
         {
             yellowArrow.addTarget(self, action: Selector("fourthScreenTransition"), forControlEvents: .TouchUpInside)
             let fourRandomConversationalists = Array(currentObjectsOnScreen[2...currentObjectsOnScreen.count-1])
             let heightsOfConversations = [65,30,49,30]
             let widthsOfConversations = [240, 263, 214,50]
-            
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-               
-                }, completion: { (completion) -> Void in
-                    
-            })
             
             var conversations = [UIImageView]()
             for (index,person) in fourRandomConversationalists.enumerate()
@@ -226,7 +229,7 @@ class NativeOnBoardingViewController: UIViewController {
         if let yellowArrow = currentObjectsOnScreen[0] as? UIButton, let subtextLabel = currentObjectsOnScreen[1] as? UILabel
         {
             let imageViews = Array(currentObjectsOnScreen[2...currentObjectsOnScreen.count-1]) as! [UIImageView]
-            
+            print(subtextLabel.text)
             let subtextLabel2 = UILabel(frame: CGRectMake(view.frame.width, 56, view.frame.width, 72))
             subtextLabel2.text = "Find a local maid \n to cook and clean"
             subtextLabel2.opaque = false
@@ -243,6 +246,7 @@ class NativeOnBoardingViewController: UIViewController {
                 
                 subtextLabel2.transform = CGAffineTransformMakeTranslation(-self.view.frame.width, 0)
                 subtextLabel2.alpha = 1
+
                 for image in imageViews
                 {
                     image.transform = CGAffineTransformMakeTranslation(-self.view.frame.width, 0)
@@ -319,7 +323,6 @@ class NativeOnBoardingViewController: UIViewController {
             
             
         }
-
     }
 
     /*
