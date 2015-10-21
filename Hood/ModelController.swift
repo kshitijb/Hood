@@ -68,6 +68,17 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
 //        }
     }
 
+    func indexOfChannelId(channelId: Int) -> Int{
+        for index in 0...self.pageData.count-1{
+            let currentObject = self.pageData[index] as! Channel
+            if channelId == currentObject.id{
+                return index
+            }
+        }
+        
+        return NSNotFound
+    }
+    
     // MARK: - Page View Controller Data Source
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {

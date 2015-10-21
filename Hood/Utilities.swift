@@ -11,6 +11,7 @@ import UIKit
 
 let AddedPostNotificationName = "AddedPost"
 let AddingPostNotificationName = "AddingPost"
+let JumpToChannelNotificationName = "JumpToChannel"
 
 struct GlobalColors{
     static let Green:UIColor = UIColor(hexString: "#1FC055")
@@ -70,7 +71,7 @@ struct Utilities
     static func timeStampFromDateString(str:String) -> String
     {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
         if let date = dateFormatter.dateFromString(str)
         {

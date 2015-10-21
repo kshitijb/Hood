@@ -126,9 +126,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height)
         }
         if(topLayoutGuide.length == 0){
-            tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+            tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
         }else{
-            tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+            tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
         }
     }
     
@@ -298,7 +298,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func hideAddPostHeader(){
-        tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
         addingPostHeaderView.layer.opacity = 1
         addingPostHeaderView.hidden = false
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -310,7 +310,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func showAddPostHeader(){
         addPostHeaderTopConstraint.constant = 25
-        tableView.contentInset = UIEdgeInsetsMake((self.parentViewController?.parentViewController as! RootViewController).pageIndicatorContainer.frame.height + 50, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(25 + 50, 0, 0, 0)
         addingPostHeaderView.layer.opacity = 0
         addingPostHeaderView.hidden = false
         UIView.animateWithDuration(0.3, animations: { () -> Void in

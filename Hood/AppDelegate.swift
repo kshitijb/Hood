@@ -56,13 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
 //        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
 //        Lookback.sharedLookback().shakeToRecord = true
 //        Lookback.sharedLookback().feedbackBubbleVisible = true
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID
-        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+        
 //        if let options = launchOptions{
 //            if let notification = options[UIApplicationLaunchOptionsRemoteNotificationKey]{
 //                processPushNotification(notification)
@@ -111,6 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
             print("deviceToken is empty")
         }
         print("Device token is \(tokenString)")
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "notificationsEnabled")
         GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
         registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
             kGGLInstanceIDAPNSServerTypeSandboxOption:false]
@@ -282,5 +277,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
             }
         }
     }
+    
+    func askForNotifications(){
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID
+        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+    }
+    
 }
 

@@ -32,9 +32,9 @@
             <string>Lato-Light</string>
             <string>Lato-Light</string>
             <string>Lato-Light</string>
-            <string>Lato-Light</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -105,12 +105,12 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Just Now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ex-4M-a9d">
                                                     <rect key="frame" x="523" y="29" width="60" height="17"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Does anyone have a cordless drill I can borrow? Need to hang some pictures up. " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coH-in-OX4">
-                                                    <rect key="frame" x="18" y="63" width="572" height="60"/>
+                                                    <rect key="frame" x="18" y="63" width="564" height="60"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="22" id="nlR-lA-uDi"/>
@@ -125,7 +125,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="96.5" id="eiN-M2-baK"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="30 Likes" image="Heart">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -139,7 +139,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="133" id="9j5-zm-g91"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="20 Comments" image="comment">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -174,7 +174,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="31R-oc-IpB" secondAttribute="bottom" constant="10" id="lzL-fm-BU5"/>
                                                 <constraint firstItem="Pei-jR-FLY" firstAttribute="leading" secondItem="XJW-Qb-nN7" secondAttribute="trailing" constant="10" id="mRy-3q-j7j"/>
                                                 <constraint firstItem="jPi-xI-nUU" firstAttribute="top" secondItem="coH-in-OX4" secondAttribute="bottom" constant="10.5" id="oYo-IR-pC5"/>
-                                                <constraint firstAttribute="trailing" secondItem="coH-in-OX4" secondAttribute="trailing" constant="10" id="sPL-ys-1xg"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="coH-in-OX4" secondAttribute="trailing" constant="10" id="sPL-ys-1xg"/>
                                                 <constraint firstItem="Pei-jR-FLY" firstAttribute="top" secondItem="WU4-Pf-rlh" secondAttribute="topMargin" constant="20" id="uar-D5-uOp"/>
                                                 <constraint firstItem="31R-oc-IpB" firstAttribute="top" secondItem="coH-in-OX4" secondAttribute="bottom" priority="999" constant="15" id="zOp-6g-w2w"/>
                                                 <constraint firstItem="4ex-4M-a9d" firstAttribute="top" secondItem="WU4-Pf-rlh" secondAttribute="topMargin" constant="21" id="zae-yr-rNY"/>
@@ -224,7 +224,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Just Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gy6-bh-312">
                                                     <rect key="frame" x="523" y="29" width="60" height="17"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <color key="textColor" red="0.72156862745098038" green="0.74509803921568629" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -244,7 +244,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95.5" id="bg0-aL-VOq"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="30 Likes" image="Heart">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -258,7 +258,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="133" id="fEL-23-oe1"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="20 Comments" image="comment">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -446,7 +446,7 @@
                                             </imageView>
                                         </subviews>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.3803921569" green="0.78039215689999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.1215686275" green="0.75294117650000003" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="5F1-vP-0yD"/>
                                             <constraint firstAttribute="width" constant="65" id="5Jd-Vn-97v"/>
@@ -504,7 +504,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vibas J" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAF-0F-fc0">
                                                     <rect key="frame" x="55" y="28" width="52" height="19"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -525,13 +525,13 @@
                                                     <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5u-OR-0lM" customClass="PopButton" customModule="Pipal" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5u-OR-0lM" customClass="PopButton" customModule="Pipal" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="341" width="96" height="18"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95.5" id="NjI-te-5d8"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="30 Likes" image="Heart">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -539,20 +539,20 @@
                                                     </state>
                                                     <state key="selected" image="HeartSelected"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="205-TO-dZU">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="205-TO-dZU">
                                                     <rect key="frame" x="121" y="340" width="126" height="19"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="126" id="iq4-rT-zAX"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="20 Comments" image="comment">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AC.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Ts-Nm-Euh">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="AC.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Ts-Nm-Euh">
                                                     <rect key="frame" x="0.0" y="100" width="600" height="226"/>
                                                     <animations/>
                                                     <constraints>
@@ -636,34 +636,34 @@
                                             <outlet property="userName" destination="vAF-0F-fc0" id="JIA-t7-bJx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Comment" rowHeight="145" id="uEj-CO-MkI" customClass="commentCell" customModule="Pipal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="408" width="600" height="145"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Comment" rowHeight="125" id="uEj-CO-MkI" customClass="commentCell" customModule="Pipal" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="408" width="600" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uEj-CO-MkI" id="Oep-FD-vPh">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="144.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="124.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Just Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcg-ja-8HC">
-                                                    <rect key="frame" x="528" y="25" width="57" height="17"/>
+                                                    <rect key="frame" x="528" y="19" width="57" height="17"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" misplaced="YES" text="Does anyone have a cordless drill I can borrow? Need to hang some pictures up. " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAh-lP-vCx">
-                                                    <rect key="frame" x="15" y="58" width="570" height="64"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Does anyone have a cordless drill I can borrow? Need to hang some pictures up. " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAh-lP-vCx">
+                                                    <rect key="frame" x="15" y="45" width="570" height="62"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="w18-vH-VA1"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="w18-vH-VA1"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vibas J" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xei-FD-upk">
-                                                    <rect key="frame" x="15" y="23" width="51" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibas J" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xei-FD-upk">
+                                                    <rect key="frame" x="15" y="18" width="44" height="17"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -675,9 +675,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="bcg-ja-8HC" secondAttribute="trailing" constant="15" id="cit-Sg-r7a"/>
                                                 <constraint firstItem="AAh-lP-vCx" firstAttribute="leading" secondItem="Oep-FD-vPh" secondAttribute="leading" constant="15" id="dO4-iP-EPB"/>
                                                 <constraint firstAttribute="trailing" secondItem="AAh-lP-vCx" secondAttribute="trailing" constant="15" id="ePp-zh-mwb"/>
-                                                <constraint firstItem="AAh-lP-vCx" firstAttribute="top" secondItem="xei-FD-upk" secondAttribute="bottom" constant="15" id="fgx-s8-1bg"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="AAh-lP-vCx" secondAttribute="bottom" constant="15" id="qnd-QC-26V"/>
-                                                <constraint firstItem="xei-FD-upk" firstAttribute="top" secondItem="Oep-FD-vPh" secondAttribute="topMargin" constant="15" id="t8K-8o-dOE"/>
+                                                <constraint firstItem="AAh-lP-vCx" firstAttribute="top" secondItem="xei-FD-upk" secondAttribute="bottom" constant="10" id="fgx-s8-1bg"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="AAh-lP-vCx" secondAttribute="bottom" constant="10" id="qnd-QC-26V"/>
+                                                <constraint firstItem="xei-FD-upk" firstAttribute="top" secondItem="Oep-FD-vPh" secondAttribute="topMargin" constant="10" id="t8K-8o-dOE"/>
                                                 <constraint firstItem="bcg-ja-8HC" firstAttribute="top" secondItem="Oep-FD-vPh" secondAttribute="topMargin" constant="21" id="vx8-Jk-jW0"/>
                                             </constraints>
                                             <variation key="default">
@@ -695,7 +695,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="138" id="2pV-ML-CNT" customClass="CommentsHeaderCell" customModule="Pipal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="553" width="600" height="138"/>
+                                        <rect key="frame" x="0.0" y="533" width="600" height="138"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2pV-ML-CNT" id="AN9-OT-aE9">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="137.5"/>
@@ -773,7 +773,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellWithoutImage" rowHeight="183" id="T9G-Ri-ngj" customClass="CellWithoutImage" customModule="Pipal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="691" width="600" height="183"/>
+                                        <rect key="frame" x="0.0" y="671" width="600" height="183"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T9G-Ri-ngj" id="pE2-ec-qnB">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="182.5"/>
@@ -787,17 +787,17 @@
                                                         <constraint firstAttribute="width" constant="30" id="Ei4-Ig-XRB"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibas J" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hE-z5-LEQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vibas J" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hE-z5-LEQ">
                                                     <rect key="frame" x="55" y="28" width="51" height="20"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just Now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7r-Un-U00">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Just Now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7r-Un-U00">
                                                     <rect key="frame" x="528" y="29" width="58" height="17"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -817,7 +817,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="96.5" id="GzU-xG-a0J"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="30 Likes" image="Heart">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -825,10 +825,10 @@
                                                     </state>
                                                     <state key="selected" image="HeartSelected"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqb-Y2-4IT">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqb-Y2-4IT">
                                                     <rect key="frame" x="122" y="135" width="92" height="30"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <state key="normal" title="20 Comments">
                                                         <color key="titleColor" red="0.72156862749999995" green="0.74509803919999995" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -929,7 +929,7 @@
                                     <constraint firstAttribute="width" constant="174" id="BRR-qe-bvv"/>
                                     <constraint firstAttribute="height" constant="45" id="XuL-TX-JkE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <inset key="titleEdgeInsets" minX="-18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="100" maxY="0.0"/>
                                 <state key="normal" title="Add Photo" image="Camera">
@@ -1077,14 +1077,38 @@
                                     <constraint firstAttribute="centerY" secondItem="rTU-PP-B0B" secondAttribute="centerY" id="jlm-kv-52z"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gad-te-yNV">
+                                <rect key="frame" x="530" y="466" width="50" height="50"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.1215686275" green="0.75294117650000003" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="KYz-sd-EON"/>
+                                    <constraint firstAttribute="height" constant="50" id="aH4-gU-pkH"/>
+                                </constraints>
+                                <size key="titleShadowOffset" width="2.2250738585072014e-308" height="2.2250738585072014e-308"/>
+                                <state key="normal" image="Add">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="XXA-Y3-OCx" kind="show" identifier="addPost" id="LbW-i1-GgH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="wjg-F2-s6c" secondAttribute="trailingMargin" constant="-16" id="FDh-Xd-mTH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gad-te-yNV" secondAttribute="trailing" id="Xmc-UX-Nhf"/>
                             <constraint firstItem="wjg-F2-s6c" firstAttribute="top" secondItem="17i-ZA-3zy" secondAttribute="bottom" id="drf-05-5H5"/>
                             <constraint firstItem="wjg-F2-s6c" firstAttribute="leadingMargin" secondItem="cc6-cB-pgf" secondAttribute="leadingMargin" constant="-16" id="lqp-MV-Tqd"/>
                             <constraint firstItem="wjg-F2-s6c" firstAttribute="top" secondItem="17i-ZA-3zy" secondAttribute="bottom" id="o56-ra-jNJ"/>
+                            <constraint firstItem="8Yh-h8-jIR" firstAttribute="top" secondItem="Gad-te-yNV" secondAttribute="bottom" constant="20" id="qGC-m4-hAQ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1092,15 +1116,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="7Gf-hM-8lt">
-                        <barButtonItem key="rightBarButtonItem" image="Add" id="lRs-YM-avi">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="XXA-Y3-OCx" kind="show" identifier="addPost" id="7MM-bh-Zoy"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="7Gf-hM-8lt"/>
                     <connections>
+                        <outlet property="addButton" destination="Gad-te-yNV" id="z6b-7R-hmW"/>
                         <outlet property="pageControl" destination="rTU-PP-B0B" id="4MP-Tt-8bc"/>
                         <outlet property="pageIndicatorContainer" destination="wjg-F2-s6c" id="JbX-KK-THl"/>
                         <segue destination="TQi-fb-2mS" kind="presentation" identifier="showLogin" id="G7d-vq-3gY"/>
@@ -1490,7 +1508,7 @@ neighbours</string>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="bra-JB-NHw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.39607843139999999" green="0.46274509800000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">

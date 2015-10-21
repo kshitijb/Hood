@@ -25,6 +25,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     let pageColors: NSMutableArray = NSMutableArray()
     let shouldHideStatusBar: Bool = false
     var statusBarBackgroundView: UIView?
+    @IBOutlet var addButton: UIButton!
     
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -45,6 +46,10 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
         self.pageControl.hidden = true
+        addButton.hidden = true
+        addButton.layer.shadowOffset = CGSizeMake(2, 2)
+        addButton.layer.shadowColor = UIColor.grayColor().CGColor
+        addButton.layer.shadowOpacity = 0.8
         self.pageIndicatorContainer.backgroundColor = GlobalColors.Green
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.automaticallyAdjustsScrollViewInsets = false
@@ -65,6 +70,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.pageViewController!.didMoveToParentViewController(self)
         self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "jumpToChannel:", name: JumpToChannelNotificationName, object: nil)
         setUpNotificationButton()
     }
     
@@ -326,6 +332,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 if let statusBarBackground = self.statusBarBackgroundView{
                     statusBarBackground.backgroundColor = colorToSet
                 }
+                self.addButton.backgroundColor = colorToSet
             })
             
         })
@@ -336,6 +343,13 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 
     }
     
+    func jumpToChannel(notification: NSNotification){
+        if let userInfo = notification.userInfo{
+            if let index = userInfo["channelID"] as? Int{
+                jumpToPageForIndex(modelController.indexOfChannelId(index))
+            }
+        }
+    }
     
     func jumpToPageForIndex(index: Int){
         let viewController = self.modelController.viewControllerAtIndex(index, storyboard: self.storyboard!)
@@ -356,6 +370,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     colorToSet = GlobalColors.Green
                 }
                 self.statusBarBackgroundView?.backgroundColor = colorToSet
+                self.addButton.backgroundColor = colorToSet
                 self.view.addSubview(self.statusBarBackgroundView!)
             }
         }else{
@@ -410,6 +425,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
             self.pageControl.currentPage = 0
             self.showPageControl()
+            self.showAddButton()
         }
         
         
@@ -417,11 +433,17 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.pageViewController?.view.userInteractionEnabled = true
     }
     
-    
-    
-
-    
-    
+    func showAddButton(){
+        addButton.layer.opacity = 0.5
+        addButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        addButton.hidden = false
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
+            self.addButton.layer.opacity = 1
+            self.addButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            }) { (completed: Bool) -> Void in
+                
+        }
+    }
 
     
 }
