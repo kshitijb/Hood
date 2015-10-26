@@ -80,9 +80,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         let userInfo:Dictionary = ["channelID":channelPicker.channelID!]
         NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
 //        NSNotificationCenter.defaultCenter().postNotificationName(JumpToChannelNotificationName, object:nil, userInfo: ["channelID":channelPicker.channelID!])
-        if(!NSUserDefaults.standardUserDefaults().boolForKey("notificationsEnabled")){
-            UIAlertView(title: "Enable Notifications", message: "Hi! Congratulations on making your first post. To stay up to date on what's going on around you, we recommend that you enable notifications", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Enable").show()
-        }
+        
+        Utilities.appDelegate.askForNotifications()
+        
         Alamofire.request(.POST, API().addPost(), parameters: params, encoding: .JSON, headers: headers).responseData{_, _, result in
             
             
@@ -207,14 +207,6 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         catch
         {
             
-        }
-    }
-
-    //Mark: UIAlertViewDelegate
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        if(buttonIndex == 1){
-            Utilities.appDelegate.askForNotifications()
         }
     }
     

@@ -34,15 +34,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     override func viewDidLoad() {
         super.viewDidLoad()
         setNeedsStatusBarAppearanceUpdate()
-        if (AppDelegate.owner == nil)
-        {
-            performSegueWithIdentifier("showLogin", sender: self)
-        }
-        else
-        {
-            getData()
-            fetchNotificationsCount()
-        }
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
         self.pageControl.hidden = true
@@ -53,25 +44,25 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.pageIndicatorContainer.backgroundColor = GlobalColors.Green
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.automaticallyAdjustsScrollViewInsets = false
-        self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-        self.pageViewController!.delegate = self
-        self.pageViewController?.view.backgroundColor = UIColor.whiteColor()
-        self.pageViewController?.view.userInteractionEnabled = false
-        self.pageViewController!.dataSource = self.modelController
-        for view in self.pageViewController!.view.subviews{
-            if(view.isKindOfClass(UIScrollView)){
-                (view as! UIScrollView).delegate = self
-            }
+        if let _ = self.pageViewController{
+            
+        }else{
+            initializePageViewController()
         }
-        self.addChildViewController(self.pageViewController!)
-        self.view.insertSubview(self.pageViewController!.view, belowSubview: self.pageIndicatorContainer)
-        let pageViewRect = self.view.bounds
-        self.pageViewController!.view.frame = pageViewRect
-        self.pageViewController!.didMoveToParentViewController(self)
-        self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "jumpToChannel:", name: JumpToChannelNotificationName, object: nil)
         setUpNotificationButton()
+        if (AppDelegate.owner == nil)
+        {
+            performSegueWithIdentifier("showLogin", sender: self)
+        }
+        else
+        {
+            fetchChannels()
+            getData()
+            fetchNotificationsCount()
+        }
+
     }
     
     func setUpNotificationButton(){
@@ -126,6 +117,25 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         if(self.navigationController?.navigationBarHidden == true){
            self.navigationController?.navigationBarHidden = false
         }
+    }
+    
+    func initializePageViewController(){
+        self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        self.pageViewController!.delegate = self
+        self.pageViewController?.view.backgroundColor = UIColor.whiteColor()
+        self.pageViewController?.view.userInteractionEnabled = false
+        self.pageViewController!.dataSource = self.modelController
+        for view in self.pageViewController!.view.subviews{
+            if(view.isKindOfClass(UIScrollView)){
+                (view as! UIScrollView).delegate = self
+            }
+        }
+        self.addChildViewController(self.pageViewController!)
+        self.view.insertSubview(self.pageViewController!.view, belowSubview: self.pageIndicatorContainer)
+        let pageViewRect = self.view.bounds
+        self.pageViewController!.view.frame = pageViewRect
+        self.pageViewController!.didMoveToParentViewController(self)
+        self.view.gestureRecognizers = self.pageViewController!.gestureRecognizers
     }
     
     var modelController: ModelController {
@@ -201,8 +211,28 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                         let channelObject = Channel.generateObjectFromJSON(channel, context: appDelegate.managedObjectContext!)
                         channels.addObject(channelObject)
                     }
+                    let fetchRequest = NSFetchRequest(entityName: "Channel")
+                    do{
+                        if let results = try appDelegate.managedObjectContext?.executeFetchRequest(fetchRequest){
+                            let oldSet = NSMutableSet(array: results)
+                            let newSet = NSMutableSet(array: channels as [AnyObject])
+                            newSet.minusSet(oldSet as Set<NSObject>)
+                            let objectsToDeleteArray = newSet.allObjects
+                            if objectsToDeleteArray.count > 0{
+                                for index in 0...objectsToDeleteArray.count-1{
+                                    appDelegate.managedObjectContext?.deleteObject(objectsToDeleteArray[index] as! NSManagedObject)
+                                }
+                            }
+                        }
+                    }
+                    catch {
+                        
+                    }
+                    
                     appDelegate.saveContext()
-                    self.fetchChannels()
+                    if(self.modelController.pageData.count == 0){
+                        self.fetchChannels()
+                    }
                 }else{
                     print(result.error)
                 }
@@ -407,8 +437,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                 var mutableArray = NSMutableArray(array: results!)
                 self.modelController.pageData = mutableArray
                 self.populateData()
-            }else{
-                getData()
             }
         }
         catch
@@ -419,6 +447,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     func populateData(){
         self.pageControl.numberOfPages = self.modelController.pageData.count
+        if let _ = self.pageViewController{
+            
+        }else{
+            initializePageViewController()
+        }
         if(self.pageViewController!.viewControllers!.count == 0){
             let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
             let viewControllers = [startingViewController]

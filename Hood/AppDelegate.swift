@@ -15,7 +15,7 @@ import Alamofire
 import Foundation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UIAlertViewDelegate {
     var window: UIWindow?
     static var owner:User?
     var gcmSenderID: String?
@@ -106,6 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
         }
         print("Device token is \(tokenString)")
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "notificationsEnabled")
+        NSUserDefaults.standardUserDefaults().synchronize()
         GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
         registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
             kGGLInstanceIDAPNSServerTypeSandboxOption:false]
@@ -268,6 +269,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
             annotation: nil)
     }
 
+    // MARK: Notifications
+    
     func processPushNotification(notification: AnyObject){
         if((notification["NOTIFICATION_POST_ID"]) != nil){
             if let id = notification["NOTIFICATION_POST_ID"]{
@@ -286,6 +289,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate {
         let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
+    }
+    
+    func showNotificationsAlert(){
+        if(!NSUserDefaults.standardUserDefaults().boolForKey("notificationsEnabled")){
+            UIAlertView(title: "Enable Notifications", message: "Hi! Congratulations on making your first post. To stay up to date on what's going on around you, we recommend that you enable notifications", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Enable").show()
+        }
+    }
+    
+    // MARK: UIAlertViewDelegate
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if(buttonIndex == 1){
+            askForNotifications()
+        }
     }
     
 }
