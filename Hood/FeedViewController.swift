@@ -120,7 +120,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillLayoutSubviews() {
-        print("Top layout guide is \(self.topLayoutGuide.length)" )
+//        print("Top layout guide is \(self.topLayoutGuide.length)" )
         let frame:CGRect = self.tableView.frame;
         if(frame.size.width > self.view.frame.size.width) {
             self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height)
@@ -152,7 +152,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             showLoader()
         }
         
-        Post.getPosts(self.dataObject as! Channel, pageSize: 5, page: page) { (responseData, error) -> Void in
+        Post.getPosts(self.dataObject as! Channel, pageSize: APIPageSize, page: page) { (responseData, error) -> Void in
             self.hideLoader()
             if let error = error{
                 print("Error in fetching posts \(error)")
@@ -173,12 +173,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func createEmptyView()
     {
-        let channel = self.dataObject as! Channel
-        let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView
-        emptyView!.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
-        self.tableView.addSubview(emptyView!)
-        let gr = UITapGestureRecognizer(target: self, action: Selector("segueAddPost"))
-        emptyView?.addGestureRecognizer(gr)
+        if let channel = self.dataObject as? Channel{
+            if !channel.name.isEmpty{
+            if let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView{
+                    emptyView.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
+                    self.tableView.addSubview(emptyView)
+                    let gr = UITapGestureRecognizer(target: self, action: Selector("segueAddPost"))
+                    emptyView.addGestureRecognizer(gr)
+                }
+            }
+        }
     }
     
     func segueAddPost()
@@ -206,7 +210,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let postFetchRequest = NSFetchRequest(entityName: "Post")
         postFetchRequest.predicate = NSPredicate(format: "channel == %@", argumentArray: [(self.dataObject as! Channel)])
         postFetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
-        postFetchRequest.fetchBatchSize = 5
+        postFetchRequest.fetchBatchSize = APIPageSize
         
         let frc = NSFetchedResultsController(
             fetchRequest: postFetchRequest,

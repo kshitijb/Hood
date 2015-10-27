@@ -30,7 +30,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     @IBOutlet weak var pageIndicatorContainer: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
     let badge = GIBadgeView()
-
+    var resetViewControllers: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNeedsStatusBarAppearanceUpdate()
@@ -52,6 +53,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "jumpToChannel:", name: JumpToChannelNotificationName, object: nil)
         setUpNotificationButton()
+        setUpOptionsButton()
         if (AppDelegate.owner == nil)
         {
             performSegueWithIdentifier("showLogin", sender: self)
@@ -70,7 +72,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         notifButton.contentMode = UIViewContentMode.ScaleAspectFit
         notifButton.addSubview(badge)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: notifButton)
-        badge.increment()
+        badge.backgroundColor = UIColor.whiteColor()
+        badge.textColor = GlobalColors.Green
+//        badge.increment()
         
         notifButton.setImage(UIImage(named: "Profile"), forState: UIControlState.Normal)
         notifButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
@@ -79,6 +83,37 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     func showNotifs(){
         self.performSegueWithIdentifier("showNotifications", sender: self)
+    }
+    
+    func setUpOptionsButton(){
+        let optionsButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
+        optionsButton.contentMode = UIViewContentMode.ScaleAspectFit
+        optionsButton.setImage(UIImage(named: "Settings"), forState: .Normal)
+        optionsButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        optionsButton.addTarget(self, action: "optionsPressed", forControlEvents: .TouchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionsButton)
+    }
+    
+    func optionsPressed(){
+        let actionSheet = UIAlertController(title: "Options", message: "", preferredStyle: .ActionSheet)
+        
+        let shareApp = UIAlertAction(title: "Share App", style: .Default) { (action) -> Void in
+            let activityViewController = UIActivityViewController(activityItems: ["Check out Pipal on the App Store!"], applicationActivities: nil)
+            self.presentViewController(activityViewController, animated: true, completion: nil)
+        }
+        actionSheet.addAction(shareApp)
+        
+        let logoutAction = UIAlertAction(title: "Log Out", style: .Destructive) { (action) -> Void in
+            Utilities.appDelegate.logoutUserAndDeleteData()
+            self._modelController = nil
+            self.resetViewControllers = true
+            self.performSegueWithIdentifier("showLogin", sender: self)
+        }
+        actionSheet.addAction(logoutAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        presentViewController(actionSheet, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -363,6 +398,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
                     statusBarBackground.backgroundColor = colorToSet
                 }
                 self.addButton.backgroundColor = colorToSet
+                self.badge.textColor = colorToSet
             })
             
         })
@@ -452,13 +488,14 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }else{
             initializePageViewController()
         }
-        if(self.pageViewController!.viewControllers!.count == 0){
+        if(self.pageViewController!.viewControllers!.count == 0 || resetViewControllers){
             let startingViewController: FeedViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
             let viewControllers = [startingViewController]
             self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: {done in })
             self.pageControl.currentPage = 0
             self.showPageControl()
             self.showAddButton()
+            resetViewControllers = false
         }
         
         

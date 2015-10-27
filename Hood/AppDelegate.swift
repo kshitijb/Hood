@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKCoreKit
+import FBSDKLoginKit
 import Fabric
 import Crashlytics
 import CoreData
@@ -269,6 +270,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
             annotation: nil)
     }
 
+    func logoutUserAndDeleteData(){
+        let allObjectsRequest = NSFetchRequest(entityName: "ParentObject")
+        allObjectsRequest.includesPropertyValues = false
+        do{
+            let allObjects = try managedObjectContext?.executeFetchRequest(allObjectsRequest)
+            if let allObjects = allObjects{
+                for object in allObjects{
+                    managedObjectContext?.deleteObject(object as! NSManagedObject)
+                }
+            }
+        }catch{
+            
+        }
+        saveContext()
+        FBSDKLoginManager().logOut()
+    }
+    
     // MARK: Notifications
     
     func processPushNotification(notification: AnyObject){

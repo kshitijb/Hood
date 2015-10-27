@@ -8,6 +8,8 @@
 
 import Foundation
 
+let APIPageSize = 5
+
 struct API {
     struct Static {
         static let apiProtocol = "http://"
