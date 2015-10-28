@@ -232,6 +232,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         print(params)
         
+        Utilities.appDelegate.showNotificationsAlert()
+        
         Alamofire.request(.POST, API().addComment(), parameters: params, encoding: .JSON,headers:headers).responseData{_, _, result in
             
             
@@ -240,6 +242,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
             self.networkRequestForComments()
+            self.tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: true)
 
         }
 

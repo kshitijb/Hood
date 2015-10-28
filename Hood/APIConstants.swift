@@ -8,6 +8,8 @@
 
 import Foundation
 
+let APIPageSize = 5
+
 struct API {
     struct Static {
         static let apiProtocol = "http://"
@@ -32,6 +34,7 @@ struct API {
         static let update = "update"
         static let locality = "locality"
         static let device = "device"
+        static let clear = "clear"
     }
     
     private var fullUrl:String{
@@ -109,5 +112,9 @@ struct API {
     
     func registerDevice() -> String{
         return ([registerUser(), Static.device]).joinWithSeparator("/")
+    }
+    
+    func clearAlerts() -> String{
+        return ([fullUrl, Static.notifications, Static.clear]).joinWithSeparator("/")
     }
 }

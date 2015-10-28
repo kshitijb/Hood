@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import CoreData
 
-class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate
 {
     @IBOutlet weak var postScrollView: UIScrollView!
     @IBOutlet weak var postTextView: UITextView!
@@ -66,6 +66,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     
     @IBAction func postNow(sender: AnyObject)
     {
+        
         var params = ["locality_id" : AppDelegate.owner!.neighbourhood.id, "channel_id" : channelPicker.channelID!, "message" : postTextView.text] as [String:AnyObject!]
         if let pickedImage = pickedImage{
             let imageData = UIImagePNGRepresentation(pickedImage)
@@ -78,6 +79,9 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
         self.navigationController?.popViewControllerAnimated(true)
         let userInfo:Dictionary = ["channelID":channelPicker.channelID!]
         NSNotificationCenter.defaultCenter().postNotificationName(AddingPostNotificationName, object: nil, userInfo: userInfo)
+//        NSNotificationCenter.defaultCenter().postNotificationName(JumpToChannelNotificationName, object:nil, userInfo: ["channelID":channelPicker.channelID!])
+        
+        Utilities.appDelegate.askForNotifications()
         
         Alamofire.request(.POST, API().addPost(), parameters: params, encoding: .JSON, headers: headers).responseData{_, _, result in
             
@@ -205,6 +209,5 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
             
         }
     }
-
     
 }

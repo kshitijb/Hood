@@ -26,8 +26,9 @@ class WelcomeViewController: UIViewController {
     }
     
     func showOnboarding(){
-        let onboarding:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("onboarding"))!
-        self.navigationController?.pushViewController(onboarding, animated: true)
+//        let onboarding:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("onboarding"))!
+//        self.navigationController?.pushViewController(onboarding, animated: true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*

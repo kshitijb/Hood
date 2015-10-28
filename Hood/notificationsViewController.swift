@@ -24,11 +24,19 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let gr = UISwipeGestureRecognizer(target: self, action: Selector("dismiss:"))
         gr.direction = UISwipeGestureRecognizerDirection.Left
         view.addGestureRecognizer(gr)
+        let rightButton = UIButton(frame: CGRectMake(0,0,24,24))
+        rightButton.contentMode = .ScaleAspectFit
+        rightButton.setImage(UIImage(named: "ForwardArrow"), forState: .Normal)
+        rightButton.imageView?.contentMode = .ScaleAspectFit
+        rightButton.addTarget(self, action: "dismiss:", forControlEvents: .TouchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.fetchNotifications()
+        fetchNotifications()
+        clearAlerts()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -69,6 +77,14 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         return UIView()
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let commentVC:CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments") as! CommentsViewController
+        commentVC.postID = notifications![indexPath.row]["post"]["id"].int!
+        
+        self.navigationController?.pushViewController(commentVC, animated: true)
+    }
+    
     @IBAction func dismiss(sender: AnyObject)
     {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
@@ -93,17 +109,20 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         }
         
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
-        let commentVC:CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments") as! CommentsViewController
-        commentVC.postID = notifications![indexPath.row]["post"]["id"].int!
-        
-        self.navigationController?.pushViewController(commentVC, animated: true)
-    }
 
     func markNotificationAsRead(notificationID: Int){
         
+    }
+    
+    func clearAlerts(){
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.GET, API().clearAlerts(), parameters: nil, encoding: .URL, headers: headers).validate().responseJSON(options: .AllowFragments) { (request, response, result) -> Void in
+            if(result.isSuccess){
+                print(result.value!)
+            }else{
+                print(result.error)
+            }
+        }
     }
     
 }
