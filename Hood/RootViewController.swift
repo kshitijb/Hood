@@ -420,7 +420,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     func jumpToPageForIndex(index: Int){
         let viewController = self.modelController.viewControllerAtIndex(index, storyboard: self.storyboard!)
         pageViewController!.setViewControllers([viewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: { (completed:Bool) -> Void in
-            pageViewController?.setViewControllers([viewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+            self.pageViewController?.setViewControllers([viewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
         })
     }
     

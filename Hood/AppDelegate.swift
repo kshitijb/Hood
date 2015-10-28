@@ -63,6 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
 //                processPushNotification(notification)
 //            }
 //        }
+        if(NSUserDefaults.standardUserDefaults().boolForKey("notificationsEnabled")){
+           askForNotifications()
+        }
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

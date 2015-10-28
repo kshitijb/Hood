@@ -11,5 +11,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'Google/CloudMessaging'
+pod 'Alamofire', '~> 2.0'
+pod 'SwiftyJSON'
 
 end
