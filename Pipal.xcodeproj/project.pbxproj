@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4224388F1BE14B1E00F6E57F /* NativeOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4224388E1BE14B1E00F6E57F /* NativeOnBoardingViewController.swift */; };
 		423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423983E11B7BC50200F9D4AF /* commentCell.swift */; };
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
-		427617B01BCD9786008BE58F /* NativeOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427617AF1BCD9786008BE58F /* NativeOnBoardingViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		42DF2BA91BCD0146001992E2 /* ReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DF2BA81BCD0146001992E2 /* ReactView.swift */; settings = {ASSET_TAGS = (); }; };
-		42DF2BAD1BCD0396001992E2 /* reactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DF2BAC1BCD0396001992E2 /* reactViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		42DF2BA91BCD0146001992E2 /* ReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DF2BA81BCD0146001992E2 /* ReactView.swift */; };
+		42DF2BAD1BCD0396001992E2 /* reactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DF2BAC1BCD0396001992E2 /* reactViewController.swift */; };
 		42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */; };
 		42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */; };
 		42E55C261B9EE4BC000C102E /* ALCameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E55C141B9EE4BC000C102E /* ALCameraView.strings */; };
@@ -105,9 +105,9 @@
 /* Begin PBXFileReference section */
 		13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pipal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.debug.xcconfig"; sourceTree = "<group>"; };
+		4224388E1BE14B1E00F6E57F /* NativeOnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeOnBoardingViewController.swift; sourceTree = "<group>"; };
 		423983E11B7BC50200F9D4AF /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
-		427617AF1BCD9786008BE58F /* NativeOnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeOnBoardingViewController.swift; sourceTree = "<group>"; };
 		42DF2BA81BCD0146001992E2 /* ReactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactView.swift; sourceTree = "<group>"; };
 		42DF2BAC1BCD0396001992E2 /* reactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reactViewController.swift; sourceTree = "<group>"; };
 		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
@@ -312,8 +312,8 @@
 				D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */,
 				42F01BEA1B79EAAB001386C1 /* loginViewController.swift */,
 				D51FB2E41B7891FC00518DA2 /* PopButton.swift */,
+				4224388E1BE14B1E00F6E57F /* NativeOnBoardingViewController.swift */,
 				42DF2BA81BCD0146001992E2 /* ReactView.swift */,
-				427617AF1BCD9786008BE58F /* NativeOnBoardingViewController.swift */,
 				D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */,
 				D547A4861B70B87C00B556B4 /* CommentsViewController.swift */,
 				D547A4881B70CFC900B556B4 /* CommentsHeaderCell.swift */,
@@ -577,7 +577,6 @@
 				D5EBCFCE1B874832000E0656 /* Model.xcdatamodeld in Sources */,
 				D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */,
 				D547A4891B70CFC900B556B4 /* CommentsHeaderCell.swift in Sources */,
-				427617B01BCD9786008BE58F /* NativeOnBoardingViewController.swift in Sources */,
 				D547A4871B70B87C00B556B4 /* CommentsViewController.swift in Sources */,
 				D5B3E4891B6A2CB000F3DF9F /* ModelController.swift in Sources */,
 				42E55C2D1B9EE4BC000C102E /* ALConfirmViewController.swift in Sources */,
@@ -603,6 +602,7 @@
 				D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */,
 				D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */,
 				42E55C321B9EE4BC000C102E /* ALImageCell.swift in Sources */,
+				4224388F1BE14B1E00F6E57F /* NativeOnBoardingViewController.swift in Sources */,
 				D54B9BD51B7DD2520075836C /* PostController.swift in Sources */,
 				42E55C301B9EE4BC000C102E /* ALCameraView.swift in Sources */,
 				D5EBCFD11B8C4AF5000E0656 /* User.swift in Sources */,
@@ -724,6 +724,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

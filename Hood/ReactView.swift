@@ -17,7 +17,7 @@ class ReactView: UIView {
         // Drawing code
     }
     */
-    let jsCodeLocation = NSURL(string: "http://localhost:8081/ReactComponent/index.ios.bundle")
+    let jsCodeLocation = NSURL(string: "http://localhost:8081/ReactComponent/index.ios.bundle?platform=ios&dev=true")
     // For production use, this `NSURL` could instead point to a pre-bundled file on disk:
     //
     //   NSURL *jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];

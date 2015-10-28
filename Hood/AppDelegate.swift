@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     static var owner:User?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions
+        launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         UINavigationBar.appearance().barTintColor = GlobalColors.Green
         UINavigationBar.appearance().setBackgroundImage(getImageWithColor(GlobalColors.Green, size: CGSizeMake(1, 64)), forBarMetrics: .Default)

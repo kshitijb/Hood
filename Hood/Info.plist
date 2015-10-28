@@ -80,6 +80,8 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
+        <string>twitter</string>
+        <string>whatsapp</string>
 		<string>fbapi20130214</string>
 		<string>fbapi20130410</string>
 		<string>fbapi20130702</string>

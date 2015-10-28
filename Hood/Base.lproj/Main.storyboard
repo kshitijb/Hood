@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B22c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="T0b-4V-rf8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bU7-14-pHA">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -409,15 +409,19 @@
                         <viewControllerLayoutGuide type="bottom" id="vcO-iX-tRW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WId-Xb-23i">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="nTE-JE-l04"/>
+                    <connections>
+                        <segue destination="PxF-Ax-wPy" kind="show" identifier="dismissOnboarding" animates="NO" id="RZ4-UO-XYf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="noa-5n-xS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2581" y="1974"/>
+            <point key="canvasLocation" x="225" y="544"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="zey-Tj-qFo">
@@ -1279,12 +1283,12 @@ neighbours</string>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="PxF-Ax-wPy" kind="relationship" relationship="rootViewController" id="JhP-Da-tCT"/>
+                        <segue destination="T0b-4V-rf8" kind="relationship" relationship="rootViewController" id="Ad6-DW-oCM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nD9-xv-gmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="181" y="476"/>
+            <point key="canvasLocation" x="-569" y="582"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="blS-sa-zQF">
