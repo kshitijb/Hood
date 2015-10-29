@@ -23,6 +23,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var count: Int?
     var page: Int = 1
     let isLoading:Bool = false
+    var isComplete:Bool = false
     
     @IBOutlet var addPostHeaderTopConstraint: NSLayoutConstraint!
     @IBOutlet var addingPostHeaderView: UIView!
@@ -30,6 +31,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 138
@@ -117,6 +119,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         self.count = nil
+        self.page = 1
     }
     
     override func viewWillLayoutSubviews() {
@@ -146,6 +149,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             else if(self.count == count)
             {
                 //reached end
+                isComplete = true
                 return
             }
         }else{
@@ -158,7 +162,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Error in fetching posts \(error)")
             }else{
                 let responseJSON = JSON(data: responseData! as! NSData, options:NSJSONReadingOptions.AllowFragments, error:nil)
-                if(self.count != nil && self.count != responseJSON["count"].int){
+                if(!self.isComplete){
                     self.page++
                 }
                 self.count = responseJSON["count"].int

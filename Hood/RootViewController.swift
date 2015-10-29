@@ -201,7 +201,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed{
             let dataViewController:FeedViewController = pageViewController.viewControllers!.last as! FeedViewController
-            let titleString = (dataViewController.dataObject as! Channel).name
             let count = self.modelController.indexOfViewController(dataViewController)
             self.pageControl.currentPage = count
         }
@@ -457,7 +456,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         Alamofire.request(.GET, url, parameters: nil, encoding: ParameterEncoding.URL,headers: headers).responseJSON(options: NSJSONReadingOptions.AllowFragments) { (request, _, result) -> Void in
             if(result.isSuccess){
                 let responseJSON = JSON(result.value!)
-                self.badge.badgeValue = responseJSON["count"].int!
+                if let unread_count = responseJSON["unread_count"].int{
+                    self.badge.badgeValue = unread_count
+                }
             }
         }
     }
@@ -470,7 +471,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         {
             let results = try context?.executeFetchRequest(fetchRequest)
             if results?.count > 0{
-                var mutableArray = NSMutableArray(array: results!)
+                let mutableArray = NSMutableArray(array: results!)
                 self.modelController.pageData = mutableArray
                 self.populateData()
             }

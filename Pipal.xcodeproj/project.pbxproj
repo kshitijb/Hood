@@ -42,6 +42,7 @@
 		D547A48B1B70D29B00B556B4 /* CellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547A48A1B70D29B00B556B4 /* CellWithImage.swift */; };
 		D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD21B7B52B20075836C /* UIColorExtension.swift */; };
 		D54B9BD51B7DD2520075836C /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD41B7DD2520075836C /* PostController.swift */; };
+		D55D81821BE20D86009096D0 /* NativeOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55D81811BE20D86009096D0 /* NativeOnBoardingViewController.swift */; };
 		D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; };
 		D5604CEF1B72238E002AD200 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D57382A11B7359150080A4FA /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57382A01B7359150080A4FA /* APIConstants.swift */; };
@@ -134,6 +135,7 @@
 		D547A48A1B70D29B00B556B4 /* CellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithImage.swift; sourceTree = "<group>"; };
 		D54B9BD21B7B52B20075836C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		D54B9BD41B7DD2520075836C /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		D55D81811BE20D86009096D0 /* NativeOnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeOnBoardingViewController.swift; sourceTree = "<group>"; };
 		D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D57382A01B7359150080A4FA /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D5B3E47D1B6A2CB000F3DF9F /* Pipal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pipal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -377,6 +379,7 @@
 		D5F5D6421BC3E74E001BC322 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D55D81811BE20D86009096D0 /* NativeOnBoardingViewController.swift */,
 				42F01BEA1B79EAAB001386C1 /* loginViewController.swift */,
 				D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */,
 				D547A4861B70B87C00B556B4 /* CommentsViewController.swift */,
@@ -603,6 +606,7 @@
 				D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */,
 				D5F5D6451BC3EA97001BC322 /* LockViewController.swift in Sources */,
 				42E55C321B9EE4BC000C102E /* ALImageCell.swift in Sources */,
+				D55D81821BE20D86009096D0 /* NativeOnBoardingViewController.swift in Sources */,
 				D54B9BD51B7DD2520075836C /* PostController.swift in Sources */,
 				42E55C301B9EE4BC000C102E /* ALCameraView.swift in Sources */,
 				D5EBCFD11B8C4AF5000E0656 /* User.swift in Sources */,
