@@ -10,11 +10,5 @@ pod 'Sheriff'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
-pod 'React'
-pod 'React', :subspecs => [
-'RCTText',
-'RCTImage',
-'RCTNetwork',
-'RCTWebSocket'
-]
+
 end
