@@ -53,6 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
         }
             
         }
+        if let _ = AppDelegate.owner{
+            let navigationController = window?.rootViewController as? UINavigationController
+            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let rootViewController = storyboard.instantiateViewControllerWithIdentifier("RootViewController")
+            navigationController?.setViewControllers([rootViewController], animated: false)
+        }
 //        Lookback.setupWithAppToken("3kok372o2DpYeWKFF")
 //        Lookback.sharedLookback().feedbackBubbleInitialPosition = CGPointMake(-20, -20)
 //        Lookback.sharedLookback().shakeToRecord = true
@@ -159,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
     }
     
     func sendTokenToServer(token: String){
-        let parameters = ["device_id": token]
+        let parameters = ["device_id": token, "device_type":"iphone"]
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         Alamofire.request(.POST, API().registerDevice(), parameters: parameters, encoding: .JSON, headers: headers).responseData { (request, response, result) -> Void in
             if(result.isSuccess){

@@ -8,7 +8,7 @@
 
 import Foundation
 
-let APIPageSize = 5
+let APIPageSize = 20
 
 struct API {
     struct Static {
