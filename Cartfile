@@ -1,4 +1,4 @@
 github "Alamofire/Alamofire" ~> 2.0
 github "TransitApp/SVProgressHUD"
-github "SwiftyJSON/SwiftyJSON" "xcode7"
+github "SwiftyJSON/SwiftyJSON"
 github "rs/SDWebImage"

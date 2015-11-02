@@ -14,7 +14,7 @@ import Crashlytics
 import CoreData
 import Alamofire
 import Foundation
-
+import NotificationBanner
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UIAlertViewDelegate {
     var window: UIWindow?
@@ -23,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
     var registrationToken: String?
     let registrationKey = "onRegistrationCompleted"
     var registrationOptions = [String: AnyObject]()
+    var currentlyViewedPost: Int?
+    let notificationCenter = NotificationBannerCenter.defaultCenter
+
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         

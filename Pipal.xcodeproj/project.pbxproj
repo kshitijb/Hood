@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423983E11B7BC50200F9D4AF /* commentCell.swift */; };
 		425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF22D1B720CC900837B8C /* AddPostViewController.swift */; };
+		42B98BF11BE378FE0086B906 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; };
+		42B98BF21BE378FE0086B906 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42B98C0F1BE384760086B906 /* NotificationBanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B98C0C1BE3845E0086B906 /* NotificationBanner.framework */; };
+		42B98C101BE384760086B906 /* NotificationBanner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42B98C0C1BE3845E0086B906 /* NotificationBanner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42BA88791BE65FC900D97F0F /* ChatNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42BA88771BE65FC900D97F0F /* ChatNotificationView.xib */; };
+		42BA887A1BE65FC900D97F0F /* ChatNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA88781BE65FC900D97F0F /* ChatNotificationView.swift */; };
 		42E4FF7F1B8726AB00A8B1C3 /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */; };
 		42E4FF811B872FFB00A8B1C3 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */; };
 		42E55C261B9EE4BC000C102E /* ALCameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42E55C141B9EE4BC000C102E /* ALCameraView.strings */; };
@@ -43,8 +49,6 @@
 		D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD21B7B52B20075836C /* UIColorExtension.swift */; };
 		D54B9BD51B7DD2520075836C /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD41B7DD2520075836C /* PostController.swift */; };
 		D55D81821BE20D86009096D0 /* NativeOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55D81811BE20D86009096D0 /* NativeOnBoardingViewController.swift */; };
-		D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; };
-		D5604CEF1B72238E002AD200 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D57382A11B7359150080A4FA /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57382A01B7359150080A4FA /* APIConstants.swift */; };
 		D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */; };
 		D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */; };
@@ -81,6 +85,30 @@
 		EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		42B98C0B1BE3845E0086B906 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42B98C061BE3845E0086B906 /* NotificationBanner.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC6BEBA81B959B6000028411;
+			remoteInfo = NotificationBanner;
+		};
+		42B98C0D1BE3845E0086B906 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42B98C061BE3845E0086B906 /* NotificationBanner.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC6BEBB31B959B6000028411;
+			remoteInfo = NotificationBannerTests;
+		};
+		42B98C111BE384760086B906 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42B98C061BE3845E0086B906 /* NotificationBanner.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC6BEBA71B959B6000028411;
+			remoteInfo = NotificationBanner;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		D5604CF21B72238E002AD200 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -88,8 +116,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D5604CEF1B72238E002AD200 /* SVProgressHUD.framework in Embed Frameworks */,
+				42B98BF21BE378FE0086B906 /* SVProgressHUD.framework in Embed Frameworks */,
 				42EB28271B74D79100AB0331 /* WebImage.framework in Embed Frameworks */,
+				42B98C101BE384760086B906 /* NotificationBanner.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +130,9 @@
 		3365645C8D920F3726D61C70 /* Pods-Pipal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pipal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pipal/Pods-Pipal.debug.xcconfig"; sourceTree = "<group>"; };
 		423983E11B7BC50200F9D4AF /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		425DF22D1B720CC900837B8C /* AddPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		42B98C061BE3845E0086B906 /* NotificationBanner.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NotificationBanner.xcodeproj; path = NotificationBanner/NotificationBanner.xcodeproj; sourceTree = "<group>"; };
+		42BA88771BE65FC900D97F0F /* ChatNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatNotificationView.xib; sourceTree = "<group>"; };
+		42BA88781BE65FC900D97F0F /* ChatNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatNotificationView.swift; sourceTree = "<group>"; };
 		42E4FF7E1B8726AB00A8B1C3 /* notificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
 		42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		42E55C141B9EE4BC000C102E /* ALCameraView.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ALCameraView.strings; sourceTree = "<group>"; };
@@ -181,11 +213,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42B98BF11BE378FE0086B906 /* SVProgressHUD.framework in Frameworks */,
 				D5EBD0101B8C5A67000E0656 /* CoreData.framework in Frameworks */,
-				D5604CEE1B72238E002AD200 /* SVProgressHUD.framework in Frameworks */,
 				D5EBCFCB1B870ED2000E0656 /* Crashlytics.framework in Frameworks */,
 				D5EBCFCA1B870ED2000E0656 /* Fabric.framework in Frameworks */,
 				42EB28261B74D79100AB0331 /* WebImage.framework in Frameworks */,
+				42B98C0F1BE384760086B906 /* NotificationBanner.framework in Frameworks */,
 				EB31196E8B8B42EC52B694BD /* Pods_Pipal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +232,15 @@
 				13016DCF20A890DF09DDEC19 /* Pods_Pipal.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42B98C071BE3845E0086B906 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42B98C0C1BE3845E0086B906 /* NotificationBanner.framework */,
+				42B98C0E1BE3845E0086B906 /* NotificationBannerTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		42E55C131B9EE4BC000C102E /* ALCameraViewController */ = {
@@ -266,6 +308,7 @@
 		D5B3E4741B6A2CB000F3DF9F = {
 			isa = PBXGroup;
 			children = (
+				42B98C061BE3845E0086B906 /* NotificationBanner.xcodeproj */,
 				D5EBD00F1B8C5A67000E0656 /* CoreData.framework */,
 				D5EBCFC81B870ED2000E0656 /* Fabric.framework */,
 				D5EBCFC91B870ED2000E0656 /* Crashlytics.framework */,
@@ -392,6 +435,8 @@
 				425DF22D1B720CC900837B8C /* AddPostViewController.swift */,
 				D5F5D6441BC3EA97001BC322 /* LockViewController.swift */,
 				D5F5D6461BC534BC001BC322 /* WelcomeViewController.swift */,
+				42BA88771BE65FC900D97F0F /* ChatNotificationView.xib */,
+				42BA88781BE65FC900D97F0F /* ChatNotificationView.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -431,6 +476,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				42B98C121BE384760086B906 /* PBXTargetDependency */,
 			);
 			name = Pipal;
 			productName = Hood;
@@ -449,7 +495,7 @@
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = F3642YKY5X;
+						DevelopmentTeam = 7G2XZXD8B4;
 					};
 				};
 			};
@@ -464,12 +510,35 @@
 			mainGroup = D5B3E4741B6A2CB000F3DF9F;
 			productRefGroup = D5B3E47E1B6A2CB000F3DF9F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 42B98C071BE3845E0086B906 /* Products */;
+					ProjectRef = 42B98C061BE3845E0086B906 /* NotificationBanner.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D5B3E47C1B6A2CB000F3DF9F /* Pipal */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		42B98C0C1BE3845E0086B906 /* NotificationBanner.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NotificationBanner.framework;
+			remoteRef = 42B98C0B1BE3845E0086B906 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		42B98C0E1BE3845E0086B906 /* NotificationBannerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NotificationBannerTests.xctest;
+			remoteRef = 42B98C0D1BE3845E0086B906 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D5B3E47B1B6A2CB000F3DF9F /* Resources */ = {
@@ -495,6 +564,7 @@
 				D5B3E4B61B6A33E000F3DF9F /* Lato-Hairline.ttf in Resources */,
 				D5F5D6491BC7B536001BC322 /* GoogleService-Info.plist in Resources */,
 				D5B3E48E1B6A2CB000F3DF9F /* Images.xcassets in Resources */,
+				42BA88791BE65FC900D97F0F /* ChatNotificationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +677,7 @@
 				D5F5D6451BC3EA97001BC322 /* LockViewController.swift in Sources */,
 				42E55C321B9EE4BC000C102E /* ALImageCell.swift in Sources */,
 				D55D81821BE20D86009096D0 /* NativeOnBoardingViewController.swift in Sources */,
+				42BA887A1BE65FC900D97F0F /* ChatNotificationView.swift in Sources */,
 				D54B9BD51B7DD2520075836C /* PostController.swift in Sources */,
 				42E55C301B9EE4BC000C102E /* ALCameraView.swift in Sources */,
 				D5EBCFD11B8C4AF5000E0656 /* User.swift in Sources */,
@@ -615,6 +686,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		42B98C121BE384760086B906 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NotificationBanner;
+			targetProxy = 42B98C111BE384760086B906 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D5B3E48A1B6A2CB000F3DF9F /* Main.storyboard */ = {
@@ -728,6 +807,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -752,8 +832,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Locon Solutions Private Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Locon Solutions Private Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

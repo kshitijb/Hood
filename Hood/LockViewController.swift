@@ -22,6 +22,7 @@ class LockViewController: UIViewController, UITextFieldDelegate {
         lockTextField.keyboardType = UIKeyboardType.NamePhonePad
         submitButton.addTarget(self, action: "submit", forControlEvents: .TouchUpInside)
         submitButton.hidden = true
+        submitButton.frame.size = CGSizeMake(35,35)
         // Do any additional setup after loading the view.
     }
     
