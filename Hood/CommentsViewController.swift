@@ -12,6 +12,7 @@ import SwiftyJSON
 import WebImage
 import FBSDKCoreKit
 import CoreData
+import NotificationBanner
 class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UITextViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
@@ -43,6 +44,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        Utilities.appDelegate.currentlyViewedPost = self.postID
         self.networkRequestForComments()
         self.navigationController?.hidesBarsOnSwipe = false
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
@@ -327,10 +329,25 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func pushNotificationReceived(notification: NSNotification){
         let userInfo = notification.userInfo!
-        if let id = userInfo["NOTIFICATION_POST_ID"]{
+        if let id = userInfo["NOTIFICATION_POST_ID"]
+        {
             if(id.integerValue == self.postID){
                 self.networkRequestForComments()
             }
+        }
+        else
+        {
+            print(userInfo)
+            let num = 0
+            let chatNotificationView = ChatNotificationView.loadFromNib()
+            chatNotificationView.nameLabel.text = "John Doe"
+            chatNotificationView.messageLabel.text =  "\(num) Hey, My name is John Doe!"
+            chatNotificationView.thumbImageView.image = UIImage(named: "johndoe.jpg")
+            chatNotificationView.context = "\(num)"
+            chatNotificationView.tapClosure = { (nbView: NBView) in
+                print((nbView as! ChatNotificationView).messageLabel.text)
+            }
+            Utilities.appDelegate.notificationCenter.enQueueNotification(chatNotificationView)
         }
     }
 
