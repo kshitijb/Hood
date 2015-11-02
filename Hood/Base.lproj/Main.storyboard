@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bU7-14-pHA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bU7-14-pHA">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -15,7 +15,6 @@
             <string>Lato-Black</string>
         </mutableArray>
         <mutableArray key="Lato-Bold.ttf">
-            <string>Lato-Bold</string>
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
@@ -1335,25 +1334,11 @@ neighbours</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lep-vf-WcT">
-                                <rect key="frame" x="200" y="484" width="200" height="41"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="irp-sY-oYd"/>
-                                    <constraint firstAttribute="width" constant="200" id="jWf-xZ-9ds"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
-                                <state key="normal" title="Meet your Neighbours">
-                                    <color key="titleColor" red="0.12156862745098039" green="0.75294117647058822" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fsu-9r-HxW" firstAttribute="top" secondItem="BZO-A1-App" secondAttribute="bottom" id="R9y-Ka-Cc0"/>
-                            <constraint firstItem="fsu-9r-HxW" firstAttribute="top" secondItem="Lep-vf-WcT" secondAttribute="bottom" constant="75" id="UBg-8G-4bO"/>
                             <constraint firstItem="BZO-A1-App" firstAttribute="top" secondItem="FLu-Jz-jYM" secondAttribute="top" id="dLe-NC-70A"/>
                             <constraint firstItem="BZO-A1-App" firstAttribute="leading" secondItem="FLu-Jz-jYM" secondAttribute="leading" id="eh8-0f-8hl"/>
                             <constraint firstItem="7gt-MS-EWW" firstAttribute="centerY" secondItem="FLu-Jz-jYM" secondAttribute="centerY" id="jNr-DB-wyH"/>
@@ -1361,11 +1346,9 @@ neighbours</string>
                             <constraint firstItem="bYX-4A-4V4" firstAttribute="centerX" secondItem="FLu-Jz-jYM" secondAttribute="centerX" id="keS-Gy-lin"/>
                             <constraint firstItem="bYX-4A-4V4" firstAttribute="top" secondItem="Phk-cO-33f" secondAttribute="bottom" constant="40" id="q64-mZ-gJD"/>
                             <constraint firstItem="7gt-MS-EWW" firstAttribute="centerX" secondItem="FLu-Jz-jYM" secondAttribute="centerX" id="qDm-bK-tXr"/>
-                            <constraint firstItem="Lep-vf-WcT" firstAttribute="centerX" secondItem="FLu-Jz-jYM" secondAttribute="centerX" id="rRU-gA-6Ld"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="meetNeighboursButton" destination="Lep-vf-WcT" id="0Lv-my-fQu"/>
                         <outlet property="welcomeLabel" destination="7gt-MS-EWW" id="o2G-uO-dx9"/>
                     </connections>
                 </viewController>

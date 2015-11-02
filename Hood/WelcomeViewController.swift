@@ -8,16 +8,23 @@
 
 import UIKit
 
+
 class WelcomeViewController: UIViewController {
 
     @IBOutlet var welcomeLabel: UILabel!
-    @IBOutlet var meetNeighboursButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        meetNeighboursButton.layer.cornerRadius = 20
-        meetNeighboursButton.addTarget(self, action: "showOnboarding", forControlEvents: .TouchUpInside)
+//        meetNeighboursButton.layer.cornerRadius = 20
+//        meetNeighboursButton.addTarget(self, action: "showOnboarding", forControlEvents: .TouchUpInside)
         welcomeLabel.text = "Welcome to \(AppDelegate.owner!.neighbourhood.name)"
+        let delayInSeconds = 1.4;
+        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)));
+        dispatch_after(popTime, dispatch_get_main_queue()) { () -> Void in
+        self.dismissViewControllerAnimated(true, completion: nil)
+
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
