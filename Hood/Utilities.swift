@@ -101,9 +101,9 @@ struct Utilities
     }
     
     static func setUpLineSpacingForLabel(label:UILabel, font: UIFont){
-        var paragraphStyle = NSMutableParagraphStyle()
+        let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 5
-        var attrString = NSMutableAttributedString(string: label.text!)
+        let attrString = NSMutableAttributedString(string: label.text!)
         attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         attrString.addAttribute(NSFontAttributeName, value: font, range:NSMakeRange(0, attrString.length))
         label.attributedText = attrString
@@ -115,10 +115,10 @@ struct Utilities
     
     static func colorBetweenColors(firstColor:UIColor , lastColor:UIColor, offsetAsFraction:CGFloat)->UIColor
     {
-        var c1Comp = CGColorGetComponents(firstColor.CGColor)
-        var c2Comp = CGColorGetComponents(lastColor.CGColor)
+        let c1Comp = CGColorGetComponents(firstColor.CGColor)
+        let c2Comp = CGColorGetComponents(lastColor.CGColor)
 
-        var colorComponents = [
+        let colorComponents = [
             c1Comp[0], c1Comp[1], c1Comp[2], c1Comp[3],
             c2Comp[0], c2Comp[1], c2Comp[2], c2Comp[3]
         ]

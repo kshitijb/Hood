@@ -19,7 +19,7 @@ class LockViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         lockTextField.delegate = self
-        lockTextField.keyboardType = UIKeyboardType.NamePhonePad
+        lockTextField.keyboardType = UIKeyboardType.PhonePad
         submitButton.addTarget(self, action: "submit", forControlEvents: .TouchUpInside)
         submitButton.hidden = true
         submitButton.frame.size = CGSizeMake(35,35)

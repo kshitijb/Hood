@@ -21,8 +21,8 @@ class WelcomeViewController: UIViewController {
         let delayInSeconds = 1.4;
         let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)));
         dispatch_after(popTime, dispatch_get_main_queue()) { () -> Void in
-        self.dismissViewControllerAnimated(true, completion: nil)
-
+//        self.dismissViewControllerAnimated(true, completion: nil)
+        self.showOnboarding()
         }
 
     }
@@ -33,9 +33,9 @@ class WelcomeViewController: UIViewController {
     }
     
     func showOnboarding(){
-//        let onboarding:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("onboarding"))!
-//        self.navigationController?.pushViewController(onboarding, animated: true)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let onboarding:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("onboarding"))!
+        self.navigationController?.pushViewController(onboarding, animated: true)
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*

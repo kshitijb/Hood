@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatNotificationView" customModule="NotificationBannerSample" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatNotificationView" customModule="Pipal" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icU-qy-Dfr" userLabel="containerView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="johndoe.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Tm8-Ws-kII">
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personThing" translatesAutoresizingMaskIntoConstraints="NO" id="Tm8-Ws-kII">
                             <rect key="frame" x="16" y="8" width="25" height="25"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="8oH-5R-JsL"/>
                                 <constraint firstAttribute="width" constant="25" id="gcM-Po-puy"/>
@@ -25,25 +32,28 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpU-AW-QLM">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpU-AW-QLM">
                             <rect key="frame" x="49" y="8" width="36" height="16.5"/>
+                            <animations/>
                             <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-G2-yPp">
-                            <rect key="frame" x="49" y="27" width="261.5" height="33"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-G2-yPp">
+                            <rect key="frame" x="15" y="10" width="345" height="50"/>
+                            <animations/>
                             <string key="text">Message Message Message Message Message Message Message Message Message Message Message Message Message Message Message Message Message Message</string>
-                            <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffI-F0-ea5">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffI-F0-ea5">
                             <rect key="frame" x="331" y="0.0" width="44" height="68"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="Rsh-3z-evX"/>
                             </constraints>
-                            <state key="normal" image="crossBtn.png">
+                            <state key="normal" image="cross">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -52,6 +62,7 @@
                             </connections>
                         </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Qe5-G2-yPp" secondAttribute="bottom" constant="8" id="3do-x6-qnG"/>
@@ -60,15 +71,16 @@
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OpU-AW-QLM" secondAttribute="trailing" constant="60" id="Khu-3e-w8t"/>
                         <constraint firstItem="Tm8-Ws-kII" firstAttribute="top" secondItem="icU-qy-Dfr" secondAttribute="top" constant="8" id="MUg-5Q-aUM"/>
                         <constraint firstItem="Tm8-Ws-kII" firstAttribute="leading" secondItem="icU-qy-Dfr" secondAttribute="leading" constant="16" id="Pef-Ge-MFg"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qe5-G2-yPp" secondAttribute="trailing" constant="60" id="SNW-fL-dQB"/>
-                        <constraint firstItem="Qe5-G2-yPp" firstAttribute="leading" secondItem="icU-qy-Dfr" secondAttribute="leading" constant="49" id="Z75-9a-jBs"/>
+                        <constraint firstAttribute="trailing" secondItem="Qe5-G2-yPp" secondAttribute="trailing" constant="15" id="SNW-fL-dQB"/>
+                        <constraint firstItem="Qe5-G2-yPp" firstAttribute="leading" secondItem="icU-qy-Dfr" secondAttribute="leading" constant="15" id="Z75-9a-jBs"/>
                         <constraint firstAttribute="bottom" secondItem="ffI-F0-ea5" secondAttribute="bottom" id="bT9-6P-TPX"/>
                         <constraint firstItem="OpU-AW-QLM" firstAttribute="leading" secondItem="Tm8-Ws-kII" secondAttribute="trailing" constant="8" id="cpz-ew-Dhj"/>
-                        <constraint firstItem="Qe5-G2-yPp" firstAttribute="top" secondItem="icU-qy-Dfr" secondAttribute="top" constant="27" id="nHR-yb-4L3"/>
+                        <constraint firstItem="Qe5-G2-yPp" firstAttribute="top" secondItem="icU-qy-Dfr" secondAttribute="top" constant="10" id="nHR-yb-4L3"/>
                         <constraint firstAttribute="trailing" secondItem="ffI-F0-ea5" secondAttribute="trailing" id="xPt-Yx-RFJ"/>
                     </constraints>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="icU-qy-Dfr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BrC-pS-WLS"/>
@@ -80,6 +92,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="containerView" destination="icU-qy-Dfr" id="Kb0-8f-7Xt"/>
+                <outlet property="crossButton" destination="ffI-F0-ea5" id="wHA-YK-bvC"/>
                 <outlet property="messageLabel" destination="Qe5-G2-yPp" id="U20-z5-R7u"/>
                 <outlet property="nameLabel" destination="OpU-AW-QLM" id="hUn-U1-Mkl"/>
                 <outlet property="thumbImageView" destination="Tm8-Ws-kII" id="9bZ-Ne-3Zz"/>
@@ -88,7 +101,7 @@
         </view>
     </objects>
     <resources>
-        <image name="crossBtn.png" width="20" height="20"/>
-        <image name="johndoe.jpg" width="50" height="65"/>
+        <image name="cross" width="30" height="30"/>
+        <image name="personThing" width="59" height="59"/>
     </resources>
 </document>

@@ -75,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
         if(NSUserDefaults.standardUserDefaults().boolForKey("notificationsEnabled")){
            askForNotifications()
         }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "PushNotification", name: "pushNotificationBroadcast:", object: nil)
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -142,7 +144,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
         if(UIApplication.sharedApplication().applicationState != UIApplicationState.Active){
             processPushNotification(userInfo)
         }else if(UIApplication.sharedApplication().applicationState == UIApplicationState.Active){
-            NSNotificationCenter.defaultCenter().postNotificationName("PushNotification", object: nil, userInfo: userInfo)
+            if let id = userInfo["NOTIFICATION_POST_ID"]
+            {
+                if(id.integerValue == self.currentlyViewedPost){
+                    NSNotificationCenter.defaultCenter().postNotificationName("PushNotification", object: nil, userInfo: userInfo)
+                }else{
+                    pushNotificationBroadcast(userInfo)
+                }
+            }
         }
         
     }
@@ -305,6 +314,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
         if((notification["NOTIFICATION_POST_ID"]) != nil){
             if let id = notification["NOTIFICATION_POST_ID"]{
                 if let rootViewController = (window?.rootViewController as? UINavigationController)?.viewControllers.first as? RootViewController{
+                    let navController = window?.rootViewController as? UINavigationController
+//                    let index = navController?.viewControllers.indexOf(rootViewController)
+                    navController?.popToViewController(rootViewController, animated: false)
                     rootViewController.showCommentsWithPostID(id.integerValue)
                 }
             }
@@ -325,6 +337,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
         if(!NSUserDefaults.standardUserDefaults().boolForKey("notificationsEnabled")){
             UIAlertView(title: "Enable Notifications", message: "Hi! Congratulations on making your first post. To stay up to date on what's going on around you, we recommend that you enable notifications", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Enable").show()
         }
+    }
+    
+    func pushNotificationBroadcast(userInfo: [NSObject : AnyObject]){
+        print(userInfo)
+        let num = 0
+        let chatNotificationView = ChatNotificationView.loadFromNib()
+        chatNotificationView.messageLabel.text =  "\(userInfo["aps"]!["alert"]!["body"])"
+        chatNotificationView.context = "\(num)"
+        chatNotificationView.tapClosure = { (nbView: NBView) in
+            self.processPushNotification(userInfo)
+        }
+        notificationCenter.enQueueNotification(chatNotificationView)
     }
     
     // MARK: UIAlertViewDelegate

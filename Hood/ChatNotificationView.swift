@@ -15,6 +15,7 @@ class ChatNotificationView: NBView {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet var crossButton: UIButton!
     
     @IBAction func crossButtonPressed(sender: AnyObject) {
         self.closeNotification()
@@ -29,7 +30,6 @@ class ChatNotificationView: NBView {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
-
         view.insertSubview(blurEffectView, atIndex: 0)
 
         return view

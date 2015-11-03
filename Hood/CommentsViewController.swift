@@ -335,20 +335,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 self.networkRequestForComments()
             }
         }
-        else
-        {
-            print(userInfo)
-            let num = 0
-            let chatNotificationView = ChatNotificationView.loadFromNib()
-            chatNotificationView.nameLabel.text = "John Doe"
-            chatNotificationView.messageLabel.text =  "\(num) Hey, My name is John Doe!"
-            chatNotificationView.thumbImageView.image = UIImage(named: "johndoe.jpg")
-            chatNotificationView.context = "\(num)"
-            chatNotificationView.tapClosure = { (nbView: NBView) in
-                print((nbView as! ChatNotificationView).messageLabel.text)
-            }
-            Utilities.appDelegate.notificationCenter.enQueueNotification(chatNotificationView)
-        }
     }
 
 }
