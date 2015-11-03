@@ -17,6 +17,7 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
     let pageColors = [GlobalColors.Green,GlobalColors.Pink, GlobalColors.Purple, GlobalColors.Yellow]
     override func viewDidLoad() {
         super.viewDidLoad()
+        let channelImages = ["home_card","buysell_card","help_card","meetups_card"]
         scrollView.contentSize = CGSizeMake(view.frame.width*4, 0)
 //        pageControl.frame = CGRectMake(0, 0, 400, 100)
 
@@ -26,9 +27,9 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
         {
             let xOffset = CGFloat(index)*view.frame.width
             let page = UIView(frame: CGRectMake(xOffset, 0, view.frame.width, view.frame.height))
-            var channelTitle = UILabel(frame: CGRectMake(xOffset, 35, view.frame.width, 37))
+            let channelTitle = UILabel(frame: CGRectMake(xOffset, 35, view.frame.width, 37))
             channelTitle.center = CGPointMake(view.center.x, channelTitle.center.y)
-            var channelDesc = UILabel(frame: CGRectMake(0, 85,  view.frame.width, 54))
+            let channelDesc = UILabel(frame: CGRectMake(0, 85,  view.frame.width, 54))
             channelDesc.numberOfLines = 2
             channelTitle.center = CGPointMake(view.center.x, channelDesc.center.y)
             let clearView = UIView()
@@ -36,8 +37,8 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
 //            clearView.backgroundColor = UIColor.redColor()
             
             channelTitle.font = UIFont(name: "Lato-Regular", size: 31)
-            channelDesc.font = UIFont(name: "Lato-Regular", size: 18)
-            channelDesc.alpha = 0.6
+            channelDesc.font = UIFont(name: "Lato-Regular", size: 22)
+            channelDesc.alpha = 0.9
             channelTitle.textColor = UIColor.whiteColor()
             channelTitle.textAlignment = NSTextAlignment.Center
             channelDesc.textAlignment = NSTextAlignment.Center
@@ -58,12 +59,13 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
 
             let views = Dictionary(dictionaryLiteral: ("channelTitle",channelTitle),("channelDesc",channelDesc),("channelImageScrollView",channelImageScrollView),("iPhoneImage",iPhoneImage),("pageControl",pageControl),("channelImage",channelImage),("clearView",clearView))
             page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[channelTitle]|", options: .DirectionLeftToRight , metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[channelDesc]|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(5)-[channelDesc]-(5)-|", options: .DirectionLeftToRight, metrics: nil, views: views))
             page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[clearView]|", options: .DirectionLeftToRight, metrics: nil, views: views))
-            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(30)-[channelTitle]-(15)-[channelDesc]-(25)-[clearView(>=9)]-(25)-[iPhoneImage]|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(30)-[channelTitle]-(15)-[channelDesc]-[iPhoneImage]-(50)-|", options: .DirectionLeftToRight, metrics: nil, views: views))
             page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[iPhoneImage]-20-|", options: .DirectionLeftToRight, metrics: nil, views: views))
             page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(22)-[channelImageScrollView]-(22)-|", options: .DirectionLeftToRight, metrics: nil, views: views))
             page.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(80)-[channelImageScrollView]|", options: .DirectionLeftToRight, metrics: nil, views: views))
+            
             scrollView.addSubview(page)
             switch index
             {
@@ -82,21 +84,39 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             default:
                 print("sdaklfjnsal")
             }
-            view.layoutIfNeeded()
+            pageViews.append(page)
+            scrollView.showsHorizontalScrollIndicator = false
+            iPhoneImage.image = UIImage(named: channelImages[index])
+            iPhoneImage.contentMode = .ScaleAspectFit
+            channelDesc.adjustsFontSizeToFitWidth = true
+            channelDesc.minimumScaleFactor = 0.5
+
 
             if index == 0
             {
-                print(clearView.frame)
-                pageControl.frame = clearView.frame
+            let whiteSeparator = UIView(frame: CGRectMake(0,view.frame.height-50,view.frame.width,1))
+            whiteSeparator.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+            view.addSubview(whiteSeparator)
+            let getStartedButton = UIButton(frame: CGRectMake(view.frame.width/2,view.frame.height - 50,view.frame.width/2,50))
+
+                getStartedButton.setTitle("Get Started", forState: UIControlState.Normal)
+                view.addSubview(getStartedButton)
+                getStartedButton.tintColor = UIColor.whiteColor()
+                getStartedButton.titleLabel?.font = UIFont(name: "Lato-Bold", size: 20)
+                getStartedButton.addTarget(self, action: "viewTapped", forControlEvents: .TouchUpInside)
+//                getStartedButton.backgroundColor = UIColor.redColor()
+                print(getStartedButton.frame)
+                pageControl.frame = CGRectMake(0, view.frame.height - 50, view.frame.width/2, 50)
             }
-            pageViews.append(page)
+
         }
         pageViews[0].backgroundColor = GlobalColors.Green
         self.view.bringSubviewToFront(pageControl)
         view.addSubview(pageControl)
         pageControl.numberOfPages = 4
-        let tapGesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped")
-        view.addGestureRecognizer(tapGesture)
+        
+//        let tapGesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped")
+//        view.addGestureRecognizer(tapGesture)
 //        pageControl.frame = CGRectMake(0.0, 55.0, view.frame.width, 54.0)
     }
     
