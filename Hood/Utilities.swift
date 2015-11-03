@@ -17,7 +17,7 @@ struct GlobalColors{
     static let Green:UIColor = UIColor(hexString: "#1FC055")
     static let Purple: UIColor = UIColor(hexString: "#7323DC")
     static let Pink: UIColor = UIColor(hexString: "#E62878")
-    static let Yellow: UIColor = UIColor(hexString: "#FFDC00")
+    static let Yellow: UIColor = UIColor(hexString: "#FCB100")
 }
 
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
