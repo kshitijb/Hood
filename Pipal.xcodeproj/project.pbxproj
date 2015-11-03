@@ -49,6 +49,10 @@
 		D54B9BD31B7B52B20075836C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD21B7B52B20075836C /* UIColorExtension.swift */; };
 		D54B9BD51B7DD2520075836C /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B9BD41B7DD2520075836C /* PostController.swift */; };
 		D55D81821BE20D86009096D0 /* NativeOnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55D81811BE20D86009096D0 /* NativeOnBoardingViewController.swift */; };
+		D55D81891BE8BEAD009096D0 /* meetups_card.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D81851BE8BEAD009096D0 /* meetups_card.png */; };
+		D55D818A1BE8BEAD009096D0 /* home_card.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D81861BE8BEAD009096D0 /* home_card.png */; };
+		D55D818B1BE8BEAD009096D0 /* help_card.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D81871BE8BEAD009096D0 /* help_card.png */; };
+		D55D818C1BE8BEAD009096D0 /* buysell_card.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D81881BE8BEAD009096D0 /* buysell_card.png */; };
 		D57382A11B7359150080A4FA /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57382A01B7359150080A4FA /* APIConstants.swift */; };
 		D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */; };
 		D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */; };
@@ -168,6 +172,10 @@
 		D54B9BD21B7B52B20075836C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		D54B9BD41B7DD2520075836C /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		D55D81811BE20D86009096D0 /* NativeOnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeOnBoardingViewController.swift; sourceTree = "<group>"; };
+		D55D81851BE8BEAD009096D0 /* meetups_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meetups_card.png; sourceTree = "<group>"; };
+		D55D81861BE8BEAD009096D0 /* home_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_card.png; sourceTree = "<group>"; };
+		D55D81871BE8BEAD009096D0 /* help_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_card.png; sourceTree = "<group>"; };
+		D55D81881BE8BEAD009096D0 /* buysell_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buysell_card.png; sourceTree = "<group>"; };
 		D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D57382A01B7359150080A4FA /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D5B3E47D1B6A2CB000F3DF9F /* Pipal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pipal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -400,6 +408,10 @@
 		D5B3E4BE1B6A33EC00F3DF9F /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D55D81851BE8BEAD009096D0 /* meetups_card.png */,
+				D55D81861BE8BEAD009096D0 /* home_card.png */,
+				D55D81871BE8BEAD009096D0 /* help_card.png */,
+				D55D81881BE8BEAD009096D0 /* buysell_card.png */,
 				D547A47E1B6B5C4300B556B4 /* Me.jpg */,
 				D5B3E4A61B6A33E000F3DF9F /* Lato */,
 			);
@@ -554,15 +566,19 @@
 				D547A47F1B6B5C4300B556B4 /* Me.jpg in Resources */,
 				D5B3E48C1B6A2CB000F3DF9F /* Main.storyboard in Resources */,
 				D5B3E4B31B6A33E000F3DF9F /* Lato-BlackItalic.ttf in Resources */,
+				D55D818B1BE8BEAD009096D0 /* help_card.png in Resources */,
 				D5B3E4911B6A2CB000F3DF9F /* LaunchScreen.xib in Resources */,
 				42E92AA51BA04BF8003973B0 /* EmptyView.xib in Resources */,
+				D55D818C1BE8BEAD009096D0 /* buysell_card.png in Resources */,
 				D5B3E4BA1B6A33E000F3DF9F /* Lato-LightItalic.ttf in Resources */,
+				D55D818A1BE8BEAD009096D0 /* home_card.png in Resources */,
 				D5B3E4B71B6A33E000F3DF9F /* Lato-HairlineItalic.ttf in Resources */,
 				D5B3E4B51B6A33E000F3DF9F /* Lato-BoldItalic.ttf in Resources */,
 				42E55C271B9EE4BC000C102E /* ALCameraViewAssets.xcassets in Resources */,
 				D5B3E4BB1B6A33E000F3DF9F /* Lato-Regular.ttf in Resources */,
 				D5B3E4B61B6A33E000F3DF9F /* Lato-Hairline.ttf in Resources */,
 				D5F5D6491BC7B536001BC322 /* GoogleService-Info.plist in Resources */,
+				D55D81891BE8BEAD009096D0 /* meetups_card.png in Resources */,
 				D5B3E48E1B6A2CB000F3DF9F /* Images.xcassets in Resources */,
 				42BA88791BE65FC900D97F0F /* ChatNotificationView.xib in Resources */,
 			);
