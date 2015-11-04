@@ -26,6 +26,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     let commentsActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
     var tapGesture :UITapGestureRecognizer?
     @IBOutlet var checkmark: UIImageView!
+    var shouldScrollToBottom = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.tableFooterView = UIView()
         setupUI()
-
+        
         performFetchFromCoreData()
 
         
@@ -110,11 +111,11 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             let resultsSet = Set(finalResult)
             let intersection = resultsSet.subtract(originalCommentsSet)
             if(intersection.count>0){
-                comments.insertContentsOf(intersection, at: 0)
                 var indexPaths = Array<NSIndexPath>()
-                for(var i = 0; i<intersection.count;i++){
+                for(var i = comments.count; i<comments.count+intersection.count;i++){
                     indexPaths.append(NSIndexPath(forRow: i, inSection: 1))
                 }
+                comments.appendContentsOf(intersection)
                 tableView.beginUpdates()
                 tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Left)
                 tableView.endUpdates()
@@ -122,6 +123,12 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             }else{
                 comments = finalResult
                 tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .None)
+            }
+            
+            if(shouldScrollToBottom){
+                let indexPath = NSIndexPath(forRow: comments.count-1, inSection: 1)
+//                self.tableView.scrollRectToVisible(CGRectMake(0, CGFloat.max, 1, 1), animated: true)
+                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             }
         }
     }
@@ -177,7 +184,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         
         let commentRequest = NSFetchRequest(entityName: "Comment")
         commentRequest.predicate = NSPredicate(format: "post.id == %@", argumentArray: [self.postID])
-        commentRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        commentRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
         let commentAsyncRequest = NSAsynchronousFetchRequest(fetchRequest: commentRequest) { (result) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.processAsyncResults(result)
@@ -206,6 +213,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
         tapGesture = UITapGestureRecognizer(target: self, action: "sendComment:")
         sendCommentButton.addGestureRecognizer(tapGesture!)
         tapGesture?.enabled = false
+        
     }
     
     //MARK: TextView delegate methods
@@ -244,7 +252,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             self.commentsTextView.resignFirstResponder()
             self.commentsTextView.text = ""
             self.networkRequestForComments()
-            self.tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: true)
+            self.shouldScrollToBottom = true
 
         }
 

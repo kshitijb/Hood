@@ -25,6 +25,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     let pageColors: NSMutableArray = NSMutableArray()
     let shouldHideStatusBar: Bool = false
     var statusBarBackgroundView: UIView?
+    var shouldScrollCommentsToBottom = false
     @IBOutlet var addButton: UIButton!
     
     @IBOutlet weak var pageIndicatorContainer: UIView!
@@ -236,9 +237,10 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         self.navigationController?.pushViewController(commentsView, animated: true)
     }
     
-    func showCommentsWithPostID(id: Int){
+    func showCommentsWithPostID(id: Int, shouldScroll:Bool){
         let commentsView: CommentsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Comments") as! CommentsViewController
         commentsView.postID = id
+        commentsView.shouldScrollToBottom = shouldScroll
         self.navigationController?.pushViewController(commentsView, animated: true)
     }
     
@@ -519,17 +521,22 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     }
     
     func showAddButton(){
-        addButton.layer.opacity = 0.5
-        addButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
-        addButton.hidden = false
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
-            self.addButton.layer.opacity = 1
-            self.addButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            }) { (completed: Bool) -> Void in
-                
+        if(addButton.hidden){
+            addButton.layer.opacity = 0.5
+            addButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+            addButton.hidden = false
+            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
+                self.addButton.layer.opacity = 1
+                self.addButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                }) { (completed: Bool) -> Void in
+                    
+            }
         }
     }
 
+    func hideAddButton(){
+        addButton.hidden = true
+    }
     
 }
 
