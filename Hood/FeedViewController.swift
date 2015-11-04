@@ -94,6 +94,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(animated: Bool) {
         getPosts()
+        if let channel = self.dataObject as? Channel{
+            if(channel.id == botChannelId){
+                NSNotificationCenter.defaultCenter().postNotificationName("HideAddButton", object: nil)
+            }else{
+                NSNotificationCenter.defaultCenter().postNotificationName("ShowAddButton", object: nil)
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
