@@ -318,6 +318,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
 //                    let index = navController?.viewControllers.indexOf(rootViewController)
                     navController?.popToViewController(rootViewController, animated: false)
                     rootViewController.showCommentsWithPostID(id.integerValue)
+                    
                 }
             }
         }
@@ -349,6 +350,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
             self.processPushNotification(userInfo)
         }
         notificationCenter.enQueueNotification(chatNotificationView)
+        NSNotificationCenter.defaultCenter().postNotificationName("hilaoGhanta", object: self, userInfo: nil)
     }
     
     // MARK: UIAlertViewDelegate
