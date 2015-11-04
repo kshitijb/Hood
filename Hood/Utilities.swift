@@ -12,6 +12,7 @@ import UIKit
 let AddedPostNotificationName = "AddedPost"
 let AddingPostNotificationName = "AddingPost"
 let JumpToChannelNotificationName = "JumpToChannel"
+let UpdateBell = "updateBell"
 
 struct GlobalColors{
     static let Green:UIColor = UIColor(hexString: "#1FC055")

@@ -53,8 +53,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "jumpToChannel:", name: JumpToChannelNotificationName, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAddButton", name: "ShowAddButton", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideAddButton", name: "HideAddButton", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBell:", name: UpdateBell, object: nil)
         setUpNotificationButton()
         setUpOptionsButton()
         if (AppDelegate.owner == nil)
@@ -67,7 +66,20 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             getData()
             fetchNotificationsCount()
         }
+        
+        updateBell()
 
+    }
+    func updateBell()
+    {
+        badge.increment()
+        let keyFrameAnimation=CAKeyframeAnimation(keyPath: "position.x")
+        keyFrameAnimation.values=[0,1,-1,1,-1,0]
+        keyFrameAnimation.keyTimes=[0,0.25,0.5,0.75,0.9,0]
+        keyFrameAnimation.duration=0.5
+        keyFrameAnimation.repeatCount = 4583695423984
+        badge.layer.addAnimation(keyFrameAnimation, forKey: "sdkfjnaskdf")
+        
     }
     
     func setUpNotificationButton(){

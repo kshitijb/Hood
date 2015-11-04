@@ -35,7 +35,7 @@ class NativeOnBoardingViewController: UIViewController
     func firstScreen()
     {
         
-        let titleLabel = UILabel(frame: CGRectMake( 0, 0.12 * view.frame.height, view.frame.width, 50))
+        let titleLabel = UILabel(frame: CGRectMake( 0, 0.05 * view.frame.height, view.frame.width, 50))
         titleLabel.font = UIFont(name: "Lato-Black", size: 42)
         titleLabel.textColor = UIColor.whiteColor()
         titleLabel.text = "Pipal"
@@ -108,17 +108,17 @@ class NativeOnBoardingViewController: UIViewController
             { () -> Void in
                 titleLabel.alpha = 0
                 yellowArrow.alpha = 0
-                burrowImageView.frame.origin.y = burrowImageView.frame.origin.y + 100
+                burrowImageView.frame.origin.y = burrowImageView.frame.origin.y + 106
                 for window in windows
                 {
-                    window.frame.origin.y = window.frame.origin.y + 100
+                    window.frame.origin.y = window.frame.origin.y + 106
                 }
                 subtextLabel.alpha = 0
                 subtextLabel.transform = CGAffineTransformMakeTranslation(-self.view.frame.width, 0)
             })
             
             UIView.animateWithDuration(0.73, animations: { () -> Void in
-                burrowImageView.frame.origin.y = 204
+                burrowImageView.frame.origin.y = 180
 
 
             })
@@ -131,7 +131,7 @@ class NativeOnBoardingViewController: UIViewController
                 {
                     for j in 0...7
                     {
-                        windows[i*8+j].frame = CGRectMake(30 + 123 * CGFloat(i), 207 + 45 + CGFloat(j) * 82 , 60, 60)
+                        windows[i*8+j].frame = CGRectMake(30 + 123 * CGFloat(i), 183 + 45 + CGFloat(j) * 82 , 60, 60)
                         windows[i*8+j].center.x = CGFloat(CGFloat(i)+CGFloat(0.5))*oneThird
                     }
                 }
@@ -151,7 +151,7 @@ class NativeOnBoardingViewController: UIViewController
     
     func secondScreenRender()
     {
-        let subtext2 = UILabel(frame: CGRectMake(0, 56, view.frame.width, 108))
+        let subtext2 = UILabel(frame: CGRectMake(0, 32, view.frame.width, 108))
         subtext2.text = "Meet \nthe neighbours \n you don't know"
         subtext2.font = UIFont(name: "Lato-light", size: 28)
         subtext2.numberOfLines = 3
@@ -215,7 +215,7 @@ class NativeOnBoardingViewController: UIViewController
             let personObjects = currentObjectsOnScreen[3...currentObjectsOnScreen.count-1]
             let fourRandomConversationalists = Array(personObjects).getFourRandomElements() as! [UIImageView]
             
-            let subtextLabel2 = UILabel(frame: CGRectMake( view.frame.width, 56, view.frame.width, 108))
+            let subtextLabel2 = UILabel(frame: CGRectMake( view.frame.width, 32, view.frame.width, 108))
             subtextLabel2.text = "Discuss \n important issues \n without spam"
             subtextLabel2.textAlignment = .Center
             subtextLabel2.font = UIFont(name: "Lato-light", size: 28)
@@ -276,6 +276,10 @@ class NativeOnBoardingViewController: UIViewController
             {
                 let conversation = UIImageView(image: UIImage(named: "bub"+String(index)))
                 conversation.frame = CGRectMake(CGRectGetMaxX(person.frame), CGRectGetMaxY(person.frame) - CGFloat(heightsOfConversations[index]), CGFloat(widthsOfConversations[index]), CGFloat(heightsOfConversations[index]))
+                if(UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone && UIScreen.mainScreen().bounds.size.height == 568.0)
+                {
+                    conversation.frame = CGRectMake(CGRectGetMaxX(person.frame), CGRectGetMaxY(person.frame) - CGFloat(heightsOfConversations[index]), CGFloat(widthsOfConversations[index])*0.9, CGFloat(heightsOfConversations[index])*0.9)
+                }
                 conversation.opaque = false
                 view.addSubview(conversation)
                 conversations.append(conversation)
