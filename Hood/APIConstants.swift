@@ -9,6 +9,7 @@
 import Foundation
 
 let APIPageSize = 20
+let botChannelId = 14
 
 struct API {
     struct Static {
