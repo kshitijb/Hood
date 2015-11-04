@@ -317,7 +317,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, UI
                     let navController = window?.rootViewController as? UINavigationController
 //                    let index = navController?.viewControllers.indexOf(rootViewController)
                     navController?.popToViewController(rootViewController, animated: false)
-                    rootViewController.showCommentsWithPostID(id.integerValue)
+                    rootViewController.showCommentsWithPostID(id.integerValue, shouldScroll: true)
                     
                 }
             }

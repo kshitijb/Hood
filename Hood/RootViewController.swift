@@ -54,6 +54,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showComments:", name: "commentsPressed", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "jumpToChannel:", name: JumpToChannelNotificationName, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBell:", name: UpdateBell, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAddButton", name: "ShowAddButton", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideAddButton", name: "HideAddButton", object: nil)
         setUpNotificationButton()
         setUpOptionsButton()
         if (AppDelegate.owner == nil)

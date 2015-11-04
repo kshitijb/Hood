@@ -196,6 +196,7 @@ class AddPostViewController: UIViewController,UITextViewDelegate,UIImagePickerCo
     func fetchChannels(){
         let fetchRequest = NSFetchRequest(entityName: "Channel")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "id != %i", argumentArray: [botChannelId])
         let context = Utilities.appDelegate.managedObjectContext
         do
         {

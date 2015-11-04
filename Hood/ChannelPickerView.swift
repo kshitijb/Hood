@@ -36,23 +36,21 @@ class ChannelPickerView: UIView {
         blurView.frame = frame
         addSubview(blurView)
         var startingY = 0
-        for (key,channel) in channels.enumerate() {
-            let buttonHeightToUse:CGFloat
-            if(key == 0){
-                buttonHeightToUse = CGFloat(statusBarHeight) + CGFloat(buttonHeight)
-            }else{
+        for channel in channels {
+            if(channel.id != botChannelId){
+                let buttonHeightToUse:CGFloat
                 buttonHeightToUse = CGFloat(buttonHeight)
+                let button: UIButton = UIButton(frame: CGRectMake(CGFloat(0), CGFloat(startingY), frame.size.width, buttonHeightToUse))
+                button.setTitle("#" + channel.name, forState: UIControlState.Normal)
+                if let colorString = channel.color{
+                    button.backgroundColor = UIColor(hexString: "#" + colorString)
+                }
+                button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
+                button.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+                blurView.contentView.addSubview(button)
+                startingY += Int(buttonHeightToUse)
+                buttonsArray.addObject(button)
             }
-            let button: UIButton = UIButton(frame: CGRectMake(CGFloat(0), CGFloat(startingY), frame.size.width, buttonHeightToUse))
-            button.setTitle("#" + channel.name, forState: UIControlState.Normal)
-            if let colorString = channel.color{
-                button.backgroundColor = UIColor(hexString: "#" + colorString)
-            }
-            button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 28)
-            button.addTarget(self, action: "buttonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
-            blurView.contentView.addSubview(button)
-            startingY += Int(buttonHeightToUse)
-            buttonsArray.addObject(button)
         }
 
     }
@@ -131,7 +129,7 @@ class ChannelPickerView: UIView {
 
             if(sender.backgroundColor == button.backgroundColor)
             {
-                channelID = index + 1
+                channelID = channels[index].id.integerValue
             }
         }
     self.navController?.navigationBar.setBackgroundImage(getImageWithColor(sender.backgroundColor!, size: CGSizeMake(1, 64)), forBarMetrics: .Default)
