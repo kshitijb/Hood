@@ -21,6 +21,7 @@ class NativeOnBoardingViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navigationController?.navigationBarHidden = true
         view.backgroundColor = GlobalColors.Green
         scale = self.view.frame.width/BURROW_WIDTH
         BURROW_HEIGHT = BURROW_HEIGHT * scale
