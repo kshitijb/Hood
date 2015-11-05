@@ -31,7 +31,7 @@ public extension ALCameraViewController {
         }
         
         
-        imagePicker.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "libraryCancel", inBundle: NSBundle(forClass: ALCameraViewController.self), compatibleWithTraitCollection: nil)?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), style: UIBarButtonItemStyle.Plain, target: imagePicker, action: "dismiss")
+        imagePicker.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Stop, target: imagePicker, action: "dismiss")
         
         return navigationController
     }

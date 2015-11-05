@@ -43,6 +43,8 @@ public class ALImageFetchingInteractor {
     
     private func onAuthorized() {
         let options = PHFetchOptions()
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        options.sortDescriptors = [sortDescriptor]
         let assets = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: options)
         
         var imageAssets = [PHAsset]()

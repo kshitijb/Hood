@@ -285,8 +285,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
             identifier = "Comment"
             let cell = tableView.dequeueReusableCellWithIdentifier("Comment", forIndexPath: indexPath) as! commentCell
             cell.authorLabel.text = record.author.firstname + " " + record.author.lastname
-
-            cell.commentLabel.text = record.comment
+            cell.commentLabel.text = String(UTF8String: record.comment)
             cell.timestampLabel.text = Utilities.timeStampFromDate(record.timestamp)
             Utilities.setUpLineSpacingForLabel(cell.commentLabel, font: UIFont(name: "Lato-Regular", size: 16)!)
             cell.preservesSuperviewLayoutMargins = false
