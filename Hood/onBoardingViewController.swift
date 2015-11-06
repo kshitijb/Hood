@@ -38,7 +38,7 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
             
             channelTitle.font = UIFont(name: "Lato-Regular", size: 31)
             channelDesc.font = UIFont(name: "Lato-Regular", size: 22)
-            channelDesc.alpha = 0.9
+            channelDesc.alpha = 0.8
             channelTitle.textColor = UIColor.whiteColor()
             channelTitle.textAlignment = NSTextAlignment.Center
             channelDesc.textAlignment = NSTextAlignment.Center

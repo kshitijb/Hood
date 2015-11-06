@@ -65,17 +65,18 @@ class CommentsViewController: UIViewController,UITableViewDelegate, UITableViewD
     {
         let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
         Alamofire.request(.GET,API().getCommentsForPost("\(postID)"), parameters: nil, encoding: .URL, headers: headers).responseData{_, _, result in
-            
-            self.commentsJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            for (_, comment) in self.commentsJSON["results"]{
-                
-                let commentObject = Comment.generateObjectFromJSON(comment, context: appDelegate.managedObjectContext!)
-                commentObject.post = self.post!
-                
+            if(result.isSuccess){
+                self.commentsJSON = JSON(data: result.value!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                for (_, comment) in self.commentsJSON["results"]{
+                    
+                    let commentObject = Comment.generateObjectFromJSON(comment, context: appDelegate.managedObjectContext!)
+                    commentObject.post = self.post!
+                    
+                }
+                appDelegate.saveContext()
+                self.getCommentsFromCoreData()
             }
-            appDelegate.saveContext()
-            self.getCommentsFromCoreData()
         }
 
     }

@@ -24,6 +24,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var page: Int = 1
     let isLoading:Bool = false
     var isComplete:Bool = false
+    var emptyView: UIView?
     
     @IBOutlet var addPostHeaderTopConstraint: NSLayoutConstraint!
     @IBOutlet var addingPostHeaderView: UIView!
@@ -173,24 +174,39 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.page++
                 }
                 self.count = responseJSON["count"].int
-                if(self.count == 0)
-                {
-                    self.createEmptyView()
-                }
+                self.showEmptyViewForCount(self.count!)
             }
         }
         
+    }
+    
+    func showEmptyViewForCount(count:Int){
+        if(self.count == 0)
+        {
+            if let emptyView = self.emptyView{
+                emptyView.hidden = false
+            }else{
+                self.createEmptyView()
+            }
+        }else{
+            if let emptyView = self.emptyView{
+                emptyView.removeFromSuperview()
+            }
+        }
     }
     
     func createEmptyView()
     {
         if let channel = self.dataObject as? Channel{
             if !channel.name.isEmpty{
-            if let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView{
-                    emptyView.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
-                    self.tableView.addSubview(emptyView)
+                if(self.emptyView == nil){
+                    if let emptyView = NSBundle.mainBundle().loadNibNamed("EmptyView", owner: self, options: nil)[0] as? EmptyView{
+                        emptyView.initWithFrameAndColor(CGRectMake(0, 0, self.view.frame.width, self.view.frame.width/1.35), color: UIColor(hexString: "#" + channel.color!))
+                        self.emptyView = emptyView
+                    }
+                    self.tableView.addSubview(self.emptyView!)
                     let gr = UITapGestureRecognizer(target: self, action: Selector("segueAddPost"))
-                    emptyView.addGestureRecognizer(gr)
+                    self.emptyView!.addGestureRecognizer(gr)
                 }
             }
         }
@@ -306,6 +322,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let channel = self.dataObject as! Channel
             if(channelID == channel.id.integerValue){
                 self.hideAddPostHeader()
+                self.count = nil
+                self.page = 1
                 self.getPosts()
                 self.tableView.scrollsToTop = true
             }

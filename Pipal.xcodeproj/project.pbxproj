@@ -507,7 +507,7 @@
 				TargetAttributes = {
 					D5B3E47C1B6A2CB000F3DF9F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7G2XZXD8B4;
+						DevelopmentTeam = F3642YKY5X;
 					};
 				};
 			};
@@ -821,7 +821,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Abheyraj Singh (G6DMR9PF3Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Abheyraj Singh (G6DMR9PF3Y)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
@@ -848,7 +848,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Locon Solutions Private Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Locon Solutions Private Limited";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;

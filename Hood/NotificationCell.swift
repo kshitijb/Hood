@@ -14,6 +14,7 @@ class NotificationCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var fullNameLabel: UILabel!
+    var placeHolderImage: UIImage?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +23,12 @@ class NotificationCell: UITableViewCell {
     func setContents(jsonObject:JSON)
     {
         json = jsonObject
-        profileImage.sd_setImageWithURL(NSURL(string: jsonObject["actor"]["profile_photo"].string!), placeholderImage: UIImage(named: "Me.jpg"))
+        if let _ = placeHolderImage{
+            
+        }else{
+            placeHolderImage = getImageWithColor(UIColor.lightGrayColor(), size: profileImage.frame.size)
+        }
+        profileImage.sd_setImageWithURL(NSURL(string: jsonObject["actor"]["profile_photo"].string!), placeholderImage: placeHolderImage)
         fullNameLabel.text = jsonObject["actor"]["firstname"].string!.uppercaseString + " " + jsonObject["actor"]["lastname"].string!.uppercaseString
         timestampLabel.text = Utilities.timeStampFromDateString(jsonObject["timestamp"].string!)
         commentLabel.text = self.generateMessage(jsonObject["action"].string!, message: jsonObject["post"]["message"].string!)

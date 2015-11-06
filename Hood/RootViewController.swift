@@ -72,13 +72,14 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             fetchNotificationsCount()
         }
         
-        updateBell()
+//        updateBell()
 
     }
     func updateBell()
     {
-        badge.increment()
+//        badge.increment()
         let keyFrameAnimation=CAKeyframeAnimation(keyPath: "position.x")
+        keyFrameAnimation.additive = true
         keyFrameAnimation.values=[0,1,-1,1,-1,0]
         keyFrameAnimation.keyTimes=[0,0.25,0.5,0.75,0.9,0]
         keyFrameAnimation.duration=0.5
@@ -142,7 +143,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.barHideOnSwipeGestureRecognizer.addTarget(self, action: "handleSwipeForNavigationBar:")
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let profile: AnyObject = userDefaults.valueForKey("fbProfilePhoto")
@@ -378,6 +379,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         if scrollView.contentOffset.x - view.frame.width < 0 && pageControl.currentPage == 0
         {
             //too much to the left
+            self.performSegueWithIdentifier("showNotifications", sender: self)
         }
         else if scrollView.contentOffset.x - view.frame.width > 0 && pageControl.currentPage == pageControl.numberOfPages - 1
         {
@@ -478,8 +480,16 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             if(result.isSuccess){
                 let responseJSON = JSON(result.value!)
                 if let unread_count = responseJSON["unread_count"].int{
-                    self.badge.badgeValue = unread_count
+                    if(unread_count>0){
+                        self.badge.badgeValue = unread_count
+                        self.badge.hidden = false
+                        self.updateBell()
+                    }else{
+                        self.badge.hidden = true
+                    }
                 }
+            }else{
+                self.badge.hidden = true
             }
         }
     }

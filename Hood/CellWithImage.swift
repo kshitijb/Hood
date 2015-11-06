@@ -67,7 +67,7 @@ class CellWithImage: UITableViewCell {
         let lastName = post.author.lastname
         userName.text = post.author.firstname + " " + lastName
         
-        if let placeholderImage = placeholderImage{
+        if let _ = placeholderImage{
             
         }else{
             placeholderImage = getImageWithColor(UIColor.lightGrayColor(), size: profileImage.frame.size)

@@ -97,7 +97,7 @@ public class ALCameraView: UIView {
                 var correctedImage = image
                 print(image.size)
                 if self.currentPosition == AVCaptureDevicePosition.Front {
-                    correctedImage = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation:.UpMirrored)
+                    correctedImage = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: UIImageOrientation.Right)
                     print(correctedImage.size)
                 }
                 
