@@ -16,6 +16,9 @@ import FBSDKLoginKit
 import FBSDKShareKit
 import Sheriff
 import CoreData
+
+let HasSwiped = "HasSwiped"
+
 class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate,UIViewControllerTransitioningDelegate {
 
     @IBOutlet weak var notificationBarButton: UIBarButtonItem!
@@ -26,6 +29,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     let shouldHideStatusBar: Bool = false
     var statusBarBackgroundView: UIView?
     var shouldScrollCommentsToBottom = false
+    var swipeCoach: UIView?
     @IBOutlet var addButton: UIButton!
     
     @IBOutlet weak var pageIndicatorContainer: UIView!
@@ -57,8 +61,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAddButton", name: "ShowAddButton", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideAddButton", name: "HideAddButton", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBell:", name: UpdateBell, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAddButton", name: "ShowAddButton", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideAddButton", name: "HideAddButton", object: nil)
         setUpNotificationButton()
         setUpOptionsButton()
         if (AppDelegate.owner == nil)
@@ -157,6 +159,13 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         else
         {
             getData()
+            if(!NSUserDefaults.standardUserDefaults().boolForKey(HasSwiped)){
+                let swipeCoach = UIImageView(image: UIImage(named: "swipecoach"))
+                swipeCoach.contentMode = UIViewContentMode.ScaleAspectFit
+                swipeCoach.frame = CGRectMake(0, 0, self.view.frame.width, 135)
+                self.swipeCoach = swipeCoach
+                self.view.addSubview(self.swipeCoach!)
+            }
         }
     }
     
@@ -224,6 +233,18 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             let dataViewController:FeedViewController = pageViewController.viewControllers!.last as! FeedViewController
             let count = self.modelController.indexOfViewController(dataViewController)
             self.pageControl.currentPage = count
+            if(!NSUserDefaults.standardUserDefaults().boolForKey(HasSwiped)){
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: HasSwiped)
+                NSUserDefaults.standardUserDefaults().synchronize()
+                if let swipeCoach = self.swipeCoach{
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        swipeCoach.layer.opacity = 0
+                        }, completion: { (completed) -> Void in
+                        swipeCoach.removeFromSuperview()
+                        self.swipeCoach = nil
+                    })
+                }
+            }
         }
     }
     
@@ -540,7 +561,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
             addButton.layer.opacity = 0.5
             addButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
             addButton.hidden = false
-            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
                 self.addButton.layer.opacity = 1
                 self.addButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 }) { (completed: Bool) -> Void in
@@ -550,7 +571,12 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     }
 
     func hideAddButton(){
-        addButton.hidden = true
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.addButton.layer.opacity = 0
+            }) { (completed) -> Void in
+                self.addButton.hidden = true
+                self.addButton.layer.opacity = 1
+        }
     }
     
 }

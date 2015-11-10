@@ -31,21 +31,6 @@ class Post: ParentObject {
         fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [id])
         var error: NSError?
         var entity:ParentObject
-//        if(context.countForFetchRequest(fetchRequest, error: &error) > 0)
-//        {
-//            do
-//            {
-//                entity = try context.executeFetchRequest(fetchRequest).last as! ParentObject
-//            }
-//            catch
-//            {
-//                //Honestly, if we're here, we're fucked anyway.
-//            }
-//        }
-//        else{
-//            entity = NSEntityDescription.insertNewObjectForEntityForName("Post", inManagedObjectContext: context) as! ParentObject
-//        }
-
         do
         {
             let results = try context.executeFetchRequest(fetchRequest)
