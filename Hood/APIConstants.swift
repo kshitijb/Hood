@@ -36,6 +36,7 @@ struct API {
         static let locality = "locality"
         static let device = "device"
         static let clear = "clear"
+        static let members = "members"
     }
     
     private var fullUrl:String{
@@ -117,5 +118,9 @@ struct API {
     
     func clearAlerts() -> String{
         return ([fullUrl, Static.notifications, Static.clear]).joinWithSeparator("/")
+    }
+    
+    func getAllMembers() -> String{
+        return ([fullUrl, Static.neighbourhoods, Static.members].joinWithSeparator("/"))
     }
 }

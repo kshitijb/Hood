@@ -77,6 +77,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
 //        updateBell()
 
     }
+    
     func updateBell()
     {
 //        badge.increment()
@@ -99,7 +100,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         badge.textColor = GlobalColors.Green
 //        badge.increment()
         
-        notifButton.setImage(UIImage(named: "Profile"), forState: UIControlState.Normal)
+        notifButton.setImage(UIImage(named: "bell"), forState: UIControlState.Normal)
         notifButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         notifButton.addTarget(self, action:Selector("showNotifs") , forControlEvents: UIControlEvents.TouchUpInside)
     }
@@ -111,10 +112,14 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
     func setUpOptionsButton(){
         let optionsButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
         optionsButton.contentMode = UIViewContentMode.ScaleAspectFit
-        optionsButton.setImage(UIImage(named: "Settings"), forState: .Normal)
+        optionsButton.setImage(UIImage(named: "Profile"), forState: .Normal)
         optionsButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        optionsButton.addTarget(self, action: "optionsPressed", forControlEvents: .TouchUpInside)
+        optionsButton.addTarget(self, action: "showDirectory", forControlEvents: .TouchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionsButton)
+    }
+    
+    func showDirectory(){
+        performSegueWithIdentifier("showDirectory", sender: self)
     }
     
     func optionsPressed(){
@@ -325,8 +330,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         }
         else if segue.identifier == "showNotifications"
         {
-            let toViewController = segue.destinationViewController 
-            toViewController.transitioningDelegate = self
+//            let toViewController = segue.destinationViewController 
+//            toViewController.transitioningDelegate = self
         }
     }
     
@@ -400,7 +405,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate, UIScro
         if scrollView.contentOffset.x - view.frame.width < 0 && pageControl.currentPage == 0
         {
             //too much to the left
-            self.performSegueWithIdentifier("showNotifications", sender: self)
+//            self.performSegueWithIdentifier("showNotifications", sender: self)
         }
         else if scrollView.contentOffset.x - view.frame.width > 0 && pageControl.currentPage == pageControl.numberOfPages - 1
         {

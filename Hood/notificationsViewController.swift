@@ -21,16 +21,25 @@ class notificationsViewController: UIViewController,UITableViewDataSource,UITabl
         notificationTableView.dataSource = self
         notificationTableView.estimatedRowHeight = 2
         notificationTableView.rowHeight = UITableViewAutomaticDimension
-        let gr = UISwipeGestureRecognizer(target: self, action: Selector("dismiss:"))
-        gr.direction = UISwipeGestureRecognizerDirection.Left
-        view.addGestureRecognizer(gr)
+//        let gr = UISwipeGestureRecognizer(target: self, action: Selector("dismiss:"))
+//        gr.direction = UISwipeGestureRecognizerDirection.Left
+//        view.addGestureRecognizer(gr)
         let rightButton = UIButton(frame: CGRectMake(0,0,24,24))
         rightButton.contentMode = .ScaleAspectFit
-        rightButton.setImage(UIImage(named: "ForwardArrow"), forState: .Normal)
+        rightButton.setImage(UIImage(named: "DownArrow"), forState: .Normal)
         rightButton.imageView?.contentMode = .ScaleAspectFit
         rightButton.addTarget(self, action: "dismiss:", forControlEvents: .TouchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         
+    }
+    
+    func setUpOptionsButton(){
+        let optionsButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
+        optionsButton.contentMode = UIViewContentMode.ScaleAspectFit
+        optionsButton.setImage(UIImage(named: "Settings"), forState: .Normal)
+        optionsButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        optionsButton.addTarget(self, action: "showDirectory", forControlEvents: .TouchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionsButton)
     }
     
     override func viewWillAppear(animated: Bool) {

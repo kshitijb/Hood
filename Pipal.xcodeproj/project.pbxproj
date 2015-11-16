@@ -53,6 +53,8 @@
 		D55D818A1BE8BEAD009096D0 /* home_card.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D81861BE8BEAD009096D0 /* home_card.png */; };
 		D55D818B1BE8BEAD009096D0 /* help_card.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D81871BE8BEAD009096D0 /* help_card.png */; };
 		D55D818C1BE8BEAD009096D0 /* buysell_card.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D81881BE8BEAD009096D0 /* buysell_card.png */; };
+		D56B4D9C1BF1E2E00073B581 /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B4D9B1BF1E2E00073B581 /* DirectoryViewController.swift */; };
+		D56B4D9F1BF1F6E00073B581 /* DirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B4D9E1BF1F6E00073B581 /* DirectoryCell.swift */; };
 		D57382A11B7359150080A4FA /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57382A01B7359150080A4FA /* APIConstants.swift */; };
 		D5B3E4831B6A2CB000F3DF9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4821B6A2CB000F3DF9F /* AppDelegate.swift */; };
 		D5B3E4851B6A2CB000F3DF9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3E4841B6A2CB000F3DF9F /* RootViewController.swift */; };
@@ -177,6 +179,8 @@
 		D55D81871BE8BEAD009096D0 /* help_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_card.png; sourceTree = "<group>"; };
 		D55D81881BE8BEAD009096D0 /* buysell_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buysell_card.png; sourceTree = "<group>"; };
 		D5604CE61B721FFF002AD200 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
+		D56B4D9B1BF1E2E00073B581 /* DirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
+		D56B4D9E1BF1F6E00073B581 /* DirectoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryCell.swift; sourceTree = "<group>"; };
 		D57382A01B7359150080A4FA /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D5B3E47D1B6A2CB000F3DF9F /* Pipal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pipal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B3E4811B6A2CB000F3DF9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -449,6 +453,7 @@
 				D5F5D6461BC534BC001BC322 /* WelcomeViewController.swift */,
 				42BA88771BE65FC900D97F0F /* ChatNotificationView.xib */,
 				42BA88781BE65FC900D97F0F /* ChatNotificationView.swift */,
+				D56B4D9B1BF1E2E00073B581 /* DirectoryViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				42EB28231B74BCE400AB0331 /* Utilities.swift */,
 				D547A4821B6B717600B556B4 /* CellWithoutImage.swift */,
 				42E4FF801B872FFB00A8B1C3 /* NotificationCell.swift */,
+				D56B4D9E1BF1F6E00073B581 /* DirectoryCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -655,6 +661,7 @@
 				423983E21B7BC50200F9D4AF /* commentCell.swift in Sources */,
 				42E55C2A1B9EE4BC000C102E /* ALImageFetchingInteractor.swift in Sources */,
 				42F01BEB1B79EAAB001386C1 /* loginViewController.swift in Sources */,
+				D56B4D9F1BF1F6E00073B581 /* DirectoryCell.swift in Sources */,
 				42E55C2C1B9EE4BC000C102E /* ALCameraViewController.swift in Sources */,
 				42EF7C611BAAB16C00F112CE /* leftToRightNavController.swift in Sources */,
 				D547A4831B6B717600B556B4 /* CellWithoutImage.swift in Sources */,
@@ -685,6 +692,7 @@
 				D5EBCFD91B8C4AF5000E0656 /* Neighbourhood.swift in Sources */,
 				42ED1E451B7C91E600B0DE68 /* onBoardingViewController.swift in Sources */,
 				425DF22E1B720CC900837B8C /* AddPostViewController.swift in Sources */,
+				D56B4D9C1BF1E2E00073B581 /* DirectoryViewController.swift in Sources */,
 				D5B3E4871B6A2CB000F3DF9F /* DataViewController.swift in Sources */,
 				D5EBCFDB1B8C4AF6000E0656 /* Comment.swift in Sources */,
 				42E55C291B9EE4BC000C102E /* ALCameraShot.swift in Sources */,
