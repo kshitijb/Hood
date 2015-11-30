@@ -82,7 +82,7 @@ class loginViewController: UIViewController {
                             user.is_owner = NSNumber(bool: true)
                             AppDelegate.owner = user
                             SVProgressHUD.dismiss()
-                            self.performSegueWithIdentifier("showLockScreen", sender: nil)
+                            self.performSegueWithIdentifier("selectNeighbourhood", sender: nil)
 //                            appDelegate.saveContext()
                         }else{
                             UIAlertView(title: "Error", message: "Could not log you in. Please try again", delegate: self, cancelButtonTitle: "Ok").show()

@@ -51,6 +51,15 @@ class PostController {
     
     }
     
+    static func FlagPost(post: Post, success: (()->Void)?, failure: (() -> Void)?) -> Void{
+        let params = ["post_id" : post.id.integerValue]
+        let headers = ["Authorization":"Bearer \(AppDelegate.owner!.uuid)"]
+        Alamofire.request(.POST, API().flagPost(), parameters: params,encoding: .JSON,headers:headers).responseJSON(options: .MutableContainers) { (request, response, result) -> Void in
+            if let success = success{
+                success()
+            }
+        }
+    }
     
     
 }

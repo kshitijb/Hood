@@ -37,6 +37,7 @@ struct API {
         static let device = "device"
         static let clear = "clear"
         static let members = "members"
+        static let flag = "flag"
     }
     
     private var fullUrl:String{
@@ -58,6 +59,10 @@ struct API {
     
     func getAllChannels() -> String{
         return allChannels
+    }
+    
+    func getAllNeighbourhoods() -> String{
+        return [fullUrl,Static.neighbourhoods,Static.all].joinWithSeparator("/")
     }
 
     func getAllChannelsForNeighbourhood(neighbourhood:String) -> String{
@@ -122,5 +127,9 @@ struct API {
     
     func getAllMembers() -> String{
         return ([fullUrl, Static.neighbourhoods, Static.members].joinWithSeparator("/"))
+    }
+    
+    func flagPost() -> String{
+        return ([fullUrl, Static.flag].joinWithSeparator("/"))
     }
 }

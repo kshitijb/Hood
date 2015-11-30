@@ -12,6 +12,7 @@ import WebImage
 import Alamofire
 class CellWithoutImage: UITableViewCell {
 
+    @IBOutlet var flagButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var content: UILabel!
@@ -33,6 +34,7 @@ class CellWithoutImage: UITableViewCell {
         commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
         self.likesButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
+        self.flagButton.addTarget(self, action: "flagPost", forControlEvents: .TouchUpInside)
     }
     
     override func prepareForReuse() {
@@ -101,5 +103,10 @@ class CellWithoutImage: UITableViewCell {
         }
     }
     
+    func flagPost(){
+        PostController.FlagPost(post!, success: { () -> Void in
+            UIAlertView(title: "Pipal", message: "This post has been reported. Thank you!", delegate: self, cancelButtonTitle: "Okay").show()
+            }, failure: nil)
+    }
     
 }

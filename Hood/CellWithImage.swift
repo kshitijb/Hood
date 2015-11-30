@@ -22,6 +22,7 @@ class CellWithImage: UITableViewCell {
     @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet var flagButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +37,7 @@ class CellWithImage: UITableViewCell {
         commentsButton.addTarget(self, action: "commentsPressed", forControlEvents: UIControlEvents.TouchUpInside)
         self.likesButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         self.likesButton.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
+        flagButton.addTarget(self, action: Selector("flagPost"), forControlEvents: .TouchUpInside);
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -116,5 +118,10 @@ class CellWithImage: UITableViewCell {
         }
     }
 
+    func flagPost(){
+        PostController.FlagPost(post!, success: { () -> Void in
+            UIAlertView(title: "Pipal", message: "This post has been reported. Thank you!", delegate: self, cancelButtonTitle: "Okay").show()
+            }, failure: nil)
+    }
     
 }

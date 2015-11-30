@@ -13,5 +13,7 @@ pod 'FBSDKShareKit'
 pod 'Google/CloudMessaging'
 pod 'Alamofire', '~> 2.0'
 pod 'SwiftyJSON'
+pod 'SVProgressHUD'
+pod 'SDWebImage'
 
 end

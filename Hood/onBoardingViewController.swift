@@ -80,7 +80,7 @@ class onBoardingViewController: UIViewController,UIScrollViewDelegate {
                 channelDesc.text = "Ask for help and share resources. \n We’re all in this together."
             case 3:
                 channelTitle.text = "#meetups"
-                channelDesc.text = "Buy and Sell to people you trust. \n Hassle free local classifieds"
+                channelDesc.text = "Find people with similar interests. \n You'll be surprised"
             default:
                 print("sdaklfjnsal")
             }

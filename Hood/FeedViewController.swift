@@ -174,7 +174,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.page++
                 }
                 self.count = responseJSON["count"].int
-                self.showEmptyViewForCount(self.count!)
+                if let count = self.count{
+                    self.showEmptyViewForCount(count)
+                }
             }
         }
         

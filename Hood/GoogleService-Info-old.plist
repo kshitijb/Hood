@@ -7,7 +7,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.vibes.Pipal</string>
+	<string>housing.Pipal</string>
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -19,6 +19,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<false/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:159668594209:ios:f5447fed5ead8571</string>
+	<string>1:159668594209:ios:5b602802d7339d29</string>
 </dict>
 </plist>
